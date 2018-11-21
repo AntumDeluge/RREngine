@@ -82,9 +82,9 @@ string formatPath(string input) {
 string getThisPath() {
 	char* buffer;
 #ifdef WIN32
-	GetModuleFileName(NULL, buffer, PATH_MAX);
+	GetModuleFileName(NULL, buffer, PATH_MAX); // @suppress("Function cannot be resolved")
 #else
-	readlink("/proc/self/exe", buffer, PATH_MAX);
+	readlink("/proc/self/exe", buffer, PATH_MAX); // @suppress("Function cannot be resolved")
 #endif
 	return (string) buffer;
 }
