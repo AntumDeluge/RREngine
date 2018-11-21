@@ -14,6 +14,7 @@ using namespace std;
 #include "config.h"
 
 #include "frame.h"
+#include "paths.h"
 
 
 const string ver = to_string(RREngine_VER_MAJ) + "." + to_string(RREngine_VER_MIN) + "." + to_string(RREngine_VER_REL); // @suppress("Invalid arguments") @suppress("Symbol is not resolved")
@@ -22,6 +23,15 @@ void showVersion();
 
 int main(int argc, char** argv) {
 	showVersion();
+
+	// DEBUG:
+	cout << "Dirname: " << dirname("C:/foo/bar") << endl;
+
+	string absolute = getThisPath();
+
+	cout << "Full path: " << absolute << endl;
+	cout << "Directory: " << dirname(absolute) << endl;
+	cout << "Executable: " << basename(absolute) << endl;
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		cout << "SDL initialization error: " << SDL_GetError() << endl;
