@@ -10,9 +10,25 @@ set (RREngine_VER_REL 0)
 # to the source code
 configure_file ("config.h.in" "config.h")
 
-# add the binary tree to the search path for include files
-# so that we will find TutorialConfig.h
-include_directories("${PROJECT_BINARY_DIR}")
+# SDL2 library
+find_package (SDL2 REQUIRED)
+
+include_directories (
+	"include"
+	${SDL2_INCLUDE_DIRS}
+	# add the binary tree to the search path to include "config.h"
+	${PROJECT_BINARY_DIR})
+
+# retrieve all source files
+file (GLOB children RELATIVE "${PROJECT_SOURCE_DIR}/src/" "${PROJECT_SOURCE_DIR}/src/*.cpp")
+set (FLIST "")
+foreach (child ${children})
+	if (EXISTS "${PROJECT_SOURCE_DIR}/src/${child}")
+		list (APPEND FLIST "src/${child}")
+	endif ()
+endforeach ()
 
 # the output executable
-add_executable (game src/main.cpp)
+add_executable (game ${FLIST})
+
+target_link_libraries (game ${SDL2_LIBRARIES})
