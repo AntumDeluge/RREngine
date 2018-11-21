@@ -13,13 +13,24 @@ using namespace std;
 
 #include "config.h"
 
+#include "frame.h"
 
-const string ver = to_string(RREngine_VER_MAJ) + "." + to_string(RREngine_VER_MIN) + "." + to_string(RREngine_VER_REL);
+
+const string ver = to_string(RREngine_VER_MAJ) + "." + to_string(RREngine_VER_MIN) + "." + to_string(RREngine_VER_REL); // @suppress("Invalid arguments") @suppress("Symbol is not resolved")
 
 void showVersion();
 
 int main(int argc, char** argv) {
 	showVersion();
+
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		cout << "SDL initialization error: " << SDL_GetError() << endl;
+		return 1;
+	} else {
+		cout << "SDL initialized" << endl;
+	}
+
+	SDL_Quit();
 
 	return 0;
 }
