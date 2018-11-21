@@ -39,7 +39,6 @@ int main(int argc, char** argv) {
 	SDL_Event event;
 
 	while (!quit) {
-		pollIndex += 1;
 		while (SDL_PollEvent(&event) != 0) {
 			if (event.type == SDL_QUIT) {
 				quit = true;
