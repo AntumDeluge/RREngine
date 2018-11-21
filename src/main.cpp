@@ -30,6 +30,24 @@ int main(int argc, char** argv) {
 		cout << "SDL initialized" << endl;
 	}
 
+	SDL_Window* window = SDL_CreateWindow("Hello world!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, RES1.first, RES1.second, SDL_WINDOW_SHOWN);
+
+	// main loop flag
+	bool quit = false;
+
+	// event handler
+	SDL_Event event;
+
+	while (!quit) {
+		pollIndex += 1;
+		while (SDL_PollEvent(&event) != 0) {
+			if (event.type == SDL_QUIT) {
+				quit = true;
+			}
+		}
+	}
+
+	SDL_DestroyWindow(window);
 	SDL_Quit();
 
 	return 0;
