@@ -18,7 +18,7 @@ const string ver = to_string(RREngine_VER_MAJ) + "." + to_string(RREngine_VER_MI
 
 void showVersion();
 
-int main(const int argc, const char** argv) {
+int main(int argc, char** argv) {
 	showVersion();
 
 	return 0;
