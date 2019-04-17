@@ -98,11 +98,13 @@ string formatPath(string input) {
  * @return String path of executable.
  */
 string getThisPath() {
-	char* buffer;
+	char buffer[PATH_MAX];
+
 #ifdef WIN32
 	GetModuleFileName(NULL, buffer, PATH_MAX); // @suppress("Function cannot be resolved")
 #else
 	readlink("/proc/self/exe", buffer, PATH_MAX); // @suppress("Function cannot be resolved")
 #endif
+
 	return (string) buffer;
 }
