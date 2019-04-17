@@ -92,6 +92,12 @@ string formatPath(string input) {
 	return input;
 }
 
+string concatPath(const string p1, const string p2) {
+	string path = p1 + "/" + p2;
+
+	return formatPath(path);
+}
+
 /** Retrieves the absolute path for the executed file.
  *
  * @function getThisPath
