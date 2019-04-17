@@ -5,9 +5,9 @@
  */
 
 #ifdef WIN32
-#include <windows.h>
+#include <windows.h> // GetModuleFileName
 #else
-#include <unistd.h>
+#include <unistd.h> // readlink
 #endif
 
 #include "paths.h"
