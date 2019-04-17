@@ -1,5 +1,6 @@
 
-## build output directory
+## binary & build output directories
+bin/
 build/
 
 ## game images
