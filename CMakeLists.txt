@@ -19,7 +19,7 @@ include_directories (
 	# add the binary tree to the search path to include "config.h"
 	${PROJECT_BINARY_DIR})
 
-# retrieve all source files
+# include all source files in compile command
 file (GLOB children RELATIVE "${PROJECT_SOURCE_DIR}/src/" "${PROJECT_SOURCE_DIR}/src/*.cpp")
 set (FLIST "")
 foreach (child ${children})
