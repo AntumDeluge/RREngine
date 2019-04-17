@@ -7,9 +7,11 @@
 #ifndef RRE_FRAME_H
 #define RRE_FRAME_H
 
-#include "reso.h"
 
-// using SDL
-#include <SDL2/SDL.h>
+class GameWindow {
+public:
+	GameWindow();
+	int init();
+};
 
 #endif /* RRE_FRAME_H */

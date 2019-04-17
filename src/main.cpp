@@ -14,7 +14,6 @@ using namespace std;
 #include "config.h"
 
 #include "frame.h"
-#include "paths.h"
 
 
 const string ver = to_string(RREngine_VER_MAJ) + "." + to_string(RREngine_VER_MIN) + "." + to_string(RREngine_VER_REL); // @suppress("Invalid arguments") @suppress("Symbol is not resolved")
@@ -22,44 +21,11 @@ const string ver = to_string(RREngine_VER_MAJ) + "." + to_string(RREngine_VER_MI
 void showVersion();
 
 int main(int argc, char** argv) {
-	showVersion();
+	// FIXME: segmentation fault
+	//string absolute = getThisPath();
 
-	// DEBUG:
-	cout << "Dirname: " << dirname("C:/foo/bar") << endl;
-
-	string absolute = getThisPath();
-
-	cout << "Full path: " << absolute << endl;
-	cout << "Directory: " << dirname(absolute) << endl;
-	cout << "Executable: " << basename(absolute) << endl;
-
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		cout << "SDL initialization error: " << SDL_GetError() << endl;
-		return 1;
-	} else {
-		cout << "SDL initialized" << endl;
-	}
-
-	SDL_Window* window = SDL_CreateWindow("Hello world!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, RES1.first, RES1.second, SDL_WINDOW_SHOWN);
-
-	// main loop flag
-	bool quit = false;
-
-	// event handler
-	SDL_Event event;
-
-	while (!quit) {
-		while (SDL_PollEvent(&event) != 0) {
-			if (event.type == SDL_QUIT) {
-				quit = true;
-			}
-		}
-	}
-
-	SDL_DestroyWindow(window);
-	SDL_Quit();
-
-	return 0;
+	GameWindow* frame = new GameWindow();
+	return frame->init();
 }
 
 
