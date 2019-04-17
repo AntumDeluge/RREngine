@@ -22,6 +22,13 @@ const char node = '/';
 #endif
 
 
+/** Checks if a string contains a specified character.
+ *
+ * @function contains
+ * @param input String to be parsed.
+ * @param value Character to be searched for.
+ * @return `true` if the character is found in string.
+ */
 bool contains(const string input, const char value) {
 	for (int idx = 0; idx < input.length(); idx++) {
 		if (input[idx] == value) {
@@ -68,6 +75,12 @@ string dirname(string path) {
 	return path.substr(0, cutoff);
 }
 
+/** Converts node delimiters in a string to conform with current system.
+ *
+ * @function formatPath
+ * @param input String to be formatted.
+ * @return Formatted string.
+ */
 string formatPath(string input) {
 
 	for (int index = 0; index < input.length(); index++) {
@@ -79,6 +92,11 @@ string formatPath(string input) {
 	return input;
 }
 
+/** Retrieves the absolute path for the executed file.
+ *
+ * @function getThisPath
+ * @return String path of executable.
+ */
 string getThisPath() {
 	char* buffer;
 #ifdef WIN32
