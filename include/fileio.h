@@ -10,6 +10,8 @@
 
 #include <string>
 
+extern bool fileExists(const std::string path);
+
 extern int mkdir(const std::string path, mode_t mode);
 
 extern int mkdir(const std::string path);
