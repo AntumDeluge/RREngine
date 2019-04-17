@@ -1,3 +1,8 @@
 
 ## build output directory
 build/
+
+## game images
+data/**/*.[pP][nN][gG]
+data/**/*.[gG][iI][fF]
+data/**/*.[xX][cC][fF]
