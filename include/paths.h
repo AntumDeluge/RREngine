@@ -4,6 +4,10 @@
  * See: LICENSE.txt
  */
 
+#ifndef PATHS_H
+#define PATHS_H
+
+
 #include <string>
 
 
@@ -30,3 +34,5 @@ extern std::string getThisPath();
 
 /** Root directory from where executable is launched. */
 static const std::string dir_root = dirname(getThisPath());
+
+#endif /* PATHS_H */
