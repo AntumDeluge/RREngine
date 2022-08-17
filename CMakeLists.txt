@@ -10,7 +10,12 @@ set(RREngine_VER_REL 0)
 # to the source code
 configure_file("config.h.in" "config.h")
 
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake")
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/dependencies.cmake")
+
+if(STATIC)
+	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")
+endif()
 
 # include all source files in compile command
 file(GLOB children RELATIVE "${PROJECT_SOURCE_DIR}/src/" "${PROJECT_SOURCE_DIR}/src/*.cpp")
@@ -24,4 +29,4 @@ endforeach()
 # the output executable
 add_executable(game ${FLIST})
 
-target_link_libraries(game ${SDL2_LIBRARIES})
+target_link_libraries(game ${LIBS})
