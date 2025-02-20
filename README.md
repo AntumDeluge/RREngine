@@ -27,8 +27,11 @@ $ cd build
 $ cmake ../
 ```
 
-Then you can execute the `make` command to build the binaries:
+Then you can execute the build process using the following commands:
 
 ```bash
 $ make
+
+# alternatively use CMake's build command
+$ cmake --build ./
 ```
