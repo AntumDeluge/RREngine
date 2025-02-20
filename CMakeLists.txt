@@ -29,4 +29,4 @@ endforeach()
 # the output executable
 add_executable(game ${FLIST})
 
-target_link_libraries(game ${LIBS})
+target_link_libraries(game PRIVATE ${LIBS})
