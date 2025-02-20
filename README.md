@@ -8,7 +8,8 @@ Plans for an engine to create Mega Man/Rockman style platform games.
 
 #### Required Libraries
 
-- [SDL](https://libsdl.org/)
+- [SDL2](https://libsdl.org/)
+- [SDL2_mixer](https://wiki.libsdl.org/SDL2_mixer)
 
 #### Required Build Tools
 

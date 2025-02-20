@@ -1,5 +1,13 @@
 
+include(FindPkgConfig)
+
+# SDL2
 find_package(SDL2 REQUIRED)
+pkg_search_module(SDL2MIXER SDL2_mixer>=2.0.0)
+
+if(NOT SDL2MIXER_VERSION)
+	message(FATAL_ERROR "Please install SDL2_mixer")
+endif()
 
 # make sure libs get updated
 unset(LIBS)
@@ -21,9 +29,12 @@ else()
 	endif()
 endif()
 
+set(LIBS ${LIBS} ${SDL2MIXER_LIBRARIES})
+
 include_directories(
 	"include"
 	${SDL2_INCLUDE_DIRS}
+	${SDL2MIXER_INCLUDE_DIRS}
 	# add the binary tree to the search path to include "config.h"
 	${PROJECT_BINARY_DIR}
 )
