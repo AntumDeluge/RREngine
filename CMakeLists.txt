@@ -29,7 +29,15 @@ foreach(child ${children})
 	endif()
 endforeach()
 
-# the output executable
-add_executable(game ${FLIST})
+# Windows resources
+if(WIN32)
+	list(APPEND FLIST "${CMAKE_SOURCE_DIR}/win_resources.rc")
+	# the output executable
+	#add_executable(game WIN32 ${FLIST})
+	add_executable(game ${FLIST})
+else()
+	# the output executable
+	add_executable(game ${FLIST})
+endif()
 
 target_link_libraries(game PRIVATE ${SDL2_LIBRARIES})
