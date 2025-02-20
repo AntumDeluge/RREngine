@@ -10,6 +10,7 @@ Plans for an engine to create Mega Man/Rockman style platform games.
 
 - [SDL2](https://libsdl.org/)
 - [SDL2_mixer](https://wiki.libsdl.org/SDL2_mixer)
+- [SDL2_image](https://wiki.libsdl.org/SDL2_image)
 
 #### Required Build Tools
 
