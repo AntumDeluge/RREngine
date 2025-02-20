@@ -15,15 +15,21 @@ include(FindPkgConfig)
 # SDL2 library
 find_package(SDL2 REQUIRED)
 pkg_search_module(SDL2MIXER SDL2_mixer>=2.0.0)
+pkg_search_module(SDL2IMAGE SDL2_image>=2.0.0)
 
 if(NOT SDL2MIXER_VERSION)
 	message(FATAL_ERROR "Please install SDL2_mixer")
+endif()
+
+if(NOT SDL2IMAGE_VERSION)
+	message(FATAL_ERROR "Please install SDL2_image")
 endif()
 
 include_directories(
 	"include"
 	${SDL2_INCLUDE_DIRS}
 	${SDL2MIXER_INCLUDE_DIRS}
+	${SDL2IMAGE_INCLUDE_DIRS}
 	# add the binary tree to the search path to include "config.h"
 	${PROJECT_BINARY_DIR}
 )
@@ -48,4 +54,4 @@ else()
 	add_executable(game ${FLIST})
 endif()
 
-target_link_libraries(game PRIVATE ${SDL2_LIBRARIES} ${SDL2MIXER_LIBRARIES})
+target_link_libraries(game PRIVATE ${SDL2_LIBRARIES} ${SDL2MIXER_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
