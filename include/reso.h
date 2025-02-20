@@ -8,6 +8,7 @@
 
 
 // NES native resolution
+// NOTE: 256x240 appears to be standard NES resolution, but 256x224 might be used as well
 const static std::pair<int, int> RES1 = std::pair<int, int>(256, 240);
 
 // double
