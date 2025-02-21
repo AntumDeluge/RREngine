@@ -28,6 +28,9 @@ int main(int argc, char** argv) {
 	// FIXME: segmentation fault
 	//string absolute = getThisPath();
 
+	// change to executable directory
+	changeDir(dir_root);
+
 	string title = "R&R Engine";
 	// default dimensions
 	int width = RES1.first;
