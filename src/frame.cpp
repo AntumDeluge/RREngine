@@ -4,23 +4,26 @@
  * See: LICENSE.txt
  */
 
-#include <SDL2/SDL.h>
-
 #include "frame.h"
 #include "reso.h"
 
 GameWindow::GameWindow() {
 
+// initialize singleton instance
+GameWindow* GameWindow::instance = nullptr;
+
+void GameWindow::setTitle(const std::string title) {
+	SDL_SetWindowTitle(this->window, title.c_str());
 }
 
-int GameWindow::init() {
-	// initialize SDL
+int GameWindow::init(const int width, const int height) {
+	// initialize video
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		return 1;
 	}
 
 	// create the SDL frame
-	SDL_Window* window = SDL_CreateWindow("Hello world!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, RES1.first, RES1.second, SDL_WINDOW_SHOWN);
+	this->window = SDL_CreateWindow("R&R Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 
 	// main loop flag
 	bool quit = false;
@@ -36,8 +39,16 @@ int GameWindow::init() {
 		}
 	}
 
-	SDL_DestroyWindow(window);
-	SDL_Quit();
+	this->shutdown();
 
 	return 0;
+}
+
+int GameWindow::init() {
+	return this->init(RES1.first, RES1.second);
+}
+
+void GameWindow::shutdown() {
+	SDL_DestroyWindow(this->window);
+	SDL_Quit();
 }

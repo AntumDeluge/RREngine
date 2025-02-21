@@ -7,11 +7,35 @@
 #ifndef RRE_FRAME_H
 #define RRE_FRAME_H
 
+#include <SDL2/SDL.h>
+#include <string>
+
 
 class GameWindow {
+private:
+	// singleton class
+	static GameWindow* instance;
+	GameWindow() {}
+	~GameWindow() {}
+
+	// delete copy & assignment operator
+	GameWindow(const GameWindow&) = delete;
+	GameWindow& operator=(const GameWindow&) = delete;
+
+	SDL_Window* window;
+
 public:
-	GameWindow();
+	static GameWindow* get() {
+		if (instance == nullptr) {
+			instance = new GameWindow();
+		}
+		return instance;
+	}
+
+	void setTitle(const std::string title);
+	int init(const int width, const int height);
 	int init();
+	void shutdown();
 };
 
 #endif /* RRE_FRAME_H */
