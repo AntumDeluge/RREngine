@@ -6,6 +6,7 @@
 
 #include <SDL2/SDL_mixer.h>
 
+#include "dialog.h"
 #include "frame.h"
 #include "reso.h"
 
@@ -23,14 +24,15 @@ void GameWindow::setTitle(const std::string title) {
 int GameWindow::init(const std::string title, const int width, const int height) {
 	// initialize video subsystem
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", SDL_GetError(), NULL);
+		// NOTE: message logged to console as video subsystem failed to initialize
+		Dialog::error(SDL_GetError());
 		SDL_Quit();
 		return 1;
 	}
 
 	// initialize audio subsystem
 	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", SDL_GetError(), NULL);
+		Dialog::error(SDL_GetError());
 		SDL_Quit();
 		return 1;
 	}
@@ -39,12 +41,12 @@ int GameWindow::init(const std::string title, const int width, const int height)
 	const int flags = MIX_INIT_OGG;
 	const int initted = Mix_Init(flags);
 	if (initted&flags != flags) {
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", Mix_GetError(), NULL);
+		Dialog::error(Mix_GetError());
 		SDL_Quit();
 		return 1;
 	}
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) != 0) {
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", Mix_GetError(), NULL);
+		Dialog::error(Mix_GetError());
 		Mix_Quit();
 		SDL_Quit();
 		return 1;
