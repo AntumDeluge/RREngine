@@ -4,10 +4,12 @@
  * See: LICENSE.txt
  */
 
+#include <iostream>
+
 #ifdef WIN32
-#include <windows.h> // GetModuleFileName
+#include <windows.h> // GetModuleFileName, GetCurrentDirectory, SetCurrentDirectory
 #else
-#include <unistd.h> // readlink
+#include <unistd.h> // readlink, getcwd, chdir
 #endif
 
 #include "paths.h"
@@ -105,12 +107,39 @@ string concatPath(const string p1, const string p2) {
  */
 string getThisPath() {
 	char buffer[PATH_MAX];
-
 #ifdef WIN32
 	GetModuleFileName(NULL, buffer, PATH_MAX); // @suppress("Function cannot be resolved")
 #else
 	readlink("/proc/self/exe", buffer, PATH_MAX); // @suppress("Function cannot be resolved")
 #endif
-
 	return (string) buffer;
+}
+
+string getCWD() {
+	char buffer[PATH_MAX];
+#ifdef WIN32
+	GetCurrentDirectory(PATH_MAX, buffer); // @suppress("Function cannot be resolved")
+#else
+	if (getcwd(buffer, PATH_MAX) == NULL) {
+		// failed to get CWD so set to relative path
+		buffer[0] = '.';
+		buffer[1] = '\0';
+	}
+#endif
+	return (string) buffer;
+}
+
+int changeDir(string path) {
+	int res;
+#ifdef WIN32
+	res = SetCurrentDirectory(path.c_str()) ? 0 : 1;
+#else
+	res = chdir(path.c_str());
+#endif
+
+	if (res != 0) {
+		cerr << "ERROR: failed to change working directory to \"" << path << "\"" << endl;
+	}
+
+	return res;
 }

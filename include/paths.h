@@ -32,6 +32,10 @@ extern std::string concatPath(const std::string p1, const std::string p2);
 
 extern std::string getThisPath();
 
+extern std::string getCWD();
+
+extern int changeDir(std::string path);
+
 /** Root directory from where executable is launched. */
 static const std::string dir_root = dirname(getThisPath());
 
