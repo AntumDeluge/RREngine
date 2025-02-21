@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
 
 	if (fileExists(game_conf)) {
 		tinyxml2::XMLDocument doc;
-		doc.LoadFile("../data/conf/game.xml");
+		doc.LoadFile(game_conf.c_str());
 		tinyxml2::XMLElement* root = doc.RootElement();
 
 		tinyxml2::XMLElement* name_element = root->FirstChildElement("name");
