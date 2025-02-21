@@ -17,8 +17,10 @@ void GameWindow::setTitle(const std::string title) {
 }
 
 int GameWindow::init(const int width, const int height) {
-	// initialize video
+	// initialize video subsystem
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", SDL_GetError(), NULL);
+		SDL_Quit();
 		return 1;
 	}
 
