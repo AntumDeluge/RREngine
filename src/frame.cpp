@@ -7,8 +7,6 @@
 #include "frame.h"
 #include "reso.h"
 
-GameWindow::GameWindow() {
-
 // initialize singleton instance
 GameWindow* GameWindow::instance = nullptr;
 
