@@ -7,6 +7,7 @@
 #ifndef RRE_FRAME_H
 #define RRE_FRAME_H
 
+#include <iostream>
 #include <string>
 
 #include <SDL2/SDL_video.h>
@@ -41,6 +42,13 @@ public:
 	// @deprecated
 	int init();
 	void shutdown();
+
+	SDL_Window* getElement() {
+		if (this->window == nullptr) {
+			std::cout << "WARNING: returning SDL_Window before initialization" << std::endl;
+		}
+		return this->window;
+	}
 };
 
 #endif /* RRE_FRAME_H */
