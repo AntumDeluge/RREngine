@@ -4,14 +4,11 @@
  * See: LICENSE.txt
  */
 
+#include <fstream>
+
 #ifdef WIN32
 #include <windows.h> // CreateDirectory
-#else
-#include <sys/stat.h> // mkdir
 #endif
-
-#include <iostream>
-#include <fstream>
 
 #include "fileio.h"
 
@@ -34,24 +31,20 @@ bool fileExists(const string path) {
 }
 
 #ifdef WIN32
-/**
- *
- * @local
- */
-int mkdir(const char* path, mode_t mode) {
-	cout << "Make dir:" << endl;
-	cout << "Path: " << path << endl;
-	cout << "Mode: " << mode << endl;
-
-	// FIXME: Second argument is type 'LPSECURITY_ATTRIBUTES' not 'unsigned short/mode_t'
+int mkdir(const char* path, dperm mode) {
+	// FIXME: `mode` must be LPSECURITY_ATTRIBUTES
 	return CreateDirectory(path, NULL);
 }
 #endif
 
-int mkdir(const std::string path, mode_t mode) {
+int mkdir(const char* path) {
+	return mkdir(path, '\0');
+}
+
+int mkdir(const std::string path, dperm mode) {
 	return mkdir(path.c_str(), mode);
 }
 
 int mkdir(const std::string path) {
-	return mkdir(path, NULL);
+	return mkdir(path, '\0');
 }

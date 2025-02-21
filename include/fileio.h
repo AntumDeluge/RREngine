@@ -4,16 +4,36 @@
  * See: LICENSE.txt
  */
 
-#ifndef FILEIO_H
-#define FILEIO_H
-
+#ifndef RRE_FILEIO_H
+#define RRE_FILEIO_H
 
 #include <string>
 
+#ifdef WIN32
+typedef unsigned char dperm; // placeholder
+#else
+#include <sys/stat.h> // mode_t, mkdir
+typedef mode_t dperm;
+#endif
+
+
 extern bool fileExists(const std::string path);
 
-extern int mkdir(const std::string path, mode_t mode);
+#ifdef WIN32
+/**
+ * `mkdir` function not defined on Windows.
+ *
+ * @param path Path of directory that should be created.
+ * @param mode Permissions of new directory (Calls should compensate for both Windows & Unix type
+ *     permissions.
+ */
+extern int mkdir(const char* path, dperm mode);
+#endif
+
+extern int mkdir(const char* path);
+
+extern int mkdir(const std::string path, dperm mode);
 
 extern int mkdir(const std::string path);
 
-#endif /* FILEIO_H */
+#endif /* RRE_FILEIO_H */
