@@ -25,9 +25,6 @@ const string ver = to_string(RREngine_VER_MAJ) + "." + to_string(RREngine_VER_MI
 void showVersion();
 
 int main(int argc, char** argv) {
-	// FIXME: segmentation fault
-	//string absolute = getThisPath();
-
 	// change to executable directory
 	changeDir(dir_root);
 
