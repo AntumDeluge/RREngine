@@ -12,6 +12,10 @@
 // initialize singleton instance
 GameWindow* GameWindow::instance = nullptr;
 
+GameWindow::GameWindow() {
+	this->window = nullptr;
+}
+
 void GameWindow::setTitle(const std::string title) {
 	SDL_SetWindowTitle(this->window, title.c_str());
 }

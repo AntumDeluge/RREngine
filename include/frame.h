@@ -7,8 +7,9 @@
 #ifndef RRE_FRAME_H
 #define RRE_FRAME_H
 
-#include <SDL2/SDL.h>
 #include <string>
+
+#include <SDL2/SDL_video.h>
 
 #include "viewport.h"
 
@@ -17,7 +18,7 @@ class GameWindow {
 private:
 	// singleton class
 	static GameWindow* instance;
-	GameWindow() {}
+	GameWindow();
 	~GameWindow() {}
 
 	// delete copy constructor & assignment operator
