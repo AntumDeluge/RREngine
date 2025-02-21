@@ -15,9 +15,9 @@ using namespace std;
 #include "config.h"
 
 #include "fileio.h"
-#include "frame.h"
 #include "paths.h"
 #include "reso.h"
+#include "singletons.h"
 
 
 const string ver = to_string(RREngine_VER_MAJ) + "." + to_string(RREngine_VER_MIN) + "." + to_string(RREngine_VER_REL); // @suppress("Invalid arguments") @suppress("Symbol is not resolved")
@@ -59,8 +59,7 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	GameWindow* frame = GameWindow::get();
-	return frame->init(title, width, height);
+	return GetGameWindow()->init(title, width, height);
 }
 
 
