@@ -10,6 +10,8 @@
 #include <SDL2/SDL.h>
 #include <string>
 
+#include "viewport.h"
+
 
 class GameWindow {
 private:
@@ -23,6 +25,7 @@ private:
 	GameWindow& operator=(const GameWindow&) = delete;
 
 	SDL_Window* window;
+	ViewPort* viewport;
 
 public:
 	static GameWindow* get() {
