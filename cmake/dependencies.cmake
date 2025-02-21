@@ -4,7 +4,7 @@ include(FindPkgConfig)
 # SDL2
 find_package(SDL2 REQUIRED)
 pkg_search_module(SDL2MIXER SDL2_mixer>=2.0.0)
-pkg_search_module(SDL2IMAGE SDL2_image>=2.0.0)
+#~ pkg_search_module(SDL2IMAGE SDL2_image>=2.0.0)
 # TinyXML-2
 pkg_search_module(TINYXML2 tinyxml2)
 
@@ -12,9 +12,9 @@ if(NOT SDL2MIXER_VERSION)
 	message(FATAL_ERROR "Please install SDL2_mixer")
 endif()
 
-if(NOT SDL2IMAGE_VERSION)
-	message(FATAL_ERROR "Please install SDL2_image")
-endif()
+#~ if(NOT SDL2IMAGE_VERSION)
+	#~ message(FATAL_ERROR "Please install SDL2_image")
+#~ endif()
 
 if(NOT TINYXML2_VERSION)
 	message(FATAL_ERROR "Please install tinyxml2")
@@ -40,7 +40,8 @@ else()
 	endif()
 endif()
 
-set(LIBS ${LIBS} ${SDL2MIXER_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${TINYXML2_LIBRARIES})
+#~ set(LIBS ${LIBS} ${SDL2MIXER_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${TINYXML2_LIBRARIES})
+set(LIBS ${LIBS} ${SDL2MIXER_LIBRARIES} ${TINYXML2_LIBRARIES})
 
 include_directories(
 	"include"
