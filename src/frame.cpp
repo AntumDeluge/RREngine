@@ -30,6 +30,10 @@ int GameWindow::init(const std::string title, const int width, const int height)
 		return 1;
 	}
 
+	// create the SDL frame
+	this->window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			width, height, SDL_WINDOW_SHOWN);
+
 	// initialize audio subsystem
 	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
 		Dialog::error(SDL_GetError());
@@ -51,10 +55,6 @@ int GameWindow::init(const std::string title, const int width, const int height)
 		SDL_Quit();
 		return 1;
 	}
-
-	// create the SDL frame
-	this->window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-			width, height, SDL_WINDOW_SHOWN);
 
 	// main loop flag
 	bool quit = false;
