@@ -18,7 +18,7 @@ private:
 	GameWindow() {}
 	~GameWindow() {}
 
-	// delete copy & assignment operator
+	// delete copy constructor & assignment operator
 	GameWindow(const GameWindow&) = delete;
 	GameWindow& operator=(const GameWindow&) = delete;
 
