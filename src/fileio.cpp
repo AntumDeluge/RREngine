@@ -14,7 +14,7 @@
 #include <fstream>
 
 #include "fileio.h"
-#include "paths.h"
+
 using namespace std;
 
 
@@ -49,8 +49,7 @@ int mkdir(const char* path, mode_t mode) {
 #endif
 
 int mkdir(const std::string path, mode_t mode) {
-	// FIXME: formatPath() should be called in mkdir(char*, mode_t)
-	return mkdir(formatPath(path).c_str(), mode);
+	return mkdir(path.c_str(), mode);
 }
 
 int mkdir(const std::string path) {
