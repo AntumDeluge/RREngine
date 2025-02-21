@@ -34,6 +34,7 @@ public:
 
 	void setTitle(const std::string title);
 	int init(const int width, const int height);
+	// @deprecated
 	int init();
 	void shutdown();
 };
