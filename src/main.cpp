@@ -28,6 +28,7 @@ int main(int argc, char** argv) {
 	// FIXME: segmentation fault
 	//string absolute = getThisPath();
 
+	string title = "R&R Engine";
 	// default dimensions
 	int width = RES1.first;
 	int height = RES1.second;
@@ -38,6 +39,11 @@ int main(int argc, char** argv) {
 		tinyxml2::XMLDocument doc;
 		doc.LoadFile("../data/conf/game.xml");
 		tinyxml2::XMLElement* root = doc.RootElement();
+
+		tinyxml2::XMLElement* name_element = root->FirstChildElement("name");
+		if (name_element != NULL) {
+			title = name_element->GetText();
+		}
 
 		const tinyxml2::XMLAttribute* wAttribute;
 		const tinyxml2::XMLAttribute* hAttribute;
@@ -54,7 +60,7 @@ int main(int argc, char** argv) {
 	}
 
 	GameWindow* frame = GameWindow::get();
-	return frame->init(width, height);
+	return frame->init(title, width, height);
 }
 
 

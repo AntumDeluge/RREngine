@@ -14,7 +14,7 @@ void GameWindow::setTitle(const std::string title) {
 	SDL_SetWindowTitle(this->window, title.c_str());
 }
 
-int GameWindow::init(const int width, const int height) {
+int GameWindow::init(const std::string title, const int width, const int height) {
 	// initialize video subsystem
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", SDL_GetError(), NULL);
@@ -30,7 +30,8 @@ int GameWindow::init(const int width, const int height) {
 	}
 
 	// create the SDL frame
-	this->window = SDL_CreateWindow("R&R Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+	this->window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			width, height, SDL_WINDOW_SHOWN);
 
 	// main loop flag
 	bool quit = false;
@@ -38,6 +39,7 @@ int GameWindow::init(const int width, const int height) {
 	// event handler
 	SDL_Event event;
 
+	// TODO: move game loop to singleton class
 	while (!quit) {
 		while (SDL_PollEvent(&event) != 0) {
 			if (event.type == SDL_QUIT) {
@@ -52,7 +54,7 @@ int GameWindow::init(const int width, const int height) {
 }
 
 int GameWindow::init() {
-	return this->init(RES1.first, RES1.second);
+	return this->init("R&R Engine", RES1.first, RES1.second);
 }
 
 void GameWindow::shutdown() {
