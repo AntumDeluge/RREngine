@@ -4,6 +4,8 @@
  * See: LICENSE.txt
  */
 
+#include <SDL2/SDL_mixer.h>
+
 #include "frame.h"
 #include "reso.h"
 
@@ -25,6 +27,21 @@ int GameWindow::init(const std::string title, const int width, const int height)
 	// initialize audio subsystem
 	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", SDL_GetError(), NULL);
+		SDL_Quit();
+		return 1;
+	}
+
+	// initialize mixer for playing OGG audio files
+	const int flags = MIX_INIT_OGG;
+	const int initted = Mix_Init(flags);
+	if (initted&flags != flags) {
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", Mix_GetError(), NULL);
+		SDL_Quit();
+		return 1;
+	}
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) != 0) {
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", Mix_GetError(), NULL);
+		Mix_Quit();
 		SDL_Quit();
 		return 1;
 	}
@@ -58,6 +75,8 @@ int GameWindow::init() {
 }
 
 void GameWindow::shutdown() {
+	Mix_CloseAudio();
+	Mix_Quit();
 	SDL_DestroyWindow(this->window);
 	SDL_Quit();
 }
