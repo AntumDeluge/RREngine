@@ -1,0 +1,18 @@
+/* Copyright © 2025 Jordan Irwin <antumdeluge@gmail.com>
+ *
+ * This work is licensed under the terms of the MIT license.
+ * See: LICENSE.txt
+ */
+
+#ifndef RRE_SINGLETONS_H
+#define RRE_SINGLETONS_H
+
+#include "frame.h"
+#include "viewport.h"
+
+
+static inline GameWindow* GetGameWindow() { return GameWindow::get(); }
+
+static inline ViewPort* GetViewPort() { return ViewPort::get(); }
+
+#endif /* RRE_SINGLETONS_H */
