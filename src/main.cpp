@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
 	// FIXME: segmentation fault
 	//string absolute = getThisPath();
 
-	GameWindow* frame = new GameWindow();
+	GameWindow* frame = GameWindow::get();
 	return frame->init();
 }
 
