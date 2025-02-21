@@ -24,6 +24,13 @@ int GameWindow::init(const int width, const int height) {
 		return 1;
 	}
 
+	// initialize audio subsystem
+	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", SDL_GetError(), NULL);
+		SDL_Quit();
+		return 1;
+	}
+
 	// create the SDL frame
 	this->window = SDL_CreateWindow("R&R Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 
