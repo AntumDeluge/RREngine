@@ -9,12 +9,14 @@
 #include "dialog.h"
 #include "frame.h"
 #include "reso.h"
+#include "singletons.h"
 
 // initialize singleton instance
 GameWindow* GameWindow::instance = nullptr;
 
 GameWindow::GameWindow() {
 	this->window = nullptr;
+	this->viewport = nullptr;
 }
 
 void GameWindow::setTitle(const std::string title) {
@@ -30,9 +32,11 @@ int GameWindow::init(const std::string title, const int width, const int height)
 		return 1;
 	}
 
-	// create the SDL frame
+	// create the SDL frame & viewport renderer
 	this->window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			width, height, SDL_WINDOW_SHOWN);
+	this->viewport = GetViewPort();
+	this->viewport->init(this->window);
 
 	// initialize audio subsystem
 	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
@@ -83,6 +87,7 @@ int GameWindow::init() {
 void GameWindow::shutdown() {
 	Mix_CloseAudio();
 	Mix_Quit();
+	this->viewport->shutdown();
 	SDL_DestroyWindow(this->window);
 	SDL_Quit();
 }
