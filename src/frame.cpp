@@ -4,12 +4,32 @@
  * See: LICENSE.txt
  */
 
+#include <chrono>
+
+//~ #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+//~ #include <cstdio>
+
 #include "audio.h"
 #include "dialog.h"
 #include "frame.h"
+//~ #include "music.h"
+#include "paths.h"
 #include "reso.h"
 #include "singletons.h"
+//~ #include "sprite.h"
 
+using namespace std::chrono;
+
+
+const Uint8 SCREEN_FPS = 60;
+const Uint8 SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
+
+
+unsigned long getTimeMilliseconds() {
+	milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
+	return ms.count();
+}
 
 // initialize singleton instance
 GameWindow* GameWindow::instance = nullptr;
@@ -60,21 +80,185 @@ int GameWindow::init(const std::string title, const int width, const int height)
 		return 1;
 	}
 
+	// example sprite
+	std::string sprite_file = concatPath(dir_root, "data/sprite/character.png");
+	SDL_Texture* sprite = nullptr;
+	SDL_Surface* surface = IMG_Load(sprite_file.c_str());
+	SDL_Rect sprite_rect;
+	if (surface == nullptr) {
+		Dialog::error("Failed to load surface");
+	} else {
+		sprite = SDL_CreateTextureFromSurface(this->viewport->getRenderer(), surface);
+		sprite_rect = surface->clip_rect;
+		SDL_FreeSurface(surface);
+	}
+
+	//~ Sprite sp = Sprite();
+	//~ sp.setImage("character", 32, 32, window);
+	//~ std::string sprite_file = sp->getImage();
+
+	// renderer
+	SDL_Renderer* renderer = this->viewport->getRenderer();
+	//~ SDL_SetRenderDrawColor(renderer, 0, 0, 20, SDL_ALPHA_OPAQUE);
+
+	unsigned int idx_x = 0;
+	unsigned int idx_y = 1;
+
+	SDL_Rect src_rect;
+	SDL_Rect tgt_rect;
+
+	src_rect.x = 0;
+	src_rect.y = 0;
+	src_rect.w = 32;
+	src_rect.h = 32;
+
+	tgt_rect.x = 0;
+	tgt_rect.y = 0;
+	tgt_rect.w = src_rect.w;
+	tgt_rect.h = src_rect.h;
+
+	// face profile
+	SDL_Rect p_rect_src;
+	SDL_Rect p_rect_tgt;
+
+	p_rect_src.x = 32 * 5;
+	p_rect_src.y = 0;
+	p_rect_src.w = 32;
+	p_rect_src.h = 32;
+
+	p_rect_tgt.x = width / 2 - 16;
+	p_rect_tgt.y = height / 2 - 16;
+	p_rect_tgt.w = 32;
+	p_rect_tgt.h = 32;
+
+	bool rev = false;
+	unsigned int iter = 0;
+
+	int dir;
+	int lastpress = 1;
+
+	this->playMusic("main");
+
 	// main loop flag
 	bool quit = false;
 
 	// event handler
 	SDL_Event event;
 
+	unsigned long last_draw_time = getTimeMilliseconds();
+
 	// TODO: move game loop to singleton class
 	while (!quit) {
+		unsigned long elapsed_ms = last_draw_time - getTimeMilliseconds();
+
+		dir = 0;
 		while (SDL_PollEvent(&event) != 0) {
 			if (event.type == SDL_QUIT) {
 				quit = true;
+			} else {
+				//dir = 2;
+				/*
+				SDL_Keycode keycode = event.key.keysym.sym;
+				if (keycode == SDLK_LEFT) {
+					dir = 1;
+				} else if (keycode == SDLK_RIGHT) {
+					dir = 2;
+				}
+				*/
 			}
+		}
+
+		// DEBUG:
+		//~ this->viewport->draw(sprite, sprite_rect);
+		//~ continue;
+
+		const Uint8* state = SDL_GetKeyboardState(NULL);
+		if (state[SDL_SCANCODE_LEFT]) {
+			dir = 1;
+			lastpress = 0;
+		} else if (state[SDL_SCANCODE_RIGHT]) {
+			dir = 2;
+			lastpress = 1;
+		}
+
+		//~ //printf("Direction: %i\n", dir);
+
+		if (dir == 0) {
+			idx_x = 0;
+			//idx_y = 1;
+			rev = false;
+		} else {
+			if (idx_x == 0) {
+				idx_x = 2;
+			}
+
+			if (idx_x == 3) {
+				rev = false;
+			} else if (idx_x == 5) {
+				rev = true;
+			}
+
+			if (rev) {
+				idx_x--;
+			} else {
+				idx_x++;
+			}
+		}
+
+		if (iter >= 100000) {
+		//~ if (iter >= SCREEN_TICKS_PER_FRAME) {
+			iter = 0;
+
+			// FIXME: doesn't work to limit movement/redraw
+			/*
+			if (elapsed_ms < 5000) {
+				continue;
+			} else {
+				last_draw_time = getTimeMilliseconds();
+			}
+			*/
+
+			src_rect.x = src_rect.w * idx_x;
+			src_rect.y = src_rect.h * idx_y;
+
+			SDL_RendererFlip flip = SDL_FLIP_NONE;
+			if (lastpress == 0) {
+				flip = SDL_FLIP_HORIZONTAL;
+			}
+
+			SDL_RenderClear(renderer);
+			SDL_RenderCopy(renderer, sprite, &p_rect_src, &p_rect_tgt);
+			SDL_RenderCopyEx(renderer, sprite, &src_rect, &tgt_rect, 0, NULL, flip);
+			SDL_RenderPresent(renderer);
+
+			if (tgt_rect.x > width - src_rect.w) {
+				tgt_rect.x = 0;
+				if (tgt_rect.y >= height - src_rect.h) {
+					tgt_rect.y = 0;
+				} else {
+					tgt_rect.y += src_rect.h;
+				}
+			} else if (tgt_rect.x < 0) {
+				tgt_rect.x = width - src_rect.w;
+				if (tgt_rect.y == 0) {
+					tgt_rect.y = height - src_rect.h;
+				}
+			} else {
+				if (dir != 0) {
+					int distance = src_rect.w / 4;
+					if (dir == 1) {
+						distance = distance * -1;
+					}
+
+					tgt_rect.x += distance;
+				}
+			}
+		} else {
+			iter++;
 		}
 	}
 
+	SDL_DestroyTexture(sprite);
 	this->shutdown();
 
 	return 0;
