@@ -5,8 +5,3 @@ build/
 
 ## documentation build directory
 doc/site/
-
-## game images
-data/**/*.[pP][nN][gG]
-data/**/*.[gG][iI][fF]
-data/**/*.[xX][cC][fF]
