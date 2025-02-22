@@ -10,6 +10,11 @@ Plans for an engine to create Mega Man/Rockman style platform games.
 
 Source: [MIT](LICENSE.txt)
 
+Example data:
+
+- sprite:
+    - character (CC0): based on [Classic Hero by GrafxKid](https://opengameart.org/node/36173)
+
 ---
 ### Building
 

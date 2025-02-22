@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sprites>
+
+	<sprite id="character">
+		<filename>character</filename>
+		<size w="32" h="32"/>
+		<animations>
+			<animation></animation>
+		</animations>
+	</sprite>
+
+</sprites>
