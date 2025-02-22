@@ -7,11 +7,14 @@
 #ifndef RRE_SINGLETONS_H
 #define RRE_SINGLETONS_H
 
+#include "Input.h"
 #include "frame.h"
 #include "viewport.h"
 
 
 static inline GameWindow* GetGameWindow() { return GameWindow::get(); }
+
+static inline Input* GetInput() { return Input::get(); }
 
 static inline ViewPort* GetViewPort() { return ViewPort::get(); }
 
