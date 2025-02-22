@@ -4,12 +4,12 @@
  * See: LICENSE.txt
  */
 
-#include <SDL2/SDL_mixer.h>
-
+#include "audio.h"
 #include "dialog.h"
 #include "frame.h"
 #include "reso.h"
 #include "singletons.h"
+
 
 // initialize singleton instance
 GameWindow* GameWindow::instance = nullptr;
@@ -17,6 +17,7 @@ GameWindow* GameWindow::instance = nullptr;
 GameWindow::GameWindow() {
 	this->window = nullptr;
 	this->viewport = nullptr;
+	this->music = nullptr;
 }
 
 void GameWindow::setTitle(const std::string title) {
@@ -83,7 +84,44 @@ int GameWindow::init() {
 	return this->init("R&R Engine", RES1.first, RES1.second);
 }
 
+void GameWindow::playMusic(std::string id) {
+	if (Mix_PlayingMusic() != 0) {
+		// close previous stream
+		this->stopMusic();
+	}
+
+	std::string file_music = Audio::GetMusicFile(id);
+	std::string audio_error = "";
+	if (file_music.compare("") == 0) {
+		Dialog::warn("Music for ID \"" + id + "\" not configured or file not found");
+	} else {
+		this->music = Mix_LoadMUS(file_music.c_str());
+		if (this->music == nullptr) {
+			audio_error = Mix_GetError();
+			if (audio_error.compare("") == 0) {
+				audio_error = "Failed to load music: \"" + file_music + "\"";
+			}
+			Dialog::warn(audio_error);
+		}
+
+		if (Mix_PlayMusic(this->music, -1) != 0) {
+			audio_error = Mix_GetError();
+			if (audio_error.compare("") == 0) {
+				audio_error = "Failed to play music: \"" + file_music + "\"";
+			}
+			Dialog::warn(audio_error);
+		}
+	}
+}
+
+void GameWindow::stopMusic() {
+	Mix_HaltMusic();
+	Mix_FreeMusic(this->music);
+	this->music = nullptr;
+}
+
 void GameWindow::shutdown() {
+	this->stopMusic();
 	Mix_CloseAudio();
 	Mix_Quit();
 	this->viewport->shutdown();

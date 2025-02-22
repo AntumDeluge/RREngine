@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 
+#include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_video.h>
 
 #include "viewport.h"
@@ -28,6 +29,8 @@ private:
 
 	SDL_Window* window;
 	ViewPort* viewport;
+	/** Active music. */
+	Mix_Music* music;
 
 public:
 	static GameWindow* get() {
@@ -49,6 +52,9 @@ public:
 		}
 		return this->window;
 	}
+
+	void playMusic(std::string id);
+	void stopMusic();
 };
 
 #endif /* RRE_FRAME_H */
