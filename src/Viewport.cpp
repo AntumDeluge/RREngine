@@ -118,6 +118,9 @@ void Viewport::setMode(GameMode::Mode mode) {
 
 		// DEBUG: placeholder of example for adding text to title screen
 		this->addText("press enter");
+	} else if (mode == GameMode::SCENE) {
+		// DEBUG: placeholder
+		GetGameWindow()->playMusic("summer_sunday");
 	} else {
 		this->unsetBackground();
 		GetGameWindow()->stopMusic();
@@ -153,7 +156,8 @@ void Viewport::drawImage(Sprite* sprite, uint32_t x, uint32_t y) {
 }
 
 void Viewport::draw() {
-	SDL_RenderClear(this->renderer);
+	// disabled so proof-of-concept rendering isn't drawn over
+	//~ SDL_RenderClear(this->renderer);
 	// TODO: create Scene class that handles drawing tiles
 	if (this->mode == GameMode::SCENE) {
 		this->drawScene();
