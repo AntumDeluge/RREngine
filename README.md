@@ -14,6 +14,8 @@ Example data:
 
 - sprite:
     - character (CC0): based on [Classic Hero by GrafxKid](https://opengameart.org/node/36173)
+- music:
+    - summer_sunday (CC0): [Summer Sunday by celestialghost8](https://opengameart.org/node/71806)
 
 ---
 ### Building
