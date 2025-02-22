@@ -1,0 +1,11 @@
+site_name: Rock & Roll Engine
+nav:
+  - Home: index.md
+  - Download: download.md
+  - Build: build.md
+  - Game Configuration: game.md
+  - Source Code: https://codeberg.org/AntumDeluge/RREngine
+  - Issue Tracker: https://codeberg.org/AntumDeluge/RREngine/issues
+theme: readthedocs
+docs_dir: doc/src
+site_dir: doc/site

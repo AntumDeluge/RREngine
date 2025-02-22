@@ -3,6 +3,9 @@
 bin/
 build/
 
+## documentation build directory
+doc/site/
+
 ## game images
 data/**/*.[pP][nN][gG]
 data/**/*.[gG][iI][fF]
