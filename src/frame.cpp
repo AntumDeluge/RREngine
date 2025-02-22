@@ -41,7 +41,7 @@ int GameWindow::init(const std::string title, const int width, const int height)
 	// initialize audio subsystem
 	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
 		Dialog::error(SDL_GetError());
-		SDL_Quit();
+		this->shutdown();
 		return 1;
 	}
 
@@ -50,13 +50,12 @@ int GameWindow::init(const std::string title, const int width, const int height)
 	const int initted = Mix_Init(flags);
 	if (initted&flags != flags) {
 		Dialog::error(Mix_GetError());
-		SDL_Quit();
+		this->shutdown();
 		return 1;
 	}
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) != 0) {
 		Dialog::error(Mix_GetError());
-		Mix_Quit();
-		SDL_Quit();
+		this->shutdown();
 		return 1;
 	}
 
