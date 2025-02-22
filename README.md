@@ -6,6 +6,11 @@ Rock &amp; Roll Engine
 Plans for an engine to create Mega Man/Rockman style platform games.
 
 ---
+### Licensing
+
+Source: [MIT](LICENSE.txt)
+
+---
 ### Building
 
 #### Required Libraries
