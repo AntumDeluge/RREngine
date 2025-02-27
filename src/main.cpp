@@ -10,7 +10,6 @@
 #include <iostream>
 #include <string>
 #include <tinyxml2.h>
-using namespace std;
 
 #include "config.h"
 
@@ -18,6 +17,8 @@ using namespace std;
 #include "paths.h"
 #include "reso.h"
 #include "singletons.h"
+
+using namespace std;
 
 
 const string ver = to_string(RREngine_VER_MAJ) + "." + to_string(RREngine_VER_MIN) + "." + to_string(RREngine_VER_REL); // @suppress("Invalid arguments") @suppress("Symbol is not resolved")
