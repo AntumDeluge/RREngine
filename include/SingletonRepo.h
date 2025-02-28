@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_SINGLETONS_H
-#define RRE_SINGLETONS_H
+#ifndef RRE_SINGLETON_REPO_H
+#define RRE_SINGLETON_REPO_H
 
 #include "FontMapLoader.h"
 #include "Input.h"
@@ -21,4 +21,4 @@ static inline Input* GetInput() { return Input::get(); }
 
 static inline ViewPort* GetViewPort() { return ViewPort::get(); }
 
-#endif /* RRE_SINGLETONS_H */
+#endif /* RRE_SINGLETON_REPO_H */

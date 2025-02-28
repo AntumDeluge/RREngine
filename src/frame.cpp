@@ -4,11 +4,11 @@
  * See: LICENSE.txt
  */
 
+#include "SingletonRepo.h"
 #include "audio.h"
 #include "dialog.h"
 #include "frame.h"
 #include "reso.h"
-#include "singletons.h"
 
 
 // initialize singleton instance

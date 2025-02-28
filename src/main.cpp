@@ -9,14 +9,14 @@
 
 #include <iostream>
 #include <string>
+
 #include <tinyxml2.h>
 
+#include "SingletonRepo.h"
 #include "config.h"
-
 #include "fileio.h"
 #include "paths.h"
 #include "reso.h"
-#include "singletons.h"
 
 using namespace std;
 

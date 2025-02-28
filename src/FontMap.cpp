@@ -9,8 +9,8 @@
 
 #include "Dialog.h"
 #include "FontMap.h"
+#include "SingletonRepo.h"
 #include "fileio.h"
-#include "singletons.h"
 
 
 // initialize static members
