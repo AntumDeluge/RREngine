@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<fonts>
+
+	<font id="main" tileset="font.png" w="7" h="7">
+		<char index="0"> .!?-</char>
+		<char index="13">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</char>
+	</font>
+
+</fonts>

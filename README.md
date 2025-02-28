@@ -16,6 +16,9 @@ Example data:
     - character (CC0): based on [Classic Hero by GrafxKid](https://opengameart.org/node/36173)
 - music:
     - summer_sunday (CC0): [Summer Sunday by celestialghost8](https://opengameart.org/node/71806)
+- font:
+    - [Press Start 2P Medium (OFL)](https://fontlibrary.org/font/press-start-2p)
+    - details: size 8, no antialiasing
 
 ---
 ### Building
