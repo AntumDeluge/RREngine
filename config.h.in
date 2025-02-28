@@ -2,3 +2,6 @@
 #define RREngine_VER_MAJ @RREngine_VER_MAJ@
 #define RREngine_VER_MIN @RREngine_VER_MIN@
 #define RREngine_VER_REL @RREngine_VER_REL@
+
+// debugging symbols
+#define RRE_DEBUGGING @RRE_DEBUGGING@

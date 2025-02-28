@@ -6,6 +6,13 @@ set(RREngine_VER_MAJ 0)
 set(RREngine_VER_MIN 1)
 set(RREngine_VER_REL 0)
 
+# debugging symbols
+if(DEBUG)
+	set(RRE_DEBUGGING true)
+else()
+	set(RRE_DEBUGGING false)
+endif()
+
 # configure a header file to pass some of the CMake settings
 # to the source code
 configure_file("config.h.in" "config.h")
