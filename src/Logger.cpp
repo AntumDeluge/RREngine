@@ -8,13 +8,17 @@
 #include <sstream>
 
 #include "Logger.h"
+#include "config.h"
 #include "paths.h"
 
 
 // initialize static members
-// TODO: set logger level via command line parameter or config
-//~ LogLevel Logger::default_level = ERROR;
+// TODO: override logger level via command line parameter
+#if RRE_DEBUGGING
 LogLevel Logger::default_level = DEBUG;
+#else
+LogLevel Logger::default_level = ERROR;
+#endif
 std::unordered_map<std::string, Logger*> Logger::loggers = {};
 
 Logger::Logger(std::string id, LogLevel level, std::string file) {
