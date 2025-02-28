@@ -13,6 +13,7 @@
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_video.h>
 
+#include "Logger.h"
 #include "viewport.h"
 
 
@@ -27,6 +28,8 @@ private:
 	GameWindow(const GameWindow&) = delete;
 	GameWindow& operator=(const GameWindow&) = delete;
 
+	/** Logger instance. */
+	Logger* logger;
 	SDL_Window* window;
 	ViewPort* viewport;
 	/** Active music. */
