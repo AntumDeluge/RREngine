@@ -71,6 +71,8 @@ int GameWindow::init(const std::string title, const int width, const int height)
 		return 1;
 	}
 
+	GetFontMapLoader()->loadConfig();
+
 	// main loop flag
 	bool quit = false;
 

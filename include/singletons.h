@@ -7,10 +7,13 @@
 #ifndef RRE_SINGLETONS_H
 #define RRE_SINGLETONS_H
 
+#include "FontMapLoader.h"
 #include "Input.h"
 #include "frame.h"
 #include "viewport.h"
 
+
+static inline FontMapLoader* GetFontMapLoader() { return FontMapLoader::get(); }
 
 static inline GameWindow* GetGameWindow() { return GameWindow::get(); }
 
