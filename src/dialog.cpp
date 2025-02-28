@@ -26,10 +26,18 @@ void Dialog::info(std::string title, std::string msg) {
 	message(SDL_MESSAGEBOX_INFORMATION, title, msg);
 }
 
+void Dialog::warn(std::string title, std::string msg) {
+	message(SDL_MESSAGEBOX_WARNING, title, msg);
+}
+
 void Dialog::warn(std::string msg) {
-	message(SDL_MESSAGEBOX_WARNING, "Warning", msg);
+	Dialog::warn("Warning", msg);
+}
+
+void Dialog::error(std::string title, std::string msg) {
+	message(SDL_MESSAGEBOX_ERROR, title, msg);
 }
 
 void Dialog::error(std::string msg) {
-	message(SDL_MESSAGEBOX_ERROR, "Error", msg);
+	Dialog::error("Error", msg);
 }

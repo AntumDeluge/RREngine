@@ -12,7 +12,9 @@
 
 namespace Dialog {
 	void info(std::string title, std::string msg);
+	void warn(std::string title, std::string msg);
 	void warn(std::string msg);
+	void error(std::string title, std::string msg);
 	void error(std::string msg);
 }
 
