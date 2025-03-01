@@ -10,23 +10,19 @@
 #include "viewport.h"
 
 
-bool initialized = false;
-
 // initialize singleton instance
 ViewPort* ViewPort::instance = nullptr;
 
 ViewPort::ViewPort() {
 	this->logger = Logger::getLogger("ViewPort");
-	//~ this->renderer = nullptr;
+	this->renderer = nullptr;
 }
 
 void ViewPort::init(SDL_Window* window) {
-	//~ if (this->renderer != nullptr) {
-	if (initialized) {
+	if (this->renderer != nullptr) {
 		this->logger->warn("ViewPort instance already initialized");
 		return;
 	}
-	initialized = true;
 
 #if RRE_DEBUGGING
 	this->logger->debug("Creating ViewPort renderer ...");
