@@ -30,10 +30,10 @@ Example data:
 
 ### External Libraries
 
-- [SDL2](https://libsdl.org/)
-- [SDL2_mixer](https://wiki.libsdl.org/SDL2_mixer)
-- [SDL2_image](https://wiki.libsdl.org/SDL2_image)
-- [TinyXML-2](http://leethomason.github.io/tinyxml2/)
+- [SDL2](https://libsdl.org/) (zlib) ([source](https://github.com/libsdl-org/SDL/releases))
+- [SDL2_mixer](https://wiki.libsdl.org/SDL2_mixer) (zlib) ([source](https://github.com/libsdl-org/SDL_mixer/releases))
+- [SDL2_image](https://wiki.libsdl.org/SDL2_image) (zlib) ([source](https://github.com/libsdl-org/SDL_image/releases))
+- [TinyXML-2](http://leethomason.github.io/tinyxml2/) (zlib) ([source](https://github.com/leethomason/tinyxml2/releases))
 
 ### Required Build Tools
 
