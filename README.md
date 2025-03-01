@@ -1,12 +1,15 @@
 
-# RREngine
-
-Rock &amp; Roll Engine
-
-Plans for an engine to create Mega Man/Rockman style platform games.
+# R+R Engine (Rock & Roll Engine)
 
 ---
-### Licensing
+## Description
+
+_(this software is a work-in-progress & not yet fully functional)_
+
+An engine to create [Mega Man/Rockman](https://en.wikipedia.org/wiki/Mega_Man) style platform games.
+
+---
+## Licensing
 
 Source: [MIT](LICENSE.txt)
 
@@ -21,21 +24,23 @@ Example data:
     - details: size 8, no antialiasing
 
 ---
-### Building
+## Building
 
-#### Required Libraries
+### Included Libraries
+
+### External Libraries
 
 - [SDL2](https://libsdl.org/)
 - [SDL2_mixer](https://wiki.libsdl.org/SDL2_mixer)
 - [SDL2_image](https://wiki.libsdl.org/SDL2_image)
 - [TinyXML-2](http://leethomason.github.io/tinyxml2/)
 
-#### Required Build Tools
+### Required Build Tools
 
 - GNU compatible C++ compiler such as [gcc](https://www.gnu.org/software/gcc/) or [clang](https://clang.llvm.org/).
 - [CMake](https://cmake.org/)
 
-#### Running CMake Commands
+### Running CMake Commands
 
 1. Open a command line/terminal.
 2. Change to the source root directory.
