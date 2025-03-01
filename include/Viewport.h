@@ -30,6 +30,7 @@ private:
 
 	SDL_Renderer* renderer;
 	FontMap* font_map;
+	uint16_t current_fps;
 
 public:
 	static Viewport* get() {
@@ -42,6 +43,7 @@ public:
 	void init(SDL_Window* window);
 	void shutdown();
 	void setFontMap(FontMap* font_map) { this->font_map = font_map; }
+	void setCurrentFPS(uint16_t fps) { this->current_fps = fps; }
 
 	SDL_Renderer* getRenderer() { return this->renderer; }
 
@@ -55,6 +57,7 @@ private:
 	void drawForeground();
 	void drawEntities();
 	void drawText();
+	void drawFPS();
 };
 
 #endif /* RRE_VIEWPORT_H */

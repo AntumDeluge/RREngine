@@ -4,8 +4,12 @@
  * See: LICENSE.txt
  */
 
+//~ #include <string>
+
 #include "Viewport.h"
 #include "config.h"
+
+//~ using namespace std;
 
 
 // initialize singleton instance
@@ -16,6 +20,7 @@ Viewport::Viewport() {
 	this->renderer = nullptr;
 	// TODO: initial viewport font should be configured in game.xml
 	this->font_map = nullptr; // cannot be set here because font maps have not yet loaded
+	this->current_fps = 0;
 }
 
 void Viewport::init(SDL_Window* window) {
@@ -61,6 +66,9 @@ void Viewport::drawSprite(Sprite* sprite, uint32_t x, uint32_t y) {
 void Viewport::draw() {
 	SDL_RenderClear(this->renderer);
 	this->drawScene();
+#if RRE_DEBUGGING
+	this->drawFPS();
+#endif
 	SDL_RenderPresent(this->renderer);
 }
 
@@ -85,4 +93,58 @@ void Viewport::drawEntities() {
 
 void Viewport::drawText() {
 	// TODO:
+}
+
+void Viewport::drawFPS() {
+	// DEBUG:
+	//~ this->logger->debug("FPS: " + to_string(this->current_fps));
+
+	// TODO: optimize
+	// FIXME: FontStore::buildTextSprite not working
+	//~ Sprite* fps_sprite = FontStore::buildTextSprite(this->font_map, "FPS: "
+			//~ + to_string(this->current_fps));
+	//~ if (fps_sprite != nullptr) {
+		//~ this->drawSprite(fps_sprite, 0, 0);
+	//~ }
+
+	SDL_Texture* texture = this->font_map->getTexture();
+
+	int t_idx = 0;
+	SDL_Rect t_rect = {9 * t_idx, 0, 9, 9};
+
+	// F
+	SDL_Rect s_rect = {5 * 9, 2 * 9, 9, 9};
+	this->drawSprite(texture, s_rect, t_rect);
+	t_idx++;
+	t_rect.x = 9 * t_idx;
+	// P
+	s_rect.x = 9 * 2;
+	s_rect.y = 9 * 3;
+	this->drawSprite(texture, s_rect, t_rect);
+	t_idx++;
+	t_rect.x = 9 * t_idx;
+	// S
+	s_rect.x = 9 * 5;
+	s_rect.y = 9 * 3;
+	this->drawSprite(texture, s_rect, t_rect);
+	t_idx++;
+	t_rect.x = 9 * t_idx;
+	// :
+	s_rect.x = 9 * 2;
+	s_rect.y = 9 * 0;
+	this->drawSprite(texture, s_rect, t_rect);
+	t_idx += 2;
+	t_rect.x = 9 * t_idx;
+	// ?
+	s_rect.x = 9 * 5;
+	s_rect.y = 9 * 0;
+	this->drawSprite(texture, s_rect, t_rect);
+	t_idx++;
+	t_rect.x = 9 * t_idx;
+	this->drawSprite(texture, s_rect, t_rect);
+	t_idx++;
+	t_rect.x = 9 * t_idx;
+	this->drawSprite(texture, s_rect, t_rect);
+	t_idx++;
+	t_rect.x = 9 * t_idx;
 }
