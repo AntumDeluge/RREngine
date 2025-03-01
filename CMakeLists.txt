@@ -38,3 +38,12 @@ else()
 endif()
 
 target_link_libraries(game PRIVATE ${LIBS})
+
+if(EXAMPLE)
+	message("-- Including example data ...")
+
+	file(
+		COPY "${CMAKE_SOURCE_DIR}/data"
+		DESTINATION "${CMAKE_BINARY_DIR}"
+	)
+endif()
