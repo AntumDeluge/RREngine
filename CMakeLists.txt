@@ -6,19 +6,12 @@ set(RREngine_VER_MAJ 0)
 set(RREngine_VER_MIN 1)
 set(RREngine_VER_REL 0)
 
-# debugging symbols
-if(DEBUG)
-	set(RRE_DEBUGGING true)
-else()
-	set(RRE_DEBUGGING false)
-endif()
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/dependencies.cmake")
 
 # configure a header file to pass some of the CMake settings
 # to the source code
 configure_file("config.h.in" "config.h")
-
-include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake")
-include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/dependencies.cmake")
 
 if(STATIC)
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")
