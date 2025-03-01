@@ -47,6 +47,7 @@ include_directories(
 	${SDL2_INCLUDE_DIRS}
 	${SDL2MIXER_INCLUDE_DIRS}
 	${SDL2IMAGE_INCLUDE_DIRS}
+	"${PROJECT_SOURCE_DIR}/lib/cxxopts"
 	# add the binary tree to the search path to include "config.h"
 	${PROJECT_BINARY_DIR}
 )

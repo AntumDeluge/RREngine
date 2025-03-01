@@ -28,6 +28,8 @@ Example data:
 
 ### Included Libraries
 
+- [cxxopts](https://github.com/jarro2783/cxxopts) v3.2.0 ([MIT](lib/cxxopts/LICENSE.txt))
+
 ### External Libraries
 
 - [SDL2](https://libsdl.org/) (zlib) ([source](https://github.com/libsdl-org/SDL/releases))
