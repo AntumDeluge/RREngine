@@ -9,9 +9,8 @@
 
 #include <string>
 
-#include <SDL2/SDL_render.h>
-
 #include "FontMap.h"
+#include "Sprite.h"
 
 
 namespace FontStore {
@@ -28,7 +27,7 @@ namespace FontStore {
 
 	FontMap* getMap(std::string fid);
 
-	SDL_Texture* buildTexture(std::string fid, std::string text);
+	Sprite* buildTextSprite(FontMap* fmap, std::string text);
 };
 
 #endif /* RRE_FONT_STORE_H */
