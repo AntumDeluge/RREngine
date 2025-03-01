@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#include "Logger.h"
+#include "config.h"
 #include "viewport.h"
 
 
@@ -16,20 +16,21 @@ bool initialized = false;
 ViewPort* ViewPort::instance = nullptr;
 
 ViewPort::ViewPort() {
+	this->logger = Logger::getLogger("ViewPort");
 	//~ this->renderer = nullptr;
 }
 
 void ViewPort::init(SDL_Window* window) {
-	Logger* logger = Logger::getLogger("ViewPort");
-
 	//~ if (this->renderer != nullptr) {
 	if (initialized) {
-		logger->warn("ViewPort instance already initialized");
+		this->logger->warn("ViewPort instance already initialized");
 		return;
 	}
 	initialized = true;
 
-	logger->debug("Creating ViewPort renderer ...");
+#if RRE_DEBUGGING
+	this->logger->debug("Creating ViewPort renderer ...");
+#endif
 
 	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	//~ SDL_SetRenderDrawColor(this->renderer, 0, 0, 20, SDL_ALPHA_OPAQUE);

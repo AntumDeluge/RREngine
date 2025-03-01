@@ -9,9 +9,14 @@
 
 #include <SDL2/SDL_render.h>
 
+#include "Logger.h"
+
 
 class ViewPort {
 private:
+	/** Logger instance for this class. */
+	Logger* logger;
+
 	// singleton class
 	static ViewPort* instance;
 	ViewPort();
