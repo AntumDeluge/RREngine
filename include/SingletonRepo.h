@@ -11,7 +11,7 @@
 #include "GameLogic.h"
 #include "GameWindow.h"
 #include "Input.h"
-#include "viewport.h"
+#include "Viewport.h"
 
 
 static inline FontMapLoader* GetFontMapLoader() { return FontMapLoader::get(); }

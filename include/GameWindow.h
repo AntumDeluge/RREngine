@@ -14,7 +14,7 @@
 #include <SDL2/SDL_video.h>
 
 #include "Logger.h"
-#include "viewport.h"
+#include "Viewport.h"
 
 
 class GameWindow {

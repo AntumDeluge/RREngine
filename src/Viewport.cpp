@@ -6,8 +6,8 @@
 
 #include <iostream>
 
+#include "Viewport.h"
 #include "config.h"
-#include "viewport.h"
 
 
 // initialize singleton instance
