@@ -4,6 +4,8 @@
  * See: LICENSE.txt
  */
 
+#include <SDL2/SDL.h> // SDL2 defines SDL_Init in main header, this has been moved to SDL_init.h in SDL3
+
 #include "GameLogic.h"
 #include "GameWindow.h"
 #include "SingletonRepo.h"
