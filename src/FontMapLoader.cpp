@@ -116,7 +116,7 @@ bool FontMapLoader::parseFont(XMLElement* el) {
 		return false;
 	}
 
-	std::unordered_map<int, unsigned int> char_map = this->parseCharacters(el);
+	std::unordered_map<wchar_t, unsigned int> char_map = this->parseCharacters(el);
 	if (char_map.size() == 0) {
 		return false;
 	}
@@ -126,9 +126,9 @@ bool FontMapLoader::parseFont(XMLElement* el) {
 	return true;
 }
 
-std::unordered_map<int, unsigned int> FontMapLoader::parseCharacters(XMLElement* el) {
-	std::unordered_map<int, unsigned int> empty_map;
-	std::unordered_map<int, unsigned int> char_map;
+std::unordered_map<wchar_t, unsigned int> FontMapLoader::parseCharacters(XMLElement* el) {
+	std::unordered_map<wchar_t, unsigned int> empty_map;
+	std::unordered_map<wchar_t, unsigned int> char_map;
 
 	XMLElement* cel = el->FirstChildElement("char");
 	while (cel != nullptr) {
@@ -144,11 +144,10 @@ std::unordered_map<int, unsigned int> FontMapLoader::parseCharacters(XMLElement*
 		const std::string value = cel->GetText();
 		for (int idx = 0; idx < value.length(); idx++) {
 			int index_offset = start_index + idx;
-			int key_code = value[idx];
-			char_map[key_code] = index_offset;
+			wchar_t c = value[idx];
+			char_map[c] = index_offset;
 		}
 
-		// FIXME: not finding values of siblings
 		cel = cel->NextSiblingElement("char");
 	}
 

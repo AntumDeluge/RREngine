@@ -16,7 +16,7 @@
 // initialize static members
 Logger* FontMap::logger = Logger::getLogger("FontMap");
 
-FontMap::FontMap(SDL_Texture* texture, std::unordered_map<SDL_Keycode, unsigned int> char_map,
+FontMap::FontMap(SDL_Texture* texture, std::unordered_map<wchar_t, unsigned int> char_map,
 		unsigned int w, unsigned int h) {
 	this->texture = texture;
 	this->char_map = char_map;
@@ -24,7 +24,7 @@ FontMap::FontMap(SDL_Texture* texture, std::unordered_map<SDL_Keycode, unsigned 
 	this->h = h;
 }
 
-FontMap::FontMap(std::string file_path, std::unordered_map<SDL_Keycode, unsigned int> char_map,
+FontMap::FontMap(std::string file_path, std::unordered_map<wchar_t, unsigned int> char_map,
 		unsigned int w, unsigned int h) {
 	this->char_map = char_map;
 	this->w = w;
@@ -48,7 +48,7 @@ FontMap::FontMap(std::string file_path, std::unordered_map<SDL_Keycode, unsigned
 
 	// DEBUG:
 	//~ std::string msg = "New FontMap:\n";
-	//~ for (std::pair<int, unsigned int> p : this->char_map) {
+	//~ for (std::pair<wchar_t, unsigned int> p : this->char_map) {
 		//~ msg += "  " + std::to_string(p.first) + ((std::string) " => ") + std::to_string(p.second) + "\n";
 	//~ }
 	//~ Dialog::info("Debug", msg);
