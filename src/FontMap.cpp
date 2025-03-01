@@ -54,3 +54,10 @@ FontMap::FontMap(string file_path, unordered_map<wchar_t, int> char_map, uint32_
 	//~ }
 	//~ Dialog::info("Debug", msg);
 }
+
+int FontMap::getCharIndex(wchar_t c) {
+	if (this->char_map.find(c) != this->char_map.end()) {
+		return this->char_map[c];
+	}
+	return -1;
+}

@@ -39,6 +39,10 @@ public:
 	SDL_Texture* getTexture() {
 		return this->texture;
 	}
+
+	uint32_t getCharWidth() { return this->w; }
+	uint32_t getCharHeight() { return this->h; }
+	int getCharIndex(wchar_t c);
 };
 
 #endif /* RRE_FONT_MAP_H */
