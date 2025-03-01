@@ -12,26 +12,26 @@
 #include "Logger.h"
 
 
-class ViewPort {
+class Viewport {
 private:
 	/** Logger instance for this class. */
 	Logger* logger;
 
 	// singleton class
-	static ViewPort* instance;
-	ViewPort();
-	~ViewPort() {}
+	static Viewport* instance;
+	Viewport();
+	~Viewport() {}
 
 	// delete copy constructor & assignment operator
-	ViewPort(const ViewPort&) = delete;
-	ViewPort& operator=(const ViewPort&) = delete;
+	Viewport(const Viewport&) = delete;
+	Viewport& operator=(const Viewport&) = delete;
 
 	SDL_Renderer* renderer;
 
 public:
-	static ViewPort* get() {
+	static Viewport* get() {
 		if (instance == nullptr) {
-			instance = new ViewPort();
+			instance = new Viewport();
 		}
 		return instance;
 	}

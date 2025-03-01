@@ -31,7 +31,7 @@ private:
 	/** Logger instance. */
 	Logger* logger;
 	SDL_Window* window;
-	ViewPort* viewport;
+	Viewport* viewport;
 	/** Active music. */
 	Mix_Music* music;
 

@@ -45,7 +45,7 @@ int GameWindow::init(const string title, const int width, const int height) {
 	// create the SDL frame & viewport renderer
 	this->window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			width, height, SDL_WINDOW_SHOWN);
-	this->viewport = GetViewPort();
+	this->viewport = GetViewport();
 	this->viewport->init(this->window);
 
 	// initialize audio subsystem

@@ -22,6 +22,6 @@ static inline GameWindow* GetGameWindow() { return GameWindow::get(); }
 
 static inline Input* GetInput() { return Input::get(); }
 
-static inline ViewPort* GetViewPort() { return ViewPort::get(); }
+static inline Viewport* GetViewport() { return Viewport::get(); }
 
 #endif /* RRE_SINGLETON_REPO_H */

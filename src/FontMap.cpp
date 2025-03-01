@@ -41,7 +41,7 @@ FontMap::FontMap(std::string file_path, std::unordered_map<SDL_Keycode, unsigned
 			FontMap::logger->error(msg);
 			Dialog::error(msg);
 		} else {
-			this->texture = SDL_CreateTextureFromSurface(GetViewPort()->getRenderer(), surface);
+			this->texture = SDL_CreateTextureFromSurface(GetViewport()->getRenderer(), surface);
 			SDL_FreeSurface(surface);
 		}
 	}

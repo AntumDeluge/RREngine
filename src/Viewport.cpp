@@ -11,21 +11,21 @@
 
 
 // initialize singleton instance
-ViewPort* ViewPort::instance = nullptr;
+Viewport* Viewport::instance = nullptr;
 
-ViewPort::ViewPort() {
-	this->logger = Logger::getLogger("ViewPort");
+Viewport::Viewport() {
+	this->logger = Logger::getLogger("Viewport");
 	this->renderer = nullptr;
 }
 
-void ViewPort::init(SDL_Window* window) {
+void Viewport::init(SDL_Window* window) {
 	if (this->renderer != nullptr) {
-		this->logger->warn("ViewPort instance already initialized");
+		this->logger->warn("Viewport instance already initialized");
 		return;
 	}
 
 #if RRE_DEBUGGING
-	this->logger->debug("Creating ViewPort renderer ...");
+	this->logger->debug("Creating Viewport renderer ...");
 #endif
 
 	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -34,12 +34,12 @@ void ViewPort::init(SDL_Window* window) {
 	//~ SDL_SetRenderViewport(this->renderer, &vrect);
 }
 
-void ViewPort::shutdown() {
+void Viewport::shutdown() {
 	SDL_DestroyRenderer(this->renderer);
 	this->renderer = nullptr;
 }
 
-void ViewPort::draw(SDL_Texture* image, SDL_Rect srect) {
+void Viewport::draw(SDL_Texture* image, SDL_Rect srect) {
 	// DEBUG:
 	//~ std::cout << "width: " << srect.w << ", height: " << srect.h << ", x: " << srect.x << ", y: " << srect.y << std::endl;
 
