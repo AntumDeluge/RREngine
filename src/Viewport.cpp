@@ -43,9 +43,7 @@ void Viewport::drawSprite(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect
 		return;
 	}
 
-	SDL_RenderClear(this->renderer);
 	SDL_RenderCopy(this->renderer, texture, &s_rect, &t_rect);
-	SDL_RenderPresent(this->renderer);
 }
 
 void Viewport::drawSprite(Sprite* sprite, uint32_t x, uint32_t y) {
@@ -59,7 +57,9 @@ void Viewport::drawSprite(Sprite* sprite, uint32_t x, uint32_t y) {
 }
 
 void Viewport::draw() {
+	SDL_RenderClear(this->renderer);
 	this->drawScene();
+	SDL_RenderPresent(this->renderer);
 }
 
 void Viewport::drawScene() {
