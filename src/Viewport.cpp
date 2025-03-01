@@ -39,19 +39,25 @@ void Viewport::shutdown() {
 	this->renderer = nullptr;
 }
 
-void Viewport::drawSprite(SDL_Texture* image, SDL_Rect srect) {
-	// DEBUG:
-	//~ std::cout << "width: " << srect.w << ", height: " << srect.h << ", x: " << srect.x << ", y: " << srect.y << std::endl;
-
-	SDL_Rect trect;
-	trect.x = 0;
-	trect.y = 0;
-	trect.w = 256;
-	trect.h = 240;
+void Viewport::drawSprite(SDL_Texture* texture, SDL_Rect trect, SDL_Rect srect) {
+	if (texture == nullptr) {
+		this->logger->error("Sprite drawing error; sprite undefined");
+		return;
+	}
 
 	SDL_RenderClear(this->renderer);
-	SDL_RenderCopy(this->renderer, image, &trect, &srect);
+	SDL_RenderCopy(this->renderer, texture, &trect, &srect);
 	SDL_RenderPresent(this->renderer);
+}
+
+void Viewport::drawSprite(Sprite* sprite, uint32_t x, uint32_t y) {
+	SDL_Rect srect;
+	srect.x = x;
+	srect.y = y;
+	srect.w = sprite->getWidth();
+	srect.h = sprite->getHeight();
+
+	this->drawSprite(sprite->getTexture(), srect, srect);
 }
 
 void Viewport::draw() {

@@ -10,6 +10,7 @@
 #include <SDL2/SDL_render.h>
 
 #include "Logger.h"
+#include "Sprite.h"
 
 
 class Viewport {
@@ -41,7 +42,8 @@ public:
 
 	SDL_Renderer* getRenderer() { return this->renderer; }
 
-	void drawSprite(SDL_Texture* image, SDL_Rect rect);
+	void drawSprite(SDL_Texture* texture, SDL_Rect trect, SDL_Rect srect);
+	void drawSprite(Sprite* sprite, uint32_t x, uint32_t y);
 	void draw();
 
 private:
