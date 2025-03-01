@@ -7,7 +7,7 @@
 #ifndef RRE_VIEWPORT_H
 #define RRE_VIEWPORT_H
 
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_render.h>
 
 
 class ViewPort {
