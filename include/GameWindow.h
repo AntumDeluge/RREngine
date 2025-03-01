@@ -7,7 +7,6 @@
 #ifndef RRE_GAME_WINDOW_H
 #define RRE_GAME_WINDOW_H
 
-#include <iostream>
 #include <string>
 
 #include <SDL2/SDL_mixer.h>
@@ -51,7 +50,7 @@ public:
 
 	SDL_Window* getElement() {
 		if (this->window == nullptr) {
-			std::cout << "WARNING: returning SDL_Window before initialization" << std::endl;
+			this->logger->warn("Returning SDL_Window before initialization");
 		}
 		return this->window;
 	}
