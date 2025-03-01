@@ -7,18 +7,20 @@
 #include "FontStore.h"
 #include "Logger.h"
 
+using namespace std;
+
 
 // font map cache
-std::unordered_map<std::string, FontMap*> fmap_cache = {};
+unordered_map<string, FontMap*> fmap_cache = {};
 
-void FontStore::addMap(std::string fid, FontMap* fmap) {
+void FontStore::addMap(string fid, FontMap* fmap) {
 	if (fmap_cache.find(fid) != fmap_cache.end()) {
 		Logger::getLogger("FontStore")->warn("Overwriting font map with id \"" + fid + "\"");
 	}
 	fmap_cache[fid] = fmap;
 }
 
-FontMap* FontStore::getMap(std::string fid) {
+FontMap* FontStore::getMap(string fid) {
 	if (fmap_cache.find(fid) != fmap_cache.end()) {
 		return fmap_cache[fid];
 	}
