@@ -18,16 +18,15 @@ using namespace std;
 // initialize static members
 Logger* FontMap::logger = Logger::getLogger("FontMap");
 
-FontMap::FontMap(SDL_Texture* texture, unordered_map<wchar_t, int> char_map,
-		unsigned int w, unsigned int h) {
+FontMap::FontMap(SDL_Texture* texture, unordered_map<wchar_t, int> char_map, uint32_t w,
+		uint32_t h) {
 	this->texture = texture;
 	this->char_map = char_map;
 	this->w = w;
 	this->h = h;
 }
 
-FontMap::FontMap(string file_path, unordered_map<wchar_t, int> char_map,
-		unsigned int w, unsigned int h) {
+FontMap::FontMap(string file_path, unordered_map<wchar_t, int> char_map, uint32_t w, uint32_t h) {
 	this->char_map = char_map;
 	this->w = w;
 	this->h = h;

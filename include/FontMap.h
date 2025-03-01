@@ -27,16 +27,14 @@ private:
 	SDL_Texture* texture;
 	std::unordered_map<wchar_t, int> char_map;
 	/** Pixel width of each character (excluding 2 pixels of padding). */
-	unsigned int w;
+	uint32_t w;
 	/** Pixel height of each character (excluding 2 pixels of padding). */
-	unsigned int h;
+	uint32_t h;
 
 public:
-	FontMap(SDL_Texture* texture, std::unordered_map<wchar_t, int> char_map,
-			unsigned int w, unsigned int h);
+	FontMap(SDL_Texture* texture, std::unordered_map<wchar_t, int> char_map, uint32_t w, uint32_t h);
 
-	FontMap(std::string file_path, std::unordered_map<wchar_t, int> char_map,
-			unsigned int w, unsigned int h);
+	FontMap(std::string file_path, std::unordered_map<wchar_t, int> char_map, uint32_t w, uint32_t h);
 
 	SDL_Texture* getTexture() {
 		return this->texture;
