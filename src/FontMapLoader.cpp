@@ -15,6 +15,7 @@
 #include "fileio.h"
 #include "paths.h"
 
+using namespace std;
 using namespace tinyxml2;
 
 
@@ -28,7 +29,7 @@ void FontMapLoader::loadConfig() {
 	}
 	this->loaded = true;
 
-	std::string conf_fonts = concatPath(dir_root, "data/conf/fonts.xml");
+	string conf_fonts = concatPath(dir_root, "data/conf/fonts.xml");
 	this->logger->debug("Loading fonts config: \"" + conf_fonts + "\"");
 	if (!fileExists(conf_fonts)) {
 		this->logger->warn("Fonts config not found: \"" + conf_fonts + "\"");
@@ -37,7 +38,7 @@ void FontMapLoader::loadConfig() {
 
 	XMLDocument doc;
 	if (doc.LoadFile(conf_fonts.c_str()) != 0) {
-		std::string msg = "Failed to load fonts config: \"" + conf_fonts + "\"";
+		string msg = "Failed to load fonts config: \"" + conf_fonts + "\"";
 		this->logger->error(msg);
 		Dialog::error(msg);
 		return;
@@ -45,7 +46,7 @@ void FontMapLoader::loadConfig() {
 
 	XMLElement* root = doc.RootElement();
 	if (root == nullptr) {
-		std::string msg = "Malformed config missing root element: \"" + conf_fonts + "\"";
+		string msg = "Malformed config missing root element: \"" + conf_fonts + "\"";
 		this->logger->error(msg);
 		Dialog::error(msg);
 		return;
@@ -61,10 +62,10 @@ void FontMapLoader::loadConfig() {
 }
 
 bool FontMapLoader::parseFont(XMLElement* el) {
-	std::vector<std::string> err;
+	vector<string> err;
 
-	std::string id = "";
-	std::string path = "";
+	string id = "";
+	string path = "";
 	int w = 0;
 	int h = 0;
 
@@ -79,7 +80,7 @@ bool FontMapLoader::parseFont(XMLElement* el) {
 	if (attr == nullptr) {
 		err.push_back("Missing font attribute \"tileset\"");
 	} else {
-		path = concatPath(dir_root, (std::string) "data/tileset/" + attr->Value());
+		path = concatPath(dir_root, (string) "data/tileset/" + attr->Value());
 		if (!fileExists(path)) {
 			err.push_back("Missing font bitmap file: \"" + path + "\"");
 		}
@@ -100,7 +101,7 @@ bool FontMapLoader::parseFont(XMLElement* el) {
 	}
 
 	if (!err.empty()) {
-		std::string msg = "";
+		string msg = "";
 		for (int idx = 0; idx < err.size(); idx++) {
 			if (msg.length() > 0) {
 #ifdef WIN32
@@ -116,7 +117,7 @@ bool FontMapLoader::parseFont(XMLElement* el) {
 		return false;
 	}
 
-	std::unordered_map<wchar_t, int> char_map = this->parseCharacters(el);
+	unordered_map<wchar_t, int> char_map = this->parseCharacters(el);
 	if (char_map.size() == 0) {
 		return false;
 	}
@@ -126,22 +127,22 @@ bool FontMapLoader::parseFont(XMLElement* el) {
 	return true;
 }
 
-std::unordered_map<wchar_t, int> FontMapLoader::parseCharacters(XMLElement* el) {
-	std::unordered_map<wchar_t, int> empty_map;
-	std::unordered_map<wchar_t, int> char_map;
+unordered_map<wchar_t, int> FontMapLoader::parseCharacters(XMLElement* el) {
+	unordered_map<wchar_t, int> empty_map;
+	unordered_map<wchar_t, int> char_map;
 
 	XMLElement* cel = el->FirstChildElement("char");
 	while (cel != nullptr) {
 		const XMLAttribute* attr = cel->FindAttribute("index");
 		if (attr == nullptr) {
-			std::string msg = "Missing attribute \"index\" in XML element \"char\"";
+			string msg = "Missing attribute \"index\" in XML element \"char\"";
 			this->logger->error("XML Parsing Error: " + msg);
 			Dialog::error("XML Parsing Error", msg);
 			return empty_map;
 		}
 
 		const int start_index = attr->IntValue();
-		const std::string value = cel->GetText();
+		const string value = cel->GetText();
 		for (int idx = 0; idx < value.length(); idx++) {
 			int index_offset = start_index + idx;
 			wchar_t c = value[idx];
@@ -152,7 +153,7 @@ std::unordered_map<wchar_t, int> FontMapLoader::parseCharacters(XMLElement* el) 
 	}
 
 	if (char_map.size() == 0) {
-		std::string msg = "No character mappings defined";
+		string msg = "No character mappings defined";
 		this->logger->error("XML Parsing Error: " + msg);
 		Dialog::error("XML Parsing Error", msg);
 	}

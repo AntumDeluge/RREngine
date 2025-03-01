@@ -12,11 +12,13 @@
 #include "SingletonRepo.h"
 #include "fileio.h"
 
+using namespace std;
+
 
 // initialize static members
 Logger* FontMap::logger = Logger::getLogger("FontMap");
 
-FontMap::FontMap(SDL_Texture* texture, std::unordered_map<wchar_t, int> char_map,
+FontMap::FontMap(SDL_Texture* texture, unordered_map<wchar_t, int> char_map,
 		unsigned int w, unsigned int h) {
 	this->texture = texture;
 	this->char_map = char_map;
@@ -24,20 +26,20 @@ FontMap::FontMap(SDL_Texture* texture, std::unordered_map<wchar_t, int> char_map
 	this->h = h;
 }
 
-FontMap::FontMap(std::string file_path, std::unordered_map<wchar_t, int> char_map,
+FontMap::FontMap(string file_path, unordered_map<wchar_t, int> char_map,
 		unsigned int w, unsigned int h) {
 	this->char_map = char_map;
 	this->w = w;
 	this->h = h;
 
 	if (!fileExists(file_path)) {
-		std::string msg = "Missing font map file: \"" + file_path + "\"";
+		string msg = "Missing font map file: \"" + file_path + "\"";
 		FontMap::logger->error(msg);
 		Dialog::error(msg);
 	} else {
 		SDL_Surface* surface = IMG_Load(file_path.c_str());
 		if (surface == nullptr) {
-			std::string msg = "Failed to create surface from file: \"" + file_path + "\"";
+			string msg = "Failed to create surface from file: \"" + file_path + "\"";
 			FontMap::logger->error(msg);
 			Dialog::error(msg);
 		} else {
@@ -47,9 +49,9 @@ FontMap::FontMap(std::string file_path, std::unordered_map<wchar_t, int> char_ma
 	}
 
 	// DEBUG:
-	//~ std::string msg = "New FontMap:\n";
-	//~ for (std::pair<wchar_t, int> p : this->char_map) {
-		//~ msg += "  " + std::to_string(p.first) + ((std::string) " => ") + std::to_string(p.second) + "\n";
+	//~ string msg = "New FontMap:\n";
+	//~ for (pair<wchar_t, int> p : this->char_map) {
+		//~ msg += "  " + to_string(p.first) + ((string) " => ") + to_string(p.second) + "\n";
 	//~ }
 	//~ Dialog::info("Debug", msg);
 }
