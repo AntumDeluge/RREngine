@@ -98,3 +98,11 @@ Sprite::Sprite(string id) {
 		}
 	}
 }
+
+Sprite::Sprite(SDL_Texture* texture, uint32_t w, uint32_t h) {
+	this->logger = Logger::getLogger("Sprite");
+
+	this->texture = texture;
+	this->w = w;
+	this->h = h;
+}
