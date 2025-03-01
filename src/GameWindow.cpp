@@ -5,11 +5,11 @@
  */
 
 #include "GameLogic.h"
+#include "GameWindow.h"
 #include "SingletonRepo.h"
 #include "audio.h"
 #include "config.h"
 #include "dialog.h"
-#include "frame.h"
 #include "reso.h"
 
 using namespace std;

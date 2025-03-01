@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_FRAME_H
-#define RRE_FRAME_H
+#ifndef RRE_GAME_WINDOW_H
+#define RRE_GAME_WINDOW_H
 
 #include <iostream>
 #include <string>
@@ -60,4 +60,4 @@ public:
 	void stopMusic();
 };
 
-#endif /* RRE_FRAME_H */
+#endif /* RRE_GAME_WINDOW_H */

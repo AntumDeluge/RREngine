@@ -9,8 +9,8 @@
 
 #include "FontMapLoader.h"
 #include "GameLogic.h"
+#include "GameWindow.h"
 #include "Input.h"
-#include "frame.h"
 #include "viewport.h"
 
 
