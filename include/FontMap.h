@@ -17,6 +17,10 @@
 
 /**
  * Class to handle drawing bitmap text.
+ *
+ * FIXME:
+ * - probably better to use `char` instead of `SDL_Keycode`
+ * - use signed int for -1 to represent char not supported
  */
 class FontMap {
 private:
