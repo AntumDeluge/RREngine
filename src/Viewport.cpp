@@ -4,8 +4,6 @@
  * See: LICENSE.txt
  */
 
-#include <iostream>
-
 #include "Viewport.h"
 #include "config.h"
 
