@@ -16,9 +16,6 @@
 
 /**
  * Class to handle drawing bitmap text.
- *
- * FIXME:
- * - use signed int for -1 to represent char not supported
  */
 class FontMap {
 private:
@@ -27,21 +24,23 @@ private:
 	SDL_Texture* texture;
 	std::unordered_map<wchar_t, int> char_map;
 	/** Pixel width of each character (excluding 2 pixels of padding). */
-	uint32_t w;
+	uint32_t c_width;
 	/** Pixel height of each character (excluding 2 pixels of padding). */
-	uint32_t h;
+	uint32_t c_height;
 
 public:
-	FontMap(SDL_Texture* texture, std::unordered_map<wchar_t, int> char_map, uint32_t w, uint32_t h);
+	FontMap(SDL_Texture* texture, std::unordered_map<wchar_t, int> char_map, uint32_t c_width,
+			uint32_t c_height);
 
-	FontMap(std::string file_path, std::unordered_map<wchar_t, int> char_map, uint32_t w, uint32_t h);
+	FontMap(std::string file_path, std::unordered_map<wchar_t, int> char_map, uint32_t c_width,
+			uint32_t c_height);
 
 	SDL_Texture* getTexture() {
 		return this->texture;
 	}
 
-	uint32_t getCharWidth() { return this->w; }
-	uint32_t getCharHeight() { return this->h; }
+	uint32_t getCharWidth() { return this->c_width; }
+	uint32_t getCharHeight() { return this->c_height; }
 	int getCharIndex(wchar_t c);
 };
 

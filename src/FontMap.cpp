@@ -18,18 +18,27 @@ using namespace std;
 // initialize static members
 Logger* FontMap::logger = Logger::getLogger("FontMap");
 
-FontMap::FontMap(SDL_Texture* texture, unordered_map<wchar_t, int> char_map, uint32_t w,
-		uint32_t h) {
+FontMap::FontMap(SDL_Texture* texture, unordered_map<wchar_t, int> char_map, uint32_t c_width,
+		uint32_t c_height) {
 	this->texture = texture;
 	this->char_map = char_map;
-	this->w = w;
-	this->h = h;
+	this->c_width = c_width;
+	this->c_height = c_height;
+
+	int width, height;
+	SDL_QueryTexture(this->texture, nullptr, nullptr, &width, &height);
+	this->w = width;
+	this->h = height;
 }
 
-FontMap::FontMap(string file_path, unordered_map<wchar_t, int> char_map, uint32_t w, uint32_t h) {
+FontMap::FontMap(string file_path, unordered_map<wchar_t, int> char_map, uint32_t c_width,
+		uint32_t c_height) {
 	this->char_map = char_map;
-	this->w = w;
-	this->h = h;
+	this->c_width = c_width;
+	this->c_height = c_height;
+
+	this->w = 0;
+	this->h = 0;
 
 	if (!fileExists(file_path)) {
 		string msg = "Missing font map file: \"" + file_path + "\"";
@@ -44,13 +53,18 @@ FontMap::FontMap(string file_path, unordered_map<wchar_t, int> char_map, uint32_
 		} else {
 			this->texture = SDL_CreateTextureFromSurface(GetViewport()->getRenderer(), surface);
 			SDL_FreeSurface(surface);
+
+			int width, height;
+			SDL_QueryTexture(this->texture, nullptr, nullptr, &width, &height);
+			this->w = width;
+			this->h = height;
 		}
 	}
 
 	// DEBUG:
 	//~ string msg = "New FontMap:\n";
 	//~ for (pair<wchar_t, int> p : this->char_map) {
-		//~ msg += "  " + to_string(p.first) + ((string) " => ") + to_string(p.second) + "\n";
+		//~ msg += "  " + string(1, p.first) + ((string) " => ") + to_string(p.second) + "\n";
 	//~ }
 	//~ Dialog::info("Debug", msg);
 }
