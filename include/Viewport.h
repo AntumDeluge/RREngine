@@ -9,6 +9,7 @@
 
 #include <SDL2/SDL_render.h>
 
+#include "FontMap.h"
 #include "Logger.h"
 #include "Sprite.h"
 
@@ -28,6 +29,7 @@ private:
 	Viewport& operator=(const Viewport&) = delete;
 
 	SDL_Renderer* renderer;
+	FontMap* font_map;
 
 public:
 	static Viewport* get() {
@@ -39,6 +41,7 @@ public:
 
 	void init(SDL_Window* window);
 	void shutdown();
+	void setFontMap(FontMap* font_map) { this->font_map = font_map; }
 
 	SDL_Renderer* getRenderer() { return this->renderer; }
 
