@@ -39,7 +39,7 @@ public:
 	void init(SDL_Window* window);
 	void shutdown();
 
-	void draw(SDL_Texture* image, SDL_Rect rect);
+	void drawSprite(SDL_Texture* image, SDL_Rect rect);
 	SDL_Renderer* getRenderer() { return this->renderer; }
 };
 

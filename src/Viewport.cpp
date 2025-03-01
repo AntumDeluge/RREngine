@@ -39,7 +39,7 @@ void Viewport::shutdown() {
 	this->renderer = nullptr;
 }
 
-void Viewport::draw(SDL_Texture* image, SDL_Rect srect) {
+void Viewport::drawSprite(SDL_Texture* image, SDL_Rect srect) {
 	// DEBUG:
 	//~ std::cout << "width: " << srect.w << ", height: " << srect.h << ", x: " << srect.x << ", y: " << srect.y << std::endl;
 
