@@ -12,6 +12,8 @@
 #include "frame.h"
 #include "reso.h"
 
+using namespace std;
+
 
 // initialize singleton instance
 GameWindow* GameWindow::instance = nullptr;
@@ -23,17 +25,17 @@ GameWindow::GameWindow() {
 	this->music = nullptr;
 }
 
-void GameWindow::setTitle(const std::string title) {
+void GameWindow::setTitle(const string title) {
 	SDL_SetWindowTitle(this->window, title.c_str());
 }
 
-int GameWindow::init(const std::string title, const int width, const int height) {
+int GameWindow::init(const string title, const int width, const int height) {
 	this->logger->debug("Initializing SDL ...");
 
 	// initialize video subsystem
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		// NOTE: message logged to console as video subsystem failed to initialize
-		std::string msg = SDL_GetError();
+		string msg = SDL_GetError();
 		this->logger->error(msg);
 		Dialog::error(msg);
 		SDL_Quit();
@@ -48,7 +50,7 @@ int GameWindow::init(const std::string title, const int width, const int height)
 
 	// initialize audio subsystem
 	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
-		std::string msg = SDL_GetError();
+		string msg = SDL_GetError();
 		this->logger->error(msg);
 		Dialog::error(msg);
 		this->shutdown();
@@ -59,14 +61,14 @@ int GameWindow::init(const std::string title, const int width, const int height)
 	const int flags = MIX_INIT_OGG;
 	const int initted = Mix_Init(flags);
 	if (initted&flags != flags) {
-		std::string msg = Mix_GetError();
+		string msg = Mix_GetError();
 		this->logger->error(msg);
 		Dialog::error(msg);
 		this->shutdown();
 		return 1;
 	}
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) != 0) {
-		std::string msg = Mix_GetError();
+		string msg = Mix_GetError();
 		this->logger->error(msg);
 		Dialog::error(msg);
 		this->shutdown();
@@ -79,7 +81,7 @@ int GameWindow::init(const std::string title, const int width, const int height)
 	uint16_t step_delay = logic->getStepDelay(); // delay (in milliseconds) for each step
 
 #if RRE_DEBUGGING
-	this->logger->debug("Game logic step delay: " + std::to_string(step_delay) + "ms");
+	this->logger->debug("Game logic step delay: " + to_string(step_delay) + "ms");
 #endif
 
 	// main loop flag
@@ -123,16 +125,16 @@ int GameWindow::init() {
 	return this->init("R&R Engine", RES1.first, RES1.second);
 }
 
-void GameWindow::playMusic(std::string id) {
+void GameWindow::playMusic(string id) {
 	if (Mix_PlayingMusic() != 0) {
 		// close previous stream
 		this->stopMusic();
 	}
 
-	std::string file_music = Audio::GetMusicFile(id);
-	std::string audio_error = "";
+	string file_music = Audio::GetMusicFile(id);
+	string audio_error = "";
 	if (file_music.compare("") == 0) {
-		std::string msg = "Music for ID \"" + id + "\" not configured or file not found";
+		string msg = "Music for ID \"" + id + "\" not configured or file not found";
 		this->logger->warn(msg);
 		Dialog::warn(msg);
 	} else {
