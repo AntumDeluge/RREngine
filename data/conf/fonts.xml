@@ -3,8 +3,9 @@
 <fonts>
 
 	<font id="main" tileset="font.png" w="7" h="7">
-		<char index="0"> .!?-</char>
-		<char index="13">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</char>
+		<char index="0"> .:;!?+-_()&lt;&gt;</char>
+		<char index="13">0123456789</char>
+		<char index="26">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</char>
 	</font>
 
 </fonts>
