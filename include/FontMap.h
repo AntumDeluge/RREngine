@@ -25,17 +25,17 @@ private:
 	static Logger* logger;
 
 	SDL_Texture* texture;
-	std::unordered_map<wchar_t, unsigned int> char_map;
+	std::unordered_map<wchar_t, int> char_map;
 	/** Pixel width of each character (excluding 2 pixels of padding). */
 	unsigned int w;
 	/** Pixel height of each character (excluding 2 pixels of padding). */
 	unsigned int h;
 
 public:
-	FontMap(SDL_Texture* texture, std::unordered_map<wchar_t, unsigned int> char_map,
+	FontMap(SDL_Texture* texture, std::unordered_map<wchar_t, int> char_map,
 			unsigned int w, unsigned int h);
 
-	FontMap(std::string file_path, std::unordered_map<wchar_t, unsigned int> char_map,
+	FontMap(std::string file_path, std::unordered_map<wchar_t, int> char_map,
 			unsigned int w, unsigned int h);
 
 	SDL_Texture* getTexture() {

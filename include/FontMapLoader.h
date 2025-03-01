@@ -46,7 +46,7 @@ public:
 
 	bool parseFont(tinyxml2::XMLElement* el);
 
-	std::unordered_map<wchar_t, unsigned int> parseCharacters(tinyxml2::XMLElement* el);
+	std::unordered_map<wchar_t, int> parseCharacters(tinyxml2::XMLElement* el);
 };
 
 #endif /* RRE_FONT_MAP_LOADER_H */
