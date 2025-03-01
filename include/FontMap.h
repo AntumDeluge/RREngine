@@ -28,6 +28,10 @@ private:
 	/** Pixel height of each character (excluding 2 pixels of padding). */
 	uint32_t c_height;
 
+	// actual image dimensions
+	uint32_t w;
+	uint32_t h;
+
 public:
 	FontMap(SDL_Texture* texture, std::unordered_map<wchar_t, int> char_map, uint32_t c_width,
 			uint32_t c_height);
@@ -43,6 +47,8 @@ public:
 		return this->texture;
 	}
 
+	uint32_t getWidth() { return this->w; }
+	uint32_t getHeight() { return this->h; }
 	uint32_t getCharWidth() { return this->c_width; }
 	uint32_t getCharHeight() { return this->c_height; }
 	int getCharIndex(wchar_t c);
