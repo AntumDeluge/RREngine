@@ -53,3 +53,30 @@ void Viewport::drawSprite(SDL_Texture* image, SDL_Rect srect) {
 	SDL_RenderCopy(this->renderer, image, &trect, &srect);
 	SDL_RenderPresent(this->renderer);
 }
+
+void Viewport::draw() {
+	this->drawScene();
+}
+
+void Viewport::drawScene() {
+	this->drawBackground();
+	this->drawForeground();
+	this->drawEntities();
+	this->drawText();
+}
+
+void Viewport::drawBackground() {
+	// TODO:
+}
+
+void Viewport::drawForeground() {
+	// TODO:
+}
+
+void Viewport::drawEntities() {
+	// TODO:
+}
+
+void Viewport::drawText() {
+	// TODO:
+}

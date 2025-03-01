@@ -39,8 +39,17 @@ public:
 	void init(SDL_Window* window);
 	void shutdown();
 
-	void drawSprite(SDL_Texture* image, SDL_Rect rect);
 	SDL_Renderer* getRenderer() { return this->renderer; }
+
+	void drawSprite(SDL_Texture* image, SDL_Rect rect);
+	void draw();
+
+private:
+	void drawScene();
+	void drawBackground();
+	void drawForeground();
+	void drawEntities();
+	void drawText();
 };
 
 #endif /* RRE_VIEWPORT_H */
