@@ -42,7 +42,7 @@ public:
 
 	SDL_Renderer* getRenderer() { return this->renderer; }
 
-	void drawSprite(SDL_Texture* texture, SDL_Rect trect, SDL_Rect srect);
+	void drawSprite(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect);
 	void drawSprite(Sprite* sprite, uint32_t x, uint32_t y);
 	void draw();
 
