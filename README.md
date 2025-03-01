@@ -97,3 +97,9 @@ $ cmake ../
 $ cmake --build ../
 ...
 ```
+
+__CMake Options:__
+
+- `-DDEBUG=on`: Enable debugging symbols.
+- `-DSTATIC=off`: Disable linking executable statically by default.
+- `-DEXAMPLE=on`: Copy example game data files to build directory.
