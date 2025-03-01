@@ -42,8 +42,19 @@ target_link_libraries(game PRIVATE ${LIBS})
 if(EXAMPLE)
 	message("-- Including example data ...")
 
+	# TODO: exclude .flac audio source files
 	file(
 		COPY "${CMAKE_SOURCE_DIR}/data"
 		DESTINATION "${CMAKE_BINARY_DIR}"
 	)
+
+	find_program(FFMPEG_EXE ffmpeg)
+	if(NOT FFMPEG_EXE)
+		message("-- WARNING: ffmpeg executable not found")
+	else()
+		message("-- ffmpeg executable found")
+		execute_process(
+			COMMAND ffmpeg -y -i "${CMAKE_SOURCE_DIR}/data/music/summer_sunday.flac" -c:a libvorbis -b:a 96k "${CMAKE_BINARY_DIR}/data/music/summer_sunday.ogg"
+		)
+	endif()
 endif()
