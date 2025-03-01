@@ -35,6 +35,10 @@ public:
 	FontMap(std::string file_path, std::unordered_map<wchar_t, int> char_map, uint32_t c_width,
 			uint32_t c_height);
 
+	~FontMap() {
+		SDL_DestroyTexture(this->texture);
+	}
+
 	SDL_Texture* getTexture() {
 		return this->texture;
 	}
