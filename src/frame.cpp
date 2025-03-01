@@ -4,8 +4,10 @@
  * See: LICENSE.txt
  */
 
+#include "GameLogic.h"
 #include "SingletonRepo.h"
 #include "audio.h"
+#include "config.h"
 #include "dialog.h"
 #include "frame.h"
 #include "reso.h"
@@ -73,19 +75,43 @@ int GameWindow::init(const std::string title, const int width, const int height)
 
 	GetFontMapLoader()->loadConfig();
 
+	const GameLogic* logic = GetGameLogic();
+	uint16_t step_delay = logic->getStepDelay(); // delay (in milliseconds) for each step
+
+#if RRE_DEBUGGING
+	this->logger->debug("Game logic step delay: " + std::to_string(step_delay) + "ms");
+#endif
+
 	// main loop flag
 	bool quit = false;
 
 	// event handler
 	SDL_Event event;
 
+	// time (in milliseconds) at which game logic was last executed
+	uint64_t time_prev = SDL_GetTicks64();
+
 	// TODO: move game loop to singleton class
 	while (!quit) {
+		// time (in milliseconds) at which game loop is executing
+		uint64_t time_now = SDL_GetTicks64();
+		// elapsed time (in milliseconds) since game logic was last executed
+		uint16_t time_elapsed = time_now - time_prev;
+
 		while (SDL_PollEvent(&event) != 0) {
 			if (event.type == SDL_QUIT) {
 				quit = true;
 			}
 		}
+
+		// limit game stepping to defined millisecond intervals
+		if (time_elapsed < step_delay) {
+			continue;
+		}
+
+		GetGameLogic()->step(time_now);
+
+		time_prev = time_now;
 	}
 
 	this->shutdown();

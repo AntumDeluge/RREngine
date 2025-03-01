@@ -8,12 +8,15 @@
 #define RRE_SINGLETON_REPO_H
 
 #include "FontMapLoader.h"
+#include "GameLogic.h"
 #include "Input.h"
 #include "frame.h"
 #include "viewport.h"
 
 
 static inline FontMapLoader* GetFontMapLoader() { return FontMapLoader::get(); }
+
+static inline GameLogic* GetGameLogic() { return GameLogic::get(); }
 
 static inline GameWindow* GetGameWindow() { return GameWindow::get(); }
 

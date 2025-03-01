@@ -1,0 +1,33 @@
+/* Copyright © 2025 Jordan Irwin <antumdeluge@gmail.com>
+ *
+ * This work is licensed under the terms of the MIT license.
+ * See: LICENSE.txt
+ */
+
+#include "GameLogic.h"
+#include "config.h"
+
+
+// initialize singleton instance to NULL
+GameLogic* GameLogic::instance = nullptr;
+// default step delay is 300ms
+uint16_t GameLogic::step_delay = 300;
+
+#if RRE_DEBUGGING
+// for debugging delay between steps
+uint64_t prev_step_time = 0;
+#endif
+
+void GameLogic::step(uint64_t step_time) {
+	this->step_time = step_time;
+
+#if RRE_DEBUGGING
+	uint32_t step_diff = this->step_time - prev_step_time;
+#endif
+
+	// TODO:
+
+#if RRE_DEBUGGING
+	this->prev_step_time = this->step_time;
+#endif
+}
