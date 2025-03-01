@@ -32,7 +32,9 @@ private:
 
 public:
 	Sprite(std::string id);
-	~Sprite() {}
+	~Sprite() {
+		SDL_DestroyTexture(this->texture);
+	}
 
 	SDL_Texture* getTexture() { return this->texture; }
 	uint32_t getWidth() { return this->w; }
