@@ -17,8 +17,22 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/depends.cmake")
 # configure header file to pass some of the CMake settings to source compiler
 configure_file("config.h.in" "config.h")
 
+
+# linker options
+
+# set executable subsystem to GUI on Win32
+if(MSVC)
+	set(CMAKE_EXE_LINKER_FLAGS "/SUBSYSTEM:WINDOWS")
+elseif(WIN32)
+	set(CMAKE_EXE_LINKER_FLAGS "-mwindows")
+endif()
+
 if(STATIC)
-	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")
+	if(MSVC)
+		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /STATIC")
+	else()
+		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
+	endif()
 endif()
 
 

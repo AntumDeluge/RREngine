@@ -1,10 +1,15 @@
 
 include(FindPkgConfig)
 
+if(STATIC)
+	set(MODULE_PARAMS --static)
+endif()
+
 # SDL2
-find_package(SDL2 REQUIRED)
-pkg_search_module(SDL2MIXER SDL2_mixer>=2.0.0)
-pkg_search_module(SDL2IMAGE SDL2_image>=2.0.0)
+# FIXME: determine correct required minimum versions
+pkg_search_module(SDL2 sdl2>=2.0.0 ${MODULE_PARAMS})
+pkg_search_module(SDL2MIXER SDL2_mixer>=2.0.0 ${MODULE_PARAMS})
+pkg_search_module(SDL2IMAGE SDL2_image>=2.0.0 ${MODULE_PARAMS})
 if(NOT SDL2MIXER_VERSION)
 	message(FATAL_ERROR "Required library SDL2_mixer or compatible version (>=2.0.0) not found")
 endif()
@@ -13,15 +18,25 @@ if(NOT SDL2IMAGE_VERSION)
 endif()
 
 # TinyXML-2
-pkg_search_module(TINYXML2 tinyxml2)
+pkg_search_module(TINYXML2 tinyxml2 ${MODULE_PARAMS})
 if(NOT TINYXML2_VERSION)
 	message(FATAL_ERROR "Please install tinyxml2")
 endif()
 
 # tmxlite
-pkg_search_module(TMXLITE tmxlite)
+pkg_search_module(TMXLITE tmxlite ${MODULE_PARAMS})
 if(NOT TMXLITE_VERSION)
 	message(FATAL_ERROR "Required library tmxlite not found")
+endif()
+if(STATIC AND NOT MSVC)
+	# tmxlite static libs may not be configured correctly for pkg-config
+	find_library(TMXLITE_A libtmxlite.a NO_CACHE)
+	if(NOT TMXLITE_A)
+		message("-- WARNING: tmxlite static library may not be configured correctly for pkg-config; attempting to locate manually")
+		find_library(TMXLITE_A libtmxlite-s.a NO_CACHE REQUIRED)
+		message("-- Found tmxlite static library: ${TMXLITE_A}")
+		set(TMXLITE_STATIC_LIBRARIES ${TMXLITE_A})
+	endif()
 endif()
 
 
@@ -54,37 +69,11 @@ if(NOT STATIC)
 		${TMXLITE_LIBRARIES}
 	)
 else()
-	# FIXME: need portable method of finding static libs
-	find_library(LIBSDL2main libSDL2main.a NO_CACHE REQUIRED)
-	find_library(LIBSDL2 libSDL2.a NO_CACHE REQUIRED)
-	if(MINGW)
-		find_library(libtmxlite_LIBRARIES libtmxlite-s.a NO_CACHE REQUIRED)
-	else()
-		set(libtmxlite_LIBRARIES ${TMXLITE_LIBRARIES})
-	endif()
-
 	set(LIBS
-		${LIBSDL2main} ${LIBSDL2}
-		${SDL2MIXER_LIBRARIES}
-		${SDL2IMAGE_LIBRARIES}
-		${TINYXML2_LIBRARIES}
-		${libtmxlite_LIBRARIES}
+		${SDL2_STATIC_LIBRARIES}
+		${SDL2MIXER_STATIC_LIBRARIES}
+		${SDL2IMAGE_STATIC_LIBRARIES}
+		${TINYXML2_STATIC_LIBRARIES}
+		${TMXLITE_STATIC_LIBRARIES}
 	)
-
-	if(WIN32)
-		find_library(LIBWINMM libwinmm REQUIRED)
-		find_library(LIBCFGMGR libcfgmgr32 REQUIRED)
-		find_library(LIBIMM libimm32 REQUIRED)
-		find_library(LIBSETUPAPI libsetupapi REQUIRED)
-		find_library(LIBVERSION libversion REQUIRED)
-		set(LIBS
-			${LIBS}
-			${LIBWINMM}
-			${LIBCFGMGR}
-			${LIBIMM}
-			${LIBSETUPAPI}
-			${LIBVERSION}
-			-mwindows
-		)
-	endif()
 endif()
