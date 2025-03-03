@@ -12,6 +12,9 @@
 
 #include <tinyxml2.h>
 
+#if RRE_DEBUGGING
+#include "Logger.h"
+#endif
 #include "SingletonRepo.h"
 #include "config.h"
 #include "fileio.h"
@@ -26,6 +29,11 @@ const string ver = to_string(RREngine_VER_MAJ) + "." + to_string(RREngine_VER_MI
 void showVersion();
 
 int main(int argc, char** argv) {
+#if RRE_DEBUGGING
+	Logger* logger = Logger::getLogger("main");
+	logger->debug("Compiled using C++ standard: " + to_string(__cplusplus));
+#endif
+
 	// change to executable directory
 	changeDir(dir_root);
 
