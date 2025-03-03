@@ -1,5 +1,10 @@
+
 cmake_minimum_required(VERSION 3.12.4)
 project(RREngine)
+
+# TODO:
+# - strip binaries
+# - ensure building with at least C++17
 
 # version info
 set(RREngine_VER_MAJ 0)
