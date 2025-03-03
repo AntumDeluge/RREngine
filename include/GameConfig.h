@@ -1,0 +1,23 @@
+
+/* Copyright © 2025 Jordan Irwin <antumdeluge@gmail.com>
+ *
+ * This work is licensed under the terms of the MIT license.
+ * See: LICENSE.txt
+ */
+
+#ifndef RRE_GAME_CONFIG
+#define RRE_GAME_CONFIG
+
+#include <string>
+
+
+namespace GameConfig {
+
+	int load();
+
+	std::string getTitle();
+
+	uint32_t getScale();
+};
+
+#endif /* RRE_GAME_CONFIG */

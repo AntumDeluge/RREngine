@@ -7,21 +7,20 @@
  * for regular use.
  */
 
+#include <cstdint> // uint32_t
 #include <iostream>
 #include <string>
 
-#include <tinyxml2.h>
+using namespace std;
 
 #if RRE_DEBUGGING
 #include "Logger.h"
 #endif
-#include "SingletonRepo.h"
+#include "GameConfig.h"
+#include "GameWindow.h"
 #include "config.h"
-#include "fileio.h"
 #include "paths.h"
 #include "reso.h"
-
-using namespace std;
 
 
 const string ver = to_string(RREngine_VER_MAJ) + "." + to_string(RREngine_VER_MIN) + "." + to_string(RREngine_VER_REL); // @suppress("Invalid arguments") @suppress("Symbol is not resolved")
@@ -34,41 +33,34 @@ int main(int argc, char** argv) {
 	logger->debug("Compiled using C++ standard: " + to_string(__cplusplus));
 #endif
 
+	// TODO: parse command line parameters
+
 	// change to executable directory
 	changeDir(dir_root);
 
-	string title = "R&R Engine";
-	// default dimensions
-	int width = RES1.first;
-	int height = RES1.second;
+	// TODO: move SDL initialization to here so configuration can be loaded before window is displayed
 
-	string game_conf = concatPath(dir_root, "data/conf/game.xml");
+	GameWindow* win = GameWindow::get();
 
-	if (fileExists(game_conf)) {
-		tinyxml2::XMLDocument doc;
-		doc.LoadFile(game_conf.c_str());
-		tinyxml2::XMLElement* root = doc.RootElement();
-
-		tinyxml2::XMLElement* name_element = root->FirstChildElement("name");
-		if (name_element != NULL) {
-			title = name_element->GetText();
-		}
-
-		const tinyxml2::XMLAttribute* wAttribute;
-		const tinyxml2::XMLAttribute* hAttribute;
-		tinyxml2::XMLElement* resElement = root->FirstChildElement("res");
-		if (resElement != NULL) {
-			wAttribute = resElement->FindAttribute("w");
-			hAttribute = resElement->FindAttribute("h");
-		}
-
-		if (wAttribute != NULL && hAttribute != NULL) {
-			width = wAttribute->IntValue();
-			height = hAttribute->IntValue();
-		}
+	int result = GameConfig::load();
+	if (result != 0) {
+		// FIXME: need to create SDL window to show configuration errors
+		return result;
 	}
 
-	return GetGameWindow()->init(title, width, height);
+	win->setTitle(GameConfig::getTitle());
+
+	uint32_t scale = GameConfig::getScale();
+	// initial window dimensions
+	int width = RES1.first * scale;
+	int height = RES1.second * scale;
+
+#if RRE_DEBUGGING
+	logger->debug("Game title: " + GameConfig::getTitle());
+	logger->debug("Window scale: " + to_string(GameConfig::getScale()));
+#endif
+
+	return win->init(width, height);
 }
 
 
