@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <game>
-	<name>Example Game</name>
+	<title>Example Game</title>
 	<icon></icon>
-	<!--<res w="256" h="240"/>-->
-	<res w="512" h="480"/>
+	<scale>2</scale>
 </game>
