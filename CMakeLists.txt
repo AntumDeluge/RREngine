@@ -103,7 +103,7 @@ if(EXAMPLE)
 		message("-- ffmpeg executable found")
 		add_custom_command(
 			TARGET game POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E echo "Converting audio source to Ogg/Vorbis ..."
+			COMMAND ${CMAKE_COMMAND} -E echo "Converting audio sources to Ogg/Vorbis ..."
 		)
 		foreach(MUSIC_FLAC ${MUSIC_SOURCE_FILES})
 			string(REGEX REPLACE "\.flac$" ".ogg" MUSIC_OGG "${MUSIC_FLAC}")
@@ -115,6 +115,8 @@ if(EXAMPLE)
 				TARGET game POST_BUILD
 				COMMAND "${FFMPEG_EXE}"
 					-y
+					-hide_banner
+					-loglevel warning
 					-i "${DATA_DIR_SOURCE}/music/${MUSIC_FLAC}"
 					-c:a libvorbis
 					-b:a 96k
