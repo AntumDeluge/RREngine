@@ -89,6 +89,8 @@ int GameConfig::load() {
 		scale = 4;
 	}
 
+	// TODO: add option for aspect ratio
+
 	loaded = true;
 	return 0;
 }
