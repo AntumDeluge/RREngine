@@ -6,8 +6,8 @@
 
 #include <tinyxml2.h>
 
+#include "Audio.h"
 #include "Filesystem.h"
-#include "audio.h"
 #include "dialog.h"
 #include "paths.h"
 
