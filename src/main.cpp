@@ -7,6 +7,8 @@
  * for regular use.
  */
 
+#include "config.h"
+
 #include <cstdint> // uint*_t
 #include <iostream>
 #include <string>
@@ -19,8 +21,7 @@ using namespace std;
 #include "GameConfig.h"
 #include "GameLoop.h"
 #include "GameWindow.h"
-#include "config.h"
-#include "paths.h"
+#include "Path.h"
 #include "reso.h"
 
 

@@ -9,8 +9,8 @@
 
 #include "Filesystem.h"
 #include "SingletonRepo.h"
+#include "Path.h"
 #include "Sprite.h"
-#include "paths.h"
 
 using namespace std;
 using namespace tinyxml2;

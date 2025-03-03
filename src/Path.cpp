@@ -12,8 +12,9 @@
 #include <unistd.h> // readlink, getcwd, chdir
 #endif
 
-#include "paths.h"
 using namespace std;
+
+#include "Path.h"
 
 #ifdef WIN32
 const char replaceNode = '/';

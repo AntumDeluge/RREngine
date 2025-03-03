@@ -12,7 +12,7 @@
 #include "FontMap.h"
 #include "FontMapLoader.h"
 #include "FontStore.h"
-#include "paths.h"
+#include "Path.h"
 
 using namespace std;
 using namespace tinyxml2;

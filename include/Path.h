@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef PATHS_H
-#define PATHS_H
+#ifndef RRE_PATH
+#define RRE_PATH
 
 
 #include <string>
@@ -39,4 +39,4 @@ extern int changeDir(std::string path);
 /** Root directory from where executable is launched. */
 static const std::string dir_root = dirname(getThisPath());
 
-#endif /* PATHS_H */
+#endif /* RRE_PATH */

@@ -17,7 +17,7 @@ using namespace tinyxml2;
 #include "Filesystem.h"
 #include "GameConfig.h"
 #include "Logger.h"
-#include "paths.h"
+#include "Path.h"
 
 
 namespace GameConfig {

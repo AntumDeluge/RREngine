@@ -9,7 +9,7 @@
 #include "Dialog.h"
 #include "Audio.h"
 #include "Filesystem.h"
-#include "paths.h"
+#include "Path.h"
 
 using namespace tinyxml2;
 

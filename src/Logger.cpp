@@ -4,12 +4,13 @@
  * See: LICENSE.txt
  */
 
+#include "config.h"
+
 #include <iostream>
 #include <sstream>
 
 #include "Logger.h"
-#include "config.h"
-#include "paths.h"
+#include "Path.h"
 
 
 // initialize static members
