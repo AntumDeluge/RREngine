@@ -17,7 +17,7 @@ namespace GameConfig {
 
 	std::string getTitle();
 
-	uint32_t getScale();
+	uint16_t getScale();
 };
 
 #endif /* RRE_GAME_CONFIG */

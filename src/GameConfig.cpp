@@ -26,7 +26,7 @@ string game_conf = concatPath(dir_root, "data/conf/game.xml");
 
 // configured options
 string title = "";
-uint32_t scale = 1;
+uint16_t scale = 1;
 
 bool loaded = false;
 
@@ -76,7 +76,7 @@ int GameConfig::load() {
 	}
 
 	XMLElement* el_scale = el_root->FirstChildElement("scale");
-	if (el_scale != nullptr && el_scale->QueryUnsignedText(&scale) != 0) {
+	if (el_scale != nullptr && el_scale->QueryUnsignedText((uint32_t*) &scale) != 0) {
 		onConfigError("XML Parsing Error", "\"scale\" value must be integer");
 		return 1;
 	}
@@ -97,6 +97,6 @@ string GameConfig::getTitle() {
 	return title;
 }
 
-uint32_t GameConfig::getScale() {
+uint16_t GameConfig::getScale() {
 	return scale;
 }

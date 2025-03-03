@@ -7,7 +7,7 @@
  * for regular use.
  */
 
-#include <cstdint> // uint32_t
+#include <cstdint> // uint*_t
 #include <iostream>
 #include <string>
 
@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
 
 	win->setTitle(GameConfig::getTitle());
 
-	uint32_t scale = GameConfig::getScale();
+	uint16_t scale = GameConfig::getScale();
 	// initial window dimensions
 	int width = RES1.first * scale;
 	int height = RES1.second * scale;
