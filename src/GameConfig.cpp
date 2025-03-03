@@ -50,7 +50,7 @@ int GameConfig::load() {
 		return 0;
 	}
 
-	if (!fileExists(game_conf)) {
+	if (!Filesystem::fileExists(game_conf)) {
 		onConfigError("Game configuration not found");
 		// TODO: use errno standard
 		return 1;
@@ -119,7 +119,7 @@ int GameConfig::load() {
 			GameConfig::logger->warn("Menu (" + id + ") without music");
 		} else {
 			string music_path = concatPath(dir_root + "/data/music", string(attr_music->Value()));
-			if (fileExists(music_path + ".oga")) {
+			if (Filesystem::fileExists(music_path + ".oga")) {
 				music_path += ".oga";
 			} else {
 				music_path += ".ogg";

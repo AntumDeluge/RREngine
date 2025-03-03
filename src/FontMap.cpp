@@ -40,7 +40,7 @@ FontMap::FontMap(string file_path, unordered_map<wchar_t, int> char_map, uint32_
 	this->w = 0;
 	this->h = 0;
 
-	if (!fileExists(file_path)) {
+	if (!Filesystem::fileExists(file_path)) {
 		string msg = "Missing font map file: \"" + file_path + "\"";
 		FontMap::logger->error(msg);
 		Dialog::error(msg);

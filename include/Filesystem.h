@@ -17,23 +17,26 @@ typedef mode_t dperm;
 #endif
 
 
-extern bool fileExists(const std::string path);
+namespace Filesystem {
 
-#ifdef WIN32
-/**
- * `mkdir` function not defined on Windows.
- *
- * @param path Path of directory that should be created.
- * @param mode Permissions of new directory (Calls should compensate for both Windows & Unix type
- *     permissions.
- */
-extern int mkdir(const char* path, dperm mode);
-#endif
+	bool fileExists(const std::string path);
 
-extern int mkdir(const char* path);
+	#ifdef WIN32
+	/**
+	 * `mkdir` function not defined on Windows.
+	 *
+	 * @param path Path of directory that should be created.
+	 * @param mode Permissions of new directory (Calls should compensate for both Windows & Unix type
+	 *     permissions.
+	 */
+	int mkdir(const char* path, dperm mode);
+	#endif
 
-extern int mkdir(const std::string path, dperm mode);
+	int mkdir(const char* path);
 
-extern int mkdir(const std::string path);
+	int mkdir(const std::string path, dperm mode);
+
+	int mkdir(const std::string path);
+};
 
 #endif /* RRE_FILESYSTEM */

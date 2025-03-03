@@ -30,7 +30,7 @@ void FontMapLoader::loadConfig() {
 
 	string conf_fonts = concatPath(dir_root, "data/conf/fonts.xml");
 	this->logger->debug("Loading fonts config: \"" + conf_fonts + "\"");
-	if (!fileExists(conf_fonts)) {
+	if (!Filesystem::fileExists(conf_fonts)) {
 		this->logger->warn("Fonts config not found: \"" + conf_fonts + "\"");
 		return;
 	}
@@ -80,7 +80,7 @@ bool FontMapLoader::parseFont(XMLElement* el) {
 		err.push_back("Missing font attribute \"tileset\"");
 	} else {
 		path = concatPath(dir_root, (string) "data/tileset/" + attr->Value());
-		if (!fileExists(path)) {
+		if (!Filesystem::fileExists(path)) {
 			err.push_back("Missing font bitmap file: \"" + path + "\"");
 		}
 	}

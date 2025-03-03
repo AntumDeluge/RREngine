@@ -21,7 +21,7 @@ using namespace std;
  * @param path String path to file.
  * @return `true` if the file is found in the filesystem.
  */
-bool fileExists(const string path) {
+bool Filesystem::fileExists(const string path) {
 	ifstream ofile;
 	ofile.open(path);
 	bool exists = ofile.is_open();
@@ -31,20 +31,20 @@ bool fileExists(const string path) {
 }
 
 #ifdef WIN32
-int mkdir(const char* path, dperm mode) {
+int Filesystem::mkdir(const char* path, dperm mode) {
 	// FIXME: `mode` must be LPSECURITY_ATTRIBUTES
 	return CreateDirectory(path, NULL);
 }
 #endif
 
-int mkdir(const char* path) {
+int Filesystem::mkdir(const char* path) {
 	return mkdir(path, '\0');
 }
 
-int mkdir(const std::string path, dperm mode) {
+int Filesystem::mkdir(const std::string path, dperm mode) {
 	return mkdir(path.c_str(), mode);
 }
 
-int mkdir(const std::string path) {
+int Filesystem::mkdir(const std::string path) {
 	return mkdir(path, '\0');
 }
