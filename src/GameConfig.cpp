@@ -18,7 +18,9 @@ using namespace tinyxml2;
 #include "paths.h"
 
 
-Logger* logger = Logger::getLogger("GameConfig");
+namespace GameConfig {
+	Logger* logger = Logger::getLogger("GameConfig");
+}
 
 string game_conf = concatPath(dir_root, "data/conf/game.xml");
 
@@ -30,7 +32,7 @@ bool loaded = false;
 
 void onConfigError(string title, string msg) {
 	msg += ": \"" + game_conf + "\"";
-	logger->error(msg);
+	GameConfig::logger->error(msg);
 	Dialog::error(title, msg);
 }
 
@@ -40,7 +42,7 @@ void onConfigError(string msg) {
 
 int GameConfig::load() {
 	if (loaded) {
-		logger->warn("Game configuration already loaded");
+		GameConfig::logger->warn("Game configuration already loaded");
 		return 0;
 	}
 
@@ -64,7 +66,7 @@ int GameConfig::load() {
 
 	XMLElement* el_title = el_root->FirstChildElement("title");
 	if (el_title == nullptr) {
-		logger->warn("Game title not configured");
+		GameConfig::logger->warn("Game title not configured");
 	} else {
 		title = el_title->GetText();
 	}
@@ -79,11 +81,11 @@ int GameConfig::load() {
 		return 1;
 	}
 	if (scale == 0) {
-		logger->warn("Scale must be a positive integer");
+		GameConfig::logger->warn("Scale must be a positive integer");
 		scale = 1;
 	}
 	if (scale > 4) {
-		logger->warn("Currently scaling the game window more than 4x is not supported");
+		GameConfig::logger->warn("Currently scaling the game window more than 4x is not supported");
 		scale = 4;
 	}
 
