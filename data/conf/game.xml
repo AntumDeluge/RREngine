@@ -4,4 +4,6 @@
 	<title>Example Game</title>
 	<icon></icon>
 	<scale>2</scale>
+	<!-- TODO: configure menu parameters in separate XML -->
+	<menu id="title" background="underwater_mountains" />
 </game>
