@@ -24,7 +24,7 @@ namespace GameConfig {
 	Logger* logger = Logger::getLogger("GameConfig");
 }
 
-string game_conf = concatPath(dir_root, "data/conf/game.xml");
+string game_conf = Path::concatPath(Path::dir_root, "data/conf/game.xml");
 
 // configured options
 string title = "";
@@ -111,14 +111,16 @@ int GameConfig::load() {
 		if (attr_bg == nullptr) {
 			GameConfig::logger->warn("Menu (" + id + ") without background");
 		} else {
-			menu_backgrounds[id] = concatPath(dir_root + "/data/menu", string(attr_bg->Value()) + ".png");
+			menu_backgrounds[id] = Path::concatPath(Path::dir_root + "/data/menu",
+					string(attr_bg->Value()) + ".png");
 		}
 
 		const XMLAttribute* attr_music = el_menu->FindAttribute("music");
 		if (attr_music == nullptr) {
 			GameConfig::logger->warn("Menu (" + id + ") without music");
 		} else {
-			string music_path = concatPath(dir_root + "/data/music", string(attr_music->Value()));
+			string music_path = Path::concatPath(Path::dir_root + "/data/music",
+					string(attr_music->Value()));
 			if (Filesystem::fexist(music_path + ".oga")) {
 				music_path += ".oga";
 			} else {

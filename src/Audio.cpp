@@ -16,7 +16,7 @@ using namespace tinyxml2;
 
 // TODO: cache audio files
 std::string Audio::GetMusicFile(const std::string id) {
-	std::string conf_music = concatPath(dir_root, "data/conf/music.xml");
+	std::string conf_music = Path::concatPath(Path::dir_root, "data/conf/music.xml");
 	if (!Filesystem::fexist(conf_music)) {
 		Dialog::error("Music config not found: \"" + conf_music + "\"");
 		return "";
@@ -41,7 +41,7 @@ std::string Audio::GetMusicFile(const std::string id) {
 		const XMLAttribute* attr = el->FindAttribute("id");
 		if (attr != NULL && id.compare(attr->Value()) == 0) {
 			// found element with matching ID
-			file_music = concatPath(dir_root, ((std::string) "data/music/") + el->GetText());
+			file_music = Path::concatPath(Path::dir_root, ((std::string) "data/music/") + el->GetText());
 			if (Filesystem::fexist(file_music + ".oga")) {
 				file_music += ".oga";
 			} else if (Filesystem::fexist(file_music + ".ogg")) {

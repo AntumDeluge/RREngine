@@ -7,36 +7,38 @@
 #ifndef RRE_PATH
 #define RRE_PATH
 
-
 #include <string>
 
 
-extern std::string basename(std::string path);
+namespace Path {
 
-extern std::string dirname(std::string path);
+	std::string basename(std::string path);
 
-extern std::string formatPath(std::string input);
+	std::string dirname(std::string path);
 
-static std::string formatPath(const char* input) {
-	return formatPath((std::string) input);
+	std::string formatPath(std::string input);
+
+	static std::string formatPath(const char* input) {
+		return formatPath((std::string) input);
+	}
+
+	/** Joins to strings into one using node delimiter.
+	 *
+	 * @function concatPath
+	 * @param p1 First path.
+	 * @param p2 Second path.
+	 * @return Single string in `p1/p2` format.
+	 */
+	std::string concatPath(const std::string p1, const std::string p2);
+
+	std::string getThisPath();
+
+	std::string getCWD();
+
+	int changeDir(std::string path);
+
+	/** Root directory from where executable is launched. */
+	static const std::string dir_root = dirname(getThisPath());
 }
 
-/** Joins to strings into one using node delimiter.
- *
- * @function concatPath
- * @param p1 First path.
- * @param p2 Second path.
- * @return Single string in `p1/p2` format.
- */
-extern std::string concatPath(const std::string p1, const std::string p2);
-
-extern std::string getThisPath();
-
-extern std::string getCWD();
-
-extern int changeDir(std::string path);
-
-/** Root directory from where executable is launched. */
-static const std::string dir_root = dirname(getThisPath());
-
-#endif /* RRE_PATH */
+	#endif /* RRE_PATH */

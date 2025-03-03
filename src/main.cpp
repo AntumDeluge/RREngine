@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
 	// TODO: parse command line parameters
 
 	// change to executable directory
-	changeDir(dir_root);
+	Path::changeDir(Path::dir_root);
 
 	// TODO: move SDL initialization to here so configuration can be loaded before window is displayed
 

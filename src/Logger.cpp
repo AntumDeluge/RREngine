@@ -26,7 +26,7 @@ Logger::Logger(std::string id, LogLevel level, std::string file) {
 	this->id = id;
 	this->level = level;
 	if (file.compare("") == 0) {
-		file = concatPath(dir_root, "debug.log");
+		file = Path::concatPath(Path::dir_root, "debug.log");
 	}
 	this->file = file;
 

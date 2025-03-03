@@ -27,7 +27,7 @@ Sprite::Sprite(string id) {
 	this->h = 0;
 
 	// TODO: cache sprites at startup or scene loading (optimization?) in SpriteStore
-	const string conf_sprites = concatPath(dir_root, "data/conf/sprites/characters.xml");
+	const string conf_sprites = Path::concatPath(Path::dir_root, "data/conf/sprites/characters.xml");
 	if (!Filesystem::fexist(conf_sprites)) {
 		string msg = "Sprite configuration not found: \"" + conf_sprites + "\"";
 		this->logger->error(msg);
@@ -71,8 +71,8 @@ Sprite::Sprite(string id) {
 		this->logger->error("Malformed sprite configuration; missing \"filename\" element: \""
 				+ conf_sprites + "\"");
 	} else {
-		string image_path = concatPath(dir_root, (string) "data/sprite/" + fileElement->GetText()
-				+ ".png");
+		string image_path = Path::concatPath(Path::dir_root, (string) "data/sprite/"
+				+ fileElement->GetText() + ".png");
 		SDL_Surface* surface = IMG_Load(image_path.c_str());
 		if (surface == nullptr) {
 			this->logger->error("Failed to load image surface: \"" + image_path + "\"");

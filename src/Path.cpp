@@ -42,8 +42,8 @@ bool contains(const string input, const char value) {
 	return false;
 }
 
-string basename(string path) {
-	path = formatPath(path);
+string Path::basename(string path) {
+	path = Path::formatPath(path);
 
 	if (!contains(path, node)) {
 		return path;
@@ -60,8 +60,8 @@ string basename(string path) {
 	return path.substr(cutoff + 1, path.length() - (cutoff + 1));
 }
 
-string dirname(string path) {
-	path = formatPath(path);
+string Path::dirname(string path) {
+	path = Path::formatPath(path);
 
 	if (!contains(path, node)) {
 		return path;
@@ -84,7 +84,7 @@ string dirname(string path) {
  * @param input String to be formatted.
  * @return Formatted string.
  */
-string formatPath(string input) {
+string Path::formatPath(string input) {
 
 	for (int index = 0; index < input.length(); index++) {
 		if (input[index] == replaceNode) {
@@ -95,10 +95,10 @@ string formatPath(string input) {
 	return input;
 }
 
-string concatPath(const string p1, const string p2) {
+string Path::concatPath(const string p1, const string p2) {
 	string path = p1 + "/" + p2;
 
-	return formatPath(path);
+	return Path::formatPath(path);
 }
 
 /** Retrieves the absolute path for the executed file.
@@ -106,7 +106,7 @@ string concatPath(const string p1, const string p2) {
  * @function getThisPath
  * @return String path of executable.
  */
-string getThisPath() {
+string Path::getThisPath() {
 	char buffer[PATH_MAX];
 #ifdef WIN32
 	GetModuleFileName(NULL, buffer, PATH_MAX); // @suppress("Function cannot be resolved")
@@ -116,7 +116,7 @@ string getThisPath() {
 	return (string) buffer;
 }
 
-string getCWD() {
+string Path::getCWD() {
 	char buffer[PATH_MAX];
 #ifdef WIN32
 	GetCurrentDirectory(PATH_MAX, buffer); // @suppress("Function cannot be resolved")
@@ -130,7 +130,7 @@ string getCWD() {
 	return (string) buffer;
 }
 
-int changeDir(string path) {
+int Path::changeDir(string path) {
 	int res;
 #ifdef WIN32
 	res = SetCurrentDirectory(path.c_str()) ? 0 : 1;
