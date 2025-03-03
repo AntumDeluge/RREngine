@@ -19,7 +19,7 @@ typedef mode_t dperm;
 
 namespace Filesystem {
 
-	bool fileExists(const std::string path);
+	bool fexist(const std::string path);
 
 	#ifdef WIN32
 	/**

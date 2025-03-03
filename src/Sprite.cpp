@@ -28,7 +28,7 @@ Sprite::Sprite(string id) {
 
 	// TODO: cache sprites at startup or scene loading (optimization?) in SpriteStore
 	const string conf_sprites = concatPath(dir_root, "data/conf/sprites/characters.xml");
-	if (!Filesystem::fileExists(conf_sprites)) {
+	if (!Filesystem::fexist(conf_sprites)) {
 		string msg = "Sprite configuration not found: \"" + conf_sprites + "\"";
 		this->logger->error(msg);
 		return;

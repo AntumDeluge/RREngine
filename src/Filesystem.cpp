@@ -17,11 +17,10 @@ using namespace std;
 
 /** Checks for existing file.
  *
- * @function fileExists
  * @param path String path to file.
  * @return `true` if the file is found in the filesystem.
  */
-bool Filesystem::fileExists(const string path) {
+bool Filesystem::fexist(const string path) {
 	ifstream ofile;
 	ofile.open(path);
 	bool exists = ofile.is_open();
