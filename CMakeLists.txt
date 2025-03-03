@@ -1,11 +1,20 @@
 
 cmake_minimum_required(VERSION 3.12.4)
+
+# C++ standard
+set(CMAKE_CXX_STANDARD 11 CACHE STRING "C++ standard to be used")
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# enforce at least C++11 compliance
+math(EXPR CXX_STANDARD_INT "${CMAKE_CXX_STANDARD}")
+if(CXX_STANDARD_INT LESS 11 OR CXX_STANDARD_INT EQUAL 98)
+	message(FATAL_ERROR "Unsupported C++ standard ${CMAKE_CXX_STANDARD}; required is at least C++11")
+endif()
+
+
+# project & version info
+
 project(RREngine)
-
-# TODO:
-# - ensure building with at least C++17
-
-# version info
 set(RREngine_VER_MAJ 0)
 set(RREngine_VER_MIN 1)
 set(RREngine_VER_REL 0)
