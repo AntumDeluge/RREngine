@@ -106,7 +106,7 @@ string Path::join(const string p1, const string p2) {
  * @function getThisPath
  * @return String path of executable.
  */
-string Path::getThisPath() {
+string Path::getExecutable() {
 	char buffer[PATH_MAX];
 #ifdef WIN32
 	GetModuleFileName(NULL, buffer, PATH_MAX); // @suppress("Function cannot be resolved")

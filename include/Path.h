@@ -30,14 +30,14 @@ namespace Path {
 	 */
 	std::string join(const std::string p1, const std::string p2);
 
-	std::string getThisPath();
+	std::string getExecutable();
 
 	std::string getCWD();
 
 	int changeDir(std::string path);
 
 	/** Root directory from where executable is launched. */
-	static const std::string dir_root = dirname(getThisPath());
+	static const std::string dir_root = dirname(getExecutable());
 }
 
 	#endif /* RRE_PATH */
