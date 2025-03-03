@@ -16,10 +16,10 @@ namespace Path {
 
 	std::string dirname(std::string path);
 
-	std::string formatPath(std::string input);
+	std::string norm(std::string input);
 
-	static std::string formatPath(const char* input) {
-		return formatPath((std::string) input);
+	static std::string norm(const char* input) {
+		return norm((std::string) input);
 	}
 
 	/** Joins to strings into one using node delimiter.

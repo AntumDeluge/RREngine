@@ -43,7 +43,7 @@ bool contains(const string input, const char value) {
 }
 
 string Path::basename(string path) {
-	path = Path::formatPath(path);
+	path = Path::norm(path);
 
 	if (!contains(path, node)) {
 		return path;
@@ -61,7 +61,7 @@ string Path::basename(string path) {
 }
 
 string Path::dirname(string path) {
-	path = Path::formatPath(path);
+	path = Path::norm(path);
 
 	if (!contains(path, node)) {
 		return path;
@@ -84,7 +84,7 @@ string Path::dirname(string path) {
  * @param input String to be formatted.
  * @return Formatted string.
  */
-string Path::formatPath(string input) {
+string Path::norm(string input) {
 
 	for (int index = 0; index < input.length(); index++) {
 		if (input[index] == replaceNode) {
@@ -98,7 +98,7 @@ string Path::formatPath(string input) {
 string Path::concatPath(const string p1, const string p2) {
 	string path = p1 + "/" + p2;
 
-	return Path::formatPath(path);
+	return Path::norm(path);
 }
 
 /** Retrieves the absolute path for the executed file.
