@@ -7,7 +7,7 @@ endif()
 
 # SDL2
 # FIXME: determine correct required minimum versions
-pkg_search_module(SDL2 sdl2>=2.0.0 ${MODULE_PARAMS})
+pkg_search_module(SDL2 sdl2>=2.0.18 ${MODULE_PARAMS})
 pkg_search_module(SDL2MIXER SDL2_mixer>=2.0.0 ${MODULE_PARAMS})
 pkg_search_module(SDL2IMAGE SDL2_image>=2.0.0 ${MODULE_PARAMS})
 if(NOT SDL2MIXER_VERSION)
