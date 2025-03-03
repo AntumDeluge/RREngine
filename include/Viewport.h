@@ -10,6 +10,7 @@
 #include <SDL2/SDL_render.h>
 
 #include "FontMap.h"
+#include "GameMode.h"
 #include "Logger.h"
 #include "Sprite.h"
 
@@ -32,6 +33,10 @@ private:
 	FontMap* font_map;
 	uint16_t current_fps;
 
+	GameMode::Mode mode;
+
+	SDL_Texture* background;
+
 public:
 	static Viewport* get() {
 		if (instance == nullptr) {
@@ -46,9 +51,15 @@ public:
 	void setCurrentFPS(uint16_t fps) { this->current_fps = fps; }
 	void setScale(uint16_t scale);
 
+	void unsetBackground();
+	bool setBackground(std::string path);
+	void setMode(GameMode::Mode mode);
+
 	SDL_Renderer* getRenderer() { return this->renderer; }
 
+	// TODO: rename to "drawImage" or "drawTexture"
 	void drawSprite(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect);
+	void drawSprite(SDL_Texture* texture, SDL_Rect rect) { this->drawSprite(texture, rect, rect); }
 	void drawSprite(Sprite* sprite, uint32_t x, uint32_t y);
 	void draw();
 
@@ -57,6 +68,7 @@ private:
 	void drawBackground();
 	void drawForeground();
 	void drawEntities();
+	void drawTitle();
 	void drawText();
 	void drawFPS();
 };

@@ -4,12 +4,16 @@
  * See: LICENSE.txt
  */
 
-//~ #include <string>
-
-#include "Viewport.h"
 #include "config.h"
 
-//~ using namespace std;
+#include <string>
+
+using namespace std;
+
+#include "GameConfig.h"
+#include "Texture.h"
+#include "Viewport.h"
+#include "reso.h"
 
 
 // initialize singleton instance
@@ -21,6 +25,9 @@ Viewport::Viewport() {
 	// TODO: initial viewport font should be configured in game.xml
 	this->font_map = nullptr; // cannot be set here because font maps have not yet loaded
 	this->current_fps = 0;
+
+	this->mode = GameMode::NONE;
+	this->background = nullptr;
 }
 
 void Viewport::init(SDL_Window* window) {
@@ -40,12 +47,41 @@ void Viewport::init(SDL_Window* window) {
 }
 
 void Viewport::shutdown() {
+	this->unsetBackground();
 	SDL_DestroyRenderer(this->renderer);
 	this->renderer = nullptr;
 }
 
 void Viewport::setScale(uint16_t scale) {
 	SDL_RenderSetScale(this->renderer, scale, scale);
+}
+
+void Viewport::unsetBackground() {
+	if (this->background != nullptr) {
+		SDL_DestroyTexture(this->background);
+		this->background = nullptr;
+	}
+}
+
+bool Viewport::setBackground(string path) {
+	this->unsetBackground();
+	this->background = Texture::getTexture(path);
+	bool result = this->background != nullptr;
+	if (!result) {
+		string msg = "Failed to set background image";
+		this->logger->error(msg);
+	}
+	return result;
+}
+
+void Viewport::setMode(GameMode::Mode mode) {
+	if (mode == GameMode::TITLE) {
+		this->setBackground(GameConfig::getBackground("title"));
+	} else {
+		this->unsetBackground();
+	}
+
+	this->mode = mode;
 }
 
 void Viewport::drawSprite(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) {
@@ -69,7 +105,11 @@ void Viewport::drawSprite(Sprite* sprite, uint32_t x, uint32_t y) {
 
 void Viewport::draw() {
 	SDL_RenderClear(this->renderer);
-	this->drawScene();
+	if (this->mode == GameMode::ACTIVE) {
+		this->drawScene();
+	} else if (this->mode == GameMode::TITLE) {
+		this->drawTitle();
+	}
 #if RRE_DEBUGGING
 	this->drawFPS();
 #endif
@@ -93,6 +133,18 @@ void Viewport::drawForeground() {
 
 void Viewport::drawEntities() {
 	// TODO:
+}
+
+void Viewport::drawTitle() {
+	if (this->background == nullptr) {
+		return;
+	}
+
+	int w, h;
+	SDL_QueryTexture(this->background, NULL, NULL, &w, &h);
+
+	this->drawSprite(this->background, (SDL_Rect) {0, 0, w, h},
+			(SDL_Rect) {0, 0, RES1.first, RES1.second});
 }
 
 void Viewport::drawText() {
