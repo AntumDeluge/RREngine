@@ -11,6 +11,11 @@ if(CXX_STANDARD_INT LESS 11 OR CXX_STANDARD_INT EQUAL 98)
 	message(FATAL_ERROR "Unsupported C++ standard ${CMAKE_CXX_STANDARD}; required is at least C++11")
 endif()
 
+# NOTE:
+# - compiler-specefic extensions is enabled by default
+# - to disable GNU specific `readlink` should be abandoned
+set(CMAKE_CXX_EXTENSIONS ON)
+
 
 # project & version info
 
