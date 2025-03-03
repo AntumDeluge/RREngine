@@ -103,7 +103,6 @@ void GameWindow::playMusic(string id) {
 	if (file_music.compare("") == 0) {
 		string msg = "Music for ID \"" + id + "\" not configured or file not found";
 		this->logger->warn(msg);
-		Dialog::warn(msg);
 	} else {
 		this->music = Mix_LoadMUS(file_music.c_str());
 		if (this->music == nullptr) {
@@ -112,7 +111,6 @@ void GameWindow::playMusic(string id) {
 				audio_error = "Failed to load music: \"" + file_music + "\"";
 			}
 			this->logger->warn(audio_error);
-			Dialog::warn(audio_error);
 		}
 
 		if (Mix_PlayMusic(this->music, -1) != 0) {
@@ -121,7 +119,6 @@ void GameWindow::playMusic(string id) {
 				audio_error = "Failed to play music: \"" + file_music + "\"";
 			}
 			this->logger->warn(audio_error);
-			Dialog::warn(audio_error);
 		}
 	}
 }
