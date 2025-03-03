@@ -19,6 +19,8 @@ namespace GameConfig {
 	std::string getTitle();
 
 	uint16_t getScale();
+
+	std::string getBackground(std::string id);
 };
 
 #endif /* RRE_GAME_CONFIG */

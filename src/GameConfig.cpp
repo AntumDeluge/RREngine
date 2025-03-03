@@ -5,6 +5,8 @@
  * See: LICENSE.txt
  */
 
+#include <unordered_map>
+
 using namespace std;
 
 #include <tinyxml2.h>
@@ -27,6 +29,7 @@ string game_conf = concatPath(dir_root, "data/conf/game.xml");
 // configured options
 string title = "";
 uint16_t scale = 1;
+unordered_map<string, string> menu_backgrounds;
 
 bool loaded = false;
 
@@ -89,6 +92,30 @@ int GameConfig::load() {
 		scale = 4;
 	}
 
+	XMLElement* el_menu = el_root->FirstChildElement("menu");
+	while (el_menu != nullptr) {
+		const XMLAttribute* attr_id = el_menu->FindAttribute("id");
+		if (attr_id == nullptr) {
+			onConfigError("XML Parsing Error", "\"menu\" element without \"id\" attribute");
+			return 1;
+		}
+
+		string id = attr_id->Value();
+		if (id.compare("") == 0) {
+			onConfigError("XML Parsing Error", "\"id\" attribute without value");
+			return 1;
+		}
+
+		const XMLAttribute* attr_bg = el_menu->FindAttribute("background");
+		if (attr_bg == nullptr) {
+			GameConfig::logger->warn("Menu (" + id + ") without background");
+		} else {
+			menu_backgrounds[id] = concatPath(dir_root + "/data/menu", string(attr_bg->Value()) + ".png");
+		}
+
+		el_menu = el_menu->NextSiblingElement("menu");
+	}
+
 	// TODO: add option for aspect ratio
 
 	loaded = true;
@@ -101,4 +128,11 @@ string GameConfig::getTitle() {
 
 uint16_t GameConfig::getScale() {
 	return scale;
+}
+
+string GameConfig::getBackground(string id) {
+	if (menu_backgrounds.find(id) != menu_backgrounds.end()) {
+		return menu_backgrounds[id];
+	}
+	return "";
 }
