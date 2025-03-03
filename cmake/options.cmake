@@ -7,6 +7,6 @@ else()
 	set(RRE_DEBUGGING false)
 endif()
 
-option(STATIC "Try to link executable statically" ON)
+option(STATIC "Try to link executable statically" OFF)
 
 option(EXAMPLE "Include example game data files" OFF)
