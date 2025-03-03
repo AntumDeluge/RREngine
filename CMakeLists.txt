@@ -73,8 +73,6 @@ endif()
 # example game data
 
 if(EXAMPLE)
-	message("-- Configuring to including example game data")
-
 	# TODO: exclude .flac audio source files
 	file(
 		COPY "${PROJECT_SOURCE_DIR}/data"
@@ -83,11 +81,13 @@ if(EXAMPLE)
 
 	find_program(FFMPEG_EXE ffmpeg)
 	if(NOT FFMPEG_EXE)
-		message("-- WARNING: ffmpeg executable not found")
+		message("-- WARNING: ffmpeg executable not found; cannot build example music")
 	else()
 		message("-- ffmpeg executable found")
-		execute_process(
-			COMMAND ffmpeg
+		add_custom_command(
+			TARGET game POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E echo "Converting audio source to Ogg/Vorbis ..."
+			COMMAND "${FFMPEG_EXE}"
 				-y
 				-i "${PROJECT_SOURCE_DIR}/data/music/summer_sunday.flac"
 				-c:a libvorbis
@@ -95,4 +95,6 @@ if(EXAMPLE)
 				"${PROJECT_BINARY_DIR}/data/music/summer_sunday.ogg"
 		)
 	endif()
+
+	message("-- Configured to include example game data")
 endif()
