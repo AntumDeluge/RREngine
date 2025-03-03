@@ -11,6 +11,7 @@
 
 
 namespace Audio {
+	// @deprecated Use GameConfig::getMusic(id)
 	extern std::string GetMusicFile(const std::string id);
 }
 

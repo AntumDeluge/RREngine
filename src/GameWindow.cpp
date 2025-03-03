@@ -7,9 +7,10 @@
 #include <SDL2/SDL.h> // SDL2 defines SDL_Init in main header, this has been moved to SDL_init.h in SDL3
 
 #include "FontStore.h"
+#include "GameConfig.h"
 #include "GameWindow.h"
 #include "SingletonRepo.h"
-#include "audio.h"
+//~ #include "audio.h"
 #include "dialog.h"
 
 using namespace std;
@@ -98,7 +99,8 @@ void GameWindow::playMusic(string id) {
 		this->stopMusic();
 	}
 
-	string file_music = Audio::GetMusicFile(id);
+	//~ string file_music = Audio::GetMusicFile(id);
+	string file_music = GameConfig::getMusic(id);
 	string audio_error = "";
 	if (file_music.compare("") == 0) {
 		string msg = "Music for ID \"" + id + "\" not configured or file not found";
