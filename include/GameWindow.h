@@ -62,6 +62,8 @@ public:
 		return this->window;
 	}
 
+	Viewport* getViewport() { return this->viewport; }
+
 	void playMusic(std::string id);
 	void stopMusic();
 };
