@@ -33,6 +33,8 @@ private:
 	Viewport* viewport;
 	/** Active music. */
 	Mix_Music* music;
+	/** Game loop iterator. */
+	bool quit;
 
 public:
 	static GameWindow* get() {
@@ -44,8 +46,9 @@ public:
 
 	void setTitle(const std::string title);
 	int init(const std::string title, const int width, const int height);
-	// @deprecated
-	int init();
+	int init(); // @deprecated
+	/** Sets game loop to be ended & shutdown cleanly. */
+	void endGameLoop();
 	void shutdown();
 
 	SDL_Window* getElement() {

@@ -26,6 +26,7 @@ GameWindow::GameWindow() {
 	this->window = nullptr;
 	this->viewport = nullptr;
 	this->music = nullptr;
+	this->quit = false;
 }
 
 void GameWindow::setTitle(const string title) {
@@ -88,9 +89,6 @@ int GameWindow::init(const string title, const int width, const int height) {
 	this->logger->debug("Game logic step delay: " + to_string(step_delay) + "ms");
 #endif
 
-	// main loop flag
-	bool quit = false;
-
 	// event handler
 	SDL_Event event;
 
@@ -109,7 +107,7 @@ int GameWindow::init(const string title, const int width, const int height) {
 #endif
 
 	// TODO: move game loop to singleton class
-	while (!quit) {
+	while (!this->quit) {
 		// time (in milliseconds) at which game loop is executing
 		uint64_t time_now = SDL_GetTicks64();
 		// elapsed time (in milliseconds) since game logic was last executed
@@ -117,7 +115,7 @@ int GameWindow::init(const string title, const int width, const int height) {
 
 		while (SDL_PollEvent(&event) != 0) {
 			if (event.type == SDL_QUIT) {
-				quit = true;
+				this->endGameLoop();
 			}
 		}
 
@@ -154,6 +152,10 @@ int GameWindow::init(const string title, const int width, const int height) {
 
 int GameWindow::init() {
 	return this->init("R&R Engine", RES1.first, RES1.second);
+}
+
+void GameWindow::endGameLoop() {
+	this->quit = true;
 }
 
 void GameWindow::playMusic(string id) {
