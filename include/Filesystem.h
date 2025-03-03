@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_FILEIO_H
-#define RRE_FILEIO_H
+#ifndef RRE_FILESYSTEM
+#define RRE_FILESYSTEM
 
 #include <string>
 
@@ -36,4 +36,4 @@ extern int mkdir(const std::string path, dperm mode);
 
 extern int mkdir(const std::string path);
 
-#endif /* RRE_FILEIO_H */
+#endif /* RRE_FILESYSTEM */

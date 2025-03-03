@@ -4,15 +4,14 @@
  * See: LICENSE.txt
  */
 
-//~ #include <sstream>
 #include <string>
 #include <vector>
 
+#include "Filesystem.h"
 #include "FontMap.h"
 #include "FontMapLoader.h"
 #include "FontStore.h"
 #include "dialog.h"
-#include "fileio.h"
 #include "paths.h"
 
 using namespace std;

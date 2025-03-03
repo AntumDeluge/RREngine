@@ -8,9 +8,9 @@
 #include <SDL2/SDL_surface.h>
 
 #include "Dialog.h"
+#include "Filesystem.h"
 #include "FontMap.h"
 #include "SingletonRepo.h"
-#include "fileio.h"
 
 using namespace std;
 

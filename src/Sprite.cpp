@@ -4,13 +4,12 @@
  * See: LICENSE.txt
  */
 
-
 #include <SDL2/SDL_image.h>
 #include <tinyxml2.h>
 
+#include "Filesystem.h"
 #include "SingletonRepo.h"
 #include "Sprite.h"
-#include "fileio.h"
 #include "paths.h"
 
 using namespace std;

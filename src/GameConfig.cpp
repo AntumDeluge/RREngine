@@ -14,9 +14,9 @@ using namespace std;
 using namespace tinyxml2;
 
 #include "Dialog.h"
+#include "Filesystem.h"
 #include "GameConfig.h"
 #include "Logger.h"
-#include "fileio.h"
 #include "paths.h"
 
 

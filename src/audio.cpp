@@ -6,9 +6,9 @@
 
 #include <tinyxml2.h>
 
+#include "Filesystem.h"
 #include "audio.h"
 #include "dialog.h"
-#include "fileio.h"
 #include "paths.h"
 
 using namespace tinyxml2;
