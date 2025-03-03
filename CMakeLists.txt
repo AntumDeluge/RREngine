@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.12.4)
 project(RREngine)
 
 # TODO:
-# - strip binaries
 # - ensure building with at least C++17
 
 # version info
@@ -47,6 +46,14 @@ endif()
 
 add_executable(game ${CPP_SOURCE})
 target_link_libraries(game PRIVATE ${LIBS})
+
+if(NOT DEBUG)
+	# strip executable of debugging symbols
+	add_custom_command(
+		TARGET game POST_BUILD
+		COMMAND ${CMAKE_OBJCOPY} --strip-debug "$<TARGET_FILE:game>"
+	)
+endif()
 
 
 # example game data
