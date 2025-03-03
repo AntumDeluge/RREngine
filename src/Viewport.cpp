@@ -44,6 +44,10 @@ void Viewport::shutdown() {
 	this->renderer = nullptr;
 }
 
+void Viewport::setScale(uint16_t scale) {
+	SDL_RenderSetScale(this->renderer, scale, scale);
+}
+
 void Viewport::drawSprite(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) {
 	if (texture == nullptr) {
 		this->logger->error("Sprite drawing error; sprite undefined");

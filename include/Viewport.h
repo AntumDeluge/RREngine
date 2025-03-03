@@ -44,6 +44,7 @@ public:
 	void shutdown();
 	void setFontMap(FontMap* font_map) { this->font_map = font_map; }
 	void setCurrentFPS(uint16_t fps) { this->current_fps = fps; }
+	void setScale(uint16_t scale);
 
 	SDL_Renderer* getRenderer() { return this->renderer; }
 

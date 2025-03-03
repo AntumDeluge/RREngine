@@ -66,6 +66,10 @@ int main(int argc, char** argv) {
 		return result;
 	}
 
+	if (scale > 1) {
+		win->getViewport()->setScale(scale);
+	}
+
 	GameLoop::start();
 
 	win->shutdown();
