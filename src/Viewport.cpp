@@ -107,6 +107,10 @@ void Viewport::drawFPS() {
 		//~ this->drawSprite(fps_sprite, 0, 0);
 	//~ }
 
+	if (this->font_map == nullptr) {
+		return;
+	}
+
 	SDL_Texture* texture = this->font_map->getTexture();
 
 	int t_idx = 0;
