@@ -131,7 +131,9 @@ int GameWindow::init(const string title, const int width, const int height) {
 		if (time_now - last_draw_time >= draw_interval) {
 			this->viewport->draw();
 			last_draw_time = time_now;
+#if RRE_DEBUGGING
 			f_drawn++;
+#endif
 		}
 
 #if RRE_DEBUGGING
