@@ -94,6 +94,8 @@ if(EXAMPLE)
 		)
 	endforeach()
 
+	file(GLOB_RECURSE MUSIC_SOURCE_FILES RELATIVE "${DATA_DIR_SOURCE}/music" "${DATA_DIR_SOURCE}/music/*.flac")
+
 	find_program(FFMPEG_EXE ffmpeg)
 	if(NOT FFMPEG_EXE)
 		message("-- WARNING: ffmpeg executable not found; cannot build example music")
@@ -102,13 +104,23 @@ if(EXAMPLE)
 		add_custom_command(
 			TARGET game POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E echo "Converting audio source to Ogg/Vorbis ..."
-			COMMAND "${FFMPEG_EXE}"
-				-y
-				-i "${PROJECT_SOURCE_DIR}/data/music/summer_sunday.flac"
-				-c:a libvorbis
-				-b:a 96k
-				"${PROJECT_BINARY_DIR}/data/music/summer_sunday.ogg"
 		)
+		foreach(MUSIC_FLAC ${MUSIC_SOURCE_FILES})
+			string(REGEX REPLACE "\.flac$" ".ogg" MUSIC_OGG "${MUSIC_FLAC}")
+			set(MUSIC_OGG_TARGET "${DATA_DIR_TARGET}/music/${MUSIC_OGG}")
+			cmake_path(GET MUSIC_OGG_TARGET PARENT_PATH MUSIC_OGG_DIR)
+			file(MAKE_DIRECTORY "${MUSIC_OGG_DIR}")
+
+			add_custom_command(
+				TARGET game POST_BUILD
+				COMMAND "${FFMPEG_EXE}"
+					-y
+					-i "${DATA_DIR_SOURCE}/music/${MUSIC_FLAC}"
+					-c:a libvorbis
+					-b:a 96k
+					"${MUSIC_OGG_TARGET}"
+			)
+		endforeach()
 	endif()
 
 	message("-- Configured to include example game data")
