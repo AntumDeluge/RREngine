@@ -23,6 +23,7 @@ GameWindow* GameWindow::instance = nullptr;
 
 GameWindow::GameWindow() {
 	this->logger = Logger::getLogger("GameWindow");
+	this->title = "R&R Engine";
 	this->window = nullptr;
 	this->viewport = nullptr;
 	this->music = nullptr;
@@ -30,11 +31,16 @@ GameWindow::GameWindow() {
 }
 
 void GameWindow::setTitle(const string title) {
-	SDL_SetWindowTitle(this->window, title.c_str());
+	this->title = title;
+	if (this->window != nullptr) {
+		SDL_SetWindowTitle(this->window, this->title.c_str());
+	}
 }
 
 int GameWindow::init(const string title, const int width, const int height) {
 	this->logger->debug("Initializing SDL ...");
+
+	this->title = title;
 
 	// initialize video subsystem
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -47,8 +53,8 @@ int GameWindow::init(const string title, const int width, const int height) {
 	}
 
 	// create the SDL frame & viewport renderer
-	this->window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-			width, height, SDL_WINDOW_SHOWN);
+	this->window = SDL_CreateWindow(this->title.c_str(), SDL_WINDOWPOS_CENTERED,
+			SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 	this->viewport = GetViewport();
 	this->viewport->init(this->window);
 
@@ -151,7 +157,7 @@ int GameWindow::init(const string title, const int width, const int height) {
 }
 
 int GameWindow::init() {
-	return this->init("R&R Engine", RES1.first, RES1.second);
+	return this->init(this->title, RES1.first, RES1.second);
 }
 
 void GameWindow::endGameLoop() {

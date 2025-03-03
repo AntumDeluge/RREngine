@@ -29,6 +29,8 @@ private:
 
 	/** Logger instance. */
 	Logger* logger;
+
+	std::string title;
 	SDL_Window* window;
 	Viewport* viewport;
 	/** Active music. */
@@ -46,6 +48,9 @@ public:
 
 	void setTitle(const std::string title);
 	int init(const std::string title, const int width, const int height);
+	int init(const int width, const int height) {
+		return this->init(this->title, width, height);
+	}
 	int init(); // @deprecated
 	/** Sets game loop to be ended & shutdown cleanly. */
 	void endGameLoop();
