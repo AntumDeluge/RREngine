@@ -32,7 +32,7 @@ namespace Path {
 
 	std::string getExecutable();
 
-	std::string getCWD();
+	std::string cwd();
 
 	int changeDir(std::string path);
 

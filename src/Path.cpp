@@ -116,7 +116,7 @@ string Path::getExecutable() {
 	return (string) buffer;
 }
 
-string Path::getCWD() {
+string Path::cwd() {
 	char buffer[PATH_MAX];
 #ifdef WIN32
 	GetCurrentDirectory(PATH_MAX, buffer); // @suppress("Function cannot be resolved")
