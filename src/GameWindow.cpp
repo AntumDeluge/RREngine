@@ -99,6 +99,7 @@ void GameWindow::playMusic(string id) {
 		this->stopMusic();
 	}
 
+	// FIXME: GameConfig::getMusic only works for configured title music, we should use Audio::GetMusicFile
 	//~ string file_music = Audio::GetMusicFile(id);
 	string file_music = GameConfig::getMusic(id);
 	string audio_error = "";
