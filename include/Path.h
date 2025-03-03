@@ -24,12 +24,11 @@ namespace Path {
 
 	/** Joins to strings into one using node delimiter.
 	 *
-	 * @function concatPath
 	 * @param p1 First path.
 	 * @param p2 Second path.
 	 * @return Single string in `p1/p2` format.
 	 */
-	std::string concatPath(const std::string p1, const std::string p2);
+	std::string join(const std::string p1, const std::string p2);
 
 	std::string getThisPath();
 

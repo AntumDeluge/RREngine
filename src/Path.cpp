@@ -95,7 +95,7 @@ string Path::norm(string input) {
 	return input;
 }
 
-string Path::concatPath(const string p1, const string p2) {
+string Path::join(const string p1, const string p2) {
 	string path = p1 + "/" + p2;
 
 	return Path::norm(path);
