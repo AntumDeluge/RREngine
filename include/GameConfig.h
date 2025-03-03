@@ -8,6 +8,7 @@
 #ifndef RRE_GAME_CONFIG
 #define RRE_GAME_CONFIG
 
+#include <cstdint>
 #include <string>
 
 
