@@ -20,15 +20,27 @@ if(NOT TINYXML2_VERSION)
 	message(FATAL_ERROR "Please install tinyxml2")
 endif()
 
+# tmxlite
+pkg_search_module(TMXLITE tmxlite)
+if(NOT TMXLITE_VERSION)
+	message(FATAL_ERROR "Required library tmxlite not found")
+endif()
+
 # make sure libs get updated
 unset(LIBS)
 if(NOT STATIC)
-	set(LIBS ${SDL2_LIBRARIES})
+	set(LIBS ${SDL2_LIBRARIES} ${TMXLITE_LIBRARIES})
 else()
 	# FIXME: need portable method of finding static libs
 	find_library(LIBSDL2main libSDL2main.a NO_CACHE REQUIRED)
 	find_library(LIBSDL2 libSDL2.a NO_CACHE REQUIRED)
 	set(LIBS ${LIBSDL2main} ${LIBSDL2})
+
+	if(MINGW)
+		set(LIBS ${LIBS} libtmxlite-s.a)
+	else()
+		set(LIBS ${LIBS} ${TMXLITE_LIBRARIES})
+	endif()
 
 	if(WIN32)
 		find_library(LIBWINMM libwinmm REQUIRED)
