@@ -1,5 +1,5 @@
 
-cmake_minimum_required(VERSION 3.12.4)
+cmake_minimum_required(VERSION 3.20)
 
 # C++ standard
 set(CMAKE_CXX_STANDARD 11 CACHE STRING "C++ standard to be used")
@@ -73,11 +73,26 @@ endif()
 # example game data
 
 if(EXAMPLE)
-	# TODO: exclude .flac audio source files
-	file(
-		COPY "${PROJECT_SOURCE_DIR}/data"
-		DESTINATION "${PROJECT_BINARY_DIR}"
-	)
+	# REGEX not working in this copy command
+	#~ file(
+		#~ COPY "${PROJECT_SOURCE_DIR}/data"
+		#~ DESTINATION "${PROJECT_BINARY_DIR}"
+		#~ REGEX "^${PROJECT_SOURCE_DIR}/data/music/.*|.*/README\.txt$" EXCLUDE
+	#~ )
+
+	set(DATA_DIR_SOURCE "${PROJECT_SOURCE_DIR}/data")
+	set(DATA_DIR_TARGET "${PROJECT_BINARY_DIR}/data")
+
+	file(GLOB_RECURSE DATA_FILES RELATIVE "${DATA_DIR_SOURCE}" "${DATA_DIR_SOURCE}/*")
+	list(FILTER DATA_FILES EXCLUDE REGEX "^music/*|README.txt$")
+
+	foreach(D_FILE ${DATA_FILES})
+		cmake_path(GET D_FILE PARENT_PATH D_DIR)
+		file(
+			COPY "${DATA_DIR_SOURCE}/${D_FILE}"
+			DESTINATION "${DATA_DIR_TARGET}/${D_DIR}"
+		)
+	endforeach()
 
 	find_program(FFMPEG_EXE ffmpeg)
 	if(NOT FFMPEG_EXE)
