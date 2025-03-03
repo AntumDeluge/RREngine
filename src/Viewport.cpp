@@ -11,6 +11,7 @@
 using namespace std;
 
 #include "GameConfig.h"
+#include "SingletonRepo.h"
 #include "Texture.h"
 #include "Viewport.h"
 #include "reso.h"
@@ -77,8 +78,10 @@ bool Viewport::setBackground(string path) {
 void Viewport::setMode(GameMode::Mode mode) {
 	if (mode == GameMode::TITLE) {
 		this->setBackground(GameConfig::getBackground("title"));
+		GetGameWindow()->playMusic("title");
 	} else {
 		this->unsetBackground();
+		GetGameWindow()->stopMusic();
 	}
 
 	this->mode = mode;
