@@ -11,7 +11,6 @@
 #include "SingletonRepo.h"
 #include "audio.h"
 #include "dialog.h"
-#include "reso.h"
 
 using namespace std;
 
@@ -87,10 +86,6 @@ int GameWindow::init(const string title, const int width, const int height) {
 	this->viewport->setFontMap(FontStore::getMap("main"));
 
 	return 0;
-}
-
-int GameWindow::init() {
-	return this->init(this->title, RES1.first, RES1.second);
 }
 
 void GameWindow::endGameLoop() {
