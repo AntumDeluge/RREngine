@@ -14,43 +14,36 @@ set(RREngine_VER_REL 0)
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake")
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/depends.cmake")
 
-# configure a header file to pass some of the CMake settings
-# to the source code
+# configure header file to pass some of the CMake settings to source compiler
 configure_file("config.h.in" "config.h")
 
 if(STATIC)
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")
 endif()
 
-# include all source files in compile command
-file(GLOB children RELATIVE "${PROJECT_SOURCE_DIR}/src/" "${PROJECT_SOURCE_DIR}/src/*.cpp")
-set(FLIST "")
-foreach(child ${children})
-	if(EXISTS "${PROJECT_SOURCE_DIR}/src/${child}")
-		list(APPEND FLIST "src/${child}")
-	endif()
-endforeach()
 
-# Windows resources
+# the output executable
+
+# detect all .cpp source files dynamically
+file(GLOB_RECURSE CPP_SOURCE "${PROJECT_SOURCE_DIR}/src/*.cpp")
 if(WIN32)
-	list(APPEND FLIST "${CMAKE_SOURCE_DIR}/win_resources.rc")
-	# the output executable
-	#add_executable(game WIN32 ${FLIST})
-	add_executable(game ${FLIST})
-else()
-	# the output executable
-	add_executable(game ${FLIST})
+	# Windows resources
+	list(APPEND CPP_SOURCE "${PROJECT_SOURCE_DIR}/win_resources.rc")
 endif()
 
+add_executable(game ${CPP_SOURCE})
 target_link_libraries(game PRIVATE ${LIBS})
 
+
+# example game data
+
 if(EXAMPLE)
-	message("-- Including example data ...")
+	message("-- Configuring to including example game data")
 
 	# TODO: exclude .flac audio source files
 	file(
-		COPY "${CMAKE_SOURCE_DIR}/data"
-		DESTINATION "${CMAKE_BINARY_DIR}"
+		COPY "${PROJECT_SOURCE_DIR}/data"
+		DESTINATION "${PROJECT_BINARY_DIR}"
 	)
 
 	find_program(FFMPEG_EXE ffmpeg)
@@ -59,7 +52,12 @@ if(EXAMPLE)
 	else()
 		message("-- ffmpeg executable found")
 		execute_process(
-			COMMAND ffmpeg -y -i "${CMAKE_SOURCE_DIR}/data/music/summer_sunday.flac" -c:a libvorbis -b:a 96k "${CMAKE_BINARY_DIR}/data/music/summer_sunday.ogg"
+			COMMAND ffmpeg
+				-y
+				-i "${PROJECT_SOURCE_DIR}/data/music/summer_sunday.flac"
+				-c:a libvorbis
+				-b:a 96k
+				"${PROJECT_BINARY_DIR}/data/music/summer_sunday.ogg"
 		)
 	endif()
 endif()

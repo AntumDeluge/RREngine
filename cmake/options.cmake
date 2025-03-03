@@ -1,11 +1,12 @@
 
 # debugging symbols
+option(DEBUG "Include debugging symbols" OFF)
 if(DEBUG)
 	set(RRE_DEBUGGING true)
 else()
 	set(RRE_DEBUGGING false)
 endif()
 
-set(STATIC "ON" CACHE BOOL "Try to link executable statically")
+option(STATIC "Try to link executable statically" ON)
 
-set(EXAMPLE "OFF" CACHE BOOL "Include example game data files")
+option(EXAMPLE "Include example game data files" OFF)
