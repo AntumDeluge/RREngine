@@ -36,6 +36,7 @@ Example data:
 - [SDL2_mixer](https://wiki.libsdl.org/SDL2_mixer) (zlib) ([source](https://github.com/libsdl-org/SDL_mixer/releases))
 - [SDL2_image](https://wiki.libsdl.org/SDL2_image) (zlib) ([source](https://github.com/libsdl-org/SDL_image/releases))
 - [TinyXML-2](http://leethomason.github.io/tinyxml2/) (zlib) ([source](https://github.com/leethomason/tinyxml2/releases))
+- [tmxlite](https://github.com/fallahn/tmxlite) (zlib)
 
 ### Required Build Tools
 
