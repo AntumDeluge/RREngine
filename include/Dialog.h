@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_DIALOG_H
-#define RRE_DIALOG_H
+#ifndef RRE_DIALOG
+#define RRE_DIALOG
 
 #include <string>
 
@@ -18,4 +18,4 @@ namespace Dialog {
 	void error(std::string msg);
 }
 
-#endif /* RRE_DIALOG_H */
+#endif /* RRE_DIALOG */

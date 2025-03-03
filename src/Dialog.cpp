@@ -8,8 +8,8 @@
 
 #include <SDL2/SDL.h>
 
+#include "Dialog.h"
 #include "SingletonRepo.h"
-#include "dialog.h"
 
 
 void message(Uint32 flags, std::string title, std::string msg) {

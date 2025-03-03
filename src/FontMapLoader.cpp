@@ -7,11 +7,11 @@
 #include <string>
 #include <vector>
 
+#include "Dialog.h"
 #include "Filesystem.h"
 #include "FontMap.h"
 #include "FontMapLoader.h"
 #include "FontStore.h"
-#include "dialog.h"
 #include "paths.h"
 
 using namespace std;
