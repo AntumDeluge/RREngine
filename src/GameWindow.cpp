@@ -7,11 +7,9 @@
 #include <SDL2/SDL.h> // SDL2 defines SDL_Init in main header, this has been moved to SDL_init.h in SDL3
 
 #include "FontStore.h"
-#include "GameLogic.h"
 #include "GameWindow.h"
 #include "SingletonRepo.h"
 #include "audio.h"
-#include "config.h"
 #include "dialog.h"
 #include "reso.h"
 
@@ -87,71 +85,6 @@ int GameWindow::init(const string title, const int width, const int height) {
 
 	GetFontMapLoader()->loadConfig();
 	this->viewport->setFontMap(FontStore::getMap("main"));
-
-	const GameLogic* logic = GetGameLogic();
-	uint16_t step_delay = logic->getStepDelay(); // delay (in milliseconds) for each step
-
-#if RRE_DEBUGGING
-	this->logger->debug("Game logic step delay: " + to_string(step_delay) + "ms");
-#endif
-
-	// event handler
-	SDL_Event event;
-
-	// time (in milliseconds) at which game logic was last executed
-	uint64_t time_prev = SDL_GetTicks64();
-
-	// TODO: use settings to set FPS limit
-	float fps_limit = 29.97;
-	float draw_interval = 1000 / fps_limit;
-
-	uint64_t last_draw_time = 0;
-
-#if RRE_DEBUGGING
-	uint16_t f_drawn = 0;
-	uint64_t fcount_start = time_prev;
-#endif
-
-	// TODO: move game loop to singleton class
-	while (!this->quit) {
-		// time (in milliseconds) at which game loop is executing
-		uint64_t time_now = SDL_GetTicks64();
-		// elapsed time (in milliseconds) since game logic was last executed
-		uint16_t time_elapsed = time_now - time_prev;
-
-		while (SDL_PollEvent(&event) != 0) {
-			if (event.type == SDL_QUIT) {
-				this->endGameLoop();
-			}
-		}
-
-		// limit game stepping to defined millisecond intervals
-		if (time_elapsed >= step_delay) {
-			GetGameLogic()->step(time_now);
-			time_prev = time_now;
-		}
-
-		// limit viewport refresh to configured max FPS
-		if (time_now - last_draw_time >= draw_interval) {
-			this->viewport->draw();
-			last_draw_time = time_now;
-#if RRE_DEBUGGING
-			f_drawn++;
-#endif
-		}
-
-#if RRE_DEBUGGING
-		if (time_now - fcount_start >= 1000) {
-			// check FPS after 1 second
-			this->viewport->setCurrentFPS(f_drawn);
-			// restart counter
-			f_drawn = 0;
-			fcount_start = time_now;
-		}
-#endif
-	}
-
-	this->shutdown();
 
 	return 0;
 }

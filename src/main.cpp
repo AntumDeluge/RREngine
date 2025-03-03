@@ -17,6 +17,7 @@ using namespace std;
 #include "Logger.h"
 #endif
 #include "GameConfig.h"
+#include "GameLoop.h"
 #include "GameWindow.h"
 #include "config.h"
 #include "paths.h"
@@ -60,7 +61,15 @@ int main(int argc, char** argv) {
 	logger->debug("Window scale: " + to_string(GameConfig::getScale()));
 #endif
 
-	return win->init(width, height);
+	result = win->init(width, height);
+	if (result != 0) {
+		return result;
+	}
+
+	GameLoop::start();
+
+	win->shutdown();
+	return 0;
 }
 
 
