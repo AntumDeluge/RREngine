@@ -15,7 +15,7 @@ using namespace tinyxml2;
 
 
 // TODO: cache audio files
-std::string Audio::GetMusicFile(const std::string id) {
+std::string Audio::getMusicPath(const std::string id) {
 	std::string conf_music = Path::join(Path::dir_root, "data/conf/music.xml");
 	if (!Filesystem::fexist(conf_music)) {
 		Dialog::error("Music config not found: \"" + conf_music + "\"");

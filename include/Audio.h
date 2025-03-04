@@ -11,7 +11,7 @@
 
 
 namespace Audio {
-	extern std::string GetMusicFile(const std::string id);
+	extern std::string getMusicPath(const std::string id);
 }
 
 #endif /* RRE_AUDIO_H */

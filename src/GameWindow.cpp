@@ -100,7 +100,7 @@ void GameWindow::playMusic(string id) {
 	}
 
 	// FIXME: GameConfig::getMusic only works for configured title music, we should use Audio::GetMusicFile
-	//~ string file_music = Audio::GetMusicFile(id);
+	//~ string file_music = Audio::getMusicPath(id);
 	string file_music = GameConfig::getMusic(id);
 	string audio_error = "";
 	if (file_music.compare("") == 0) {
