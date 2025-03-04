@@ -8,7 +8,7 @@
 #ifndef RRE_GAME_CONFIG
 #define RRE_GAME_CONFIG
 
-#include <cstdint>
+#include <cstdint> // uint*_t
 #include <string>
 
 
@@ -22,7 +22,7 @@ namespace GameConfig {
 
 	std::string getBackground(std::string id);
 
-	std::string getMusic(std::string id);
+	std::string getMenuMusicId(std::string id);
 };
 
 #endif /* RRE_GAME_CONFIG */

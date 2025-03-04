@@ -30,7 +30,7 @@ string game_conf = Path::join(Path::dir_root, "data/conf/game.xml");
 string title = "";
 uint16_t scale = 1;
 unordered_map<string, string> menu_backgrounds;
-unordered_map<string, string> menu_music;
+unordered_map<string, string> menu_music_ids;
 
 bool loaded = false;
 
@@ -119,13 +119,7 @@ int GameConfig::load() {
 		if (attr_music == nullptr) {
 			GameConfig::logger->warn("Menu (" + id + ") without music");
 		} else {
-			string music_path = Path::join(Path::dir_root + "/data/music", string(attr_music->Value()));
-			if (Filesystem::fexist(music_path + ".oga")) {
-				music_path += ".oga";
-			} else {
-				music_path += ".ogg";
-			}
-			menu_music[id] = music_path;
+			menu_music_ids[id] = attr_music->Value();
 		}
 
 		el_menu = el_menu->NextSiblingElement("menu");
@@ -152,9 +146,9 @@ string GameConfig::getBackground(string id) {
 	return "";
 }
 
-string GameConfig::getMusic(string id) {
-	if (menu_music.find(id) != menu_music.end()) {
-		return menu_music[id];
+string GameConfig::getMenuMusicId(string id) {
+	if (menu_music_ids.find(id) != menu_music_ids.end()) {
+		return menu_music_ids[id];
 	}
 	return "";
 }
