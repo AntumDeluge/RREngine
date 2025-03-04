@@ -12,8 +12,16 @@
 #include <string>
 
 
+/**
+ * Namespace for loading & accessing game configuration from `data/conf/game.xml`.
+ */
 namespace GameConfig {
 
+	/**
+	 * Loads game configuration from `data/conf/game.xml` into memory.
+	 *
+	 * @return
+	 */
 	int load();
 
 	std::string getTitle();
