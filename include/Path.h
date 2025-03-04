@@ -30,6 +30,16 @@ namespace Path {
 	 */
 	std::string join(const std::string p1, const std::string p2);
 
+	/**
+	 * Converts a path relative to the executable to absolute.
+	 *
+	 * @param rel
+	 *   Relative path.
+	 * @return
+	 *   Absolute path.
+	 */
+	std::string rabs(std::string rel);
+
 	std::string getExecutable();
 
 	std::string cwd();

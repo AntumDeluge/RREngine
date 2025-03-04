@@ -101,6 +101,10 @@ string Path::join(const string p1, const string p2) {
 	return Path::norm(path);
 }
 
+string Path::rabs(string rel) {
+	return Path::join(Path::dir_root, rel);
+}
+
 /** Retrieves the absolute path for the executed file.
  *
  * @function getThisPath
