@@ -23,6 +23,7 @@ using namespace std;
 #include "GameLoop.h"
 #include "GameWindow.h"
 #include "Path.h"
+#include "TMXLoader.h"
 #include "reso.h"
 
 
@@ -44,6 +45,7 @@ int main(int argc, char** argv) {
 	// TODO: move SDL initialization to here so configuration can be loaded before window is displayed
 
 	Audio::load();
+	TMXLoader::load();
 
 	GameWindow* win = GameWindow::get();
 
