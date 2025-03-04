@@ -2,13 +2,14 @@
 cmake_minimum_required(VERSION 3.20)
 
 # C++ standard
-set(CMAKE_CXX_STANDARD 11 CACHE STRING "C++ standard to be used")
+set(CXX_STANDARD_MIN 17)
+set(CMAKE_CXX_STANDARD ${CXX_STANDARD_MIN} CACHE STRING "C++ standard to be used")
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# enforce at least C++11 compliance
+# enforce minimum C++11 standard compliance
 math(EXPR CXX_STANDARD_INT "${CMAKE_CXX_STANDARD}")
-if(CXX_STANDARD_INT LESS 11 OR CXX_STANDARD_INT EQUAL 98)
-	message(FATAL_ERROR "Unsupported C++ standard ${CMAKE_CXX_STANDARD}; required is at least C++11")
+if(CXX_STANDARD_INT LESS ${CXX_STANDARD_MIN} OR CXX_STANDARD_INT EQUAL 98)
+	message(FATAL_ERROR "Unsupported C++ standard ${CMAKE_CXX_STANDARD}; required is at least C++${CXX_STANDARD_MIN}")
 endif()
 
 # NOTE:
