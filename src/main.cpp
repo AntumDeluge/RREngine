@@ -24,7 +24,7 @@ using namespace std;
 #include "reso.h"
 
 
-const string ver = to_string(RREngine_VER_MAJ) + "." + to_string(RREngine_VER_MIN) + "." + to_string(RREngine_VER_REL); // @suppress("Invalid arguments") @suppress("Symbol is not resolved")
+const string ver = to_string(RRE_VER_MAJ) + "." + to_string(RRE_VER_MIN) + "." + to_string(RRE_VER_REL); // @suppress("Invalid arguments") @suppress("Symbol is not resolved")
 
 void showVersion();
 

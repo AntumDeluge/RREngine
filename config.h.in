@@ -1,7 +1,7 @@
 // configured project version information
-#define RREngine_VER_MAJ @RREngine_VER_MAJ@
-#define RREngine_VER_MIN @RREngine_VER_MIN@
-#define RREngine_VER_REL @RREngine_VER_REL@
+#define RRE_VER_MAJ @RRE_VER_MAJ@
+#define RRE_VER_MIN @RRE_VER_MIN@
+#define RRE_VER_REL @RRE_VER_REL@
 
 // debugging symbols
 #define RRE_DEBUGGING @RRE_DEBUGGING@

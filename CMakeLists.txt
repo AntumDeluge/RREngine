@@ -21,9 +21,9 @@ set(CMAKE_CXX_EXTENSIONS ON)
 # project & version info
 
 project(RREngine)
-set(RREngine_VER_MAJ 0)
-set(RREngine_VER_MIN 1)
-set(RREngine_VER_REL 0)
+set(RRE_VER_MAJ 0)
+set(RRE_VER_MIN 1)
+set(RRE_VER_REL 0)
 
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake")
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/depends.cmake")
