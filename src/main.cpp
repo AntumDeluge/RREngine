@@ -15,15 +15,12 @@
 
 using namespace std;
 
-#include "Audio.h"
-#if RRE_DEBUGGING
-#include "Logger.h"
-#endif
+#include "DataLoader.h"
 #include "GameConfig.h"
 #include "GameLoop.h"
 #include "GameWindow.h"
+#include "Logger.h"
 #include "Path.h"
-#include "TMXLoader.h"
 #include "reso.h"
 
 
@@ -32,8 +29,9 @@ const string ver = to_string(RREngine_VER_MAJ) + "." + to_string(RREngine_VER_MI
 void showVersion();
 
 int main(int argc, char** argv) {
-#if RRE_DEBUGGING
 	Logger* logger = Logger::getLogger("main");
+
+#if RRE_DEBUGGING
 	logger->debug("Compiled using C++ standard: " + to_string(__cplusplus));
 #endif
 
@@ -44,8 +42,13 @@ int main(int argc, char** argv) {
 
 	// TODO: move SDL initialization to here so configuration can be loaded before window is displayed
 
-	Audio::load();
-	TMXLoader::load();
+	if (!DataLoader::load()) {
+		logger->error("Failed to load game data");
+#if RRE_DEBUGGING
+	} else {
+		logger->debug("Game data loaded");
+#endif
+	}
 
 	GameWindow* win = GameWindow::get();
 
