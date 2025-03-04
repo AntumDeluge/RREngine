@@ -22,11 +22,15 @@ using namespace tinyxml2;
 
 namespace GameConfig {
 	Logger* logger = Logger::getLogger("GameConfig");
+
+	// path to master game configuration
+	const string file_conf = Path::rabs("data/conf/game.xml");
 }
 
-string game_conf = Path::join(Path::dir_root, "data/conf/game.xml");
-
 // configured options
+// TODO:
+// - move into GameConfig namespace
+// - make static?
 string title = "";
 uint16_t scale = 1;
 unordered_map<string, string> menu_backgrounds;
@@ -35,7 +39,7 @@ unordered_map<string, string> menu_music_ids;
 bool loaded = false;
 
 void onConfigError(string title, string msg) {
-	msg += ": \"" + game_conf + "\"";
+	msg += ": \"" + GameConfig::file_conf + "\"";
 	GameConfig::logger->error(msg);
 	Dialog::error(title, msg);
 }
@@ -50,14 +54,14 @@ int GameConfig::load() {
 		return 0;
 	}
 
-	if (!Filesystem::fexist(game_conf)) {
+	if (!Filesystem::fexist(GameConfig::file_conf)) {
 		onConfigError("Game configuration not found");
 		// TODO: use errno standard
 		return 1;
 	}
 
 	XMLDocument doc;
-	if (doc.LoadFile(game_conf.c_str()) != 0) {
+	if (doc.LoadFile(GameConfig::file_conf.c_str()) != 0) {
 		onConfigError("XML Loading Error", "Failed to load game configuration");
 		return 1;
 	}
