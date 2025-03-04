@@ -121,4 +121,4 @@ namespace Path {
 	static const std::string dir_root = dirname(getExecutable());
 }
 
-	#endif /* RRE_PATH */
+#endif /* RRE_PATH */
