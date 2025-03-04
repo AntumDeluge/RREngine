@@ -40,3 +40,17 @@ int Filesystem::mkdir(const string path, dperm mode) {
 int Filesystem::mkdir(const string path) {
 	return Filesystem::mkdir(path, '\0');
 }
+
+vector<filesystem::directory_entry> Filesystem::listDir(string path, bool recurse) {
+	vector<filesystem::directory_entry> items;
+	if (recurse) {
+		for (filesystem::directory_entry item: filesystem::recursive_directory_iterator{path}) {
+			items.push_back(item);
+		}
+	} else {
+		for (filesystem::directory_entry item: filesystem::directory_iterator{path}) {
+			items.push_back(item);
+		}
+	}
+	return items;
+}
