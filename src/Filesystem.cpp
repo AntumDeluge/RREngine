@@ -5,14 +5,13 @@
  */
 
 #include <fstream>
-
 #ifdef WIN32
 #include <windows.h> // CreateDirectory
 #endif
 
-#include "Filesystem.h"
-
 using namespace std;
+
+#include "Filesystem.h"
 
 
 /** Checks for existing file.
@@ -40,10 +39,10 @@ int Filesystem::mkdir(const char* path) {
 	return mkdir(path, '\0');
 }
 
-int Filesystem::mkdir(const std::string path, dperm mode) {
+int Filesystem::mkdir(const string path, dperm mode) {
 	return mkdir(path.c_str(), mode);
 }
 
-int Filesystem::mkdir(const std::string path) {
+int Filesystem::mkdir(const string path) {
 	return mkdir(path, '\0');
 }
