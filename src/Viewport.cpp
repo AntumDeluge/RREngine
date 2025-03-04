@@ -108,6 +108,7 @@ void Viewport::drawSprite(Sprite* sprite, uint32_t x, uint32_t y) {
 
 void Viewport::draw() {
 	SDL_RenderClear(this->renderer);
+	// TODO: create Scene class that handles drawing tiles
 	if (this->mode == GameMode::SCENE) {
 		this->drawScene();
 	} else if (this->mode == GameMode::TITLE) {
