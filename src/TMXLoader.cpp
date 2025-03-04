@@ -26,6 +26,8 @@ namespace TMXLoader {
 	bool loaded = false;
 
 	unordered_map<string, string> scene_paths;
+	// scene data cached in memory
+	unordered_map<string, Scene*> scenes;
 };
 
 bool TMXLoader::load() {
@@ -56,7 +58,11 @@ bool TMXLoader::load() {
 	return true;
 }
 
-bool TMXLoader::loadScene(string id) {
+Scene* TMXLoader::loadScene(string id) {
+	if (TMXLoader::scenes.find(id) != TMXLoader::scenes.end()) {
+		return TMXLoader::scenes[id];
+	}
+
 	// TODO: parse scene data from TMX & load into viewport
-	return true;
+	return nullptr;
 }

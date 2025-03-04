@@ -10,6 +10,8 @@
 
 #include <string>
 
+#include "Scene.h"
+
 
 namespace TMXLoader {
 
@@ -24,14 +26,16 @@ namespace TMXLoader {
 	bool load();
 
 	/**
-	 * Loads a scene into the viewport.
+	 * Loads & returns a scene.
+	 *
+	 * TODO: need a function to delete cached scene data from memory
 	 *
 	 * @param id
 	 *   Scene idenifier.
 	 * @return
-	 *   `true` if scene loaded.
+	 *   New or cached scene data.
 	 */
-	bool loadScene(std::string id);
+	Scene* loadScene(std::string id);
 };
 
 #endif /* RRE_TMX_LOADER */
