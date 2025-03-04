@@ -13,6 +13,7 @@
 #include "Scene.h"
 
 
+// TODO: rename to "SceneStore" or "TMXStore"
 namespace TMXLoader {
 
 	/**

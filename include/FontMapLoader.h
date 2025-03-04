@@ -14,6 +14,9 @@
 #include "Logger.h"
 
 
+// TODO:
+// - change to namespace
+// - rename to "FontMapStore"
 class FontMapLoader {
 private:
 	// singleton class
