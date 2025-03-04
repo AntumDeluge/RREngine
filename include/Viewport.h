@@ -12,6 +12,7 @@
 #include "FontMap.h"
 #include "GameMode.h"
 #include "Logger.h"
+#include "Scene.h"
 #include "Sprite.h"
 
 
@@ -36,6 +37,7 @@ private:
 	GameMode::Mode mode;
 
 	SDL_Texture* background;
+	Scene* scene;
 
 public:
 	static Viewport* get() {
@@ -53,6 +55,8 @@ public:
 
 	void unsetBackground();
 	bool setBackground(std::string path);
+	void unsetScene();
+	bool setScene(Scene* scene);
 	void setMode(GameMode::Mode mode);
 
 	SDL_Renderer* getRenderer() { return this->renderer; }

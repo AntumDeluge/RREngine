@@ -29,6 +29,7 @@ Viewport::Viewport() {
 
 	this->mode = GameMode::NONE;
 	this->background = nullptr;
+	this->scene = nullptr;
 }
 
 void Viewport::init(SDL_Window* window) {
@@ -71,6 +72,19 @@ bool Viewport::setBackground(string path) {
 	if (!result) {
 		string msg = "Failed to set background image";
 		this->logger->error(msg);
+	}
+	return result;
+}
+
+void Viewport::unsetScene() {
+	this->scene = nullptr;
+}
+
+bool Viewport::setScene(Scene* scene) {
+	this->scene = scene;
+	bool result = this->scene != nullptr;
+	if (!result) {
+		this->logger->error("Failed to set scene");
 	}
 	return result;
 }
