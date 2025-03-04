@@ -113,6 +113,8 @@ if(EXAMPLE)
 			file(MAKE_DIRECTORY "${MUSIC_OGG_DIR}")
 
 			add_custom_command(
+				# FIXME: OUTPUT signature not working
+				#~ OUTPUT "${MUSIC_OGG_TARGET}"
 				TARGET game POST_BUILD
 				COMMAND "${FFMPEG_EXE}"
 					-y

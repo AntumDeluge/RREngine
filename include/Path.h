@@ -100,6 +100,17 @@ namespace Path {
 	std::string getExecutable();
 
 	/**
+	 * Retrieves an absolute path to a data resource.
+	 *
+	 * @param drel
+	 *   Path to resource relative to data directory.
+	 * @return
+	 *   Absolute path to resource.
+	 */
+	// FIXME: cannot implement this method; linker error
+	//~ std::string dataPath(std::string drel);
+
+	/**
 	 * Retrieves working directory.
 	 *
 	 * @return

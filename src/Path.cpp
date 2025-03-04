@@ -122,6 +122,10 @@ string Path::getExecutable() {
 	return (string) buffer;
 }
 
+//~ string Path::dataPath(string drel) {
+	//~ return Path::join(Path::dir_root, "data", drel);
+//~ }
+
 string Path::cwd() {
 	char buffer[PATH_MAX];
 #ifdef WIN32
