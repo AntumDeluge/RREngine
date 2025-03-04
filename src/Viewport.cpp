@@ -65,9 +65,9 @@ void Viewport::unsetBackground() {
 	}
 }
 
-bool Viewport::setBackground(string path) {
+bool Viewport::setBackground(string rdpath) {
 	this->unsetBackground();
-	this->background = TextureLoader::load(path);
+	this->background = TextureLoader::load(rdpath);
 	bool result = this->background != nullptr;
 	if (!result) {
 		string msg = "Failed to set background image";

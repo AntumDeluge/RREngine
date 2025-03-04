@@ -80,12 +80,12 @@ public:
 	/**
 	 * Sets background texture to draw.
 	 *
-	 * @param path
-	 *   Path to image file relative to data directory.
+	 * @param rdpath
+	 *   Path to image file relative to data directory (excluding .png suffix).
 	 * @return
 	 *   `true` if a texture was set.
 	 */
-	bool setBackground(std::string path);
+	bool setBackground(std::string rdpath);
 
 	/**
 	 * Unsets scene data.

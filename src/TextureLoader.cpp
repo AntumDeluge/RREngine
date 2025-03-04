@@ -11,6 +11,7 @@ using namespace std;
 #include <SDL2/SDL_surface.h>
 
 #include "Logger.h"
+#include "Path.h"
 #include "SingletonRepo.h"
 #include "TextureLoader.h"
 
@@ -20,13 +21,15 @@ using namespace std;
 	//~ Logger* logger = Logger::getLogger("TextureLoader");
 //~ };
 
-SDL_Texture* TextureLoader::load(string path) {
+SDL_Texture* TextureLoader::load(string rdpath) {
 	// TODO: cache loaded textures
 	Logger* logger = Logger::getLogger("TextureLoader");
 
-	SDL_Surface* surface = IMG_Load(path.c_str());
+	// absolute path to image data file (only PNG supported)
+	const string adpath = Path::rabs(Path::join("data", rdpath)) + ".png";
+	SDL_Surface* surface = IMG_Load(adpath.c_str());
 	if (surface == nullptr) {
-		logger->error("Failed to load image surface: \"" + path + "\"");
+		logger->error("Failed to load image surface: \"" + adpath + "\"");
 		return nullptr;
 	}
 
@@ -34,7 +37,7 @@ SDL_Texture* TextureLoader::load(string path) {
 	SDL_FreeSurface(surface);
 
 	if (texture == nullptr) {
-		logger->error("Failed to create texture from surface: \"" + path + "\"");
+		logger->error("Failed to create texture from surface: \"" + adpath + "\"");
 	}
 
 	return texture;

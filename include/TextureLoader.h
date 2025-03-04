@@ -21,12 +21,12 @@ namespace TextureLoader {
 	/**
 	 * Loads image into SDL texture. Only supports PNG images.
 	 *
-	 * @param path
+	 * @param rdpath
 	 *   File path relative to data directory (excluding .png suffix).
 	 * @return
 	 *   Texture or `nullptr`.
 	 */
-	SDL_Texture* load(std::string path);
+	SDL_Texture* load(std::string rdpath);
 };
 
 #endif /* RRE_TEXTURE_LOADER */

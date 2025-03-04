@@ -111,8 +111,7 @@ int GameConfig::load() {
 		if (attr_bg == nullptr) {
 			GameConfig::logger->warn("Menu (" + id + ") without background");
 		} else {
-			menu_backgrounds[id] = Path::join(Path::dir_root + "/data/background", string(attr_bg->Value())
-					+ ".png");
+			menu_backgrounds[id] = Path::join("background", attr_bg->Value());
 		}
 
 		const XMLAttribute* attr_music = el_menu->FindAttribute("music");
