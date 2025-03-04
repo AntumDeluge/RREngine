@@ -14,8 +14,8 @@ namespace GameMode {
 		NONE,
 		INTRO,
 		TITLE,
-		ACTIVE,
-		PAUSED
+		SCENE,
+		SCENE_PAUSED
 	};
 };
 
