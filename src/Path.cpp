@@ -28,6 +28,8 @@ const char node = '/';
 
 /** Checks if a string contains a specified character.
  *
+ * TODO: move to StrUtil namespace
+ *
  * @function contains
  * @param input String to be parsed.
  * @param value Character to be searched for.
@@ -79,12 +81,6 @@ string Path::dirname(string path) {
 	return path.substr(0, cutoff);
 }
 
-/** Converts node delimiters in a string to conform with current system.
- *
- * @function formatPath
- * @param input String to be formatted.
- * @return Formatted string.
- */
 string Path::norm(string input) {
 
 	for (int index = 0; index < input.length(); index++) {
@@ -116,11 +112,6 @@ string Path::rabs(string rel) {
 	return Path::join(Path::dir_root, rel);
 }
 
-/** Retrieves the absolute path for the executed file.
- *
- * @function getThisPath
- * @return String path of executable.
- */
 string Path::getExecutable() {
 	char buffer[PATH_MAX];
 #ifdef WIN32

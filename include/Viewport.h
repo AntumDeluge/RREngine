@@ -47,19 +47,70 @@ public:
 		return instance;
 	}
 
+	/**
+	 * Initializes the pixel data renderer.
+	 *
+	 * @param window
+	 *   Window where renderer should draw.
+	 */
 	void init(SDL_Window* window);
+
+	/**
+	 * Cleans up renderer & data memory.
+	 */
 	void shutdown();
+
+	/**
+	 * Retrieves the viewport renderer where pixel data is drawn.
+	 *
+	 * @return
+	 *   SDL_Renderer instance.
+	 */
+	SDL_Renderer* getRenderer() { return this->renderer; }
+
 	void setFontMap(FontMap* font_map) { this->font_map = font_map; }
 	void setCurrentFPS(uint16_t fps) { this->current_fps = fps; }
 	void setScale(uint16_t scale);
 
+	/**
+	 * Unsets background texture.
+	 */
 	void unsetBackground();
-	bool setBackground(std::string path);
-	void unsetScene();
-	bool setScene(Scene* scene);
-	void setMode(GameMode::Mode mode);
 
-	SDL_Renderer* getRenderer() { return this->renderer; }
+	/**
+	 * Sets background texture to draw.
+	 *
+	 * @param path
+	 *   Path to image file relative to data directory.
+	 * @return
+	 *   `true` if a texture was set.
+	 */
+	bool setBackground(std::string path);
+
+	/**
+	 * Unsets scene data.
+	 */
+	void unsetScene();
+
+	/**
+	 * Sets current scene data.
+	 *
+	 * @param scene
+	 *   Scene data to be drawn.
+	 * @return
+	 *   `true` if scene was set.
+	 */
+	bool setScene(Scene* scene);
+
+	/**
+	 * Sets drawing mode.
+	 *
+	 * TODO: rename to "setDrawMode"
+	 *
+	 * @param mode
+	 *   Game mode use to determine how to execute drawing instructions.
+	 */
+	void setMode(GameMode::Mode mode);
 
 	// TODO: rename to "drawImage" or "drawTexture"
 	void drawSprite(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect);
