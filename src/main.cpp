@@ -74,7 +74,7 @@ int main(int argc, char** argv) {
 		win->getViewport()->setScale(scale);
 	}
 
-	win->getViewport()->setMode(GameMode::TITLE);
+	GameLoop::setMode(GameMode::TITLE);
 	GameLoop::start();
 
 	win->shutdown();

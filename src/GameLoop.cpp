@@ -27,6 +27,8 @@ using namespace std;
 namespace GameLoop {
 	// logger instance
 	Logger* logger = Logger::getLogger("GameLoop");
+
+	GameMode::Mode mode = GameMode::NONE;
 }
 
 // loop iterator flag
@@ -104,4 +106,13 @@ void GameLoop::start() {
 
 void GameLoop::end() {
 	quit = true;
+}
+
+GameMode::Mode GameLoop::getMode() {
+	return GameLoop::mode;
+}
+
+void GameLoop::setMode(GameMode::Mode mode) {
+	GameLoop::mode = mode;
+	GetViewport()->setMode(GameLoop::mode);
 }

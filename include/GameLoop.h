@@ -8,12 +8,18 @@
 #ifndef RRE_GAME_LOOP
 #define RRE_GAME_LOOP
 
+#include "GameMode.h"
+
 
 namespace GameLoop {
 
 	void start();
 
 	void end();
+
+	GameMode::Mode getMode();
+
+	void setMode(GameMode::Mode mode);
 };
 
 #endif /* RRE_GAME_LOOP */
