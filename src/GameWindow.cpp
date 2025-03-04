@@ -6,7 +6,7 @@
 
 #include <SDL2/SDL.h> // SDL2 defines SDL_Init in main header, this has been moved to SDL_init.h in SDL3
 
-#include "Audio.h"
+#include "AudioStore.h"
 #include "Dialog.h"
 #include "FontStore.h"
 #include "GameWindow.h"
@@ -98,7 +98,7 @@ void GameWindow::playMusic(string id) {
 		this->stopMusic();
 	}
 
-	string file_music = Audio::getMusicPath(id);
+	string file_music = AudioStore::getMusicPath(id);
 	string audio_error = "";
 	if (file_music.compare("") == 0) {
 		string msg = "Music for ID \"" + id + "\" not configured or file not found";

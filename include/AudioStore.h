@@ -4,14 +4,13 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_AUDIO_H
-#define RRE_AUDIO_H
+#ifndef RRE_AUDIO_STORE
+#define RRE_AUDIO_STORE
 
 #include <string>
 
 
-// TODO: rename to "AudioStore"
-namespace Audio {
+namespace AudioStore {
 
 	/**
 	 * Loads music file paths from data/music directory.
@@ -24,4 +23,4 @@ namespace Audio {
 	std::string getMusicPath(const std::string id);
 }
 
-#endif /* RRE_AUDIO_H */
+#endif /* RRE_AUDIO_STORE */

@@ -14,23 +14,23 @@ using namespace std;
 
 using namespace tinyxml2;
 
-#include "Audio.h"
+#include "AudioStore.h"
 #include "Filesystem.h"
 #include "Logger.h"
 #include "Path.h"
 
 
-namespace Audio {
-	Logger* logger = Logger::getLogger("Audio");
+namespace AudioStore {
+	Logger* logger = Logger::getLogger("AudioStore");
 
 	bool loaded = false;
 
 	unordered_map<string, string> music_paths;
 }
 
-bool Audio::load() {
-	if (Audio::loaded) {
-		Audio::logger->warn("Audio already loaded");
+bool AudioStore::load() {
+	if (AudioStore::loaded) {
+		AudioStore::logger->warn("Audio data already loaded");
 		return true;
 	}
 
@@ -44,24 +44,24 @@ bool Audio::load() {
 		if (p.ends_with(".oga") || p.ends_with(".ogg")) {
 			int d_len = dir_music.length();
 			string id = p.substr(d_len + 1, p.length() - d_len - 5);
-			Audio::music_paths[id] = p;
+			AudioStore::music_paths[id] = p;
 
 #if RRE_DEBUGGING
-			Audio::logger->debug("Loaded music with ID \"" + id + "\" (" + p + ")");
+			AudioStore::logger->debug("Loaded music with ID \"" + id + "\" (" + p + ")");
 #endif
 		}
 	}
 
 	// TODO: load sound effects
 
-	Audio::loaded = true;
+	AudioStore::loaded = true;
 	return true;
 }
 
-string Audio::getMusicPath(const string id) {
-	if (Audio::music_paths.find(id) != Audio::music_paths.end()) {
-		return Audio::music_paths[id];
+string AudioStore::getMusicPath(const string id) {
+	if (AudioStore::music_paths.find(id) != AudioStore::music_paths.end()) {
+		return AudioStore::music_paths[id];
 	}
-	Audio::logger->warn("Music with ID \"" + id + "\" not loaded");
+	AudioStore::logger->warn("Music with ID \"" + id + "\" not loaded");
 	return "";
 }

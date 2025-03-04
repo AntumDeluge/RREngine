@@ -4,7 +4,7 @@
  * See: LICENSE.txt
  */
 
-#include "Audio.h"
+#include "AudioStore.h"
 #include "DataLoader.h"
 #include "Logger.h"
 #include "TMXLoader.h"
@@ -22,7 +22,7 @@ bool DataLoader::load() {
 		return true;
 	}
 
-	if (!Audio::load()) {
+	if (!AudioStore::load()) {
 		return false;
 	}
 
