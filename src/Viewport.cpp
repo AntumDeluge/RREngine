@@ -12,7 +12,7 @@ using namespace std;
 
 #include "GameConfig.h"
 #include "SingletonRepo.h"
-#include "Texture.h"
+#include "TextureLoader.h"
 #include "Viewport.h"
 #include "reso.h"
 
@@ -67,7 +67,7 @@ void Viewport::unsetBackground() {
 
 bool Viewport::setBackground(string path) {
 	this->unsetBackground();
-	this->background = Texture::getTexture(path);
+	this->background = TextureLoader::load(path);
 	bool result = this->background != nullptr;
 	if (!result) {
 		string msg = "Failed to set background image";

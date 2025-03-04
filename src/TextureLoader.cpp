@@ -12,17 +12,17 @@ using namespace std;
 
 #include "Logger.h"
 #include "SingletonRepo.h"
-#include "Texture.h"
+#include "TextureLoader.h"
 
 
 // FIXME: can't instantiate logger here
-//~ namespace Texture {
-	//~ Logger* logger = Logger::getLogger("Texture");
+//~ namespace TextureLoader {
+	//~ Logger* logger = Logger::getLogger("TextureLoader");
 //~ };
 
-SDL_Texture* Texture::getTexture(string path) {
+SDL_Texture* TextureLoader::load(string path) {
 	// TODO: cache loaded textures
-	Logger* logger = Logger::getLogger("Texture");
+	Logger* logger = Logger::getLogger("TextureLoader");
 
 	SDL_Surface* surface = IMG_Load(path.c_str());
 	if (surface == nullptr) {

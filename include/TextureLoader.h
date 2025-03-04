@@ -1,0 +1,24 @@
+
+/* Copyright © 2025 Jordan Irwin <antumdeluge@gmail.com>
+ *
+ * This work is licensed under the terms of the MIT license.
+ * See: LICENSE.txt
+ */
+
+#ifndef RRE_TEXTURE_LOADER
+#define RRE_TEXTURE_LOADER
+
+#include <string>
+
+#include <SDL2/SDL_render.h>
+
+
+/**
+ * Namespace for loading PNG images into SDL textures.
+ */
+namespace TextureLoader {
+
+	SDL_Texture* load(std::string path);
+};
+
+#endif /* RRE_TEXTURE_LOADER */
