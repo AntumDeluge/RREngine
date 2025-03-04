@@ -16,6 +16,8 @@ namespace TMXLoader {
 	/**
 	 * Caches filename paths for all scenes.
 	 *
+	 * TODO: rename to loadPaths
+	 *
 	 * @return
 	 *   `true` if caching succeeded.
 	 */
