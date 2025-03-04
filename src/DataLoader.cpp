@@ -8,6 +8,7 @@
 #include "DataLoader.h"
 #include "Logger.h"
 #include "TMXLoader.h"
+#include "TilesetStore.h"
 
 
 namespace DataLoader {
@@ -23,6 +24,10 @@ bool DataLoader::load() {
 	}
 
 	if (!AudioStore::load()) {
+		return false;
+	}
+
+	if (!TilesetStore::load()) {
 		return false;
 	}
 
