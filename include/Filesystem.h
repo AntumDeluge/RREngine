@@ -21,19 +21,6 @@ namespace Filesystem {
 
 	bool fexist(const std::string path);
 
-	#ifdef WIN32
-	/**
-	 * `mkdir` function not defined on Windows.
-	 *
-	 * @param path Path of directory that should be created.
-	 * @param mode Permissions of new directory (Calls should compensate for both Windows & Unix type
-	 *     permissions.
-	 */
-	int mkdir(const char* path, dperm mode);
-	#endif
-
-	int mkdir(const char* path);
-
 	int mkdir(const std::string path, dperm mode);
 
 	int mkdir(const std::string path);

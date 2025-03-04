@@ -28,21 +28,15 @@ bool Filesystem::fexist(const string path) {
 	return exists;
 }
 
-#ifdef WIN32
-int Filesystem::mkdir(const char* path, dperm mode) {
-	// FIXME: `mode` must be LPSECURITY_ATTRIBUTES
-	return CreateDirectory(path, NULL);
-}
-#endif
-
-int Filesystem::mkdir(const char* path) {
-	return mkdir(path, '\0');
-}
-
 int Filesystem::mkdir(const string path, dperm mode) {
+#ifdef WIN32
+	// FIXME: `mode` must be LPSECURITY_ATTRIBUTES
+	return CreateDirectory(path.c_str(), NULL);
+#else
 	return mkdir(path.c_str(), mode);
+#endif
 }
 
 int Filesystem::mkdir(const string path) {
-	return mkdir(path, '\0');
+	return Filesystem::mkdir(path, '\0');
 }
