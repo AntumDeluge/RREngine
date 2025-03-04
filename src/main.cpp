@@ -15,6 +15,7 @@
 
 using namespace std;
 
+#include "Audio.h"
 #if RRE_DEBUGGING
 #include "Logger.h"
 #endif
@@ -41,6 +42,8 @@ int main(int argc, char** argv) {
 	Path::changeDir(Path::dir_root);
 
 	// TODO: move SDL initialization to here so configuration can be loaded before window is displayed
+
+	Audio::load();
 
 	GameWindow* win = GameWindow::get();
 

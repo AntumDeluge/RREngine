@@ -11,6 +11,15 @@
 
 
 namespace Audio {
+
+	/**
+	 * Loads music file paths from data/music directory.
+	 *
+	 * @return
+	 *   `true` if loading succeeded.
+	 */
+	bool load();
+
 	std::string getMusicPath(const std::string id);
 }
 

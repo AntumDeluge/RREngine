@@ -4,58 +4,64 @@
  * See: LICENSE.txt
  */
 
+#include "config.h"
+
+#include <unordered_map>
+
 using namespace std;
 
 #include <tinyxml2.h>
 
 using namespace tinyxml2;
 
-#include "Dialog.h"
 #include "Audio.h"
 #include "Filesystem.h"
+#include "Logger.h"
 #include "Path.h"
 
 
-// TODO: cache audio files
-string Audio::getMusicPath(const string id) {
-	string conf_music = Path::join(Path::dir_root, "data/conf/music.xml");
-	if (!Filesystem::fexist(conf_music)) {
-		Dialog::error("Music config not found: \"" + conf_music + "\"");
-		return "";
+namespace Audio {
+	Logger* logger = Logger::getLogger("Audio");
+
+	bool loaded = false;
+
+	unordered_map<string, string> music_paths;
+}
+
+bool Audio::load() {
+	if (Audio::loaded) {
+		Audio::logger->warn("Audio already loaded");
+		return true;
 	}
 
-	tinyxml2::XMLDocument doc;
-	if (doc.LoadFile(conf_music.c_str()) != 0) {
-		Dialog::error("Failed to load music config: \"" + conf_music + "\"");
-		return "";
-	}
+	string dir_music = Path::rabs("data/music");
 
-	string file_music = "";
-
-	XMLElement* root = doc.RootElement(); // TODO: check that root element exists
-	if (root == NULL || root == nullptr) {
-		Dialog::error("Missing root \"music\" element in music config: \"" + conf_music + "\"");
-		return "";
-	}
-
-	XMLElement* el = root->FirstChildElement("file");
-	while (el != NULL) {
-		const XMLAttribute* attr = el->FindAttribute("id");
-		if (attr != NULL && id.compare(attr->Value()) == 0) {
-			// found element with matching ID
-			file_music = Path::join(Path::dir_root, ((string) "data/music/") + el->GetText());
-			if (Filesystem::fexist(file_music + ".oga")) {
-				file_music += ".oga";
-			} else if (Filesystem::fexist(file_music + ".ogg")) {
-				file_music += ".ogg";
-			} else {
-				file_music = "";
-			}
-			break;
+	for (filesystem::directory_entry item: Filesystem::listDir(dir_music, true)) {
+		if (!item.is_regular_file()) {
+			continue;
 		}
+		string p = item.path().string();
+		if (p.ends_with(".oga") || p.ends_with(".ogg")) {
+			int d_len = dir_music.length();
+			string id = p.substr(d_len + 1, p.length() - d_len - 5);
+			Audio::music_paths[id] = p;
 
-		el = root->NextSiblingElement("file");
+#if RRE_DEBUGGING
+			Audio::logger->debug("Loaded music with ID \"" + id + "\" (" + p + ")");
+#endif
+		}
 	}
 
-	return file_music;
+	// TODO: load sound effects
+
+	Audio::loaded = true;
+	return true;
+}
+
+string Audio::getMusicPath(const string id) {
+	if (Audio::music_paths.find(id) != Audio::music_paths.end()) {
+		return Audio::music_paths[id];
+	}
+	Audio::logger->warn("Music with ID \"" + id + "\" not loaded");
+	return "";
 }

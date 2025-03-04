@@ -44,7 +44,7 @@ Example data:
 ### Required Build Tools
 
 - GNU compatible C++ compiler such as [gcc](https://www.gnu.org/software/gcc/) or
-    [clang](https://clang.llvm.org/) with C++11 support.
+    [clang](https://clang.llvm.org/) with C++20 support.
 - [CMake](https://cmake.org/)
 
 ### Running CMake Commands

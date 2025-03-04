@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 # C++ standard
-set(CXX_STANDARD_MIN 17)
+set(CXX_STANDARD_MIN 20)
 set(CMAKE_CXX_STANDARD ${CXX_STANDARD_MIN} CACHE STRING "C++ standard to be used")
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
