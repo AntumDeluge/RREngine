@@ -15,6 +15,7 @@
 using namespace std;
 
 #include "Path.h"
+#include "StrUtil.h"
 
 #ifdef WIN32
 const char replaceNode = '/';
@@ -95,10 +96,20 @@ string Path::norm(string input) {
 	return input;
 }
 
-string Path::join(const string p1, const string p2) {
-	string path = p1 + "/" + p2;
+template <typename... Args>
+string Path::join(string p1, string p2, Args... rem) {
+	string p_out = p1;
+	if (!p2.empty()) {
+		if (!p_out.empty()) {
+			p_out += "/";
+		}
+		p_out += p2;
+	}
 
-	return Path::norm(path);
+	// append remaining paths
+	((p_out += (p_out.empty() ? "" : "/") + StrUtil::check(rem)), ...);
+
+	return Path::norm(p_out);
 }
 
 string Path::rabs(string rel) {

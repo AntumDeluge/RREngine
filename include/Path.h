@@ -24,11 +24,17 @@ namespace Path {
 
 	/** Joins to strings into one using node delimiter.
 	 *
-	 * @param p1 First path.
-	 * @param p2 Second path.
-	 * @return Single string in `p1/p2` format.
+	 * @param p1
+	 *   First path.
+	 * @param p2
+	 *   Second path.
+	 * @param rem
+	 *   Any other paths to be appended.
+	 * @return
+	 *   Single string in `<p1>/<p2>[/...]` format.
 	 */
-	std::string join(const std::string p1, const std::string p2);
+	template <typename... Args>
+	std::string join(std::string p1, std::string p2, Args... rem);
 
 	/**
 	 * Converts a path relative to the executable to absolute.
