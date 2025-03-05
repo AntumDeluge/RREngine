@@ -46,9 +46,8 @@ void Viewport::init(SDL_Window* window) {
 #endif
 
 	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	SDL_SetRenderDrawBlendMode(this->renderer, SDL_BLENDMODE_BLEND);
 	//~ SDL_SetRenderDrawColor(this->renderer, 0, 0, 20, SDL_ALPHA_OPAQUE);
-	//~ SDL_Rect vrect; vrect.x = 0, vrect.y = 0, vrect.w = 256, vrect.h = 240;
-	//~ SDL_SetRenderViewport(this->renderer, &vrect);
 }
 
 void Viewport::shutdown() {
