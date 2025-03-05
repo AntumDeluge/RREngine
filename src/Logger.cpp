@@ -6,6 +6,8 @@
 
 #include "config.h"
 
+using namespace std;
+
 #include <iostream>
 #include <sstream>
 
@@ -20,9 +22,9 @@ LogLevel Logger::default_level = DEBUG;
 #else
 LogLevel Logger::default_level = ERROR;
 #endif
-std::unordered_map<std::string, Logger*> Logger::loggers = {};
+unordered_map<string, Logger*> Logger::loggers = {};
 
-Logger::Logger(std::string id, LogLevel level, std::string file) {
+Logger::Logger(string id, LogLevel level, string file) {
 	this->id = id;
 	this->level = level;
 	if (file.compare("") == 0) {
@@ -35,17 +37,17 @@ Logger::Logger(std::string id, LogLevel level, std::string file) {
 	this->debug("Initialized logging to file: \"" + this->file + "\"");
 }
 
-void Logger::write(std::string msg) {
+void Logger::write(string msg) {
 	// TODO: export to file
 }
 
-void Logger::log(LogLevel level, std::string msg) {
+void Logger::log(LogLevel level, string msg) {
 	if (this->level < level || this->level == SILENT || level == SILENT) {
 		// do nothing
 		return;
 	}
 
-	std::ostringstream os;
+	ostringstream os;
 	switch (level) {
 		case WARN:
 			os << "WARN:  ";
@@ -62,11 +64,11 @@ void Logger::log(LogLevel level, std::string msg) {
 
 	os << "(" << this->id << ") " << msg;
 
-	const std::string st = os.str();
+	const string st = os.str();
 	if (level == ERROR) {
-		std::cerr << st << std::endl;
+		cerr << st << endl;
 	} else {
-		std::cout << st << std::endl;
+		cout << st << endl;
 	}
 	this->write(st);
 }
