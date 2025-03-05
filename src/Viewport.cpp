@@ -183,6 +183,7 @@ void Viewport::drawFPS() {
 	cout << "FPS: " << this->current_fps << "                \r";
 #endif
 	if (this->fps_sprite != nullptr) {
+		// FIXME: transparent pixels are drawn black
 		this->drawSprite(this->fps_sprite, 0, 0);
 	}
 }
