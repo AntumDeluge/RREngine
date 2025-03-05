@@ -24,9 +24,9 @@ using namespace std;
 #include "reso.h"
 
 
-const string ver = to_string(RRE_VER_MAJ) + "." + to_string(RRE_VER_MIN) + "." + to_string(RRE_VER_REL); // @suppress("Invalid arguments") @suppress("Symbol is not resolved")
-
-void showVersion();
+namespace RRE {
+	void printVersion();
+};
 
 int main(int argc, char** argv) {
 	Logger* logger = Logger::getLogger("main");
@@ -86,7 +86,6 @@ int main(int argc, char** argv) {
 	return 0;
 }
 
-
-void showVersion() {
-	cout << "Version: " << ver << endl;
+void RRE::printVersion() {
+	cout << "R&R Engine version " << RRE_VERSION << endl;
 }

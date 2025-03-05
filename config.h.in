@@ -11,6 +11,7 @@
 #define RRE_VER_MAJ @RRE_VER_MAJ@
 #define RRE_VER_MIN @RRE_VER_MIN@
 #define RRE_VER_REL @RRE_VER_REL@
+#define RRE_VERSION (char*) "@RRE_VER_MAJ@.@RRE_VER_MIN@.@RRE_VER_REL@"
 
 // debugging symbols
 #define RRE_DEBUGGING @RRE_DEBUGGING@
