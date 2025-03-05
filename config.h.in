@@ -1,3 +1,12 @@
+/* Copyright © 2018-2025 Jordan Irwin <antumdeluge@gmail.com>
+ *
+ * This work is licensed under the terms of the MIT license.
+ * See: LICENSE.txt
+ */
+
+#ifndef RRE_CONFIG
+#define RRE_CONFIG
+
 // configured project version information
 #define RRE_VER_MAJ @RRE_VER_MAJ@
 #define RRE_VER_MIN @RRE_VER_MIN@
@@ -5,3 +14,5 @@
 
 // debugging symbols
 #define RRE_DEBUGGING @RRE_DEBUGGING@
+
+#endif /* RRE_CONFIG */
