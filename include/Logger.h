@@ -26,6 +26,7 @@ private:
 	std::string file;
 
 	static LogLevel default_level;
+	static bool verbose;
 
 	/** Logger instances. */
 	static std::unordered_map<std::string, Logger*> loggers;
@@ -48,6 +49,9 @@ public:
 		}
 		return logger;
 	}
+
+	static void setVerbose(bool verbose);
+	static void setVerbose() { Logger::setVerbose(true); }
 
 	void log(LogLevel level, std::string msg);
 

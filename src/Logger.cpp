@@ -22,6 +22,7 @@ LogLevel Logger::default_level = DEBUG;
 #else
 LogLevel Logger::default_level = ERROR;
 #endif
+bool Logger::verbose = false;
 unordered_map<string, Logger*> Logger::loggers = {};
 
 Logger::Logger(string id, LogLevel level, string file) {
@@ -34,7 +35,19 @@ Logger::Logger(string id, LogLevel level, string file) {
 
 	// TODO: get absolute path of 'file' parameter
 
-	this->debug("Initialized logging to file: \"" + this->file + "\"");
+#if RRE_DEBUGGING
+	if (Logger::verbose) {
+		this->debug("Initialized logging to file: \"" + this->file + "\"");
+	}
+#endif
+}
+
+void Logger::setVerbose(bool verbose) {
+	Logger::verbose = verbose;
+#if RRE_DEBUGGING
+	Logger::getLogger("Logger")->debug("Verbose output "
+			+ string(Logger::verbose ? "enabled" : "disabled"));
+#endif
 }
 
 void Logger::write(string msg) {
