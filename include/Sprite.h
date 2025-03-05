@@ -18,6 +18,8 @@
 
 /**
  * Sprite interface class.
+ *
+ * TODO: should be subclass of ImageImpl
  */
 class Sprite {
 private:
