@@ -1,4 +1,3 @@
-
 /* Copyright © 2025 Jordan Irwin <antumdeluge@gmail.com>
  *
  * This work is licensed under the terms of the MIT license.
@@ -14,14 +13,14 @@ using namespace std;
 #include "Filesystem.h"
 #include "Logger.h"
 #include "Path.h"
-#include "TMXLoader.h"
+#include "SceneStore.h"
 
 
 // TODO: rename to SceneStore
 
-namespace TMXLoader {
+namespace SceneStore {
 	// FIXME: can't initialize logger here
-	//~ Logger* logger = Logger::getLogger("TMXLoader");
+	//~ Logger* logger = Logger::getLogger("SceneStore");
 
 	bool loaded = false;
 
@@ -30,10 +29,10 @@ namespace TMXLoader {
 	unordered_map<string, Scene*> scenes;
 };
 
-bool TMXLoader::load() {
-	if (TMXLoader::loaded) {
-		//~ TMXLoader::logger->warn("Scene paths already loaded");
-		Logger::getLogger("TMXLoader")->warn("Scene paths already loaded");
+bool SceneStore::load() {
+	if (SceneStore::loaded) {
+		//~ SceneStore::logger->warn("Scene paths already loaded");
+		Logger::getLogger("SceneStore")->warn("Scene paths already loaded");
 		return true;
 	}
 
@@ -46,21 +45,21 @@ bool TMXLoader::load() {
 		}
 		int d_len = dir_scene.length();
 		string id = p.substr(d_len + 1, p.length() - d_len - 5);
-		TMXLoader::scene_paths[id] = p;
+		SceneStore::scene_paths[id] = p;
 
 #if RRE_DEBUGGING
-		//~ TMXLoader::logger->debug("Loaded scene path with ID \"" + id + "\" (" + p + ")");
-		Logger::getLogger("TMXLoader")->debug("Loaded scene path with ID \"" + id + "\" (" + p + ")");
+		//~ SceneStore::logger->debug("Loaded scene path with ID \"" + id + "\" (" + p + ")");
+		Logger::getLogger("SceneStore")->debug("Loaded scene path with ID \"" + id + "\" (" + p + ")");
 #endif
 	}
 
-	TMXLoader::loaded = true;
+	SceneStore::loaded = true;
 	return true;
 }
 
-Scene* TMXLoader::loadScene(string id) {
-	if (TMXLoader::scenes.find(id) != TMXLoader::scenes.end()) {
-		return TMXLoader::scenes[id];
+Scene* SceneStore::loadScene(string id) {
+	if (SceneStore::scenes.find(id) != SceneStore::scenes.end()) {
+		return SceneStore::scenes[id];
 	}
 
 	// TODO: parse scene data from TMX & load into viewport

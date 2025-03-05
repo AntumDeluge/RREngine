@@ -7,7 +7,7 @@
 #include "AudioStore.h"
 #include "DataLoader.h"
 #include "Logger.h"
-#include "TMXLoader.h"
+#include "SceneStore.h"
 #include "TilesetStore.h"
 
 
@@ -31,7 +31,7 @@ bool DataLoader::load() {
 		return false;
 	}
 
-	if (!TMXLoader::load()) {
+	if (!SceneStore::load()) {
 		return false;
 	}
 

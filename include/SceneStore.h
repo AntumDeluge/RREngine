@@ -1,25 +1,24 @@
-
 /* Copyright © 2025 Jordan Irwin <antumdeluge@gmail.com>
  *
  * This work is licensed under the terms of the MIT license.
  * See: LICENSE.txt
  */
 
-#ifndef RRE_TMX_LOADER
-#define RRE_TMX_LOADER
+#ifndef RRE_SCENE_STORE
+#define RRE_SCENE_STORE
 
 #include <string>
 
 #include "Scene.h"
 
 
-// TODO: rename to "SceneStore" or "TMXStore"
-namespace TMXLoader {
+/**
+ * Functions for loading & retrieving scene data.
+ */
+namespace SceneStore {
 
 	/**
 	 * Caches filename paths for all scenes.
-	 *
-	 * TODO: rename to loadPaths
 	 *
 	 * @return
 	 *   `true` if caching succeeded.
@@ -39,4 +38,4 @@ namespace TMXLoader {
 	Scene* loadScene(std::string id);
 };
 
-#endif /* RRE_TMX_LOADER */
+#endif /* RRE_SCENE_STORE */
