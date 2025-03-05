@@ -136,9 +136,7 @@ void Viewport::draw() {
 	} else if (this->mode == GameMode::TITLE) {
 		this->drawTitle();
 	}
-#if RRE_DEBUGGING
-	this->drawFPS();
-#endif
+	this->drawText();
 	SDL_RenderPresent(this->renderer);
 }
 
@@ -146,7 +144,6 @@ void Viewport::drawScene() {
 	this->drawBackground();
 	this->drawForeground();
 	this->drawEntities();
-	this->drawText();
 }
 
 void Viewport::drawBackground() {
@@ -174,7 +171,31 @@ void Viewport::drawTitle() {
 }
 
 void Viewport::drawText() {
-	// TODO:
+	for (int idx = 0; idx < this->text_sprites.size(); idx++) {
+		// TODO:
+		// - use text sprite class with x/y offsets predefined
+		Sprite* sprite = this->text_sprites[idx];
+		uint32_t center_x = (RES1.first / 2) - (sprite->getWidth() / 2);
+		uint32_t center_y = (RES1.second / 2) + (sprite->getHeight() / 2);
+		// FIXME: not being drawn
+		this->drawSprite(sprite, center_x, center_y);
+	}
+
+#if RRE_DEBUGGING
+	this->drawFPS();
+#endif
+}
+
+void Viewport::addText(string text) {
+	this->text_sprites.push_back(FontStore::buildTextSprite(this->font_map, text));
+}
+
+void Viewport::clearText() {
+	for (int idx = 0; idx < this->text_sprites.size(); idx++) {
+		// NOTE: is it safe to delete instance?
+		delete this->text_sprites[idx];
+	}
+	this->text_sprites.clear();
 }
 
 void Viewport::drawFPS() {

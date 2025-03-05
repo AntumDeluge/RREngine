@@ -7,6 +7,8 @@
 #ifndef RRE_VIEWPORT_H
 #define RRE_VIEWPORT_H
 
+#include <vector>
+
 #include <SDL2/SDL_render.h>
 
 #include "FontMap.h"
@@ -39,6 +41,9 @@ private:
 	SDL_Texture* background;
 	Sprite* fps_sprite;
 	Scene* scene;
+
+	// TODO: replace with text sprite class with x/y offsets
+	std::vector<Sprite*> text_sprites;
 
 public:
 	static Viewport* get() {
@@ -118,6 +123,19 @@ public:
 	void drawSprite(SDL_Texture* texture, SDL_Rect rect) { this->drawSprite(texture, rect, rect); }
 	void drawSprite(Sprite* sprite, uint32_t x, uint32_t y);
 	void draw();
+
+	/**
+	 * Adds a text sprite to be drawn in viewport.
+	 *
+	 * @param text
+	 *   Text value.
+	 */
+	void addText(std::string text);
+
+	/**
+	 * Clears all text sprites from viewport.
+	 */
+	void clearText();
 
 private:
 	void drawScene();
