@@ -45,6 +45,15 @@ bool contains(const string input, const char value) {
 	return false;
 }
 
+// TODO: add to global Path namespace if required
+string trimExtension(string path) {
+	int e_idx = path.find_last_of(".");
+	if (e_idx > -1) {
+		path = path.substr(0, e_idx);
+	}
+	return path;
+}
+
 string Path::basename(string path) {
 	path = Path::norm(path);
 
@@ -112,19 +121,23 @@ string Path::rabs(string rel) {
 	return Path::join(Path::dir_root, rel);
 }
 
-string Path::getExecutable() {
+string Path::getExecutable(bool trim_parent, bool trim_ext) {
 	char buffer[PATH_MAX];
 #ifdef WIN32
 	GetModuleFileName(NULL, buffer, PATH_MAX); // @suppress("Function cannot be resolved")
 #else
 	readlink("/proc/self/exe", buffer, PATH_MAX); // @suppress("Function cannot be resolved")
 #endif
-	return (string) buffer;
-}
 
-//~ string Path::dataPath(string drel) {
-	//~ return Path::join(Path::dir_root, "data", drel);
-//~ }
+	string exe = (string) buffer;
+	if (trim_parent) {
+		exe = Path::basename(exe);
+	}
+	if (trim_ext) {
+		exe = trimExtension(exe);
+	}
+	return exe;
+}
 
 string Path::cwd() {
 	char buffer[PATH_MAX];

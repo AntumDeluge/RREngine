@@ -94,10 +94,22 @@ namespace Path {
 	/**
 	 * Retrieves process executable.
 	 *
+	 * @param trim_parent
+	 *   Trim the parent directory tree from returned value.
+	 * @param trim_ext
+	 *   Trim filename extension from returned value.
 	 * @return
 	 *   Filename path of executed process.
 	 */
-	std::string getExecutable();
+	std::string getExecutable(bool trim_parent, bool trim_ext);
+
+	/**
+	 * Retrieves process executable.
+	 *
+	 * @return
+	 *   Filename path of executed process.
+	 */
+	static std::string getExecutable() { return getExecutable(false, false); }
 
 	/**
 	 * Retrieves an absolute path to a data resource.
