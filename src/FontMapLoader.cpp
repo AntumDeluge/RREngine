@@ -4,8 +4,15 @@
  * See: LICENSE.txt
  */
 
+
 #include <string>
 #include <vector>
+
+using namespace std;
+
+#include <tinyxml2.h>
+
+using namespace tinyxml2;
 
 #include "Dialog.h"
 #include "Filesystem.h"
@@ -13,9 +20,7 @@
 #include "FontMapLoader.h"
 #include "FontStore.h"
 #include "Path.h"
-
-using namespace std;
-using namespace tinyxml2;
+#include "TextureLoader.h"
 
 
 // initialize static members
@@ -64,7 +69,7 @@ bool FontMapLoader::parseFont(XMLElement* el) {
 	vector<string> err;
 
 	string id = "";
-	string path = "";
+	string rpath = "";
 	int w = 0;
 	int h = 0;
 
@@ -79,10 +84,7 @@ bool FontMapLoader::parseFont(XMLElement* el) {
 	if (attr == nullptr) {
 		err.push_back("Missing font attribute \"tileset\"");
 	} else {
-		path = Path::join(Path::dir_root, (string) "data/tileset/" + attr->Value());
-		if (!Filesystem::fexist(path)) {
-			err.push_back("Missing font bitmap file: \"" + path + "\"");
-		}
+		rpath = Path::join("tileset", attr->Value());
 	}
 
 	attr = (XMLAttribute*) el->FindAttribute("w");
@@ -121,7 +123,7 @@ bool FontMapLoader::parseFont(XMLElement* el) {
 		return false;
 	}
 
-	FontStore::addMap(id, new FontMap(path, char_map, w, h));
+	FontStore::addMap(id, new FontMap(TextureLoader::load(rpath), char_map, w, h));
 
 	return true;
 }
