@@ -37,6 +37,7 @@ private:
 	GameMode::Mode mode;
 
 	SDL_Texture* background;
+	Sprite* fps_sprite;
 	Scene* scene;
 
 public:
@@ -69,7 +70,7 @@ public:
 	SDL_Renderer* getRenderer() { return this->renderer; }
 
 	void setFontMap(FontMap* font_map) { this->font_map = font_map; }
-	void setCurrentFPS(uint16_t fps) { this->current_fps = fps; }
+	void setCurrentFPS(uint16_t fps);
 	void setScale(uint16_t scale);
 
 	/**

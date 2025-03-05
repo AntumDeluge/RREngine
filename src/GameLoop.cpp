@@ -67,6 +67,9 @@ void GameLoop::start() {
 	uint64_t fcount_start = time_prev;
 #endif
 
+	// set before drawing to show FPS before update
+	viewport->setCurrentFPS(0);
+
 	while (!quit) {
 		// time (in milliseconds) at which game loop is executing
 		uint64_t time_now = SDL_GetTicks64();

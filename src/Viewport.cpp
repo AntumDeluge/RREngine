@@ -6,10 +6,12 @@
 
 #include "config.h"
 
+#include <iostream>
 #include <string>
 
 using namespace std;
 
+#include "FontStore.h"
 #include "GameConfig.h"
 #include "SingletonRepo.h"
 #include "TextureLoader.h"
@@ -29,6 +31,7 @@ Viewport::Viewport() {
 
 	this->mode = GameMode::NONE;
 	this->background = nullptr;
+	this->fps_sprite = nullptr;
 	this->scene = nullptr;
 }
 
@@ -52,6 +55,12 @@ void Viewport::shutdown() {
 	this->unsetBackground();
 	SDL_DestroyRenderer(this->renderer);
 	this->renderer = nullptr;
+}
+
+void Viewport::setCurrentFPS(uint16_t fps) {
+	this->current_fps = fps;
+	this->fps_sprite = FontStore::buildTextSprite(this->font_map, "FPS: "
+			+ to_string(this->current_fps));
 }
 
 void Viewport::setScale(uint16_t scale) {
@@ -170,59 +179,10 @@ void Viewport::drawText() {
 }
 
 void Viewport::drawFPS() {
-	// DEBUG:
-	//~ this->logger->debug("FPS: " + to_string(this->current_fps));
-
-	// TODO: optimize
-	// FIXME: FontStore::buildTextSprite not working
-	//~ Sprite* fps_sprite = FontStore::buildTextSprite(this->font_map, "FPS: "
-			//~ + to_string(this->current_fps));
-	//~ if (fps_sprite != nullptr) {
-		//~ this->drawSprite(fps_sprite, 0, 0);
-	//~ }
-
-	if (this->font_map == nullptr) {
-		return;
+#if RRE_DEBUGGING
+	cout << "FPS: " << this->current_fps << "                \r";
+#endif
+	if (this->fps_sprite != nullptr) {
+		this->drawSprite(this->fps_sprite, 0, 0);
 	}
-
-	SDL_Texture* texture = this->font_map->getTexture();
-
-	int t_idx = 0;
-	SDL_Rect t_rect = {9 * t_idx, 0, 9, 9};
-
-	// F
-	SDL_Rect s_rect = {5 * 9, 2 * 9, 9, 9};
-	this->drawSprite(texture, s_rect, t_rect);
-	t_idx++;
-	t_rect.x = 9 * t_idx;
-	// P
-	s_rect.x = 9 * 2;
-	s_rect.y = 9 * 3;
-	this->drawSprite(texture, s_rect, t_rect);
-	t_idx++;
-	t_rect.x = 9 * t_idx;
-	// S
-	s_rect.x = 9 * 5;
-	s_rect.y = 9 * 3;
-	this->drawSprite(texture, s_rect, t_rect);
-	t_idx++;
-	t_rect.x = 9 * t_idx;
-	// :
-	s_rect.x = 9 * 2;
-	s_rect.y = 9 * 0;
-	this->drawSprite(texture, s_rect, t_rect);
-	t_idx += 2;
-	t_rect.x = 9 * t_idx;
-	// ?
-	s_rect.x = 9 * 5;
-	s_rect.y = 9 * 0;
-	this->drawSprite(texture, s_rect, t_rect);
-	t_idx++;
-	t_rect.x = 9 * t_idx;
-	this->drawSprite(texture, s_rect, t_rect);
-	t_idx++;
-	t_rect.x = 9 * t_idx;
-	this->drawSprite(texture, s_rect, t_rect);
-	t_idx++;
-	t_rect.x = 9 * t_idx;
 }
