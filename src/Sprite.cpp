@@ -11,6 +11,7 @@
 #include "SingletonRepo.h"
 #include "Path.h"
 #include "Sprite.h"
+#include "TextureLoader.h"
 
 using namespace std;
 using namespace tinyxml2;
@@ -71,15 +72,7 @@ Sprite::Sprite(string id) {
 		this->logger->error("Malformed sprite configuration; missing \"filename\" element: \""
 				+ conf_sprites + "\"");
 	} else {
-		string image_path = Path::join(Path::dir_root, (string) "data/sprite/" + fileElement->GetText()
-				+ ".png");
-		SDL_Surface* surface = IMG_Load(image_path.c_str());
-		if (surface == nullptr) {
-			this->logger->error("Failed to load image surface: \"" + image_path + "\"");
-		} else {
-			this->texture = SDL_CreateTextureFromSurface(GetViewport()->getRenderer(), surface);
-			SDL_FreeSurface(surface);
-		}
+		this->texture = TextureLoader::load(Path::join("sprite", fileElement->GetText()));
 	}
 
 	XMLElement* sizeElement = spriteElement->FirstChildElement("size");
