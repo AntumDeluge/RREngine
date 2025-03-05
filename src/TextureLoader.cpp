@@ -8,7 +8,6 @@
 using namespace std;
 
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_surface.h>
 
 #include "Logger.h"
 #include "Path.h"
@@ -26,18 +25,16 @@ SDL_Texture* TextureLoader::load(string rdpath) {
 	Logger* logger = Logger::getLogger("TextureLoader");
 
 	// absolute path to image data file (only PNG supported)
-	const string adpath = Path::rabs(Path::join("data", rdpath)) + ".png";
-	SDL_Surface* surface = IMG_Load(adpath.c_str());
-	if (surface == nullptr) {
-		logger->error("Failed to load image surface: \"" + adpath + "\"");
-		return nullptr;
+	string adpath = Path::rabs(Path::join("data", rdpath));
+	if (!adpath.ends_with(".png")) {
+		adpath += ".png";
 	}
 
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(GetViewport()->getRenderer(), surface);
-	SDL_FreeSurface(surface);
-
+	SDL_Texture * texture = IMG_LoadTexture(GetViewport()->getRenderer(), adpath.c_str());
 	if (texture == nullptr) {
-		logger->error("Failed to create texture from surface: \"" + adpath + "\"");
+		logger->error("Failed to load texture: " + string(IMG_GetError()));
+	} else {
+		SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
 	}
 
 	return texture;
