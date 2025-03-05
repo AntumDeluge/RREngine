@@ -113,5 +113,5 @@ Sprite* FontStore::buildTextSprite(FontMap* fmap, string text) {
 				+ to_string(c_height) + " but got " + to_string(t_width) + "x" + to_string(t_height));
 	}
 
-	return new Sprite(t_texture, t_width, t_height);
+	return new Sprite(t_texture);
 }

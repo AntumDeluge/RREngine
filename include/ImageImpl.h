@@ -14,7 +14,7 @@
  * Base class to define images.
  */
 class ImageImpl {
-private:
+protected:
 	/** Texture to draw with renderer. */
 	SDL_Texture* texture;
 
@@ -22,6 +22,13 @@ private:
 	int width;
 	/** Full image height (in pixels). */
 	int height;
+
+	/** Default Constructor. */
+	ImageImpl() {
+		this->texture = nullptr;
+		this->width = 0;
+		this->height = 0;
+	}
 
 public:
 	/**
