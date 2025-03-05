@@ -5,6 +5,7 @@
  */
 
 #include <SDL2/SDL.h> // SDL2 defines SDL_Init in main header, this has been moved to SDL_init.h in SDL3
+#include <SDL2/SDL_image.h>
 
 #include "AudioStore.h"
 #include "Dialog.h"
@@ -54,6 +55,15 @@ int GameWindow::init(const string title, const int width, const int height) {
 			SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 	this->viewport = GetViewport();
 	this->viewport->init(this->window);
+
+	// initialize PNG image support
+	if (IMG_Init(IMG_INIT_PNG) == 0) {
+		string msg = IMG_GetError();
+		this->logger->error(msg);
+		Dialog::error(msg);
+		this->shutdown();
+		return 1;
+	}
 
 	// initialize audio subsystem
 	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
@@ -133,6 +143,7 @@ void GameWindow::shutdown() {
 	this->stopMusic();
 	Mix_CloseAudio();
 	Mix_Quit();
+	IMG_Quit();
 	this->viewport->shutdown();
 	SDL_DestroyWindow(this->window);
 	SDL_Quit();
