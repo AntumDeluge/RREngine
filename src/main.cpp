@@ -26,7 +26,7 @@ using namespace std;
 
 namespace RRE {
 	void printVersion();
-	void printUsage();
+	void printUsage(bool header);
 	void exitWithError(int code, string msg, bool show_usage);
 	void exitWithError(int code, string msg) { exitWithError(code, msg, false); }
 };
@@ -90,13 +90,17 @@ int main(int argc, char** argv) {
 }
 
 void RRE::exitWithError(int code, string msg, bool show_usage) {
+	cout << endl;
 	Logger::getLogger("main")->error(msg);
-	if (show_usage) RRE::printUsage();
+	if (show_usage) RRE::printUsage(false);
 	exit(code);
 }
 
-void RRE::printUsage() {
-	cout << "Usage: TODO" << endl;
+void RRE::printUsage(bool header) {
+	if (header) {
+	cout << endl;
+		cout << "R&R Engine: 2D platform game engine" << endl;
+	}
 }
 
 void RRE::printVersion() {
