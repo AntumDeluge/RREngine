@@ -27,6 +27,8 @@ using namespace std;
 namespace RRE {
 	void printVersion();
 	void printUsage();
+	void exitWithError(int code, string msg, bool show_usage);
+	void exitWithError(int code, string msg) { exitWithError(code, msg, false); }
 };
 
 int main(int argc, char** argv) {
@@ -85,6 +87,12 @@ int main(int argc, char** argv) {
 
 	win->shutdown();
 	return 0;
+}
+
+void RRE::exitWithError(int code, string msg, bool show_usage) {
+	Logger::getLogger("main")->error(msg);
+	if (show_usage) RRE::printUsage();
+	exit(code);
 }
 
 void RRE::printUsage() {
