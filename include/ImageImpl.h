@@ -33,6 +33,11 @@ public:
 	ImageImpl(SDL_Texture* texture);
 
 	/**
+	 * Default destructor.
+	 */
+	~ImageImpl() { SDL_DestroyTexture(this->texture); }
+
+	/**
 	 * Retrieves drawable texture.
 	 *
 	 * @return
