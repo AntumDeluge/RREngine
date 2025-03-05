@@ -21,24 +21,47 @@ using namespace std;
 #include "GameWindow.h"
 #include "Logger.h"
 #include "Path.h"
+#include "cxxopts.hpp"
 #include "reso.h"
 
 
 namespace RRE {
+	cxxopts::Options options(Path::getExecutable(true, false));
+
 	void printVersion();
 	void printUsage(bool header);
 	void exitWithError(int code, string msg, bool show_usage);
 	void exitWithError(int code, string msg) { exitWithError(code, msg, false); }
+	void populateOptions();
 };
 
 int main(int argc, char** argv) {
+	// parse command line parameters
+	RRE::populateOptions();
+	cxxopts::ParseResult args;
+	try {
+		args = RRE::options.parse(argc, argv);
+	} catch (cxxopts::exceptions::parsing& e) {
+		RRE::exitWithError(1, e.what(), true);
+	}
+
+	if (args.count("help")) {
+		RRE::printUsage(true);
+		return 0;
+	}
+	if (args.count("version")) {
+		RRE::printVersion();
+		return 0;
+	}
+	if (args.count("verbose")) {
+		Logger::setVerbose();
+	}
+
 	Logger* logger = Logger::getLogger("main");
 
 #if RRE_DEBUGGING
 	logger->debug("Compiled using C++ standard: " + to_string(__cplusplus));
 #endif
-
-	// TODO: parse command line parameters
 
 	// change to executable directory
 	Path::changeDir(Path::dir_root);
@@ -101,8 +124,17 @@ void RRE::printUsage(bool header) {
 	cout << endl;
 		cout << "R&R Engine: 2D platform game engine" << endl;
 	}
+	cout << RRE::options.help() << endl;
 }
 
 void RRE::printVersion() {
 	cout << "R&R Engine version " << RRE_VERSION << endl;
+}
+
+void RRE::populateOptions() {
+	RRE::options.add_options()
+		("h,help", "Show this help information.")
+		("v,version", "Show version information")
+		("V,verbose", "Enable verbose logging.")
+	;
 }
