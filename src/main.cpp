@@ -26,6 +26,7 @@ using namespace std;
 
 namespace RRE {
 	void printVersion();
+	void printUsage();
 };
 
 int main(int argc, char** argv) {
@@ -84,6 +85,10 @@ int main(int argc, char** argv) {
 
 	win->shutdown();
 	return 0;
+}
+
+void RRE::printUsage() {
+	cout << "Usage: TODO" << endl;
 }
 
 void RRE::printVersion() {
