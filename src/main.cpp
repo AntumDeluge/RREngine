@@ -138,7 +138,7 @@ void RRE::printVersion() {
 #elif defined(_MSC_VER)
 			<< " (built with MSVC " << _MSC_VER / 100 << "." << _MSC_VER % 100 << ")"
 #endif
-			<< endl; // @suppress("Invalid overload")
+			<< endl;
 }
 
 void RRE::populateOptions() {
