@@ -85,7 +85,7 @@ Sprite* FontStore::buildTextSprite(FontMap* fmap, string text) {
 		}
 		int c_index = fmap->getCharIndex(c);
 		if (c_index < 0) {
-			logger->error("Unsupported font map character: \"" + string(1, c) + "\"");
+			logger->error("Unsupported font map character: \"" + string(1, c) + "\""); // @suppress("Symbol is not resolved")
 			c_index = 0;
 		}
 

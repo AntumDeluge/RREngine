@@ -43,7 +43,7 @@ bool AudioStore::load() {
 		string p = item.path().string();
 		if (p.ends_with(".oga") || p.ends_with(".ogg")) {
 			int d_len = dir_music.length();
-			string id = p.substr(d_len + 1, p.length() - d_len - 5);
+			string id = p.substr(d_len + 1, p.length() - d_len - 5); // @suppress("Invalid arguments")
 			AudioStore::music_paths[id] = p;
 
 #if RRE_DEBUGGING

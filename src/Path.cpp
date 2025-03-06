@@ -49,7 +49,7 @@ bool contains(const string input, const char value) {
 string trimExtension(string path) {
 	int e_idx = path.find_last_of(".");
 	if (e_idx > -1) {
-		path = path.substr(0, e_idx);
+		path = path.substr(0, e_idx);  // @suppress("Invalid arguments")
 	}
 	return path;
 }
@@ -69,7 +69,7 @@ string Path::basename(string path) {
 		}
 	}
 
-	return path.substr(cutoff + 1, path.length() - (cutoff + 1));
+	return path.substr(cutoff + 1, path.length() - (cutoff + 1));  // @suppress("Invalid arguments")
 }
 
 string Path::dirname(string path) {
@@ -87,7 +87,7 @@ string Path::dirname(string path) {
 		}
 	}
 
-	return path.substr(0, cutoff);
+	return path.substr(0, cutoff);  // @suppress("Invalid arguments")
 }
 
 string Path::norm(string input) {

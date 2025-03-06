@@ -44,7 +44,7 @@ bool SceneStore::load() {
 			continue;
 		}
 		int d_len = dir_scene.length();
-		string id = p.substr(d_len + 1, p.length() - d_len - 5);
+		string id = p.substr(d_len + 1, p.length() - d_len - 5); // @suppress("Invalid arguments")
 		SceneStore::scene_paths[id] = p;
 
 #if RRE_DEBUGGING
