@@ -5,7 +5,7 @@
  */
 
 #include <fstream>
-#ifdef WIN32
+#ifdef __WIN32__
 #include <windows.h> // CreateDirectory
 #endif
 
@@ -24,7 +24,7 @@ bool Filesystem::fexist(const string path) {
 }
 
 int Filesystem::mkdir(const string path, dperm mode) {
-#ifdef WIN32
+#ifdef __WIN32__
 	// FIXME: `mode` must be LPSECURITY_ATTRIBUTES
 	return CreateDirectory(path.c_str(), NULL);
 #else

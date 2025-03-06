@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#ifdef WIN32
+#ifdef __WIN32__
 #include <windows.h> // GetModuleFileName, GetCurrentDirectory, SetCurrentDirectory
 #else
 #include <unistd.h> // readlink, getcwd, chdir
@@ -17,7 +17,7 @@ using namespace std;
 #include "Path.h"
 #include "StrUtil.h"
 
-#ifdef WIN32
+#ifdef __WIN32__
 const char replaceNode = '/';
 const char node = '\\';
 #else
@@ -123,7 +123,7 @@ string Path::rabs(string rel) {
 
 string Path::getExecutable(bool trim_parent, bool trim_ext) {
 	char buffer[PATH_MAX];
-#ifdef WIN32
+#ifdef __WIN32__
 	GetModuleFileName(NULL, buffer, PATH_MAX); // @suppress("Function cannot be resolved")
 #else
 	readlink("/proc/self/exe", buffer, PATH_MAX); // @suppress("Function cannot be resolved")
@@ -141,7 +141,7 @@ string Path::getExecutable(bool trim_parent, bool trim_ext) {
 
 string Path::cwd() {
 	char buffer[PATH_MAX];
-#ifdef WIN32
+#ifdef __WIN32__
 	GetCurrentDirectory(PATH_MAX, buffer); // @suppress("Function cannot be resolved")
 #else
 	if (getcwd(buffer, PATH_MAX) == NULL) {
@@ -155,7 +155,7 @@ string Path::cwd() {
 
 int Path::changeDir(string path) {
 	int res;
-#ifdef WIN32
+#ifdef __WIN32__
 	res = SetCurrentDirectory(path.c_str()) ? 0 : 1;
 #else
 	res = chdir(path.c_str());

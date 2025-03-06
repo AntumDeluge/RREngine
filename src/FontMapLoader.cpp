@@ -105,7 +105,7 @@ bool FontMapLoader::parseFont(XMLElement* el) {
 		string msg = "";
 		for (int idx = 0; idx < err.size(); idx++) {
 			if (msg.length() > 0) {
-#ifdef WIN32
+#ifdef __WIN32__
 				msg += "\r\n";
 #else
 				msg += "\n";

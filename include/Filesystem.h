@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-#ifdef WIN32
+#ifdef __WIN32__
 typedef unsigned char dperm; // placeholder
 #else
 #include <sys/stat.h> // mode_t, mkdir
