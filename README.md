@@ -120,3 +120,4 @@ __CMake Options:__
 ## TODO
 
 - Maybe switch to [pugixml](https://pugixml.org/) as it is used by tmxlite.
+- Add Lua scripting support.
