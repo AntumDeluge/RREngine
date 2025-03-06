@@ -32,6 +32,19 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/depends.cmake")
 configure_file("config.h.in" "config.h")
 
 
+# compiler options
+
+# prioritize Clang over GNU
+find_program(CLANG_COMPILER NAMES clang++)
+if(CLANG_COMPILER)
+	set(CMAKE_C_COMPILER clang)
+	set(CMAKE_CXX_COMPILER clang++)
+else()
+	set(CMAKE_C_COMPILER gcc)
+	set(CMAKE_CXX_COMPILER g++)
+endif()
+	
+
 # linker options
 
 # set executable subsystem to GUI on Win32
