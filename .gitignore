@@ -1,7 +1,7 @@
 
 ## binary & build output directories
-bin/
-build/
+bin/*
+build*/*
 
 ## documentation build directory
 doc/site/
