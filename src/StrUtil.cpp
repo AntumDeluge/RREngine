@@ -25,3 +25,13 @@ string StrUtil::check(const T& v) {
 	ss << v;
 	return ss.str();
 }
+
+string StrUtil::trim(string st) {
+	std::size_t f = st.find_first_not_of(" \t\n\r\f\v");
+	if (f == string::npos) {
+		// string only contains whitespace
+		return "";
+	}
+	std::size_t l = st.find_last_not_of(" \t\n\r\f\v");
+	return st.substr(f, l - f + 1); // @suppress("Invalid arguments")
+}
