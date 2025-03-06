@@ -21,6 +21,15 @@ typedef mode_t dperm;
 
 namespace Filesystem {
 
+	/** Checks for existing file.
+	 *
+	 * @param path
+	 *   String path to file.
+	 * @return
+	 *   `true` if the file is found in the filesystem.
+	 * @deprecated
+	 *   Replace with calls to `std::filesystem::is_regular_file`
+	 */
 	bool fexist(const std::string path);
 
 	int mkdir(const std::string path, dperm mode);

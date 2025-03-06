@@ -14,11 +14,6 @@ using namespace std;
 #include "Filesystem.h"
 
 
-/** Checks for existing file.
- *
- * @param path String path to file.
- * @return `true` if the file is found in the filesystem.
- */
 bool Filesystem::fexist(const string path) {
 	ifstream ofile;
 	ofile.open(path);
