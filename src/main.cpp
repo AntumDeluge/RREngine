@@ -15,13 +15,15 @@
 
 using namespace std;
 
+#include "cxxopts.hpp"
+
 #include "DataLoader.h"
 #include "GameConfig.h"
 #include "GameLoop.h"
 #include "GameWindow.h"
 #include "Logger.h"
 #include "Path.h"
-#include "cxxopts.hpp"
+#include "StrUtil.h"
 #include "reso.h"
 
 
@@ -128,7 +130,15 @@ void RRE::printUsage(bool header) {
 }
 
 void RRE::printVersion() {
-	cout << "R&R Engine version " << RRE_VERSION << endl;
+	cout << "R&R Engine version " << RRE_VERSION
+#if defined(__clang__)
+			<< " (built with Clang " << StrUtil::trim(__clang_version__) << ")"
+#elif defined(__GNUC__)
+			<< " (built with GNU " << StrUtil::trim(__VERSION__) << ")"
+#elif defined(_MSC_VER)
+			<< " (built with MSVC " << _MSC_VER / 100 << "." << _MSC_VER % 100 << ")"
+#endif
+			<< endl; // @suppress("Invalid overload")
 }
 
 void RRE::populateOptions() {
