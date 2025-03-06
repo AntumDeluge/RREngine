@@ -14,8 +14,8 @@ endif()
 
 # NOTE:
 # - compiler-specefic extensions is enabled by default
-# - to disable GNU specific `readlink` should be abandoned
-set(CMAKE_CXX_EXTENSIONS ON)
+# - may need to enable if GNU specific `readlink` is necessary
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 # project & version info
