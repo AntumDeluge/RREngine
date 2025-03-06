@@ -55,9 +55,8 @@ int GameConfig::load() {
 	}
 
 	if (!Filesystem::fexist(GameConfig::file_conf)) {
-		onConfigError("Game configuration not found");
-		// TODO: use errno standard
-		return 1;
+		GameConfig::logger->warn("Game configuration not found: \"" + GameConfig::file_conf + "\"");
+		return 0;
 	}
 
 	XMLDocument doc;

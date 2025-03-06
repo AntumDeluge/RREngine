@@ -35,20 +35,23 @@ bool AudioStore::load() {
 	}
 
 	string dir_music = Path::rabs("data/music");
-
-	for (filesystem::directory_entry item: Filesystem::listDir(dir_music, true)) {
-		if (!item.is_regular_file()) {
-			continue;
-		}
-		string p = item.path().string();
-		if (p.ends_with(".oga") || p.ends_with(".ogg")) {
-			int d_len = dir_music.length();
-			string id = p.substr(d_len + 1, p.length() - d_len - 5); // @suppress("Invalid arguments")
-			AudioStore::music_paths[id] = p;
+	if (!filesystem::is_directory(dir_music)) {
+		logger->warn("Music data directory not found: " + dir_music);
+	} else {
+		for (filesystem::directory_entry item: Filesystem::listDir(dir_music, true)) {
+			if (!item.is_regular_file()) {
+				continue;
+			}
+			string p = item.path().string();
+			if (p.ends_with(".oga") || string(p).ends_with(".ogg")) {
+				int d_len = dir_music.length();
+				string id = p.substr(d_len + 1, p.length() - d_len - 5); // @suppress("Invalid arguments")
+				AudioStore::music_paths[id] = p;
 
 #if RRE_DEBUGGING
-			AudioStore::logger->debug("Loaded music with ID \"" + id + "\" (" + p + ")");
+				AudioStore::logger->debug("Loaded music with ID \"" + id + "\" (" + p + ")");
 #endif
+			}
 		}
 	}
 

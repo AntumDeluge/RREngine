@@ -30,27 +30,30 @@ namespace SceneStore {
 };
 
 bool SceneStore::load() {
+	Logger* logger = Logger::getLogger("SceneStore");
+
 	if (SceneStore::loaded) {
-		//~ SceneStore::logger->warn("Scene paths already loaded");
-		Logger::getLogger("SceneStore")->warn("Scene paths already loaded");
+		logger->warn("Scene paths already loaded");
 		return true;
 	}
 
 	string dir_scene = Path::rabs("data/scene");
-
-	for (filesystem::directory_entry item: Filesystem::listDir(dir_scene, true)) {
-		string p = item.path().string();
-		if (!item.is_regular_file() || !p.ends_with(".tmx")) {
-			continue;
-		}
-		int d_len = dir_scene.length();
-		string id = p.substr(d_len + 1, p.length() - d_len - 5); // @suppress("Invalid arguments")
-		SceneStore::scene_paths[id] = p;
+	if (!filesystem::is_directory(dir_scene)) {
+		logger->warn("Scene data directory not found: " + dir_scene);
+	} else {
+		for (filesystem::directory_entry item: Filesystem::listDir(dir_scene, true)) {
+			string p = item.path().string();
+			if (!item.is_regular_file() || !p.ends_with(".tmx")) {
+				continue;
+			}
+			int d_len = dir_scene.length();
+			string id = p.substr(d_len + 1, p.length() - d_len - 5); // @suppress("Invalid arguments")
+			SceneStore::scene_paths[id] = p;
 
 #if RRE_DEBUGGING
-		//~ SceneStore::logger->debug("Loaded scene path with ID \"" + id + "\" (" + p + ")");
-		Logger::getLogger("SceneStore")->debug("Loaded scene path with ID \"" + id + "\" (" + p + ")");
+			logger->debug("Loaded scene path with ID \"" + id + "\" (" + p + ")");
 #endif
+		}
 	}
 
 	SceneStore::loaded = true;

@@ -32,19 +32,22 @@ bool TilesetStore::load() {
 	}
 
 	string dir_tileset = Path::rabs("data/tileset");
-
-	for (filesystem::directory_entry item: Filesystem::listDir(dir_tileset, true)) {
-		string p = item.path().string();
-		if (!item.is_regular_file() || !p.ends_with(".png")) {
-			continue;
-		}
-		int d_len = dir_tileset.length();
-		string id = p.substr(d_len + 1, p.length() - d_len - 5); // @suppress("Invalid arguments")
-		TilesetStore::tileset_paths[id] = p;
+	if (!filesystem::is_directory(dir_tileset)) {
+		logger->warn("Tileset data directory not found: " + dir_tileset);
+	} else {
+		for (filesystem::directory_entry item: Filesystem::listDir(dir_tileset, true)) {
+			string p = item.path().string();
+			if (!item.is_regular_file() || !p.ends_with(".png")) {
+				continue;
+			}
+			int d_len = dir_tileset.length();
+			string id = p.substr(d_len + 1, p.length() - d_len - 5); // @suppress("Invalid arguments")
+			TilesetStore::tileset_paths[id] = p;
 
 #if RRE_DEBUGGING
-		logger->debug("Loaded tileset path with ID \"" + id + "\" (" + p + ")");
+			logger->debug("Loaded tileset path with ID \"" + id + "\" (" + p + ")");
 #endif
+		}
 	}
 
 	TilesetStore::loaded = true;
