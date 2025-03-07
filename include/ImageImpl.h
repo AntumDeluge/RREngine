@@ -23,6 +23,7 @@ protected:
 	/** Full image height (in pixels). */
 	int height;
 
+public:
 	/** Default Constructor. */
 	ImageImpl() {
 		this->texture = nullptr;
@@ -30,7 +31,6 @@ protected:
 		this->height = 0;
 	}
 
-public:
 	/**
 	 * Image definition constructor.
 	 *
