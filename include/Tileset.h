@@ -17,10 +17,8 @@
  */
 class Tileset : public ImageImpl {
 private:
-	/** Single tile width. */
-	uint16_t tileWidth;
-	/** Single tile height. */
-	uint16_t tileHeight;
+	uint32_t first_gid;
+	uint32_t last_gid;
 
 public:
 	/**
@@ -28,28 +26,40 @@ public:
 	 *
 	 * @param texture
 	 *   Texture to draw with renderer.
-	 * @param tileWidth
-	 *   Single tile width in pixels.
+	 * @param first_gid
+	 *   Global ID start.
 	 * @param tileHeight
-	 *   Single tile height in pixels.
+	 *   Global ID end.
 	 */
-	Tileset(SDL_Texture* texture, uint16_t tileWidth, uint16_t tileHeight);
+	Tileset(SDL_Texture* texture, uint16_t first_gid, uint16_t last_gid);
 
 	/**
-	 * Retrieves tile width.
+	 * Retrieves global ID start index.
 	 *
 	 * @return
-	 *   Defined width of a single tile for this tileset.
+	 *   Global ID start.
 	 */
-	uint16_t getTileWidth() { return this->tileWidth; }
+	uint32_t getFirstGID() { return this->first_gid; }
 
 	/**
-	 * Retrieves tile height.
+	 * Retrieves global ID end index.
 	 *
 	 * @return
-	 *   Defined height of a single tile for this tileset.
+	 *   Global ID end.
 	 */
-	uint16_t getTileHeight() { return this->tileHeight; }
+	uint32_t getLastGID() { return this->last_gid; }
+
+	/**
+	 * Checks if global ID represents this tileset.
+	 *
+	 * @param gid
+	 *   Global ID to be checked.
+	 * @return
+	 *   `true` if global ID within range of this tileset's IDs.
+	 */
+	bool matches(uint32_t gid) {
+		return gid >= this->first_gid && gid <= this->last_gid;
+	}
 };
 
 #endif /* RRE_TILESET */

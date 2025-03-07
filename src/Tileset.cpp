@@ -7,8 +7,8 @@
 #include "Tileset.h"
 
 
-Tileset::Tileset(SDL_Texture* texture, uint16_t tileWidth, uint16_t tileHeight)
+Tileset::Tileset(SDL_Texture* texture, uint16_t first_gid, uint16_t last_gid)
 		: ImageImpl(texture) {
-	this->tileWidth = tileWidth;
-	this->tileHeight = tileHeight;
+	this->first_gid = first_gid;
+	this->last_gid = last_gid;
 }
