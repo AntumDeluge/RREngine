@@ -67,6 +67,16 @@ public:
 	 *   Image height in pixels.
 	 */
 	int getHeight() { return this->height; }
+
+	/**
+	 * Checks if image is ready for rendering.
+	 *
+	 * @return
+	 *   `true` if texture has been loaded.
+	 */
+	bool ready() {
+		return this->texture != nullptr;
+	}
 };
 
 #endif /* RRE_IMAGE_IMPL */
