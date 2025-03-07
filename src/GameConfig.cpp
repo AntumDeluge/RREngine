@@ -21,7 +21,7 @@ using namespace tinyxml2;
 
 
 namespace GameConfig {
-	Logger* logger = Logger::getLogger("GameConfig");
+	Logger logger = Logger::getLogger("GameConfig");
 
 	// path to master game configuration
 	const string file_conf = Path::rabs("data/conf/game.xml");
@@ -40,7 +40,7 @@ bool loaded = false;
 
 void onConfigError(string title, string msg) {
 	msg += ": \"" + GameConfig::file_conf + "\"";
-	GameConfig::logger->error(msg);
+	GameConfig::logger.error(msg);
 	Dialog::error(title, msg);
 }
 
@@ -50,12 +50,12 @@ void onConfigError(string msg) {
 
 int GameConfig::load() {
 	if (loaded) {
-		GameConfig::logger->warn("Game configuration already loaded");
+		GameConfig::logger.warn("Game configuration already loaded");
 		return 0;
 	}
 
 	if (!Filesystem::fexist(GameConfig::file_conf)) {
-		GameConfig::logger->warn("Game configuration not found: \"" + GameConfig::file_conf + "\"");
+		GameConfig::logger.warn("Game configuration not found: \"" + GameConfig::file_conf + "\"");
 		return 0;
 	}
 
@@ -73,7 +73,7 @@ int GameConfig::load() {
 
 	XMLElement* el_title = el_root->FirstChildElement("title");
 	if (el_title == nullptr) {
-		GameConfig::logger->warn("Game title not configured");
+		GameConfig::logger.warn("Game title not configured");
 	} else {
 		title = el_title->GetText();
 	}
@@ -88,11 +88,11 @@ int GameConfig::load() {
 		return 1;
 	}
 	if (scale == 0) {
-		GameConfig::logger->warn("Scale must be a positive integer");
+		GameConfig::logger.warn("Scale must be a positive integer");
 		scale = 1;
 	}
 	if (scale > 4) {
-		GameConfig::logger->warn("Currently scaling the game window more than 4x is not supported");
+		GameConfig::logger.warn("Currently scaling the game window more than 4x is not supported");
 		scale = 4;
 	}
 
@@ -112,14 +112,14 @@ int GameConfig::load() {
 
 		const XMLAttribute* attr_bg = el_menu->FindAttribute("background");
 		if (attr_bg == nullptr) {
-			GameConfig::logger->warn("Menu (" + id + ") without background");
+			GameConfig::logger.warn("Menu (" + id + ") without background");
 		} else {
 			menu_backgrounds[id] = Path::join("background", attr_bg->Value());
 		}
 
 		const XMLAttribute* attr_music = el_menu->FindAttribute("music");
 		if (attr_music == nullptr) {
-			GameConfig::logger->warn("Menu (" + id + ") without music");
+			GameConfig::logger.warn("Menu (" + id + ") without music");
 		} else {
 			menu_music_ids[id] = attr_music->Value();
 		}

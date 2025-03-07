@@ -17,12 +17,12 @@ using namespace std;
 
 // FIXME: can't instantiate logger here
 //~ namespace TextureLoader {
-	//~ Logger* logger = Logger::getLogger("TextureLoader");
+	//~ Logger logger = Logger::getLogger("TextureLoader");
 //~ };
 
 SDL_Texture* TextureLoader::load(string rdpath) {
 	// TODO: cache loaded textures
-	Logger* logger = Logger::getLogger("TextureLoader");
+	Logger logger = Logger::getLogger("TextureLoader");
 
 	// absolute path to image data file (only PNG supported)
 	string adpath = Path::rabs(Path::join("data", rdpath));
@@ -32,7 +32,7 @@ SDL_Texture* TextureLoader::load(string rdpath) {
 
 	SDL_Texture * texture = IMG_LoadTexture(GetViewport()->getRenderer(), adpath.c_str());
 	if (texture == nullptr) {
-		logger->error("Failed to load texture: " + string(IMG_GetError()));
+		logger.error("Failed to load texture: " + string(IMG_GetError()));
 	} else {
 		SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
 	}

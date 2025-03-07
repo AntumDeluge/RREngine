@@ -16,7 +16,7 @@ unordered_map<string, FontMap*> fmap_cache = {};
 
 void FontStore::addMap(string fid, FontMap* fmap) {
 	if (fmap_cache.find(fid) != fmap_cache.end()) {
-		Logger::getLogger("FontStore")->warn("Overwriting font map with id \"" + fid + "\"");
+		Logger::getLogger("FontStore").warn("Overwriting font map with id \"" + fid + "\"");
 	}
 	fmap_cache[fid] = fmap;
 }
@@ -29,12 +29,12 @@ FontMap* FontStore::getMap(string fid) {
 }
 
 Sprite* FontStore::buildTextSprite(FontMap* fmap, string text) {
-	Logger* logger = Logger::getLogger("FontStore");
+	Logger logger = Logger::getLogger("FontStore");
 
 	// TODO: cache text sprites for redraw (probably in Viewport class)
 
 	if (fmap == nullptr) {
-		logger->error("Undefined font map");
+		logger.error("Undefined font map");
 		return nullptr;
 	}
 
@@ -56,7 +56,7 @@ Sprite* FontStore::buildTextSprite(FontMap* fmap, string text) {
 	SDL_Texture* t_texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA32,
 			SDL_TEXTUREACCESS_TARGET, full_width, c_height);
 	if (t_texture == nullptr) {
-		logger->error((string) "Cannot build text sprite: " + SDL_GetError());
+		logger.error((string) "Cannot build text sprite: " + SDL_GetError());
 		return nullptr;
 	}
 
@@ -85,7 +85,7 @@ Sprite* FontStore::buildTextSprite(FontMap* fmap, string text) {
 		}
 		int c_index = fmap->getCharIndex(c);
 		if (c_index < 0) {
-			logger->error("Unsupported font map character: \"" + string(1, c) + "\""); // @suppress("Symbol is not resolved")
+			logger.error("Unsupported font map character: \"" + string(1, c) + "\""); // @suppress("Symbol is not resolved")
 			c_index = 0;
 		}
 
@@ -109,7 +109,7 @@ Sprite* FontStore::buildTextSprite(FontMap* fmap, string text) {
 	int t_width, t_height;
 	SDL_QueryTexture(t_texture, nullptr, nullptr, &t_width, &t_height);
 	if (t_width != full_width || t_height != c_height) {
-		logger->warn("Expected sprite dimensions of " + to_string(full_width) + "x"
+		logger.warn("Expected sprite dimensions of " + to_string(full_width) + "x"
 				+ to_string(c_height) + " but got " + to_string(t_width) + "x" + to_string(t_height));
 	}
 

@@ -20,7 +20,7 @@
  */
 class FontMap: public ImageImpl {
 private:
-	static Logger* logger;
+	static Logger logger;
 
 	/** Pixel width of each character (excluding 2 pixels of padding). */
 	uint32_t c_width;

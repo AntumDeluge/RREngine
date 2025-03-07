@@ -10,7 +10,7 @@ using namespace std;
 
 
 // initialize static members
-Logger* FontMap::logger = Logger::getLogger("FontMap");
+Logger FontMap::logger = Logger::getLogger("FontMap");
 
 FontMap::FontMap(SDL_Texture* texture, unordered_map<wchar_t, int> char_map, uint32_t c_width,
 		uint32_t c_height): ImageImpl(texture) {

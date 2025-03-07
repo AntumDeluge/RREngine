@@ -29,7 +29,7 @@ private:
 	static bool verbose;
 
 	/** Logger instances. */
-	static std::unordered_map<std::string, Logger*> loggers;
+	static std::unordered_map<std::string, Logger> loggers;
 
 	Logger(std::string id, LogLevel level, std::string file);
 	Logger(std::string id, LogLevel level) : Logger(id, level, "") {}
@@ -39,14 +39,13 @@ private:
 	void write(std::string msg);
 
 public:
-	static Logger* getLogger(std::string id) {
-		Logger* logger = nullptr;
+	static Logger getLogger(std::string id) {
 		if (Logger::loggers.find(id) != Logger::loggers.end()) {
-			logger = Logger::loggers[id];
-		} else {
-			logger = new Logger(id);
-			Logger::loggers[id] = logger;
+			return Logger::loggers[id];
 		}
+
+		Logger logger(id);
+		Logger::loggers[id] = logger;
 		return logger;
 	}
 

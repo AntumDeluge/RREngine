@@ -36,7 +36,7 @@ void GameWindow::setTitle(const string title) {
 }
 
 int GameWindow::init(const string title, const int width, const int height) {
-	this->logger->debug("Initializing SDL ...");
+	this->logger.debug("Initializing SDL ...");
 
 	this->title = title;
 
@@ -44,7 +44,7 @@ int GameWindow::init(const string title, const int width, const int height) {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		// NOTE: message logged to console as video subsystem failed to initialize
 		string msg = SDL_GetError();
-		this->logger->error(msg);
+		this->logger.error(msg);
 		Dialog::error(msg);
 		SDL_Quit();
 		return 1;
@@ -59,7 +59,7 @@ int GameWindow::init(const string title, const int width, const int height) {
 	// initialize PNG image support
 	if (IMG_Init(IMG_INIT_PNG) == 0) {
 		string msg = IMG_GetError();
-		this->logger->error(msg);
+		this->logger.error(msg);
 		Dialog::error(msg);
 		this->shutdown();
 		return 1;
@@ -68,7 +68,7 @@ int GameWindow::init(const string title, const int width, const int height) {
 	// initialize audio subsystem
 	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
 		string msg = SDL_GetError();
-		this->logger->error(msg);
+		this->logger.error(msg);
 		Dialog::error(msg);
 		this->shutdown();
 		return 1;
@@ -79,14 +79,14 @@ int GameWindow::init(const string title, const int width, const int height) {
 	const int initted = Mix_Init(flags);
 	if (initted&flags != flags) {
 		string msg = Mix_GetError();
-		this->logger->error(msg);
+		this->logger.error(msg);
 		Dialog::error(msg);
 		this->shutdown();
 		return 1;
 	}
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) != 0) {
 		string msg = Mix_GetError();
-		this->logger->error(msg);
+		this->logger.error(msg);
 		Dialog::error(msg);
 		this->shutdown();
 		return 1;
@@ -112,7 +112,7 @@ void GameWindow::playMusic(string id) {
 	string audio_error = "";
 	if (file_music.compare("") == 0) {
 		string msg = "Music for ID \"" + id + "\" not configured or file not found";
-		this->logger->warn(msg);
+		this->logger.warn(msg);
 	} else {
 		this->music = Mix_LoadMUS(file_music.c_str());
 		if (this->music == nullptr) {
@@ -120,7 +120,7 @@ void GameWindow::playMusic(string id) {
 			if (audio_error.compare("") == 0) {
 				audio_error = "Failed to load music: \"" + file_music + "\"";
 			}
-			this->logger->warn(audio_error);
+			this->logger.warn(audio_error);
 		}
 
 		if (Mix_PlayMusic(this->music, -1) != 0) {
@@ -128,7 +128,7 @@ void GameWindow::playMusic(string id) {
 			if (audio_error.compare("") == 0) {
 				audio_error = "Failed to play music: \"" + file_music + "\"";
 			}
-			this->logger->warn(audio_error);
+			this->logger.warn(audio_error);
 		}
 	}
 }

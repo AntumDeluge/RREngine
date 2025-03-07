@@ -28,22 +28,22 @@ FontMapLoader* FontMapLoader::instance = nullptr;
 
 void FontMapLoader::loadConfig() {
 	if (this->loaded) {
-		logger->warn("Cannot reload font maps");
+		logger.warn("Cannot reload font maps");
 		return;
 	}
 	this->loaded = true;
 
 	string conf_fonts = Path::join(Path::dir_root, "data/conf/fonts.xml");
-	this->logger->debug("Loading fonts config: \"" + conf_fonts + "\"");
+	this->logger.debug("Loading fonts config: \"" + conf_fonts + "\"");
 	if (!Filesystem::fexist(conf_fonts)) {
-		this->logger->warn("Fonts config not found: \"" + conf_fonts + "\"");
+		this->logger.warn("Fonts config not found: \"" + conf_fonts + "\"");
 		return;
 	}
 
 	XMLDocument doc;
 	if (doc.LoadFile(conf_fonts.c_str()) != 0) {
 		string msg = "Failed to load fonts config: \"" + conf_fonts + "\"";
-		this->logger->error(msg);
+		this->logger.error(msg);
 		Dialog::error(msg);
 		return;
 	}
@@ -51,7 +51,7 @@ void FontMapLoader::loadConfig() {
 	XMLElement* root = doc.RootElement();
 	if (root == nullptr) {
 		string msg = "Malformed config missing root element: \"" + conf_fonts + "\"";
-		this->logger->error(msg);
+		this->logger.error(msg);
 		Dialog::error(msg);
 		return;
 	}
@@ -113,7 +113,7 @@ bool FontMapLoader::parseFont(XMLElement* el) {
 			}
 			msg += err[idx];
 		}
-		this->logger->error("XML Parsing Errors: " + msg);
+		this->logger.error("XML Parsing Errors: " + msg);
 		Dialog::error("XML Parsing Errors", msg);
 		return false;
 	}
@@ -137,7 +137,7 @@ unordered_map<wchar_t, int> FontMapLoader::parseCharacters(XMLElement* el) {
 		const XMLAttribute* attr = cel->FindAttribute("index");
 		if (attr == nullptr) {
 			string msg = "Missing attribute \"index\" in XML element \"char\"";
-			this->logger->error("XML Parsing Error: " + msg);
+			this->logger.error("XML Parsing Error: " + msg);
 			Dialog::error("XML Parsing Error", msg);
 			return empty_map;
 		}
@@ -155,7 +155,7 @@ unordered_map<wchar_t, int> FontMapLoader::parseCharacters(XMLElement* el) {
 
 	if (char_map.size() == 0) {
 		string msg = "No character mappings defined";
-		this->logger->error("XML Parsing Error: " + msg);
+		this->logger.error("XML Parsing Error: " + msg);
 		Dialog::error("XML Parsing Error", msg);
 	}
 

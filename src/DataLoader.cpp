@@ -16,10 +16,10 @@ namespace DataLoader {
 };
 
 bool DataLoader::load() {
-	Logger* logger = Logger::getLogger("DataLoader");
+	Logger logger = Logger::getLogger("DataLoader");
 
 	if (DataLoader::loaded) {
-		logger->warn("Data already loaded");
+		logger.warn("Data already loaded");
 		return true;
 	}
 

@@ -14,7 +14,7 @@ using namespace std;
 
 namespace TilesetStore {
 	// FIXME: can't instantiate logger here
-	//~ Logger* logger = Logger::getLogger("TilesetStore");
+	//~ Logger logger = Logger::getLogger("TilesetStore");
 
 	bool loaded = false;
 
@@ -24,16 +24,16 @@ namespace TilesetStore {
 };
 
 bool TilesetStore::load() {
-	Logger* logger = Logger::getLogger("TilesetStore");
+	Logger logger = Logger::getLogger("TilesetStore");
 
 	if (TilesetStore::loaded) {
-		logger->warn("Tileset data already loaded");
+		logger.warn("Tileset data already loaded");
 		return true;
 	}
 
 	string dir_tileset = Path::rabs("data/tileset");
 	if (!filesystem::is_directory(dir_tileset)) {
-		logger->warn("Tileset data directory not found: " + dir_tileset);
+		logger.warn("Tileset data directory not found: " + dir_tileset);
 	} else {
 		for (filesystem::directory_entry item: Filesystem::listDir(dir_tileset, true)) {
 			string p = item.path().string();
@@ -45,7 +45,7 @@ bool TilesetStore::load() {
 			TilesetStore::tileset_paths[id] = p;
 
 #if RRE_DEBUGGING
-			logger->debug("Loaded tileset path with ID \"" + id + "\" (" + p + ")");
+			logger.debug("Loaded tileset path with ID \"" + id + "\" (" + p + ")");
 #endif
 		}
 	}
@@ -55,17 +55,17 @@ bool TilesetStore::load() {
 }
 
 Tileset* TilesetStore::getTileset(string rpath) {
-	Logger* logger = Logger::getLogger("TilesetStore");
+	Logger logger = Logger::getLogger("TilesetStore");
 
 	if (TilesetStore::tilesets.find(rpath) != TilesetStore::tilesets.end()) {
 #if RRE_DEBUGGING
-		logger->debug("Loading cached tileset: " + rpath);
+		logger.debug("Loading cached tileset: " + rpath);
 #endif
 		return TilesetStore::tilesets[rpath];
 	}
 
 #if RRE_DEBUGGING
-	logger->debug("Building new tileset: " + rpath);
+	logger.debug("Building new tileset: " + rpath);
 #endif
 
 	if (TilesetStore::tileset_paths.find(rpath) != TilesetStore::tileset_paths.end()) {
@@ -75,6 +75,6 @@ Tileset* TilesetStore::getTileset(string rpath) {
 		return nullptr;
 	}
 
-	logger->warn("Tileset not found: " + rpath);
+	logger.warn("Tileset not found: " + rpath);
 	return nullptr;
 }

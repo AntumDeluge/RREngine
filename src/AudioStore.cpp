@@ -21,7 +21,7 @@ using namespace tinyxml2;
 
 
 namespace AudioStore {
-	Logger* logger = Logger::getLogger("AudioStore");
+	Logger logger = Logger::getLogger("AudioStore");
 
 	bool loaded = false;
 
@@ -30,13 +30,13 @@ namespace AudioStore {
 
 bool AudioStore::load() {
 	if (AudioStore::loaded) {
-		AudioStore::logger->warn("Audio data already loaded");
+		AudioStore::logger.warn("Audio data already loaded");
 		return true;
 	}
 
 	string dir_music = Path::rabs("data/music");
 	if (!filesystem::is_directory(dir_music)) {
-		logger->warn("Music data directory not found: " + dir_music);
+		logger.warn("Music data directory not found: " + dir_music);
 	} else {
 		for (filesystem::directory_entry item: Filesystem::listDir(dir_music, true)) {
 			if (!item.is_regular_file()) {
@@ -49,7 +49,7 @@ bool AudioStore::load() {
 				AudioStore::music_paths[id] = p;
 
 #if RRE_DEBUGGING
-				AudioStore::logger->debug("Loaded music with ID \"" + id + "\" (" + p + ")");
+				AudioStore::logger.debug("Loaded music with ID \"" + id + "\" (" + p + ")");
 #endif
 			}
 		}
@@ -65,6 +65,6 @@ string AudioStore::getMusicPath(const string id) {
 	if (AudioStore::music_paths.find(id) != AudioStore::music_paths.end()) {
 		return AudioStore::music_paths[id];
 	}
-	AudioStore::logger->warn("Music with ID \"" + id + "\" not loaded");
+	AudioStore::logger.warn("Music with ID \"" + id + "\" not loaded");
 	return "";
 }

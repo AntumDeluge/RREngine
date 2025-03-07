@@ -26,7 +26,7 @@ using namespace std;
 
 namespace GameLoop {
 	// logger instance
-	Logger* logger = Logger::getLogger("GameLoop");
+	Logger logger = Logger::getLogger("GameLoop");
 
 	GameMode::Mode mode = GameMode::NONE;
 }
@@ -36,7 +36,7 @@ bool quit = false;
 
 void GameLoop::start() {
 #if RRE_DEBUGGING
-	GameLoop::logger->debug("Starting game loop ...");
+	GameLoop::logger.debug("Starting game loop ...");
 #endif
 
 	Viewport* viewport = GetViewport();
@@ -59,7 +59,7 @@ void GameLoop::start() {
 	uint64_t last_draw_time = 0;
 
 #if RRE_DEBUGGING
-	GameLoop::logger->debug("Game logic step interval: " + to_string(step_interval) + "ms");
+	GameLoop::logger.debug("Game logic step interval: " + to_string(step_interval) + "ms");
 
 	// number of frames drawn during this interval
 	uint16_t f_drawn = 0;

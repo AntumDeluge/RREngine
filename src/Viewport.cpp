@@ -37,12 +37,12 @@ Viewport::Viewport() {
 
 void Viewport::init(SDL_Window* window) {
 	if (this->renderer != nullptr) {
-		this->logger->warn("Viewport instance already initialized");
+		this->logger.warn("Viewport instance already initialized");
 		return;
 	}
 
 #if RRE_DEBUGGING
-	this->logger->debug("Creating Viewport renderer ...");
+	this->logger.debug("Creating Viewport renderer ...");
 #endif
 
 	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -79,7 +79,7 @@ bool Viewport::setBackground(string rdpath) {
 	bool result = this->background != nullptr;
 	if (!result) {
 		string msg = "Failed to set background image";
-		this->logger->error(msg);
+		this->logger.error(msg);
 	}
 	return result;
 }
@@ -92,7 +92,7 @@ bool Viewport::setScene(Scene* scene) {
 	this->scene = scene;
 	bool result = this->scene != nullptr;
 	if (!result) {
-		this->logger->error("Failed to set scene");
+		this->logger.error("Failed to set scene");
 	}
 	return result;
 }
@@ -111,7 +111,7 @@ void Viewport::setMode(GameMode::Mode mode) {
 
 void Viewport::drawSprite(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) {
 	if (texture == nullptr) {
-		this->logger->error("Sprite drawing error; sprite undefined");
+		this->logger.error("Sprite drawing error; sprite undefined");
 		return;
 	}
 

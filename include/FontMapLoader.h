@@ -19,6 +19,9 @@
 // - rename to "FontMapStore"
 class FontMapLoader {
 private:
+	// TODO: make static
+	Logger logger;
+
 	// singleton class
 	static FontMapLoader* instance;
 	FontMapLoader() {
@@ -31,7 +34,6 @@ private:
 	FontMapLoader(const FontMapLoader&) = delete;
 	FontMapLoader& operator=(const FontMapLoader&) = delete;
 
-	Logger* logger;
 	bool loaded;
 
 public:

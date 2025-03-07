@@ -20,7 +20,7 @@ using namespace std;
 
 namespace SceneStore {
 	// FIXME: can't initialize logger here
-	//~ Logger* logger = Logger::getLogger("SceneStore");
+	//~ Logger logger = Logger::getLogger("SceneStore");
 
 	bool loaded = false;
 
@@ -30,16 +30,16 @@ namespace SceneStore {
 };
 
 bool SceneStore::load() {
-	Logger* logger = Logger::getLogger("SceneStore");
+	Logger logger = Logger::getLogger("SceneStore");
 
 	if (SceneStore::loaded) {
-		logger->warn("Scene paths already loaded");
+		logger.warn("Scene paths already loaded");
 		return true;
 	}
 
 	string dir_scene = Path::rabs("data/scene");
 	if (!filesystem::is_directory(dir_scene)) {
-		logger->warn("Scene data directory not found: " + dir_scene);
+		logger.warn("Scene data directory not found: " + dir_scene);
 	} else {
 		for (filesystem::directory_entry item: Filesystem::listDir(dir_scene, true)) {
 			string p = item.path().string();
@@ -51,7 +51,7 @@ bool SceneStore::load() {
 			SceneStore::scene_paths[id] = p;
 
 #if RRE_DEBUGGING
-			logger->debug("Loaded scene path with ID \"" + id + "\" (" + p + ")");
+			logger.debug("Loaded scene path with ID \"" + id + "\" (" + p + ")");
 #endif
 		}
 	}

@@ -21,7 +21,8 @@
 class Viewport {
 private:
 	/** Logger instance for this class. */
-	Logger* logger;
+	// TODO: make static
+	Logger logger;
 
 	// singleton class
 	static Viewport* instance;

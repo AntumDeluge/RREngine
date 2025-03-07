@@ -14,7 +14,8 @@
 
 class GameLogic {
 private:
-	Logger* logger;
+	// TODO: make static
+	Logger logger;
 
 	/** Delay (in milliseconds) for each step. */
 	static uint16_t step_delay;

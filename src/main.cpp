@@ -59,10 +59,10 @@ int main(int argc, char** argv) {
 		Logger::setVerbose();
 	}
 
-	Logger* logger = Logger::getLogger("main");
+	Logger logger = Logger::getLogger("main");
 
 #if RRE_DEBUGGING
-	logger->debug("Compiled using C++ standard: " + to_string(__cplusplus));
+	logger.debug("Compiled using C++ standard: " + to_string(__cplusplus));
 #endif
 
 	// change to executable directory
@@ -71,10 +71,10 @@ int main(int argc, char** argv) {
 	// TODO: move SDL initialization to here so configuration can be loaded before window is displayed
 
 	if (!DataLoader::load()) {
-		logger->error("Failed to load game data");
+		logger.error("Failed to load game data");
 #if RRE_DEBUGGING
 	} else {
-		logger->debug("Game data loaded");
+		logger.debug("Game data loaded");
 #endif
 	}
 
@@ -94,8 +94,8 @@ int main(int argc, char** argv) {
 	int height = RES1.second * scale;
 
 #if RRE_DEBUGGING
-	logger->debug("Game title: " + GameConfig::getTitle());
-	logger->debug("Window scale: " + to_string(GameConfig::getScale()));
+	logger.debug("Game title: " + GameConfig::getTitle());
+	logger.debug("Window scale: " + to_string(GameConfig::getScale()));
 #endif
 
 	result = win->init(width, height);
@@ -116,7 +116,7 @@ int main(int argc, char** argv) {
 
 void RRE::exitWithError(int code, string msg, bool show_usage) {
 	cout << endl;
-	Logger::getLogger("main")->error(msg);
+	Logger::getLogger("main").error(msg);
 	if (show_usage) RRE::printUsage(false);
 	exit(code);
 }

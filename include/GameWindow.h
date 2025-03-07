@@ -18,6 +18,10 @@
 
 class GameWindow {
 private:
+	/** Logger instance. */
+	// TODO: make static
+	Logger logger;
+
 	// singleton class
 	static GameWindow* instance;
 	GameWindow();
@@ -26,9 +30,6 @@ private:
 	// delete copy constructor & assignment operator
 	GameWindow(const GameWindow&) = delete;
 	GameWindow& operator=(const GameWindow&) = delete;
-
-	/** Logger instance. */
-	Logger* logger;
 
 	std::string title;
 	SDL_Window* window;
@@ -57,7 +58,7 @@ public:
 
 	SDL_Window* getElement() {
 		if (this->window == nullptr) {
-			this->logger->warn("Returning SDL_Window before initialization");
+			this->logger.warn("Returning SDL_Window before initialization");
 		}
 		return this->window;
 	}
