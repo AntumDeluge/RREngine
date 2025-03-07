@@ -39,6 +39,11 @@ private:
 	void write(std::string msg);
 
 public:
+	// FIXME: may need method to check if logger has been properly initialized
+	Logger() {
+		this->level = Logger::default_level;
+	}
+
 	static Logger getLogger(std::string id) {
 		if (Logger::loggers.find(id) != Logger::loggers.end()) {
 			return Logger::loggers[id];
