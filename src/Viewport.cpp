@@ -54,6 +54,16 @@ void Viewport::shutdown() {
 	this->unsetBackground();
 	SDL_DestroyRenderer(this->renderer);
 	this->renderer = nullptr;
+	SDL_DestroyTexture(this->background);
+	delete this->font_map;
+	delete this->fps_sprite;
+	this->unsetScene();
+	for (Sprite* ts: this->text_sprites) {
+		delete ts;
+	}
+	this->text_sprites.clear();
+	delete Viewport::instance;
+	Viewport::instance = nullptr;
 }
 
 void Viewport::setCurrentFPS(uint16_t fps) {
@@ -85,6 +95,7 @@ bool Viewport::setBackground(string rdpath) {
 }
 
 void Viewport::unsetScene() {
+	delete this->scene;
 	this->scene = nullptr;
 }
 
