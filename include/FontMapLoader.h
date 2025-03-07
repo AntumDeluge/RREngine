@@ -11,46 +11,36 @@
 
 #include <tinyxml2.h>
 
-#include "Logger.h"
 
-
-// TODO:
-// - change to namespace
-// - rename to "FontMapStore"
-class FontMapLoader {
-private:
-	// TODO: make static
-	Logger logger;
-
-	// singleton class
-	static FontMapLoader* instance;
-	FontMapLoader() {
-		this->logger = Logger::getLogger("FontMapLoader");
-		this->loaded = false;
-	}
-	~FontMapLoader();
-
-	// delete copy constructor & assignment operator
-	FontMapLoader(const FontMapLoader&) = delete;
-	FontMapLoader& operator=(const FontMapLoader&) = delete;
-
-	bool loaded;
-
-public:
-	static FontMapLoader* get() {
-		if (FontMapLoader::instance == nullptr) {
-			FontMapLoader::instance = new FontMapLoader();
-		}
-		return FontMapLoader::instance;
-	}
+namespace FontMapLoader {
 
 	/**
 	 * Loads configured font maps from configuration in `data/conf/fonts.xml`.
 	 */
 	void loadConfig();
 
+	/**
+	 * Creates a font map from XML data.
+	 *
+	 * FIXME: make private; not needed by other namespaces/classes
+	 *
+	 * @param el
+	 *   Element containing font information.
+	 * @return
+	 *   `true` if parsing succeeded.
+	 */
 	bool parseFont(tinyxml2::XMLElement* el);
 
+	/**
+	 * Parses mapping of character index.
+	 *
+	 * FIXME: make private; not needed by other namespaces/classes
+	 *
+	 * @param el
+	 *   Element containing starting index & associated characters.
+	 * @return
+	 *   Mapping of indexed characters.
+	 */
 	std::unordered_map<wchar_t, int> parseCharacters(tinyxml2::XMLElement* el);
 };
 

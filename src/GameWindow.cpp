@@ -9,6 +9,7 @@
 
 #include "AudioStore.h"
 #include "Dialog.h"
+#include "FontMapLoader.h"
 #include "FontStore.h"
 #include "GameWindow.h"
 #include "SingletonRepo.h"
@@ -92,7 +93,8 @@ int GameWindow::init(const string title, const int width, const int height) {
 		return 1;
 	}
 
-	GetFontMapLoader()->loadConfig();
+	// FIXME: move to `DataLoader` class startup?
+	FontMapLoader::loadConfig();
 	this->viewport->setFontMap(FontStore::getMap("main"));
 
 	return 0;
