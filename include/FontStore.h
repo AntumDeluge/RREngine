@@ -18,16 +18,16 @@ namespace FontStore {
 	/**
 	 * Caches a font mapping.
 	 *
-	 * @param fid
+	 * @param font_id
 	 *   Font map identifier.
-	 * @param fmap
+	 * @param font_map
 	 *   Font map instance.
 	 */
-	void addMap(std::string fid, FontMap* fmap);
+	void addMap(std::string font_id, FontMap* font_map);
 
-	FontMap* getMap(std::string fid);
+	FontMap* getMap(std::string font_id);
 
-	Sprite* buildTextSprite(FontMap* fmap, std::string text);
+	Sprite* buildTextSprite(FontMap* font_map, std::string text);
 };
 
 #endif /* RRE_FONT_STORE_H */

@@ -14,33 +14,33 @@ using namespace std;
 // font map cache
 unordered_map<string, FontMap*> fmap_cache = {};
 
-void FontStore::addMap(string fid, FontMap* fmap) {
-	if (fmap_cache.find(fid) != fmap_cache.end()) {
-		Logger::getLogger("FontStore").warn("Overwriting font map with id \"" + fid + "\"");
+void FontStore::addMap(string font_id, FontMap* font_map) {
+	if (fmap_cache.find(font_id) != fmap_cache.end()) {
+		Logger::getLogger("FontStore").warn("Overwriting font map with id \"" + font_id + "\"");
 	}
-	fmap_cache[fid] = fmap;
+	fmap_cache[font_id] = font_map;
 }
 
-FontMap* FontStore::getMap(string fid) {
-	if (fmap_cache.find(fid) != fmap_cache.end()) {
-		return fmap_cache[fid];
+FontMap* FontStore::getMap(string font_id) {
+	if (fmap_cache.find(font_id) != fmap_cache.end()) {
+		return fmap_cache[font_id];
 	}
 	return nullptr;
 }
 
-Sprite* FontStore::buildTextSprite(FontMap* fmap, string text) {
+Sprite* FontStore::buildTextSprite(FontMap* font_map, string text) {
 	Logger logger = Logger::getLogger("FontStore");
 
 	// TODO: cache text sprites for redraw (probably in Viewport class)
 
-	if (fmap == nullptr) {
+	if (font_map == nullptr) {
 		logger.error("Undefined font map");
 		return nullptr;
 	}
 
 	// get character dimensions
-	uint32_t c_width = fmap->getCharWidth();
-	uint32_t c_height = fmap->getCharHeight();
+	uint32_t c_width = font_map->getCharWidth();
+	uint32_t c_height = font_map->getCharHeight();
 
 	// number of characters to be drawn
 	uint16_t c_count = text.length();
@@ -49,7 +49,7 @@ Sprite* FontStore::buildTextSprite(FontMap* fmap, string text) {
 	uint32_t full_width = c_count * c_width;
 
 	// source image
-	SDL_Texture* s_texture = fmap->getTexture();
+	SDL_Texture* s_texture = font_map->getTexture();
 
 	SDL_Renderer* renderer = GetViewport()->getRenderer();
 
@@ -73,7 +73,7 @@ Sprite* FontStore::buildTextSprite(FontMap* fmap, string text) {
 	t_rect.h = c_height;
 
 	// full width of source image
-	uint32_t s_width = fmap->getWidth();
+	uint32_t s_width = font_map->getWidth();
 
 	// number of columns in source image
 	uint16_t ix = s_width / c_width;
@@ -84,7 +84,7 @@ Sprite* FontStore::buildTextSprite(FontMap* fmap, string text) {
 			// don't draw anything for whitespace
 			continue;
 		}
-		int c_index = fmap->getCharIndex(c);
+		int c_index = font_map->getCharIndex(c);
 		if (c_index < 0) {
 			logger.error("Unsupported font map character: \"" + string(1, c) + "\""); // @suppress("Symbol is not resolved")
 			c_index = 0;
