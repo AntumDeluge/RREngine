@@ -2,7 +2,7 @@
 
 <fonts>
 
-	<font id="main" tileset="font" w="9" h="9">
+	<font id="main" tileset="fontmap" w="9" h="9">
 		<char index="0">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</char>
 		<char index="52">0123456789</char>
 		<char index="65">.:;!?+-_()&lt;&gt;</char>
