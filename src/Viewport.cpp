@@ -102,6 +102,7 @@ void Viewport::unsetScene() {
 }
 
 bool Viewport::setScene(Scene* scene) {
+	this->unsetScene();
 	this->scene = scene;
 	bool result = this->scene != nullptr;
 	if (!result) {
