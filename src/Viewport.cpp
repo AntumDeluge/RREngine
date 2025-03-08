@@ -129,7 +129,7 @@ void Viewport::drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rec
 	SDL_RenderCopy(this->renderer, texture, &s_rect, &t_rect);
 }
 
-void Viewport::drawSprite(Sprite* sprite, uint32_t x, uint32_t y) {
+void Viewport::drawImage(Sprite* sprite, uint32_t x, uint32_t y) {
 	SDL_Rect s_rect;
 	s_rect.x = x;
 	s_rect.y = y;
@@ -189,7 +189,7 @@ void Viewport::drawText() {
 		uint32_t center_x = (RES1.first / 2) - (sprite->getWidth() / 2);
 		uint32_t center_y = (RES1.second / 2) + (sprite->getHeight() / 2);
 		// FIXME: not being drawn
-		this->drawSprite(sprite, center_x, center_y);
+		this->drawImage(sprite, center_x, center_y);
 	}
 
 #if RRE_DEBUGGING
@@ -214,7 +214,6 @@ void Viewport::drawFPS() {
 	cout << "FPS: " << this->current_fps << "                \r";
 #endif
 	if (this->fps_sprite != nullptr) {
-		// FIXME: transparent pixels are drawn black
-		this->drawSprite(this->fps_sprite, 0, 0);
+		this->drawImage(this->fps_sprite, 0, 0);
 	}
 }

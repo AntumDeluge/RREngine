@@ -122,7 +122,7 @@ public:
 	// TODO: rename to "drawImage" or "drawTexture"
 	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect);
 	void drawTexture(SDL_Texture* texture, SDL_Rect rect) { this->drawTexture(texture, rect, rect); }
-	void drawSprite(Sprite* sprite, uint32_t x, uint32_t y);
+	void drawImage(Sprite* sprite, uint32_t x, uint32_t y);
 	void draw();
 
 	/**
