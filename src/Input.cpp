@@ -7,8 +7,11 @@
 #include "config.h"
 
 #include <algorithm>
+#include <string>
 
 #include "Input.h"
+
+using namespace std;
 
 
 Logger Input::logger = Logger::getLogger("Input");
