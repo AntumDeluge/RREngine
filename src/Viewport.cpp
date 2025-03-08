@@ -120,7 +120,7 @@ void Viewport::setMode(GameMode::Mode mode) {
 	this->mode = mode;
 }
 
-void Viewport::drawSprite(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) {
+void Viewport::drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) {
 	if (texture == nullptr) {
 		this->logger.error("Sprite drawing error; sprite undefined");
 		return;
@@ -136,7 +136,7 @@ void Viewport::drawSprite(Sprite* sprite, uint32_t x, uint32_t y) {
 	s_rect.w = sprite->getWidth();
 	s_rect.h = sprite->getHeight();
 
-	this->drawSprite(sprite->getTexture(), s_rect, s_rect);
+	this->drawTexture(sprite->getTexture(), s_rect, s_rect);
 }
 
 void Viewport::draw() {
@@ -177,7 +177,7 @@ void Viewport::drawTitle() {
 	int w, h;
 	SDL_QueryTexture(this->background, NULL, NULL, &w, &h);
 
-	this->drawSprite(this->background, (SDL_Rect) {0, 0, w, h},
+	this->drawTexture(this->background, (SDL_Rect) {0, 0, w, h},
 			(SDL_Rect) {0, 0, RES1.first, RES1.second});
 }
 
