@@ -59,6 +59,7 @@ Sprite* FontStore::buildTextSprite(FontMap* fmap, string text) {
 		logger.error((string) "Cannot build text sprite: " + SDL_GetError());
 		return nullptr;
 	}
+	SDL_SetTextureBlendMode(t_texture, SDL_BLENDMODE_BLEND);
 
 	// set render target to background
 	SDL_SetRenderTarget(renderer, t_texture);
