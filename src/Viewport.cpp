@@ -58,10 +58,6 @@ void Viewport::shutdown() {
 	delete this->font_map;
 	delete this->fps_sprite;
 	this->unsetScene();
-	for (Sprite* ts: this->text_sprites) {
-		delete ts;
-	}
-	this->text_sprites.clear();
 	delete Viewport::instance;
 	Viewport::instance = nullptr;
 }
