@@ -20,17 +20,11 @@ using namespace std;
 	//~ Logger logger = Logger::getLogger("TextureLoader");
 //~ };
 
-SDL_Texture* TextureLoader::load(string rdpath) {
+SDL_Texture* TextureLoader::absLoad(string apath) {
 	// TODO: cache loaded textures
 	Logger logger = Logger::getLogger("TextureLoader");
 
-	// absolute path to image data file (only PNG supported)
-	string adpath = Path::rabs(Path::join("data", rdpath));
-	if (!adpath.ends_with(".png")) {
-		adpath += ".png";
-	}
-
-	SDL_Texture * texture = IMG_LoadTexture(GetViewport()->getRenderer(), adpath.c_str());
+	SDL_Texture * texture = IMG_LoadTexture(GetViewport()->getRenderer(), apath.c_str());
 	if (texture == nullptr) {
 		logger.error("Failed to load texture: " + string(IMG_GetError()));
 	} else {
@@ -38,4 +32,14 @@ SDL_Texture* TextureLoader::load(string rdpath) {
 	}
 
 	return texture;
+}
+
+SDL_Texture* TextureLoader::load(string rdpath) {
+	// absolute path to image data file (only PNG supported)
+	string apath = Path::rabs(Path::join("data", rdpath));
+	if (!apath.ends_with(".png")) {
+		apath += ".png";
+	}
+
+	return TextureLoader::absLoad(apath);
 }

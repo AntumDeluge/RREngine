@@ -19,10 +19,20 @@
 namespace TextureLoader {
 
 	/**
+	 * Loads image into SDL texture.
+	 *
+	 * @param apath
+	 *   Absolute path to image resource.
+	 * @return
+	 *   Texture or `nullptr`.
+	 */
+	SDL_Texture* absLoad(std::string apath);
+
+	/**
 	 * Loads image into SDL texture. Only supports PNG images.
 	 *
 	 * @param rdpath
-	 *   File path relative to data directory (excluding .png suffix).
+	 *   File path relative to data directory (.png suffix optional).
 	 * @return
 	 *   Texture or `nullptr`.
 	 */
