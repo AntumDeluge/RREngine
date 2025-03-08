@@ -22,6 +22,8 @@ namespace TilesetStore {
 	/**
 	 * Retrieves from memory or builds a tileset.
 	 *
+	 * FIXME: deprecated, no longer used
+	 *
 	 * @param rpath
 	 *   File path relative to tileset directory (excluding *.png suffix).
 	 */
