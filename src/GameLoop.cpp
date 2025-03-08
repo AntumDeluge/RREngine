@@ -79,6 +79,10 @@ void GameLoop::start() {
 		while (SDL_PollEvent(&event) != 0) {
 			if (event.type == SDL_QUIT) {
 				GameLoop::end();
+			} else if (event.type == SDL_KEYDOWN) {
+				GetInput()->onKeyDown(event.key.keysym);
+			} else if (event.type == SDL_KEYUP) {
+				GetInput()->onKeyUp(event.key.keysym);
 			}
 		}
 

@@ -9,15 +9,29 @@
 #ifndef RRE_INPUT_H
 #define RRE_INPUT_H
 
+#include <vector>
+
+#include <SDL2/SDL_keyboard.h>
 #include <SDL2/SDL_keycode.h>
+
+#include "Logger.h"
 
 
 class Input {
 private:
+	static Logger logger;
+
+	std::vector<SDL_Keycode> pressed_keys;
+
 	// singleton class
-	Input() {}
-	~Input() {}
 	static Input* instance;
+	Input() {}
+	~Input() {
+		if (Input::instance != nullptr) {
+			delete Input::instance;
+			Input::instance = nullptr;
+		}
+	}
 
 	// delete copy constructor & assignment operator
 	Input(const Input&) = delete;
@@ -34,6 +48,16 @@ private:
 	SDL_KeyCode cycle_w_prev = SDLK_LESS;
 	SDL_KeyCode menu = SDLK_ESCAPE;
 
+	/**
+	 * Checks if a key is depressed.
+	 *
+	 * @param key
+	 *   Keycode to check.
+	 * @return
+	 *   `true` if found in pressed keys vector.
+	 */
+	bool keyIsPressed(SDL_Keycode key);
+
 public:
 	static Input* get() {
 		if (instance == nullptr) {
@@ -41,6 +65,9 @@ public:
 		}
 		return instance;
 	}
+
+	void onKeyDown(SDL_Keysym key);
+	void onKeyUp(SDL_Keysym key);
 };
 
 #endif /* RRE_INPUT_H */

@@ -4,8 +4,40 @@
  * See: LICENSE.txt
  */
 
+#include "config.h"
+
+#include <algorithm>
+
 #include "Input.h"
 
 
+Logger Input::logger = Logger::getLogger("Input");
+
 // initialize singleton instance
 Input* Input::instance = nullptr;
+
+bool Input::keyIsPressed(SDL_Keycode key) {
+	return find(this->pressed_keys.begin(), this->pressed_keys.end(), key) != this->pressed_keys.end();
+}
+
+void Input::onKeyDown(SDL_Keysym keysym) {
+	if (this->keyIsPressed(keysym.sym)) {
+		return;
+	}
+	this->pressed_keys.push_back(keysym.sym);
+
+#ifdef RRE_DEBUGGING
+	this->logger.debug("Key pressed: " + to_string(keysym.sym));
+#endif
+}
+
+void Input::onKeyUp(SDL_Keysym keysym) {
+	if (!this->keyIsPressed(keysym.sym)) {
+		return;
+	}
+	this->pressed_keys.erase(remove(this->pressed_keys.begin(), this->pressed_keys.end(), keysym.sym), this->pressed_keys.end());
+
+#ifdef RRE_DEBUGGING
+	this->logger.debug("Key released: " + to_string(keysym.sym));
+#endif
+}
