@@ -30,6 +30,12 @@ private:
 	std::unordered_map<wchar_t, int> char_map;
 
 public:
+	/** default constructor. */
+	FontMap() {
+		this->c_width = 0;
+		this->c_height = 0;
+	}
+
 	FontMap(SDL_Texture* texture, std::unordered_map<wchar_t, int> char_map, uint32_t c_width,
 			uint32_t c_height);
 
