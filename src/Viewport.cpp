@@ -115,6 +115,9 @@ void Viewport::setMode(GameMode::Mode mode) {
 	if (mode == GameMode::TITLE) {
 		this->setBackground(GameConfig::getBackground("title"));
 		GetGameWindow()->playMusic(GameConfig::getMenuMusicId("title"));
+
+		// DEBUG: placeholder of example for adding text to title screen
+		this->addText("press enter");
 	} else {
 		this->unsetBackground();
 		GetGameWindow()->stopMusic();
