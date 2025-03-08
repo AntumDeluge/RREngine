@@ -94,6 +94,9 @@ void GameLoop::start() {
 				// TODO: placeholder
 				viewport->setScene(nullptr);
 				GameLoop::setMode(GameMode::SCENE);
+
+				// DEBUG: example
+				viewport->setScene("map1");
 			}
 		}
 
