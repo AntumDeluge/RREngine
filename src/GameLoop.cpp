@@ -96,7 +96,7 @@ void GameLoop::start() {
 				GameLoop::setMode(GameMode::SCENE);
 
 				// DEBUG: example
-				viewport->setScene("map1");
+				//viewport->setScene("map1");
 			}
 		}
 
