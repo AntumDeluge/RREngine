@@ -16,4 +16,6 @@
 // debugging symbols
 #define RRE_DEBUGGING @RRE_DEBUGGING@
 
+#define HAVE_FONTMAP_PNG_H @HAVE_FONTMAP_PNG_H@
+
 #endif /* RRE_CONFIG */

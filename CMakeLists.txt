@@ -83,6 +83,24 @@ if(NOT DEBUG)
 	)
 endif()
 
+# convert built-in resources
+if(BIN2HEADER)
+	message("-- bin2header found")
+	message("-- Converting built-in resources ...")
+	file(MAKE_DIRECTORY "${PROJECT_BINARY_DIR}/builtin/tileset")
+	execute_process(
+		COMMAND "${BIN2HEADER}"
+			# bin2header output fails if "-" in path name so output to source dir & move
+			#-o "${PROJECT_BINARY_DIR}/builtin/tileset/fontmap.h"
+			-o "${PROJECT_SOURCE_DIR}/fontmap_png.h"
+			"${PROJECT_SOURCE_DIR}/builtin/tileset/fontmap.png"
+	)
+	file(COPY "${PROJECT_SOURCE_DIR}/fontmap_png.h" DESTINATION "${PROJECT_BINARY_DIR}/builtin/tileset")
+	file(REMOVE "${PROJECT_SOURCE_DIR}/fontmap_png.h")
+else()
+	message("-- bin2header NOT found")
+endif()
+
 
 # example game data
 

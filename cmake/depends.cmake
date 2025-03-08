@@ -44,7 +44,7 @@ endif()
 
 include_directories(
 	"include"
-	# "config.h"
+	# "config.h" & built-in data
 	"${PROJECT_BINARY_DIR}"
 	# system libraries
 	"${SDL2_INCLUDE_DIRS}"
