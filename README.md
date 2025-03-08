@@ -17,6 +17,8 @@ Example data:
 
 - sprite:
     - character (CC0): based on [Classic Hero by GrafxKid](https://opengameart.org/node/36173)
+- tileset:
+    - grassland (CC0): [Grassy Tileset by ImpossibleRealms](https://opengameart.org/node/66391)
 - menu background:
     - [Underwater Mountains](https://opengameart.org/node/28985) by
       [PumpkinGlitters](https://pumpkingitters.deviantart.com/) (CC BY 3.0)
