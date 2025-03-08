@@ -95,6 +95,8 @@ bool Viewport::setBackground(string rdpath) {
 }
 
 void Viewport::unsetScene() {
+	// clear any text from previous scene
+	this->clearText();
 	delete this->scene;
 	this->scene = nullptr;
 }
@@ -209,7 +211,6 @@ void Viewport::addText(string text) {
 
 void Viewport::clearText() {
 	for (int idx = 0; idx < this->text_sprites.size(); idx++) {
-		// NOTE: is it safe to delete instance?
 		delete this->text_sprites[idx];
 	}
 	this->text_sprites.clear();
