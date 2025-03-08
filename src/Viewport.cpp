@@ -131,12 +131,19 @@ void Viewport::drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rec
 
 void Viewport::drawImage(Sprite* sprite, uint32_t x, uint32_t y) {
 	SDL_Rect s_rect;
-	s_rect.x = x;
-	s_rect.y = y;
+	s_rect.x = 0;
+	s_rect.y = 0;
 	s_rect.w = sprite->getWidth();
 	s_rect.h = sprite->getHeight();
 
-	this->drawTexture(sprite->getTexture(), s_rect, s_rect);
+	// target rectangle used for offset
+	SDL_Rect t_rect; //= (SDL_Rect) {x, y, s_rect.w, s_rect.h};
+	t_rect.x = x;
+	t_rect.y = y;
+	t_rect.w = s_rect.w;
+	t_rect.h = s_rect.h;
+
+	this->drawTexture(sprite->getTexture(), s_rect, t_rect);
 }
 
 void Viewport::draw() {
@@ -188,7 +195,6 @@ void Viewport::drawText() {
 		Sprite* sprite = this->text_sprites[idx];
 		uint32_t center_x = (RES1.first / 2) - (sprite->getWidth() / 2);
 		uint32_t center_y = (RES1.second / 2) + (sprite->getHeight() / 2);
-		// FIXME: not being drawn
 		this->drawImage(sprite, center_x, center_y);
 	}
 
