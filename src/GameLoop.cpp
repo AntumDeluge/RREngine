@@ -85,8 +85,11 @@ void GameLoop::start() {
 		const uint8_t* k_state = SDL_GetKeyboardState(NULL);
 
 		if (GameLoop::mode == GameMode::TITLE) {
+			// TODO: use translated event to determine how to proceed
 			if (k_state[SDL_SCANCODE_RETURN] || k_state[SDL_SCANCODE_KP_ENTER]) {
-				// TODO:
+				// TODO: placeholder
+				viewport->setScene(nullptr);
+				GameLoop::setMode(GameMode::SCENE);
 			}
 		}
 
