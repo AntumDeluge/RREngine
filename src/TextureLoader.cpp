@@ -5,8 +5,6 @@
  * See: LICENSE.txt
  */
 
-#include <cstring> // std::memcpy
-
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_rwops.h>
@@ -52,11 +50,7 @@ SDL_Texture* TextureLoader::load(string rdpath) {
 SDL_Texture* TextureLoader::loadFM(const uint8_t data[], const size_t data_size) {
 	Logger logger = Logger::getLogger("TextureLoader");
 
-	uint8_t data_copy[data_size];
-	// need to either pass mutable variable or cast to `uint8_t*`
-	memcpy(data_copy, data, data_size);
-
-	SDL_RWops* rw = SDL_RWFromMem(data_copy, data_size);
+	SDL_RWops* rw = SDL_RWFromMem((uint8_t*) data, data_size);
 	if (rw == nullptr) {
 		logger.error("Failed to load texture from memory: " + string(SDL_GetError()));
 		return nullptr;
