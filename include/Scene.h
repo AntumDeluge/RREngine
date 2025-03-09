@@ -94,6 +94,15 @@ public:
 	 * Builds scene layers.
 	 */
 	void render();
+
+	void setScrollBackground(tmx::ImageLayer* layer) { this->s_background = layer; }
+	void setScrollBackground2(tmx::ImageLayer* layer) { this->s_background2 = layer; }
+	void setBackground(tmx::TileLayer* layer) { this->background = layer; }
+	void setTerrain(tmx::TileLayer* layer) { this->terrain = layer; }
+	void setEntities(tmx::TileLayer* layer) { this->entities = layer; }
+	void setCollision(tmx::TileLayer* layer) { this->collision = layer; }
+	void setForeground(tmx::TileLayer* layer) { this->foreground = layer; }
+	void setScrollForeground(tmx::ImageLayer* layer) { this->s_foreground = layer; }
 };
 
 #endif /* RRE_SCENE */
