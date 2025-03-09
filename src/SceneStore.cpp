@@ -113,28 +113,33 @@ Scene* SceneStore::loadScene(string id) {
 	// - _maybe_ use layer order instead of names to determine destination
 	// - use properties to set parallax backgrounds
 	for (auto& layerPtr: map.getLayers()) {
-		tmx::TileLayer t_layer = dynamic_cast<const tmx::TileLayer&>(*layerPtr);
-		string layerName = t_layer.getName();
+		tmx::Layer& layer = *layerPtr;
+		string layerName = layer.getName();
 
-		if (layerName == "s_background") {
-			tmx::ImageLayer i_layer = dynamic_cast<const tmx::ImageLayer&>(t_layer);
-			scene->setScrollBackground(&i_layer);
-		} else if (layerName == "s_background2") {
-			tmx::ImageLayer i_layer = dynamic_cast<const tmx::ImageLayer&>(t_layer);
-			scene->setScrollBackground2(&i_layer);
-		} else if (layerName == "background") {
-			scene->setBackground(&t_layer);
-		} else if (layerName == "terrain") {
-			scene->setTerrain(&t_layer);
-		} else if (layerName == "entities") {
-			scene->setEntities(&t_layer);
-		} else if (layerName == "collision") {
-			scene->setCollision(&t_layer);
-		} else if (layerName == "foreground") {
-			scene->setForeground(&t_layer);
-		} else if (layerName == "s_foreground") {
-			tmx::ImageLayer i_layer = dynamic_cast<const tmx::ImageLayer&>(t_layer);
-			scene->setScrollForeground(&i_layer);
+		if (layer.getType() == tmx::Layer::Type::Image) {
+			tmx::ImageLayer i_layer = dynamic_cast<const tmx::ImageLayer&>(*layerPtr);
+
+			if (layerName == "s_background") {
+				scene->setScrollBackground(&i_layer);
+			} else if (layerName == "s_background2") {
+				scene->setScrollBackground2(&i_layer);
+			} else if (layerName == "s_foreground") {
+				scene->setScrollForeground(&i_layer);
+			}
+		} else if (layer.getType() == tmx::Layer::Type::Tile) {
+			tmx::TileLayer t_layer = dynamic_cast<const tmx::TileLayer&>(*layerPtr);
+
+			if (layerName == "background") {
+				scene->setBackground(&t_layer);
+			} else if (layerName == "terrain") {
+				scene->setTerrain(&t_layer);
+			} else if (layerName == "entities") {
+				scene->setEntities(&t_layer);
+			} else if (layerName == "collision") {
+				scene->setCollision(&t_layer);
+			} else if (layerName == "foreground") {
+				scene->setForeground(&t_layer);
+			}
 		}
 	}
 
