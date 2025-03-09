@@ -8,9 +8,12 @@
 
 #include "AudioStore.h"
 #include "DataLoader.h"
+#include "FontMap.h"
 #include "FontMapLoader.h"
+#include "FontStore.h"
 #include "Logger.h"
 #include "SceneStore.h"
+#include "SingletonRepo.h"
 
 #if HAVE_FONTMAP_PNG_H
 #include "builtin/tileset/fontmap_png.h"
@@ -32,6 +35,11 @@ bool DataLoader::load() {
 
 	if (!FontMapLoader::loadConfig()) {
 		return false;
+	}
+
+	FontMap* font_main = FontStore::getMap("main");
+	if (font_main != nullptr) {
+		GetViewport()->setFontMap(font_main);
 	}
 
 	if (!AudioStore::load()) {

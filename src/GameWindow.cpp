@@ -9,7 +9,6 @@
 
 #include "AudioStore.h"
 #include "Dialog.h"
-#include "FontStore.h"
 #include "GameWindow.h"
 #include "SingletonRepo.h"
 
@@ -91,8 +90,6 @@ int GameWindow::init(const string title, const int width, const int height) {
 		this->shutdown();
 		return 1;
 	}
-
-	this->viewport->setFontMap(FontStore::getMap("main"));
 
 	return 0;
 }
