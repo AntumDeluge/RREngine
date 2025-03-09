@@ -113,6 +113,8 @@ bool Viewport::setScene(string id) {
 }
 
 void Viewport::setMode(GameMode::Mode mode) {
+	GetGameWindow()->stopMusic();
+	this->unsetBackground();
 	if (mode == GameMode::TITLE) {
 		this->setScene("");
 		this->setBackground(GameConfig::getBackground("title"));
@@ -123,9 +125,6 @@ void Viewport::setMode(GameMode::Mode mode) {
 	} else if (mode == GameMode::SCENE) {
 		// DEBUG: placeholder example
 		//this->setScene("map1");
-	} else {
-		this->unsetBackground();
-		GetGameWindow()->stopMusic();
 	}
 
 	this->mode = mode;
