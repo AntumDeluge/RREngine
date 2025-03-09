@@ -6,17 +6,20 @@
 
 #include "config.h"
 
+#include <cstddef> // size_t
 #include <unordered_map>
 
-using namespace std;
+#include <tmxlite/Map.hpp>
 
 #include "Filesystem.h"
 #include "Logger.h"
 #include "Path.h"
 #include "SceneStore.h"
+#include "TextureLoader.h"
+#include "Tileset.h"
 
+using namespace std;
 
-// TODO: rename to SceneStore
 
 namespace SceneStore {
 	// FIXME: can't initialize logger here
@@ -61,10 +64,78 @@ bool SceneStore::load() {
 }
 
 Scene* SceneStore::loadScene(string id) {
+	// look in cache first
 	if (SceneStore::scenes.find(id) != SceneStore::scenes.end()) {
 		return SceneStore::scenes[id];
 	}
 
-	// TODO: parse scene data from TMX & load into viewport
-	return nullptr;
+	Logger logger = Logger::getLogger("SceneStore");
+
+	// get map file path
+	string map_path;
+	if (SceneStore::scene_paths.find(id) == SceneStore::scene_paths.end()) {
+		logger.warn("Scene not found: " + id);
+		return nullptr;
+	}
+	map_path = SceneStore::scene_paths[id];
+
+	tmx::Map map;
+	if (!map.load(map_path)) {
+		logger.error("Failed to load scene map: " + map_path);
+		return nullptr;
+	}
+
+	Scene* scene = new Scene(map.getTileSize().x, map.getTileSize().y);
+	// TODO: get map dimensions
+	//auto map_size = map.getSize();
+	size_t width = 0;
+	size_t height = 0;
+
+	// parse tilesets
+	for (tmx::Tileset ts: map.getTilesets()) {
+		string image_path = Path::norm(ts.getImagePath());
+
+#ifdef RRE_DEBUGGING
+		logger.debug("Loading tileset: " + ts.getName() + " (" + image_path + ")");
+#endif
+
+		SDL_Texture* texture = TextureLoader::absLoad(image_path);
+		if (texture == nullptr) {
+			logger.error("Failed to load tileset: " + image_path);
+			continue;
+		}
+
+		scene->addTileset(Tileset(texture, ts.getFirstGID(), ts.getLastGID()));
+	}
+
+	// parse layers
+	for (auto& layerPtr: map.getLayers()) {
+		tmx::TileLayer t_layer = dynamic_cast<const tmx::TileLayer&>(*layerPtr);
+		string layerName = t_layer.getName();
+
+		if (layerName == "s_background") {
+			tmx::ImageLayer i_layer = dynamic_cast<const tmx::ImageLayer&>(t_layer);
+			scene->setScrollBackground(&i_layer);
+		} else if (layerName == "s_background2") {
+			tmx::ImageLayer i_layer = dynamic_cast<const tmx::ImageLayer&>(t_layer);
+			scene->setScrollBackground2(&i_layer);
+		} else if (layerName == "background") {
+			scene->setBackground(&t_layer);
+		} else if (layerName == "terrain") {
+			scene->setTerrain(&t_layer);
+		} else if (layerName == "entities") {
+			scene->setEntities(&t_layer);
+		} else if (layerName == "collision") {
+			scene->setCollision(&t_layer);
+		} else if (layerName == "foreground") {
+			scene->setForeground(&t_layer);
+		} else if (layerName == "s_foreground") {
+			tmx::ImageLayer i_layer = dynamic_cast<const tmx::ImageLayer&>(t_layer);
+			scene->setScrollForeground(&i_layer);
+		}
+	}
+
+	// cache for subsequent retrieval
+	SceneStore::scenes[id] = scene;
+	return scene;
 }
