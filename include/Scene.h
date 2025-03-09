@@ -20,7 +20,7 @@
  * Class to represent a scene being drawn on the viewport.
  *
  * TODO:
- * - need collision mapping to match terrain layer
+ * - need collision mapping to match collision layer
  * - support additional background with parallax scrolling
  * - create separate class called SceneBuilder to serve as framework to rendering scene
  */
@@ -42,11 +42,11 @@ private:
 	/** Bottom tiled layer. */
 	tmx::TileLayer* background;
 	/** Terrain layer drawn under entities. */
-	tmx::TileLayer* terrain_rear;
+	tmx::TileLayer* terrain;
 	/** Entities located in scene. */
 	tmx::TileLayer* entities;
 	/** Terrain layer containing collision info. */
-	tmx::TileLayer* terrain;
+	tmx::TileLayer* collision;
 	/** Top tiled layer drawn over entities. */
 	tmx::TileLayer* foreground;
 
@@ -60,9 +60,9 @@ public:
 		this->s_background = nullptr;
 		this->s_background2 = nullptr;
 		this->background = nullptr;
-		this->terrain_rear = nullptr;
-		this->entities = nullptr;
 		this->terrain = nullptr;
+		this->entities = nullptr;
+		this->collision = nullptr;
 		this->foreground = nullptr;
 		this->s_foreground = nullptr;
 	}
@@ -74,12 +74,12 @@ public:
 		this->s_background2 = nullptr;
 		delete this->background;
 		this->background = nullptr;
-		delete this->terrain_rear;
-		this->terrain_rear = nullptr;
-		delete this->entities;
-		this->entities = nullptr;
 		delete this->terrain;
 		this->terrain = nullptr;
+		delete this->entities;
+		this->entities = nullptr;
+		delete this->collision;
+		this->collision = nullptr;
 		delete this->foreground;
 		this->foreground = nullptr;
 		delete this->s_foreground;
