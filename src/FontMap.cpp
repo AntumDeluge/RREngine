@@ -4,9 +4,9 @@
  * See: LICENSE.txt
  */
 
-using namespace std;
-
 #include "FontMap.h"
+
+using namespace std;
 
 
 // initialize static members

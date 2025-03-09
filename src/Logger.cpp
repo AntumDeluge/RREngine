@@ -6,13 +6,13 @@
 
 #include "config.h"
 
-using namespace std;
-
 #include <iostream>
 #include <sstream>
 
 #include "Logger.h"
 #include "Path.h"
+
+using namespace std;
 
 
 // initialize static members

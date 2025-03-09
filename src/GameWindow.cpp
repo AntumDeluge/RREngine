@@ -76,7 +76,7 @@ int GameWindow::init(const string title, const int width, const int height) {
 	// initialize mixer for playing OGG audio files
 	const int flags = MIX_INIT_OGG;
 	const int initted = Mix_Init(flags);
-	if (initted&flags != flags) {
+	if ((initted&flags) != flags) {
 		string msg = Mix_GetError();
 		this->logger.error(msg);
 		Dialog::error(msg);

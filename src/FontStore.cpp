@@ -4,11 +4,11 @@
  * See: LICENSE.txt
  */
 
-using namespace std;
-
 #include "FontStore.h"
 #include "Logger.h"
 #include "SingletonRepo.h"
+
+using namespace std;
 
 
 // font map cache
