@@ -183,6 +183,7 @@ void Viewport::drawTitle() {
 		return;
 	}
 
+	// FIXME: would it be better to store background as ImageImpl so we don't have to call `SDL_QueryTexture` every cycle?
 	int w, h;
 	SDL_QueryTexture(this->background, NULL, NULL, &w, &h);
 
