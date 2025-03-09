@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="16" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="16" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="1">
+ <properties>
+  <property name="parallax1" value="filename_here"/>
+ </properties>
  <tileset firstgid="1" name="grassland" tilewidth="16" tileheight="16" tilecount="48" columns="6">
   <image source="../tileset/grassland.png" width="96" height="128"/>
  </tileset>
+ <imagelayer id="7" name="s_background2"/>
+ <imagelayer id="6" name="s_background"/>
  <layer id="1" name="background" width="16" height="14">
   <data encoding="base64" compression="zlib">
    eJzjY2Bg4BvFo3gUDwgGAI07DEE=
@@ -13,9 +18,20 @@
    eJxjYBgFo2DoAiYK8UADABfAACE=
   </data>
  </layer>
+ <layer id="9" name="entities" width="16" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDBQAAAOAAAE=
+  </data>
+ </layer>
  <layer id="5" name="collision" width="16" height="14">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2DkAg4KMaUAADSAAIE=
   </data>
  </layer>
+ <layer id="10" name="foreground" width="16" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDBQAAAOAAAE=
+  </data>
+ </layer>
+ <imagelayer id="11" name="s_foreground"/>
 </map>
