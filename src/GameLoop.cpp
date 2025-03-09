@@ -91,12 +91,7 @@ void GameLoop::start() {
 		if (GameLoop::mode == GameMode::TITLE) {
 			// TODO: use translated event to determine how to proceed
 			if (k_state[SDL_SCANCODE_RETURN] || k_state[SDL_SCANCODE_KP_ENTER]) {
-				// TODO: placeholder
-				viewport->setScene(nullptr);
 				GameLoop::setMode(GameMode::SCENE);
-
-				// DEBUG: example
-				//viewport->setScene("map1");
 			}
 		}
 

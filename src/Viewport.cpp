@@ -13,6 +13,7 @@ using namespace std;
 
 #include "FontStore.h"
 #include "GameConfig.h"
+#include "SceneStore.h"
 #include "SingletonRepo.h"
 #include "TextureLoader.h"
 #include "Viewport.h"
@@ -97,23 +98,31 @@ void Viewport::unsetScene() {
 	this->scene = nullptr;
 }
 
-bool Viewport::setScene(Scene* scene) {
+bool Viewport::setScene(string id) {
 	this->unsetScene();
-	this->scene = scene;
+	if (id.empty()) {
+		// empty string means no scene is to be set
+		return true;
+	}
+	this->scene = SceneStore::loadScene(id);
 	bool result = this->scene != nullptr;
 	if (!result) {
-		this->logger.error("Failed to set scene");
+		this->logger.error("Failed to set scene: " + id);
 	}
 	return result;
 }
 
 void Viewport::setMode(GameMode::Mode mode) {
 	if (mode == GameMode::TITLE) {
+		this->setScene("");
 		this->setBackground(GameConfig::getBackground("title"));
 		GetGameWindow()->playMusic(GameConfig::getMenuMusicId("title"));
 
 		// DEBUG: placeholder of example for adding text to title screen
 		this->addText("press enter");
+	} else if (mode == GameMode::SCENE) {
+		// DEBUG: placeholder example
+		//this->setScene("map1");
 	} else {
 		this->unsetBackground();
 		GetGameWindow()->stopMusic();

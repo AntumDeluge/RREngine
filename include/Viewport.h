@@ -103,12 +103,12 @@ public:
 	/**
 	 * Sets current scene data.
 	 *
-	 * @param scene
-	 *   Scene data to be drawn.
+	 * @param id
+	 *   Scene identifier.
 	 * @return
 	 *   `true` if scene was set.
 	 */
-	bool setScene(Scene* scene);
+	bool setScene(std::string id);
 
 	/**
 	 * Sets drawing mode.
