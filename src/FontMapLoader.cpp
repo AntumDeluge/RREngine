@@ -67,7 +67,7 @@ bool FontMapLoader::loadBuiltin() {
 
 bool FontMapLoader::loadConfig() {
 	if (FontMapLoader::loaded) {
-		logger.warn("Cannot reload font maps");
+		FontMapLoader::logger.warn("Cannot reload font maps");
 		return false;
 	}
 	FontMapLoader::loaded = true;
