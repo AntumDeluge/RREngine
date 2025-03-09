@@ -78,7 +78,8 @@ bool FontMapLoader::loadConfig() {
 #endif
 	if (!Filesystem::fexist(conf_fonts)) {
 		FontMapLoader::logger.warn("Fonts config not found: \"" + conf_fonts + "\"");
-		return false;
+		// don't close application
+		return true;
 	}
 
 	XMLDocument doc;
