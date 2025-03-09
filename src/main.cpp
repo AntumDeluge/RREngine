@@ -70,14 +70,6 @@ int main(int argc, char** argv) {
 
 	// TODO: move SDL initialization to here so configuration can be loaded before window is displayed
 
-	if (!DataLoader::load()) {
-		logger.error("Failed to load game data");
-#if RRE_DEBUGGING
-	} else {
-		logger.debug("Game data loaded");
-#endif
-	}
-
 	GameWindow* win = GameWindow::get();
 
 	int result = GameConfig::load();
@@ -105,6 +97,15 @@ int main(int argc, char** argv) {
 
 	if (scale > 1) {
 		win->getViewport()->setScale(scale);
+	}
+
+	// renderer must be constructed before texture data can be loaded
+	if (!DataLoader::load()) {
+		logger.error("Failed to load game data");
+#if RRE_DEBUGGING
+	} else {
+		logger.debug("Game data loaded");
+#endif
 	}
 
 	GameLoop::setMode(GameMode::TITLE);
