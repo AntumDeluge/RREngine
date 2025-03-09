@@ -43,7 +43,7 @@ else()
 	set(CMAKE_C_COMPILER gcc)
 	set(CMAKE_CXX_COMPILER g++)
 endif()
-	
+
 
 # linker options
 
@@ -101,6 +101,13 @@ else()
 	message("-- bin2header NOT found")
 	file(COPY "${PROJECT_SOURCE_DIR}/builtin/tileset/fontmap.png" DESTINATION "${PROJECT_BINARY_DIR}/data/tileset")
 endif()
+# config analogous to fontmap.png
+file(READ "${PROJECT_SOURCE_DIR}/builtin/conf/fonts.xml" FONTS_CONFIG_IN)
+string(REPLACE "\"" "\\\"" FONTS_CONFIG_IN "${FONTS_CONFIG_IN}")
+string(REPLACE "\n" "\\n" FONTS_CONFIG_IN "${FONTS_CONFIG_IN}")
+set(FONTS_CONFIG_OUT "${PROJECT_BINARY_DIR}/builtin/conf/fonts.h")
+file(WRITE "${FONTS_CONFIG_OUT}" "#include <string>\n")
+file(APPEND "${FONTS_CONFIG_OUT}"  "const static inline std::string builtin_fonts_config = \"${FONTS_CONFIG_IN}\";\n")
 
 
 # example game data
