@@ -109,6 +109,9 @@ Scene* SceneStore::loadScene(string id) {
 	}
 
 	// parse layers
+	// TODO:
+	// - _maybe_ use layer order instead of names to determine destination
+	// - use properties to set parallax backgrounds
 	for (auto& layerPtr: map.getLayers()) {
 		tmx::TileLayer t_layer = dynamic_cast<const tmx::TileLayer&>(*layerPtr);
 		string layerName = t_layer.getName();
