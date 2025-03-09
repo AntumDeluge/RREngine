@@ -7,6 +7,8 @@
 #ifndef RRE_FONT_MAP_LOADER_H
 #define RRE_FONT_MAP_LOADER_H
 
+#include <cstddef> // size_t
+#include <cstdint> // uint*_t
 #include <unordered_map>
 
 #include <tinyxml2.h>
@@ -14,6 +16,11 @@
 
 // TODO: rename to FontMapsLoader
 namespace FontMapLoader {
+
+	/**
+	 * Loads configured font maps from built-in data.
+	 */
+	bool loadBuiltin();
 
 	/**
 	 * Loads configured font maps from configuration in `data/conf/fonts.xml`.
@@ -27,10 +34,14 @@ namespace FontMapLoader {
 	 *
 	 * @param el
 	 *   Element containing font information.
+	 * @param data
+	 *   PNG image data to use for map texture. if `NULL`, uses path parsed from XML.
+	 * @param data_size
+	 *   Data's byte count to be read.
 	 * @return
 	 *   `true` if parsing succeeded.
 	 */
-	bool parseFont(tinyxml2::XMLElement* el);
+	bool parseFont(tinyxml2::XMLElement* el, const uint8_t data[], const size_t data_size);
 
 	/**
 	 * Parses mapping of character index.

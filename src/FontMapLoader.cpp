@@ -4,6 +4,7 @@
  * See: LICENSE.txt
  */
 
+#include "config.h"
 
 #include <string>
 #include <vector>
@@ -16,6 +17,10 @@
 #include "Logger.h"
 #include "Path.h"
 #include "TextureLoader.h"
+#include "builtin/conf/fonts.h"
+#if HAVE_BUILTIN_FONT_MAP
+#include "builtin/tileset/fontmap_png.h"
+#endif
 
 using namespace std;
 using namespace tinyxml2;
@@ -28,6 +33,38 @@ namespace FontMapLoader {
 	bool loaded = false;
 };
 
+bool FontMapLoader::loadBuiltin() {
+#if RRE_DEBUGGING
+	FontMapLoader::logger.debug("Loading built-in fonts config");
+#endif
+
+	XMLDocument doc;
+	if (doc.Parse(builtin_fonts_config.c_str()) != XML_SUCCESS) {
+		string msg = "Failed to load built-in fonts config";
+		FontMapLoader::logger.error(msg);
+		Dialog::error(msg);
+		return false;
+	}
+
+	XMLElement* root = doc.FirstChildElement("fonts");
+	if (root == nullptr) {
+		string msg = "Root element \"fonts\" not found";
+		FontMapLoader::logger.error("XML Parsing Error: " + msg);
+		Dialog::error("XML Parsing Error", msg);
+		return false;
+	}
+
+	XMLElement* el = root->FirstChildElement("font");
+	if (el == nullptr) {
+		string msg = "Built-in font not configured";
+		FontMapLoader::logger.error("XML Parsing Error: " + msg);
+		Dialog::error("XML Parsing Error", msg);
+		return false;
+	}
+
+	return FontMapLoader::parseFont(el, fontmap_png, sizeof(fontmap_png));
+}
+
 bool FontMapLoader::loadConfig() {
 	if (FontMapLoader::loaded) {
 		logger.warn("Cannot reload font maps");
@@ -36,31 +73,33 @@ bool FontMapLoader::loadConfig() {
 	FontMapLoader::loaded = true;
 
 	string conf_fonts = Path::join(Path::dir_root, "data/conf/fonts.xml");
-	FontMapLoader::logger.debug("Loading fonts config: \"" + conf_fonts + "\"");
+#if RRE_DEBUGGING
+	FontMapLoader::logger.debug("Loading external fonts config: \"" + conf_fonts + "\"");
+#endif
 	if (!Filesystem::fexist(conf_fonts)) {
 		FontMapLoader::logger.warn("Fonts config not found: \"" + conf_fonts + "\"");
 		return false;
 	}
 
 	XMLDocument doc;
-	if (doc.LoadFile(conf_fonts.c_str()) != 0) {
+	if (doc.LoadFile(conf_fonts.c_str()) != XML_SUCCESS) {
 		string msg = "Failed to load fonts config: \"" + conf_fonts + "\"";
 		FontMapLoader::logger.error(msg);
 		Dialog::error(msg);
 		return false;
 	}
 
-	XMLElement* root = doc.RootElement();
+	XMLElement* root = doc.FirstChildElement("fonts");
 	if (root == nullptr) {
-		string msg = "Malformed config missing root element: \"" + conf_fonts + "\"";
-		FontMapLoader::logger.error(msg);
-		Dialog::error(msg);
+		string msg = "Root element \"fonts\" not found: \"" + conf_fonts + "\"";
+		FontMapLoader::logger.error("XML Parsing Error: " + msg);
+		Dialog::error("XML Parsing Error", msg);
 		return false;
 	}
 
 	XMLElement* el = root->FirstChildElement("font");
 	while (el != nullptr) {
-		if (!FontMapLoader::parseFont(el)) {
+		if (!FontMapLoader::parseFont(el, nullptr, 0)) {
 			return false;
 		}
 		el = el->NextSiblingElement("font");
@@ -69,7 +108,7 @@ bool FontMapLoader::loadConfig() {
 	return true;
 }
 
-bool FontMapLoader::parseFont(XMLElement* el) {
+bool FontMapLoader::parseFont(XMLElement* el, const uint8_t data[], const size_t data_size) {
 	vector<string> err;
 
 	string id = "";
@@ -128,7 +167,11 @@ bool FontMapLoader::parseFont(XMLElement* el) {
 	}
 
 	// add parsed data to font store
-	FontStore::addMap(id, new FontMap(TextureLoader::load(rpath), char_map, w, h));
+	if (data != nullptr) {
+		FontStore::addMap(id, new FontMap(TextureLoader::loadFM(data, data_size), char_map, w, h));
+	} else {
+		FontStore::addMap(id, new FontMap(TextureLoader::load(rpath), char_map, w, h));
+	}
 
 	return true;
 }
