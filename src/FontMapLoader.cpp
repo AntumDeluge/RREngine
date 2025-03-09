@@ -190,7 +190,12 @@ bool FontMapLoader::loadBuiltin() {
 		return false;
 	}
 
+#if HAVE_BUILTIN_FONT_MAP
 	return _parseFont(el, fontmap_png, sizeof(fontmap_png));
+#else
+	// shouldn't get here
+	return false;
+#endif
 }
 
 
