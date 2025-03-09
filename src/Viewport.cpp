@@ -131,12 +131,12 @@ void Viewport::drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rec
 	SDL_RenderCopy(this->renderer, texture, &s_rect, &t_rect);
 }
 
-void Viewport::drawImage(Sprite* sprite, uint32_t x, uint32_t y) {
+void Viewport::drawImage(ImageImpl* img, uint32_t x, uint32_t y) {
 	SDL_Rect s_rect;
 	s_rect.x = 0;
 	s_rect.y = 0;
-	s_rect.w = sprite->getWidth();
-	s_rect.h = sprite->getHeight();
+	s_rect.w = img->getWidth();
+	s_rect.h = img->getHeight();
 
 	// target rectangle used for offset
 	SDL_Rect t_rect; //= (SDL_Rect) {x, y, s_rect.w, s_rect.h};
@@ -145,7 +145,7 @@ void Viewport::drawImage(Sprite* sprite, uint32_t x, uint32_t y) {
 	t_rect.w = s_rect.w;
 	t_rect.h = s_rect.h;
 
-	this->drawTexture(sprite->getTexture(), s_rect, t_rect);
+	this->drawTexture(img->getTexture(), s_rect, t_rect);
 }
 
 void Viewport::draw() {

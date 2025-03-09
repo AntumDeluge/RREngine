@@ -13,6 +13,7 @@
 
 #include "FontMap.h"
 #include "GameMode.h"
+#include "ImageImpl.h"
 #include "Logger.h"
 #include "Scene.h"
 #include "Sprite.h"
@@ -122,7 +123,7 @@ public:
 	// TODO: rename to "drawImage" or "drawTexture"
 	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect);
 	void drawTexture(SDL_Texture* texture, SDL_Rect rect) { this->drawTexture(texture, rect, rect); }
-	void drawImage(Sprite* sprite, uint32_t x, uint32_t y);
+	void drawImage(ImageImpl* sprite, uint32_t x, uint32_t y);
 	void draw();
 
 	/**
