@@ -15,15 +15,10 @@
 #include "SceneStore.h"
 #include "SingletonRepo.h"
 
-#if HAVE_BUILTIN_FONT_MAP
-#include "builtin/tileset/fontmap_png.h"
-#endif
 
 namespace DataLoader {
 	bool loaded = false;
 };
-
-void buildBuiltinFontMap();
 
 bool DataLoader::load() {
 	Logger logger = Logger::getLogger("DataLoader");
@@ -36,6 +31,12 @@ bool DataLoader::load() {
 	if (!FontMapLoader::loadConfig()) {
 		return false;
 	}
+
+#if HAVE_BUILTIN_FONT_MAP
+	if (!FontMapLoader::loadBuiltin()) {
+		return false;
+	}
+#endif
 
 	FontMap* font_main = FontStore::getMap("main");
 	if (font_main != nullptr) {
@@ -50,20 +51,6 @@ bool DataLoader::load() {
 		return false;
 	}
 
-#if HAVE_BUILTIN_FONT_MAP
-	buildBuiltinFontMap();
-#endif
-
 	DataLoader::loaded = true;
 	return true;
-}
-
-void buildBuiltinFontMap() {
-	Logger logger = Logger::getLogger("DataLoader");
-
-#if RRE_DEBUGGING
-	logger.debug("Building built-in font map ...");
-#endif
-
-	// TODO:
 }
