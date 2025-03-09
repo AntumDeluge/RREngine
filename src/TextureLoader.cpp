@@ -5,14 +5,19 @@
  * See: LICENSE.txt
  */
 
-using namespace std;
+#include <cstring> // std::memcpy
 
+#include <SDL2/SDL_error.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_rwops.h>
+#include <SDL2/SDL_surface.h>
 
 #include "Logger.h"
 #include "Path.h"
 #include "SingletonRepo.h"
 #include "TextureLoader.h"
+
+using namespace std;
 
 
 // FIXME: can't instantiate logger here
@@ -42,4 +47,33 @@ SDL_Texture* TextureLoader::load(string rdpath) {
 	}
 
 	return TextureLoader::absLoad(apath);
+}
+
+SDL_Texture* TextureLoader::loadFM(const uint8_t data[], const size_t data_size) {
+	Logger logger = Logger::getLogger("TextureLoader");
+
+	uint8_t data_copy[data_size];
+	// need to either pass mutable variable or cast to `uint8_t*`
+	memcpy(data_copy, data, data_size);
+
+	SDL_RWops* rw = SDL_RWFromMem(data_copy, data_size);
+	if (rw == nullptr) {
+		logger.error("Failed to load texture from memory: " + string(SDL_GetError()));
+		return nullptr;
+	}
+
+	SDL_Surface* surface = IMG_Load_RW(rw, 1);
+	if (surface == nullptr) {
+		logger.error("Failed to load texture from memory: " + string(IMG_GetError()));
+		return nullptr;
+	}
+
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(GetViewport()->getRenderer(), surface);
+	SDL_FreeSurface(surface);
+	if (texture == nullptr) {
+		logger.error("Failed to load texture from memory: " + string(SDL_GetError()));
+		return nullptr;
+	}
+
+	return texture;
 }

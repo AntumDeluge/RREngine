@@ -8,6 +8,8 @@
 #ifndef RRE_TEXTURE_LOADER
 #define RRE_TEXTURE_LOADER
 
+#include <cstddef> // size_t
+#include <cstdint> // uint*_t
 #include <string>
 
 #include <SDL2/SDL_render.h>
@@ -37,6 +39,16 @@ namespace TextureLoader {
 	 *   Texture or `nullptr`.
 	 */
 	SDL_Texture* load(std::string rdpath);
+
+	/**
+	 * Loads image data into SDL texture.
+	 *
+	 * @param data
+	 *   PNG image data.
+	 * @return
+	 *   Texture.
+	 */
+	SDL_Texture* loadFM(const uint8_t data[], const size_t data_size);
 };
 
 #endif /* RRE_TEXTURE_LOADER */
