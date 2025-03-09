@@ -8,6 +8,7 @@
 
 #include "AudioStore.h"
 #include "DataLoader.h"
+#include "FontMapLoader.h"
 #include "Logger.h"
 #include "SceneStore.h"
 
@@ -27,6 +28,10 @@ bool DataLoader::load() {
 	if (DataLoader::loaded) {
 		logger.warn("Data already loaded");
 		return true;
+	}
+
+	if (!FontMapLoader::loadConfig()) {
+		return false;
 	}
 
 	if (!AudioStore::load()) {
