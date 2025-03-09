@@ -28,10 +28,10 @@ namespace FontMapLoader {
 	bool loaded = false;
 };
 
-void FontMapLoader::loadConfig() {
+bool FontMapLoader::loadConfig() {
 	if (FontMapLoader::loaded) {
 		logger.warn("Cannot reload font maps");
-		return;
+		return false;
 	}
 	FontMapLoader::loaded = true;
 
@@ -39,7 +39,7 @@ void FontMapLoader::loadConfig() {
 	FontMapLoader::logger.debug("Loading fonts config: \"" + conf_fonts + "\"");
 	if (!Filesystem::fexist(conf_fonts)) {
 		FontMapLoader::logger.warn("Fonts config not found: \"" + conf_fonts + "\"");
-		return;
+		return false;
 	}
 
 	XMLDocument doc;
@@ -47,7 +47,7 @@ void FontMapLoader::loadConfig() {
 		string msg = "Failed to load fonts config: \"" + conf_fonts + "\"";
 		FontMapLoader::logger.error(msg);
 		Dialog::error(msg);
-		return;
+		return false;
 	}
 
 	XMLElement* root = doc.RootElement();
@@ -55,16 +55,18 @@ void FontMapLoader::loadConfig() {
 		string msg = "Malformed config missing root element: \"" + conf_fonts + "\"";
 		FontMapLoader::logger.error(msg);
 		Dialog::error(msg);
-		return;
+		return false;
 	}
 
 	XMLElement* el = root->FirstChildElement("font");
 	while (el != nullptr) {
 		if (!FontMapLoader::parseFont(el)) {
-			break;
+			return false;
 		}
 		el = el->NextSiblingElement("font");
 	}
+
+	return true;
 }
 
 bool FontMapLoader::parseFont(XMLElement* el) {

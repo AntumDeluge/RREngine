@@ -17,7 +17,7 @@ namespace FontMapLoader {
 	/**
 	 * Loads configured font maps from configuration in `data/conf/fonts.xml`.
 	 */
-	void loadConfig();
+	bool loadConfig();
 
 	/**
 	 * Creates a font map from XML data.
