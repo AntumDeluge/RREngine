@@ -15,7 +15,7 @@
 #include "SceneStore.h"
 #include "SingletonRepo.h"
 
-#if HAVE_FONTMAP_PNG_H
+#if HAVE_BUILTIN_FONT_MAP
 #include "builtin/tileset/fontmap_png.h"
 #endif
 
@@ -50,7 +50,7 @@ bool DataLoader::load() {
 		return false;
 	}
 
-#if HAVE_FONTMAP_PNG_H
+#if HAVE_BUILTIN_FONT_MAP
 	buildBuiltinFontMap();
 #endif
 
