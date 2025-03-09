@@ -12,6 +12,7 @@
 #include <tinyxml2.h>
 
 
+// TODO: rename to FontMapsLoader
 namespace FontMapLoader {
 
 	/**
