@@ -9,11 +9,16 @@
 
 #include <SDL2/SDL_render.h>
 
+#include "Logger.h"
+
 
 /**
  * Base class to define images.
  */
 class ImageImpl {
+private:
+	static Logger logger;
+
 protected:
 	/** Texture to draw with renderer. */
 	SDL_Texture* texture;

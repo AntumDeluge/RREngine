@@ -7,7 +7,13 @@
 #include "ImageImpl.h"
 
 
-ImageImpl::ImageImpl(SDL_Texture* texture) {
+Logger ImageImpl::logger = Logger::getLogger("ImageImpl");
+
+ImageImpl::ImageImpl(SDL_Texture* texture): ImageImpl() {
+	if (texture == nullptr) {
+		this->logger.warn("Image constructed with null texture");
+		return;
+	}
 	this->texture = texture;
 	// get dimensions
 	SDL_QueryTexture(this->texture, NULL, NULL, &this->width, &this->height);
