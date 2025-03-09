@@ -8,10 +8,11 @@
 #define RRE_SCENE
 
 #include <cstdint> // uint*_t
-#include <string>
 #include <vector>
 
-#include "ImageImpl.h"
+#include <tmxlite/ImageLayer.hpp>
+#include <tmxlite/TileLayer.hpp>
+
 #include "Tileset.h"
 
 
@@ -21,6 +22,7 @@
  * TODO:
  * - need collision mapping to match terrain layer
  * - support additional background with parallax scrolling
+ * - create separate class called SceneBuilder to serve as framework to rendering scene
  */
 class Scene {
 private:
@@ -32,17 +34,56 @@ private:
 	/** Scene tilesets. */
 	std::vector<Tileset> tilesets;
 
-	/** Rendered background image. */
-	ImageImpl background;
-	/** Rendered terrain/collision image. */
-	ImageImpl terrain;
-	/** Rendered foreground image. */
-	ImageImpl foreground;
+	/** Parallax scrolling background layer 1. */
+	tmx::ImageLayer* s_background;
+	/** Parallax scrolling background layer 2. */
+	tmx::ImageLayer* s_background2;
+
+	/** Bottom tiled layer. */
+	tmx::TileLayer* background;
+	/** Terrain layer drawn under entities. */
+	tmx::TileLayer* terrain_rear;
+	/** Entities located in scene. */
+	tmx::TileLayer* entities;
+	/** Terrain layer containing collision info. */
+	tmx::TileLayer* terrain;
+	/** Top tiled layer drawn over entities. */
+	tmx::TileLayer* foreground;
+
+	tmx::ImageLayer* s_foreground;
 
 public:
 	Scene(uint16_t tile_width, uint16_t tile_height) {
 		this->tile_width = tile_width;
 		this->tile_height = tile_height;
+
+		this->s_background = nullptr;
+		this->s_background2 = nullptr;
+		this->background = nullptr;
+		this->terrain_rear = nullptr;
+		this->entities = nullptr;
+		this->terrain = nullptr;
+		this->foreground = nullptr;
+		this->s_foreground = nullptr;
+	}
+
+	~Scene() {
+		delete this->s_background;
+		this->s_background = nullptr;
+		delete this->s_background2;
+		this->s_background2 = nullptr;
+		delete this->background;
+		this->background = nullptr;
+		delete this->terrain_rear;
+		this->terrain_rear = nullptr;
+		delete this->entities;
+		this->entities = nullptr;
+		delete this->terrain;
+		this->terrain = nullptr;
+		delete this->foreground;
+		this->foreground = nullptr;
+		delete this->s_foreground;
+		this->s_foreground = nullptr;
 	}
 
 	void addTileset(Tileset tileset) {
@@ -50,34 +91,9 @@ public:
 	}
 
 	/**
-	 * Builds scene background layer.
-	 *
-	 * FIXME: might need to use different type for `data` parameter
-	 *
-	 * @param data
-	 *   Data defining tile drawing order.
+	 * Builds scene layers.
 	 */
-	void renderBackground(std::string data);
-
-	/**
-	 * Builds scene terrain layer.
-	 *
-	 * FIXME: might need to use different type for `data` parameter
-	 *
-	 * @param data
-	 *   Data defining tile drawing order.
-	 */
-	void renderTerrain(std::string data);
-
-	/**
-	 * Builds scene foreground layer.
-	 *
-	 * FIXME: might need to use different type for `data` parameter
-	 *
-	 * @param data
-	 *   Data defining tile drawing order.
-	 */
-	void renderForeground(std::string data);
+	void render();
 };
 
 #endif /* RRE_SCENE */
