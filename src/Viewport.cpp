@@ -200,13 +200,15 @@ void Viewport::drawTitle() {
 }
 
 void Viewport::drawText() {
-	for (int idx = 0; idx < this->text_sprites.size(); idx++) {
-		// TODO:
-		// - use text sprite class with x/y offsets predefined
-		Sprite* sprite = this->text_sprites[idx];
-		uint32_t center_x = (RES1.first / 2) - (sprite->getWidth() / 2);
-		uint32_t center_y = (RES1.second / 2) - (sprite->getHeight() / 2);
-		this->drawImage(sprite, center_x, center_y);
+	uint16_t y_offset = 0;
+	for (Sprite* s: this->text_sprites) {
+		uint16_t s_height = s->getHeight();
+		// TODO: need sprite class that defines text position
+		uint16_t center_x = (RES1.first / 2) - (s->getWidth() / 2);
+		uint16_t center_y = (RES1.second / 2) - (s_height / 2);
+		this->drawImage(s, center_x, center_y + y_offset);
+
+		y_offset += s_height + 1;
 	}
 
 #if RRE_DEBUGGING
