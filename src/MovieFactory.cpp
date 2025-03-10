@@ -65,6 +65,9 @@ Movie* MovieFactory::getMovie(string id) {
 	}
 
 	MovieFrameList frames;
+	//vector<pair<uint16_t, Sprite*>> text_sprites;
+	vector<string> texts;
+
 	if (movie_el != nullptr) {
 		XMLElement* frame_el = movie_el->FirstChildElement("frame");
 		while (frame_el != nullptr) {
@@ -90,6 +93,25 @@ Movie* MovieFactory::getMovie(string id) {
 
 			frame_el = frame_el->NextSiblingElement("frame");
 		}
+
+		XMLElement* text_el = movie_el->FirstChildElement("text");
+		while (text_el != nullptr) {
+			string text = text_el->GetText();
+
+			// TODO: support delay & duration
+
+			const XMLAttribute* delay_attr = text_el->FindAttribute("delay");
+			uint16_t delay = delay_attr != nullptr ? delay_attr->UnsignedValue()
+					: 0;
+
+			const XMLAttribute* duration_attr = text_el->FindAttribute("duration");
+			uint16_t duration = duration_attr != nullptr
+					? duration_attr->UnsignedValue() : 0;
+
+			texts.push_back(text);
+
+			text_el = text_el->NextSiblingElement("text");
+		}
 	}
 
 	if (frames.size() == 0) {
@@ -100,5 +122,10 @@ Movie* MovieFactory::getMovie(string id) {
 		return nullptr;
 	}
 
-	return new Movie(frames);
+	Movie* movie = new Movie(frames);
+	for (string t: texts) {
+		movie->addText(t);
+	}
+
+	return movie;
 }
