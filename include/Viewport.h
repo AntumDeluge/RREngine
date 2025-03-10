@@ -28,6 +28,7 @@ private:
 	// singleton class
 	static Viewport* instance;
 	Viewport();
+	// deletion of pointer members handled in Viewport.shutdown
 	~Viewport() {}
 
 	// delete copy constructor & assignment operator
