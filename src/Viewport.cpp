@@ -205,7 +205,7 @@ void Viewport::drawText() {
 		// - use text sprite class with x/y offsets predefined
 		Sprite* sprite = this->text_sprites[idx];
 		uint32_t center_x = (RES1.first / 2) - (sprite->getWidth() / 2);
-		uint32_t center_y = (RES1.second / 2) + (sprite->getHeight() / 2);
+		uint32_t center_y = (RES1.second / 2) - (sprite->getHeight() / 2);
 		this->drawImage(sprite, center_x, center_y);
 	}
 
