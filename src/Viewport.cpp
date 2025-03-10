@@ -63,8 +63,6 @@ void Viewport::shutdown() {
 	this->unsetScene();
 	delete this->movie;
 	this->movie = nullptr;
-	delete Viewport::instance;
-	Viewport::instance = nullptr;
 }
 
 void Viewport::setCurrentFPS(uint16_t fps) {
