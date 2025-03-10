@@ -100,6 +100,7 @@ void GameLoop::start() {
 		}
 
 		// limit game stepping frequency to defined millisecond intervals
+		// FIXME: should step only occur in GameMode::SCENE?
 		if (time_elapsed >= step_interval) {
 			logic->step(time_now);
 			time_prev = time_now;
