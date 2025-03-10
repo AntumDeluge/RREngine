@@ -52,7 +52,7 @@ void GameLoop::start() {
 
 	// target redraw rate
 	// TODO: use settings to set FPS limit
-	float fps_limit = 29.97;
+	float fps_limit = 29.97 * 2;
 	// delay (in milliseconds) for each viewport redraw
 	float draw_interval = 1000 / fps_limit;
 	// time (in milliseconds) at which viewport was most recently redrawn
