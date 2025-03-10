@@ -38,6 +38,10 @@ Viewport::Viewport() {
 	this->fps_sprite = nullptr;
 	this->scene = nullptr;
 	this->movie = nullptr;
+
+	// can't construct here because renderer hasn't been initialized
+	//this->player_sprite = new Sprite(TextureLoader::load("sprite/character"));
+	//this->player_sprite = nullptr;
 }
 
 void Viewport::init(SDL_Window* window) {
@@ -53,6 +57,8 @@ void Viewport::init(SDL_Window* window) {
 	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	SDL_SetRenderDrawBlendMode(this->renderer, SDL_BLENDMODE_BLEND);
 	//~ SDL_SetRenderDrawColor(this->renderer, 0, 0, 20, SDL_ALPHA_OPAQUE);
+
+	//this->player_sprite = new Sprite(TextureLoader::load("sprite/character"));
 }
 
 void Viewport::shutdown() {
@@ -65,6 +71,9 @@ void Viewport::shutdown() {
 	this->unsetScene();
 	delete this->movie;
 	this->movie = nullptr;
+
+	//delete this->player_sprite;
+	//this->player_sprite = nullptr;
 }
 
 void Viewport::setCurrentFPS(uint32_t fps) {
@@ -129,9 +138,10 @@ void Viewport::setMode(GameMode::Mode mode) {
 		this->addText("press enter");
 	} else if (mode == GameMode::SCENE) {
 		// DEBUG: placeholder example
-		this->setScene("map1");
-		this->addText("Sorry, nothing to do");
-		this->addText("here yet. :(");
+		//this->setScene("map1");
+		//this->addText("Sorry, nothing to do");
+		//this->addText("here yet. :(");
+		GetGameWindow()->playMusic("summer_sunday");
 	} else if (mode == GameMode::INTRO) {
 		this->movie = GameConfig::getIntro();
 		this->movie->play();
@@ -192,7 +202,8 @@ void Viewport::drawImage(ImageImpl* img, uint32_t x, uint32_t y) {
 }
 
 void Viewport::draw() {
-	SDL_RenderClear(this->renderer);
+	// DEBUG: clearing is done in GameLoop for proof-of-concept
+	//SDL_RenderClear(this->renderer);
 	// TODO: create Scene class that handles drawing tiles
 	if (this->mode == GameMode::SCENE) {
 		this->drawScene();
