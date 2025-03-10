@@ -61,6 +61,14 @@ public:
 		return instance;
 	}
 
+	static void destroy() {
+		if (Viewport::instance != nullptr) {
+			Viewport::instance->shutdown();
+			delete Viewport::instance;
+		}
+		Viewport::instance = nullptr;
+	}
+
 	/**
 	 * Initializes the pixel data renderer.
 	 *
