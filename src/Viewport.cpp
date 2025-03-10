@@ -129,6 +129,8 @@ void Viewport::setMode(GameMode::Mode mode) {
 	} else if (mode == GameMode::SCENE) {
 		// DEBUG: placeholder example
 		//this->setScene("map1");
+		this->addText("Sorry, nothing to do");
+		this->addText("here yet. :(");
 	} else if (mode == GameMode::INTRO) {
 		this->movie = GameConfig::getIntro();
 		this->movie->play();
