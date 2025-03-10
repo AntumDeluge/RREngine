@@ -4,6 +4,7 @@
 	<title>Example Game</title>
 	<icon></icon>
 	<scale>2</scale>
+	<intro movie="intro" />
 	<!-- TODO: configure menu parameters in separate XML -->
 	<menu id="title" background="voodoo_cactus_underwater" music="summer_sunday" />
 </game>
