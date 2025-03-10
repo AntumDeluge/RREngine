@@ -47,6 +47,14 @@ public:
 		return instance;
 	}
 
+	static void destroy() {
+		if (GameWindow::instance != nullptr) {
+			GameWindow::instance->shutdown();
+			delete GameWindow::instance;
+		}
+		GameWindow::instance = nullptr;
+	}
+
 	void setTitle(const std::string title);
 	int init(const std::string title, const int width, const int height);
 	int init(const int width, const int height) {

@@ -110,7 +110,7 @@ int main(int argc, char** argv) {
 
 	GameLoop::start();
 
-	win->shutdown();
+	GameWindow::destroy();
 	return 0;
 }
 
