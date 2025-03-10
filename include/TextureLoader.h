@@ -17,6 +17,8 @@
 
 /**
  * Namespace for loading PNG images into SDL textures.
+ *
+ * FIXME: need failsafes in case renderer not initialized (E.g. trying to get a texture within Viewport constructor)
  */
 namespace TextureLoader {
 
