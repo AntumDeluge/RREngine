@@ -71,8 +71,7 @@ void GameLoop::start() {
 	viewport->setCurrentFPS(0);
 
 	// start with intro movie if configured
-	//GameLoop::setMode(GameMode::INTRO);
-	GameLoop::setMode(GameMode::TITLE);
+	GameLoop::setMode(GameMode::INTRO);
 
 	while (!quit) {
 		// time (in milliseconds) at which game loop is executing
