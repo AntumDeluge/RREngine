@@ -52,8 +52,6 @@ int GameWindow::init(const string title, const int width, const int height) {
 	// create the SDL frame & viewport renderer
 	this->window = SDL_CreateWindow(this->title.c_str(), SDL_WINDOWPOS_CENTERED,
 			SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
-	this->viewport = GetViewport();
-	this->viewport->init(this->window);
 
 	// initialize PNG image support
 	if (IMG_Init(IMG_INIT_PNG) == 0) {
@@ -90,6 +88,9 @@ int GameWindow::init(const string title, const int width, const int height) {
 		this->shutdown();
 		return 1;
 	}
+
+	this->viewport = GetViewport();
+	this->viewport->init(this->window);
 
 	return 0;
 }
