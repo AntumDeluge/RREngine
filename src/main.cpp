@@ -108,7 +108,6 @@ int main(int argc, char** argv) {
 #endif
 	}
 
-	GameLoop::setMode(GameMode::TITLE);
 	GameLoop::start();
 
 	win->shutdown();

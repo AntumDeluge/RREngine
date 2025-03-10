@@ -70,6 +70,10 @@ void GameLoop::start() {
 	// set before drawing to show FPS before update
 	viewport->setCurrentFPS(0);
 
+	// start with intro movie if configured
+	//GameLoop::setMode(GameMode::INTRO);
+	GameLoop::setMode(GameMode::TITLE);
+
 	while (!quit) {
 		// time (in milliseconds) at which game loop is executing
 		uint64_t time_now = SDL_GetTicks64();
