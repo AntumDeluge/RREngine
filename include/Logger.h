@@ -28,9 +28,6 @@ private:
 	static LogLevel default_level;
 	static bool verbose;
 
-	/** Logger instances. */
-	static std::unordered_map<std::string, Logger> loggers;
-
 	Logger(std::string id, LogLevel level, std::string file);
 	Logger(std::string id, LogLevel level) : Logger(id, level, "") {}
 	Logger(std::string id, std::string file) : Logger(id, Logger::default_level, file) {}
@@ -44,14 +41,17 @@ public:
 		this->level = Logger::default_level;
 	}
 
-	static Logger getLogger(std::string id) {
-		if (Logger::loggers.find(id) != Logger::loggers.end()) {
-			return Logger::loggers[id];
+	static Logger& getLogger(std::string id) {
+		/** Logger instances. */
+		static std::unordered_map<std::string, Logger> loggers;
+
+		if (loggers.find(id) != loggers.end()) {
+			return loggers[id];
 		}
 
 		Logger logger(id);
-		Logger::loggers[id] = logger;
-		return logger;
+		loggers[id] = logger;
+		return loggers[id];
 	}
 
 	static void setVerbose(bool verbose);

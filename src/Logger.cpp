@@ -23,7 +23,6 @@ LogLevel Logger::default_level = DEBUG;
 LogLevel Logger::default_level = ERROR;
 #endif
 bool Logger::verbose = false;
-unordered_map<string, Logger> Logger::loggers = {};
 
 Logger::Logger(string id, LogLevel level, string file) {
 	this->id = id;
