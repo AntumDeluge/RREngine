@@ -13,6 +13,7 @@ using namespace std;
 
 #include "FontStore.h"
 #include "GameConfig.h"
+#include "GameLoop.h"
 #include "SceneStore.h"
 #include "SingletonRepo.h"
 #include "TextureLoader.h"
@@ -34,6 +35,7 @@ Viewport::Viewport() {
 	this->background = nullptr;
 	this->fps_sprite = nullptr;
 	this->scene = nullptr;
+	this->movie = nullptr;
 }
 
 void Viewport::init(SDL_Window* window) {
@@ -59,6 +61,8 @@ void Viewport::shutdown() {
 	delete this->font_map;
 	delete this->fps_sprite;
 	this->unsetScene();
+	delete this->movie;
+	this->movie = nullptr;
 	delete Viewport::instance;
 	Viewport::instance = nullptr;
 }
@@ -125,6 +129,17 @@ void Viewport::setMode(GameMode::Mode mode) {
 	} else if (mode == GameMode::SCENE) {
 		// DEBUG: placeholder example
 		//this->setScene("map1");
+	} else if (mode == GameMode::INTRO) {
+		this->movie = GameConfig::getIntro();
+		this->movie->play();
+
+#if RRE_DEBUGGING
+		if (this->movie == nullptr) {
+			this->logger.warn("No intro movie set");
+		} else {
+			this->logger.debug("Intro movie set");
+		}
+#endif
 	}
 
 	this->mode = mode;
@@ -163,6 +178,13 @@ void Viewport::draw() {
 		this->drawScene();
 	} else if (this->mode == GameMode::TITLE) {
 		this->drawTitle();
+	} else if (this->mode == GameMode::INTRO) {
+		if (this->movie == nullptr || this->movie->ended()) {
+			GameLoop::setMode(GameMode::TITLE);
+			return; // XXX: may be causing flicker between draws
+		} else {
+			this->movie->render(this);
+		}
 	}
 	this->drawText();
 	SDL_RenderPresent(this->renderer);

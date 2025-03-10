@@ -15,6 +15,8 @@
 #include "GameMode.h"
 #include "ImageImpl.h"
 #include "Logger.h"
+#include "Movie.h"
+#include "MovieFactory.h"
 #include "Scene.h"
 #include "Sprite.h"
 
@@ -44,6 +46,9 @@ private:
 	SDL_Texture* background;
 	Sprite* fps_sprite;
 	Scene* scene;
+
+	/** Currently playing movie. */
+	Movie* movie;
 
 	// TODO: replace with text sprite class with x/y offsets
 	std::vector<Sprite*> text_sprites;
@@ -78,6 +83,7 @@ public:
 	SDL_Renderer* getRenderer() { return this->renderer; }
 
 	void setFontMap(FontMap* font_map) { this->font_map = font_map; }
+	FontMap* getFontMap() { return this->font_map; }
 	void setCurrentFPS(uint16_t fps);
 	void setScale(uint16_t scale);
 
