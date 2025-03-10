@@ -118,6 +118,7 @@ bool Viewport::setScene(string id) {
 
 void Viewport::setMode(GameMode::Mode mode) {
 	GetGameWindow()->stopMusic();
+	this->clearText();
 	this->unsetBackground();
 	if (mode == GameMode::TITLE) {
 		this->setScene("");
