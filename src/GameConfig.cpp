@@ -17,6 +17,7 @@ using namespace tinyxml2;
 #include "Filesystem.h"
 #include "GameConfig.h"
 #include "Logger.h"
+#include "MovieFactory.h"
 #include "Path.h"
 
 
@@ -35,6 +36,7 @@ string title = "";
 uint16_t scale = 1;
 unordered_map<string, string> menu_backgrounds;
 unordered_map<string, string> menu_music_ids;
+string intro_id = "";
 
 bool loaded = false;
 
@@ -69,6 +71,17 @@ int GameConfig::load() {
 	if (el_root == nullptr) {
 		onConfigError("XML Parsing Error", "Root element not found");
 		return 1;
+	}
+
+	XMLElement* el_intro = el_root->FirstChildElement("intro");
+	if (el_intro != nullptr) {
+		const XMLAttribute* intro_movie_attr = el_intro->FindAttribute("movie");
+		if (intro_movie_attr == nullptr) {
+			onConfigError("XML Parsing Error",
+					"Intro element without \"movie\" attribute");
+			return 1;
+		}
+		intro_id = intro_movie_attr->Value();
 	}
 
 	XMLElement* el_title = el_root->FirstChildElement("title");
@@ -139,6 +152,13 @@ string GameConfig::getTitle() {
 
 uint16_t GameConfig::getScale() {
 	return scale;
+}
+
+Movie* GameConfig::getIntro() {
+	if (intro_id.empty()) {
+		return nullptr;
+	}
+	return MovieFactory::getMovie(intro_id);
 }
 
 string GameConfig::getBackground(string id) {

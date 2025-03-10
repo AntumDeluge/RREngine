@@ -11,6 +11,8 @@
 #include <cstdint> // uint*_t
 #include <string>
 
+#include "Movie.h"
+
 
 /**
  * Namespace for loading & accessing game configuration from `data/conf/game.xml`.
@@ -27,6 +29,8 @@ namespace GameConfig {
 	std::string getTitle();
 
 	uint16_t getScale();
+
+	Movie* getIntro();
 
 	std::string getBackground(std::string id);
 
