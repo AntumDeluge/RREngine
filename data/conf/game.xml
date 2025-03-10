@@ -5,5 +5,5 @@
 	<icon></icon>
 	<scale>2</scale>
 	<!-- TODO: configure menu parameters in separate XML -->
-	<menu id="title" background="underwater_mountains" music="summer_sunday" />
+	<menu id="title" background="voodoo_cactus_underwater" music="summer_sunday" />
 </game>
