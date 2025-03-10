@@ -20,7 +20,7 @@
 
 
 /** Type representing <duration (ms), image>. */
-typedef std::pair<uint32_t, ImageImpl> MovieFrame;
+typedef std::pair<uint32_t, ImageImpl*> MovieFrame;
 typedef std::vector<MovieFrame> MovieFrameList;
 
 class Movie {
@@ -40,6 +40,12 @@ public:
 	// default constructor
 	Movie() {}
 	Movie(MovieFrameList frames) { this->frames = frames; }
+	~Movie() {
+		for (MovieFrame f: this->frames) {
+			delete f.second;
+		}
+		this->frames.clear();
+	}
 
 	void play() {
 		this->frame_start = SDL_GetTicks64();

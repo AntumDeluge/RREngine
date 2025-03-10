@@ -78,8 +78,8 @@ Movie* MovieFactory::getMovie(string id) {
 			}
 			uint32_t duration = ms_attr->UnsignedValue();
 			string frame_id = frame_el->GetText();
-			ImageImpl img = TextureLoader::load(Path::join("movie", frame_id));
-			if (!img.ready()) {
+			ImageImpl* img = new ImageImpl(TextureLoader::load(Path::join("movie", frame_id)));
+			if (!img->ready()) {
 				string msg = "Failed to load movie frame image \"" + frame_id
 						+ "\": " + movies_conf;
 				MovieFactory::logger.error(msg);
