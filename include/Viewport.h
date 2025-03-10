@@ -53,6 +53,9 @@ private:
 	// TODO: replace with text sprite class with x/y offsets
 	std::vector<Sprite*> text_sprites;
 
+	// XXX: placeholder for testing moving sprites
+	//Sprite* player_sprite;
+
 public:
 	static Viewport* get() {
 		if (instance == nullptr) {
