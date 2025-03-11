@@ -7,13 +7,14 @@
 #ifndef RRE_SPRITE_H
 #define RRE_SPRITE_H
 
-#include <cstdint>
+#include <cstdint> // uint*_t
 #include <string>
 
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_timer.h>
 
 #include "ImageImpl.h"
+#include "Logger.h"
 
 
 /**
@@ -21,6 +22,8 @@
  */
 class Sprite: public ImageImpl {
 private:
+	static Logger logger;
+
 	uint32_t expires = 0;
 
 public:

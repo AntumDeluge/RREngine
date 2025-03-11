@@ -18,21 +18,21 @@ using namespace tinyxml2;
 using namespace std;
 
 
-Sprite::Sprite(string id) : ImageImpl() {
-	Logger logger = Logger::getLogger("Sprite");
+Logger Sprite::logger = Logger::getLogger("Sprite");
 
+Sprite::Sprite(string id) : ImageImpl() {
 	// TODO: cache sprites at startup or scene loading (optimization?) in SpriteStore
 	const string conf_sprites = Path::join(Path::dir_root, "data/conf/sprites/characters.xml");
 	if (!Filesystem::fexist(conf_sprites)) {
 		string msg = "Sprite configuration not found: \"" + conf_sprites + "\"";
-		logger.error(msg);
+		this->logger.error(msg);
 		return;
 	}
 
 	XMLDocument doc;
 	doc.LoadFile(conf_sprites.c_str());
 	if (doc.Error()) {
-		logger.error(doc.ErrorStr());
+		this->logger.error(doc.ErrorStr());
 		return;
 	}
 
@@ -41,7 +41,7 @@ Sprite::Sprite(string id) : ImageImpl() {
 	if (root != nullptr) {
 		XMLElement* element = root->FirstChildElement("sprite");
 		if (element == nullptr) {
-			logger.warn("No sprite definitions found in config: \"" + conf_sprites + "\"");
+			this->logger.warn("No sprite definitions found in config: \"" + conf_sprites + "\"");
 		}
 
 		while (element != nullptr) {
@@ -57,13 +57,13 @@ Sprite::Sprite(string id) : ImageImpl() {
 
 	if (spriteElement == nullptr) {
 		string msg = "Sprite for ID \"" + id + "\" not configured: \"" + conf_sprites + "\"";
-		logger.error(msg);
+		this->logger.error(msg);
 		return;
 	}
 
 	XMLElement* fileElement = spriteElement->FirstChildElement("filename");
 	if (fileElement == nullptr) {
-		logger.error("Malformed sprite configuration; missing \"filename\" element: \""
+		this->logger.error("Malformed sprite configuration; missing \"filename\" element: \""
 				+ conf_sprites + "\"");
 	} else {
 		this->texture = TextureLoader::load(Path::join("sprite", fileElement->GetText()));
@@ -71,7 +71,7 @@ Sprite::Sprite(string id) : ImageImpl() {
 
 	XMLElement* sizeElement = spriteElement->FirstChildElement("size");
 	if (sizeElement == nullptr) {
-		logger.error("Malformed sprite configuration; missing \"size\" element: \""
+		this->logger.error("Malformed sprite configuration; missing \"size\" element: \""
 				+ conf_sprites + "\"");
 	} else {
 		const XMLAttribute* width = sizeElement->FindAttribute("w");
