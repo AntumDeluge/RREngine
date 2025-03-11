@@ -15,6 +15,7 @@
 
 #include "Entity.h"
 #include "Tileset.h"
+#include "ViewportRenderer.h"
 
 
 /**
@@ -103,7 +104,7 @@ public:
 	/**
 	 * Builds scene layers.
 	 */
-	void render();
+	void render(ViewportRenderer* viewport);
 
 	void setLayerSBackground(tmx::ImageLayer* layer) { this->s_background = layer; }
 	void setLayerSBackground2(tmx::ImageLayer* layer) { this->s_background2 = layer; }

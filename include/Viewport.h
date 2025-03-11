@@ -160,10 +160,11 @@ public:
 	void clearText();
 
 private:
+	// TODO: replace with methods in Scene class
 	void drawScene();
 	void drawBackground();
 	void drawForeground();
-	void drawEntities();
+
 	void drawTitle();
 	void drawText();
 	void drawFPS();

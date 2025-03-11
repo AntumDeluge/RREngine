@@ -211,7 +211,11 @@ void Viewport::draw() {
 
 void Viewport::drawScene() {
 	this->drawBackground();
-	this->drawEntities();
+	if (this->scene == nullptr) {
+		logger.error("Scene is undefined");
+	} else {
+		this->scene->render(this);
+	}
 	this->drawForeground();
 }
 
@@ -220,10 +224,6 @@ void Viewport::drawBackground() {
 }
 
 void Viewport::drawForeground() {
-	// TODO:
-}
-
-void Viewport::drawEntities() {
 	// TODO:
 }
 

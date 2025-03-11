@@ -6,16 +6,16 @@
 
 #include <algorithm> // std::find
 
-#include <SDL2/SDL_render.h>
-
 #include "Scene.h"
 #include "SingletonRepo.h"
 
 using namespace std;
 
 
-void Scene::render() {
-	SDL_Renderer* renderer = GetViewport()->getRenderer();
+void Scene::render(ViewportRenderer* viewport) {
+	for (Entity* entity: this->entities) {
+		entity->render(viewport);
+	}
 
 	// TODO:
 }
