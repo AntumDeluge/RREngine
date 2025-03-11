@@ -21,6 +21,7 @@
 #include "Sprite.h"
 
 
+// TODO: move rendering functions to new renderer class or Scene
 class Viewport {
 private:
 	/** Logger instance for this class. */
@@ -127,10 +128,11 @@ public:
 	 */
 	void setMode(GameMode::Mode mode);
 
-	// TODO: rename to "drawImage" or "drawTexture"
 	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect);
 	void drawTexture(SDL_Texture* texture, SDL_Rect rect) { this->drawTexture(texture, rect, rect); }
 	void drawImage(ImageImpl* sprite, uint32_t x, uint32_t y);
+
+	// TODO: rename to render
 	void draw();
 
 	/**

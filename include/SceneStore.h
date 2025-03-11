@@ -14,6 +14,8 @@
 
 /**
  * Functions for loading & retrieving scene data.
+ *
+ * TODO: rename to SceneFactory
  */
 namespace SceneStore {
 
