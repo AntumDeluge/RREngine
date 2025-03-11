@@ -21,11 +21,12 @@ using namespace std;
 #include "reso.h"
 
 
+Logger Viewport::logger = Logger::getLogger("Viewport");
+
 // initialize singleton instance
 Viewport* Viewport::instance = nullptr;
 
 Viewport::Viewport() {
-	this->logger = Logger::getLogger("Viewport");
 	this->renderer = nullptr;
 	// TODO: initial viewport font should be configured in game.xml
 	this->font_map = nullptr; // cannot be set here because font maps have not yet loaded

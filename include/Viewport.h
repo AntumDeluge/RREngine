@@ -26,8 +26,7 @@
 class Viewport: public ViewportRenderer {
 private:
 	/** Logger instance for this class. */
-	// TODO: make static
-	Logger logger;
+	static Logger logger;
 
 	// singleton class
 	static Viewport* instance;
