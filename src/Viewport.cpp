@@ -211,11 +211,7 @@ void Viewport::draw() {
 
 void Viewport::drawScene() {
 	this->drawBackground();
-	if (this->scene == nullptr) {
-		logger.error("Scene is undefined");
-	} else {
-		this->scene->render(this);
-	}
+	if (this->scene != nullptr) this->scene->render(this);
 	this->drawForeground();
 }
 
