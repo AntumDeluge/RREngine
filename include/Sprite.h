@@ -15,6 +15,7 @@
 
 #include "ImageImpl.h"
 #include "Logger.h"
+#include "ViewportRenderer.h"
 
 
 /**
@@ -29,6 +30,7 @@ private:
 public:
 	Sprite(SDL_Texture* texture): ImageImpl(texture) {}
 	Sprite(std::string id);
+	Sprite(): Sprite(nullptr) {}
 
 	void setExpiration(uint32_t expires) {
 		this->expires = expires;
