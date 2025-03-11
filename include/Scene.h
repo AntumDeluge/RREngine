@@ -13,6 +13,7 @@
 #include <tmxlite/ImageLayer.hpp>
 #include <tmxlite/TileLayer.hpp>
 
+#include "Entity.h"
 #include "Tileset.h"
 
 
@@ -52,6 +53,9 @@ private:
 
 	tmx::ImageLayer* s_foreground;
 
+	/** Entities currently occupying this scene. */
+	std::vector<Entity*> entities;
+
 public:
 	Scene(uint16_t tile_width, uint16_t tile_height) {
 		this->tile_width = tile_width;
@@ -84,6 +88,12 @@ public:
 		this->foreground = nullptr;
 		delete this->s_foreground;
 		this->s_foreground = nullptr;
+
+		for (Entity* e: this->entities) {
+			delete e;
+			e = nullptr;
+		}
+		this->entities.clear();
 	}
 
 	void addTileset(Tileset tileset) {
@@ -103,6 +113,22 @@ public:
 	void setLayerCollision(tmx::TileLayer* layer) { this->collision = layer; }
 	void setLayerForeground(tmx::TileLayer* layer) { this->foreground = layer; }
 	void setLayerSForeground(tmx::ImageLayer* layer) { this->s_foreground = layer; }
+
+	/**
+	 * Adds an entity to the scene.
+	 *
+	 * @param entity
+	 *   Entity to be added.
+	 */
+	void addEntity(Entity* entity) { this->entities.push_back(entity); }
+
+	/**
+	 * Removes an entity from the scene.
+	 *
+	 * @param entity
+	 *   Entity to be removed.
+	 */
+	void removeEntity(Entity* entity);
 };
 
 #endif /* RRE_SCENE */
