@@ -20,6 +20,9 @@
 
 using namespace std;
 
+// DEBUG:
+#include "Entity.h"
+
 
 namespace SceneStore {
 	// FIXME: can't initialize logger here
@@ -146,6 +149,10 @@ Scene* SceneStore::loadScene(string id) {
 			}
 		}
 	}
+
+	// DEBUG: test drawing entity in scene
+	// NOTE: deleted by scene
+	scene->addEntity(new Entity("character", 32, 32));
 
 	// cache for subsequent retrieval
 	SceneStore::scenes[id] = scene;
