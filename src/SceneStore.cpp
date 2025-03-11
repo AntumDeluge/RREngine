@@ -120,25 +120,25 @@ Scene* SceneStore::loadScene(string id) {
 			tmx::ImageLayer i_layer = dynamic_cast<const tmx::ImageLayer&>(*layerPtr);
 
 			if (layerName == "s_background") {
-				scene->setScrollBackground(&i_layer);
+				scene->setLayerSBackground(&i_layer);
 			} else if (layerName == "s_background2") {
-				scene->setScrollBackground2(&i_layer);
+				scene->setLayerSBackground2(&i_layer);
 			} else if (layerName == "s_foreground") {
-				scene->setScrollForeground(&i_layer);
+				scene->setLayerSForeground(&i_layer);
 			}
 		} else if (layer.getType() == tmx::Layer::Type::Tile) {
 			tmx::TileLayer t_layer = dynamic_cast<const tmx::TileLayer&>(*layerPtr);
 
 			if (layerName == "background") {
-				scene->setBackground(&t_layer);
+				scene->setLayerBackground(&t_layer);
 			} else if (layerName == "terrain") {
-				scene->setTerrain(&t_layer);
+				scene->setLayerTerrain(&t_layer);
 			} else if (layerName == "objects") {
-				scene->setObjects(&t_layer);
+				scene->setLayerObjects(&t_layer);
 			} else if (layerName == "collision") {
-				scene->setCollision(&t_layer);
+				scene->setLayerCollision(&t_layer);
 			} else if (layerName == "foreground") {
-				scene->setForeground(&t_layer);
+				scene->setLayerForeground(&t_layer);
 			}
 		}
 	}

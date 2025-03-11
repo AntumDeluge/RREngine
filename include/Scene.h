@@ -95,14 +95,14 @@ public:
 	 */
 	void render();
 
-	void setScrollBackground(tmx::ImageLayer* layer) { this->s_background = layer; }
-	void setScrollBackground2(tmx::ImageLayer* layer) { this->s_background2 = layer; }
-	void setBackground(tmx::TileLayer* layer) { this->background = layer; }
-	void setTerrain(tmx::TileLayer* layer) { this->terrain = layer; }
-	void setObjects(tmx::TileLayer* layer) { this->objects = layer; }
-	void setCollision(tmx::TileLayer* layer) { this->collision = layer; }
-	void setForeground(tmx::TileLayer* layer) { this->foreground = layer; }
-	void setScrollForeground(tmx::ImageLayer* layer) { this->s_foreground = layer; }
+	void setLayerSBackground(tmx::ImageLayer* layer) { this->s_background = layer; }
+	void setLayerSBackground2(tmx::ImageLayer* layer) { this->s_background2 = layer; }
+	void setLayerBackground(tmx::TileLayer* layer) { this->background = layer; }
+	void setLayerTerrain(tmx::TileLayer* layer) { this->terrain = layer; }
+	void setLayerObjects(tmx::TileLayer* layer) { this->objects = layer; }
+	void setLayerCollision(tmx::TileLayer* layer) { this->collision = layer; }
+	void setLayerForeground(tmx::TileLayer* layer) { this->foreground = layer; }
+	void setLayerSForeground(tmx::ImageLayer* layer) { this->s_foreground = layer; }
 };
 
 #endif /* RRE_SCENE */
