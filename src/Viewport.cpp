@@ -155,6 +155,23 @@ void Viewport::drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rec
 	SDL_RenderCopy(this->renderer, texture, &s_rect, &t_rect);
 }
 
+void Viewport::drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width,
+		uint32_t s_height, uint32_t x, uint32_t y) {
+	SDL_Rect s_rect;
+	s_rect.x = sx;
+	s_rect.y = sx;
+	s_rect.w = s_width;
+	s_rect.h = s_height;
+
+	SDL_Rect t_rect;
+	t_rect.x = x;
+	t_rect.y = y;
+	t_rect.w = s_rect.w;
+	t_rect.h = s_rect.h;
+
+	this->drawTexture(img->getTexture(), s_rect, t_rect);
+}
+
 void Viewport::drawImage(ImageImpl* img, uint32_t x, uint32_t y) {
 	SDL_Rect s_rect;
 	s_rect.x = 0;

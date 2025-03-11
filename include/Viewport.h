@@ -139,6 +139,8 @@ public:
 	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect);
 	void drawTexture(SDL_Texture* texture, SDL_Rect rect) { this->drawTexture(texture, rect, rect); }
 	// TODO: support scaling
+	void drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width, uint32_t t_height,
+			uint32_t x, uint32_t y);
 	void drawImage(ImageImpl* img, uint32_t x, uint32_t y);
 
 	// TODO: rename to render
