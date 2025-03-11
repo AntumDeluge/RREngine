@@ -47,7 +47,7 @@ public:
 	/**
 	 * Default destructor.
 	 */
-	~ImageImpl() { SDL_DestroyTexture(this->texture); }
+	virtual ~ImageImpl() { SDL_DestroyTexture(this->texture); }
 
 	/**
 	 * Retrieves drawable texture.
