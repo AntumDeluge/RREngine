@@ -20,6 +20,7 @@
 #include "ImageImpl.h"
 #include "Logger.h"
 #include "Sprite.h"
+#include "ViewportRenderer.h"
 
 
 /** Type representing <duration (ms), image>. */
@@ -57,7 +58,7 @@ public:
 		this->playing = true;
 	}
 
-	void render(void* viewport);
+	void render(ViewportRenderer* viewport);
 
 	void onComplete() {
 #if RRE_DEBUGGING

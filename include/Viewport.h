@@ -19,10 +19,11 @@
 #include "MovieFactory.h"
 #include "Scene.h"
 #include "Sprite.h"
+#include "ViewportRenderer.h"
 
 
 // TODO: move rendering functions to new renderer class or Scene
-class Viewport {
+class Viewport: public ViewportRenderer {
 private:
 	/** Logger instance for this class. */
 	// TODO: make static
@@ -138,10 +139,10 @@ public:
 
 	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect);
 	void drawTexture(SDL_Texture* texture, SDL_Rect rect) { this->drawTexture(texture, rect, rect); }
-	// TODO: support scaling
+
 	void drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width, uint32_t t_height,
-			uint32_t x, uint32_t y);
-	void drawImage(ImageImpl* img, uint32_t x, uint32_t y);
+			uint32_t x, uint32_t y) override;
+	void drawImage(ImageImpl* img, uint32_t x, uint32_t y) override;
 
 	// TODO: rename to render
 	void draw();

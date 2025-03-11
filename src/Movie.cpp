@@ -6,7 +6,7 @@
 
 #include "FontStore.h"
 #include "Movie.h"
-#include "Viewport.h"
+#include "SingletonRepo.h"
 #include "reso.h"
 
 using namespace std;
@@ -14,7 +14,7 @@ using namespace std;
 
 Logger Movie::logger = Logger::getLogger("Movie");
 
-void Movie::render(void* viewport) {
+void Movie::render(ViewportRenderer* viewport) {
 
 	uint16_t frames_count = this->frames.size();
 	if (!this->playing || frames_count == 0) {
@@ -39,8 +39,7 @@ void Movie::render(void* viewport) {
 		frame = this->frames[this->frame_index];
 	}
 
-	// FIXME: ensure instance of Viewport
-	((Viewport*) viewport)->drawImage(frame.second, 0, 0);
+	viewport->drawImage(frame.second, 0, 0);
 
 	uint16_t y_offset = 0;
 	for (Sprite* s: this->text_sprites) {
@@ -48,7 +47,7 @@ void Movie::render(void* viewport) {
 		// TODO: need sprite class that defines text position
 		uint16_t center_x = (RES1.first / 2) - (s->getWidth() / 2);
 		uint16_t center_y = (RES1.second / 2) - (s_height / 2);
-		((Viewport*) viewport)->drawImage(s, center_x, center_y + y_offset);
+		viewport->drawImage(s, center_x, center_y + y_offset);
 
 		y_offset += s_height + 1;
 	}
@@ -65,9 +64,9 @@ void Movie::addText(FontMap* font_map, string text) {
 }
 
 void Movie::addText(uint32_t expires, string text) {
-	this->addText(Viewport::get()->getFontMap(), expires, text);
+	this->addText(GetViewport()->getFontMap(), expires, text);
 }
 
 void Movie::addText(string text) {
-	this->addText(Viewport::get()->getFontMap(), text);
+	this->addText(GetViewport()->getFontMap(), text);
 }
