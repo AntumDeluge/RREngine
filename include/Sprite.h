@@ -39,6 +39,18 @@ public:
 	bool expired() {
 		return this->expires != 0 && SDL_GetTicks64() >= this->expires;
 	}
+
+	/**
+	 * Draws this sprite on the viewport.
+	 *
+	 * @param viewport
+	 *   Viewport render instance.
+	 * @param x
+	 *   Pixel drawing position on horizontal axis.
+	 * @param y
+	 *   Pixel drawing position on vertical axis.
+	 */
+	void render(ViewportRenderer* viewport, uint16_t x, uint16_t y);
 };
 
 #endif /* RRE_SPRITE_H */
