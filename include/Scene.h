@@ -44,7 +44,7 @@ private:
 	/** Terrain layer drawn under entities. */
 	tmx::TileLayer* terrain;
 	/** Entities located in scene. */
-	tmx::TileLayer* entities;
+	tmx::TileLayer* objects;
 	/** Terrain layer containing collision info. */
 	tmx::TileLayer* collision;
 	/** Top tiled layer drawn over entities. */
@@ -61,7 +61,7 @@ public:
 		this->s_background2 = nullptr;
 		this->background = nullptr;
 		this->terrain = nullptr;
-		this->entities = nullptr;
+		this->objects = nullptr;
 		this->collision = nullptr;
 		this->foreground = nullptr;
 		this->s_foreground = nullptr;
@@ -76,8 +76,8 @@ public:
 		this->background = nullptr;
 		delete this->terrain;
 		this->terrain = nullptr;
-		delete this->entities;
-		this->entities = nullptr;
+		delete this->objects;
+		this->objects = nullptr;
 		delete this->collision;
 		this->collision = nullptr;
 		delete this->foreground;
@@ -99,7 +99,7 @@ public:
 	void setScrollBackground2(tmx::ImageLayer* layer) { this->s_background2 = layer; }
 	void setBackground(tmx::TileLayer* layer) { this->background = layer; }
 	void setTerrain(tmx::TileLayer* layer) { this->terrain = layer; }
-	void setEntities(tmx::TileLayer* layer) { this->entities = layer; }
+	void setObjects(tmx::TileLayer* layer) { this->objects = layer; }
 	void setCollision(tmx::TileLayer* layer) { this->collision = layer; }
 	void setForeground(tmx::TileLayer* layer) { this->foreground = layer; }
 	void setScrollForeground(tmx::ImageLayer* layer) { this->s_foreground = layer; }

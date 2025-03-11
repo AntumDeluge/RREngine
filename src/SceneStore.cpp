@@ -133,8 +133,8 @@ Scene* SceneStore::loadScene(string id) {
 				scene->setBackground(&t_layer);
 			} else if (layerName == "terrain") {
 				scene->setTerrain(&t_layer);
-			} else if (layerName == "entities") {
-				scene->setEntities(&t_layer);
+			} else if (layerName == "objects") {
+				scene->setObjects(&t_layer);
 			} else if (layerName == "collision") {
 				scene->setCollision(&t_layer);
 			} else if (layerName == "foreground") {
