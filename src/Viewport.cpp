@@ -210,8 +210,8 @@ void Viewport::draw() {
 
 void Viewport::drawScene() {
 	this->drawBackground();
-	this->drawForeground();
 	this->drawEntities();
+	this->drawForeground();
 }
 
 void Viewport::drawBackground() {
