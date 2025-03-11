@@ -125,6 +125,8 @@ Scene* SceneStore::loadScene(string id) {
 				scene->setLayerSBackground2(&i_layer);
 			} else if (layerName == "s_foreground") {
 				scene->setLayerSForeground(&i_layer);
+			} else {
+				logger.warn("Unknown image layer \"" + layerName + "\": " + map_path);
 			}
 		} else if (layer.getType() == tmx::Layer::Type::Tile) {
 			tmx::TileLayer t_layer = dynamic_cast<const tmx::TileLayer&>(*layerPtr);
@@ -139,6 +141,8 @@ Scene* SceneStore::loadScene(string id) {
 				scene->setLayerCollision(&t_layer);
 			} else if (layerName == "foreground") {
 				scene->setLayerForeground(&t_layer);
+			} else {
+				logger.warn("Unknown tile layer \"" + layerName + "\": " + map_path);
 			}
 		}
 	}
