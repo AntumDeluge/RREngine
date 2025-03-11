@@ -14,6 +14,7 @@
 
 #include "Logger.h"
 #include "Sprite.h"
+#include "ViewportRenderer.h"
 
 
 /**
@@ -146,6 +147,8 @@ public:
 	 *   `true` if entities clip at any point.
 	 */
 	bool collides(Entity* other);
+
+	void render(ViewportRenderer* viewport);
 };
 
 #endif /* RRE_ENTITY */

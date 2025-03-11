@@ -77,3 +77,9 @@ bool Entity::collides(Entity* other) {
 		&& ((this->rect.y >= o_rect.y && this->rect.y <= o_bottom)
 			|| (t_bottom >= o_rect.y && t_bottom <= o_bottom));
 }
+
+void Entity::render(ViewportRenderer* viewport) {
+	if (this->sprite != nullptr) {
+		this->sprite->render(viewport, this->rect.x, this->rect.y);
+	}
+}
