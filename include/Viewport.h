@@ -149,7 +149,7 @@ public:
 	 * @param fps
 	 *   Detected FPS.
 	 */
-	void setCurrentFPS(uint16_t fps);
+	void setCurrentFPS(uint32_t fps);
 
 	/**
 	 * Sets scaling factor of game window.

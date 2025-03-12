@@ -29,7 +29,7 @@ private:
 	 *
 	 * FIXME: doesn't need to be static in singleton.
 	 */
-	static uint16_t step_delay;
+	static uint32_t step_delay;
 
 	/** Time (in milliseconds) of previous step. */
 	uint64_t prev_step_time;
@@ -87,7 +87,7 @@ public:
 	 * @return
 	 *   Step delay in milliseconds.
 	 */
-	static uint16_t getStepDelay() {
+	static uint32_t getStepDelay() {
 		return GameLogic::step_delay;
 	}
 
@@ -97,7 +97,7 @@ public:
 	 * @param delay
 	 *   Step delay in milliseconds.
 	 */
-	static void setStepDelay(uint16_t delay) {
+	static void setStepDelay(uint32_t delay) {
 		GameLogic::step_delay = delay;
 	}
 

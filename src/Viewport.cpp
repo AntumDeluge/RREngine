@@ -66,7 +66,7 @@ void Viewport::shutdown() {
 	this->movie = nullptr;
 }
 
-void Viewport::setCurrentFPS(uint16_t fps) {
+void Viewport::setCurrentFPS(uint32_t fps) {
 	this->current_fps = fps;
 	this->fps_sprite = FontStore::buildTextSprite(this->font_map, "FPS: "
 			+ to_string(this->current_fps));
