@@ -22,9 +22,9 @@ using namespace tinyxml2;
 static Logger _logger = Logger::getLogger("SpriteStore");
 
 /** Holds loaded sprites in memory indexed by ID/path. */
-unordered_map<string, Sprite> _cache;
+static unordered_map<string, Sprite> _cache;
 
-void _onConfigError(string title, string msg) {
+static void _onConfigError(string title, string msg) {
 	if (!title.empty()) {
 		_logger.error(title + ": " + msg);
 		Dialog::error(title, msg);
@@ -34,7 +34,7 @@ void _onConfigError(string title, string msg) {
 	}
 }
 
-void _onConfigError(string msg) {
+static void _onConfigError(string msg) {
 	_onConfigError("", msg);
 }
 
