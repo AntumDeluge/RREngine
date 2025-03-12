@@ -122,5 +122,6 @@ __CMake Options:__
 ---
 ## TODO
 
+- Likely switch to a stream based XML parser such as Expat.
 - Maybe switch to [pugixml](https://pugixml.org/) as it is used by tmxlite.
 - Add Lua scripting support.
