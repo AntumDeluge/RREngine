@@ -37,8 +37,6 @@ typedef std::vector<MovieFrame> MovieFrameList;
 
 /**
  * A playable movie.
- *
- * TODO: rename file to Movie.hpp
  */
 class Movie {
 private:

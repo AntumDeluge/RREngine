@@ -21,8 +21,6 @@ typedef mode_t dperm;
 
 /**
  * Wrapper for filesystem related functions.
- *
- * TODO: rename file to Filesystem.hpp
  */
 namespace Filesystem {
 
