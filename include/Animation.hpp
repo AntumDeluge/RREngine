@@ -8,7 +8,7 @@
 #define RRE_ANIMATION
 
 #include <cstdint> // *int*_t
-#include <utility>
+#include <utility> // std::pair
 #include <vector>
 
 #include <SDL2/SDL_timer.h>
@@ -37,11 +37,12 @@ private:
 	uint64_t expires = 0;
 
 	/** Configured animation frames. */
-	const AnimationFrameSet frames;
+	AnimationFrameSet frames;
+
+	/** Flag denoting if animation should loop after completions. */
+	bool loop;
 
 public:
-	/** Flag denoting if animation should loop after completions. */
-	const bool loop;
 
 	/**
 	 * Constructs a new animation.
@@ -52,8 +53,8 @@ public:
 	 *   Configured animation frames.
 	 */
 	Animation(bool loop, AnimationFrameSet frames) {
-		this->frames = frames;
 		this->loop = loop;
+		this->frames = frames;
 	}
 
 	/**
@@ -67,9 +68,7 @@ public:
 	/**
 	 * Constructs an "uninitialized" animation without any frames.
 	 */
-	Animation() {
-		this->loop = false;
-	}
+	Animation(): Animation(false, AnimationFrameSet()) {}
 
 	/**
 	 * Checks if animation is ready.
@@ -80,6 +79,14 @@ public:
 	bool ready() {
 		return frames.size() > 0;
 	}
+
+	/**
+	 * Gets looping playback flag.
+	 *
+	 * @return
+	 *   `true` if the animation playback should loop.
+	 */
+	bool loops() { return loop; }
 
 	/**
 	 * Retrieves the index of sprite texture that should be drawn.

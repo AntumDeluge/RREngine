@@ -29,10 +29,10 @@ private:
 	static Logger logger;
 
 	/** Available animation modes of this sprite. */
-	std::unordered_map<std::string, const Animation> modes;
+	std::unordered_map<std::string, Animation> modes;
 
 	/** Animation currently being displayed. */
-	Animation* current_mode;
+	const Animation* current_mode;
 
 	/** Identifier for sprite's default animation mode. */
 	std::string default_mode;
@@ -80,7 +80,7 @@ public:
 	 * @param animation
 	 *   Animation definition.
 	 */
-	void addMode(std::string id, const Animation animation) { modes[id] = animation; }
+	void addMode(std::string id, Animation animation) { modes[id] = animation; }
 
 	/**
 	 * Sets the current animation mode.
@@ -113,7 +113,7 @@ private:
 	 *   `true` if current animation definition is configured to loop.
 	 */
 	bool loops() {
-		return this->current_mode->loop;
+		return ((Animation*) this->current_mode)->loops();
 	}
 
 	/**
