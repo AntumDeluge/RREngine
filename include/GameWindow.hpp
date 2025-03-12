@@ -46,7 +46,7 @@ private:
 
 	/**
 	 * Renderer where images are drawn.
-	 * 
+	 *
 	 * TODO: use abstract `ViewportRender`
 	 */
 	Viewport* viewport;
