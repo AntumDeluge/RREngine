@@ -4,18 +4,14 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_FONT_MAP_LOADER_H
-#define RRE_FONT_MAP_LOADER_H
+#ifndef RRE_FONT_MAP_FACTORY
+#define RRE_FONT_MAP_FACTORY
 
 
 /**
  * Caches font maps from configuration.
- *
- * TODO:
- * - rename to FontMapFactory
- * - rename file to FontMapFactory.hpp
  */
-namespace FontMapLoader {
+namespace FontMapFactory {
 
 	/**
 	 * Loads configured font maps from built-in data.
@@ -34,4 +30,4 @@ namespace FontMapLoader {
 	bool loadConfig();
 };
 
-#endif /* RRE_FONT_MAP_LOADER_H */
+#endif /* RRE_FONT_MAP_FACTORY */

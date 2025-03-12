@@ -9,9 +9,9 @@
 
 #include "DataLoader.hpp"
 #include "FontMap.hpp"
-#include "FontMapLoader.hpp"
 #include "Logger.hpp"
 #include "SingletonRepo.hpp"
+#include "factory/FontMapFactory.hpp"
 #include "store/AudioStore.hpp"
 #include "store/FontMapStore.hpp"
 #include "store/EntityStore.hpp"
@@ -31,12 +31,12 @@ bool DataLoader::load() {
 		return true;
 	}
 
-	if (!FontMapLoader::loadConfig()) {
+	if (!FontMapFactory::loadConfig()) {
 		return false;
 	}
 
 #if HAVE_BUILTIN_FONT_MAP
-	if (!FontMapLoader::loadBuiltin()) {
+	if (!FontMapFactory::loadBuiltin()) {
 		return false;
 	}
 #endif
