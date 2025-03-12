@@ -33,7 +33,7 @@ private:
 	uint32_t c_height;
 
 	/** Mapping of texture tile indexes. */
-	std::unordered_map<wchar_t, int> char_map;
+	std::unordered_map<wchar_t, int32_t> char_map;
 
 public:
 	/** Default constructor. */
@@ -81,7 +81,7 @@ public:
 	 * @return
 	 *   Texture index of character or -1 if not mapped.
 	 */
-	int getCharIndex(wchar_t c);
+	int32_t getCharIndex(wchar_t c);
 };
 
 #endif /* RRE_FONT_MAP_H */

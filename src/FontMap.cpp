@@ -19,7 +19,7 @@ FontMap::FontMap(SDL_Texture* texture, unordered_map<wchar_t, int> char_map, uin
 	this->c_height = c_height;
 }
 
-int FontMap::getCharIndex(wchar_t c) {
+int32_t FontMap::getCharIndex(wchar_t c) {
 	if (this->char_map.find(c) != this->char_map.end()) {
 		return this->char_map[c];
 	}
