@@ -24,7 +24,11 @@ private:
 	// TODO: make static
 	Logger logger;
 
-	/** Delay (in milliseconds) for each step. */
+	/**
+	 * Delay (in milliseconds) for each step.
+	 *
+	 * FIXME: doesn't need to be static in singleton.
+	 */
 	static uint16_t step_delay;
 
 	/** Time (in milliseconds) of previous step. */
@@ -32,7 +36,11 @@ private:
 	/** Time (in milliseconds) of current step. */
 	uint64_t step_time;
 
-	/** Static singleton instance. */
+	/**
+	 * Static singleton instance.
+	 *
+	 * FIXME: needs destroyed at process end
+	 */
 	static GameLogic* instance;
 
 	/**

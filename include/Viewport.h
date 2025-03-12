@@ -100,6 +100,7 @@ public:
 	static void destroy() {
 		if (Viewport::instance != nullptr) {
 			Viewport::instance->shutdown();
+			// FIXME: segmentation fault?
 			delete Viewport::instance;
 		}
 		Viewport::instance = nullptr;

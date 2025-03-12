@@ -77,6 +77,7 @@ public:
 	static void destroy() {
 		if (GameWindow::instance != nullptr) {
 			GameWindow::instance->shutdown();
+			// FIXME: segmentation fault?
 			delete GameWindow::instance;
 		}
 		GameWindow::instance = nullptr;

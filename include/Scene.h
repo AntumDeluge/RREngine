@@ -28,6 +28,9 @@
  * - rename file to Scene.hpp
  * - don't use pointers for layers
  * - defined a SceneLayer class that can support animation
+ *
+ * FIXME: for parallax scrolling background layer 1, it might be better to use a full image instead
+ *        of a tiling image layer
  */
 class Scene {
 private:

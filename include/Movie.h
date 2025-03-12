@@ -96,7 +96,11 @@ public:
 	 */
 	void render(ViewportRenderer* viewport);
 
-	/** Handles callback when movie finishes. */
+	/**
+	 * Handles callback when movie finishes.
+	 *
+	 * FIXME: not necessary?
+	 */
 	void onComplete() {
 #if RRE_DEBUGGING
 		this->logger.debug("Movie has ended");

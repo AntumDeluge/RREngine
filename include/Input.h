@@ -38,6 +38,7 @@ private:
 	/** Defaul destructor. */
 	~Input() {
 		if (Input::instance != nullptr) {
+			// FIXME: segmentation fault?
 			delete Input::instance;
 			Input::instance = nullptr;
 		}
