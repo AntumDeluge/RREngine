@@ -7,8 +7,6 @@
 #include <utility> // pair
 
 
-// TODO: rename file to reso.hpp
-
 /**
  * NES native resolution.
  *

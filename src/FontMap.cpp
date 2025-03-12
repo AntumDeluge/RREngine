@@ -4,7 +4,7 @@
  * See: LICENSE.txt
  */
 
-#include "FontMap.h"
+#include "FontMap.hpp"
 
 using namespace std;
 

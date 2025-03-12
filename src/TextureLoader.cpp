@@ -10,10 +10,10 @@
 #include <SDL2/SDL_rwops.h>
 #include <SDL2/SDL_surface.h>
 
-#include "Logger.h"
-#include "Path.h"
-#include "SingletonRepo.h"
-#include "TextureLoader.h"
+#include "Logger.hpp"
+#include "Path.hpp"
+#include "SingletonRepo.hpp"
+#include "TextureLoader.hpp"
 
 using namespace std;
 

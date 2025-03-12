@@ -14,15 +14,13 @@
 #include <SDL2/SDL_render.h>
 
 #include "Animation.hpp"
-#include "Logger.h"
-#include "Sprite.h"
-#include "ViewportRenderer.h"
+#include "Logger.hpp"
+#include "Sprite.hpp"
+#include "ViewportRenderer.hpp"
 
 
 /**
  * Animated sprite to be drawn on viewport renderer.
- *
- * TODO: rename file to AnimatedSprite.hpp
  */
 class AnimatedSprite: public Sprite {
 private:

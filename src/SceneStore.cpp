@@ -11,17 +11,17 @@
 
 #include <tmxlite/Map.hpp>
 
-#include "Filesystem.h"
-#include "Logger.h"
-#include "Path.h"
-#include "SceneStore.h"
-#include "TextureLoader.h"
-#include "Tileset.h"
+#include "Filesystem.hpp"
+#include "Logger.hpp"
+#include "Path.hpp"
+#include "SceneStore.hpp"
+#include "TextureLoader.hpp"
+#include "Tileset.hpp"
 
 using namespace std;
 
 // DEBUG:
-#include "Entity.h"
+#include "Entity.hpp"
 
 
 namespace SceneStore {

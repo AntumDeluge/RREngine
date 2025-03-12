@@ -11,15 +11,15 @@
 
 #include <SDL2/SDL_render.h>
 
-#include "FontMap.h"
-#include "GameMode.h"
-#include "ImageImpl.h"
-#include "Logger.h"
-#include "Movie.h"
-#include "MovieFactory.h"
-#include "Scene.h"
-#include "Sprite.h"
-#include "ViewportRenderer.h"
+#include "FontMap.hpp"
+#include "GameMode.hpp"
+#include "ImageImpl.hpp"
+#include "Logger.hpp"
+#include "Movie.hpp"
+#include "MovieFactory.hpp"
+#include "Scene.hpp"
+#include "Sprite.hpp"
+#include "ViewportRenderer.hpp"
 
 
 /**
@@ -27,7 +27,6 @@
  *
  * TODO:
  * - move rendering functions to new renderer class or Scene
- * - rename file to Viewport.hpp
  */
 class Viewport: public ViewportRenderer {
 private:

@@ -4,10 +4,10 @@
  * See: LICENSE.txt
  */
 
-#include "FontStore.h"
-#include "Movie.h"
-#include "SingletonRepo.h"
-#include "reso.h"
+#include "FontStore.hpp"
+#include "Movie.hpp"
+#include "SingletonRepo.hpp"
+#include "reso.hpp"
 
 using namespace std;
 

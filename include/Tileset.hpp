@@ -9,13 +9,11 @@
 
 #include <cstdint>
 
-#include "ImageImpl.h"
+#include "ImageImpl.hpp"
 
 
 /**
  * Image implementation representing a tileset.
- *
- * TODO: rename file to Tileset.hpp
  */
 class Tileset : public ImageImpl {
 private:

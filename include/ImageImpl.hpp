@@ -9,13 +9,11 @@
 
 #include <SDL2/SDL_render.h>
 
-#include "Logger.h"
+#include "Logger.hpp"
 
 
 /**
  * Base class to define images.
- *
- * TODO: rename file to ImagImpl.hpp
  */
 class ImageImpl {
 private:

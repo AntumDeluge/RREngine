@@ -13,15 +13,13 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_timer.h>
 
-#include "ImageImpl.h"
-#include "Logger.h"
-#include "ViewportRenderer.h"
+#include "ImageImpl.hpp"
+#include "Logger.hpp"
+#include "ViewportRenderer.hpp"
 
 
 /**
  * Sprite interface class.
- *
- * TODO: rename file to Sprite.hpp
  */
 class Sprite: public ImageImpl {
 private:

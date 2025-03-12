@@ -4,9 +4,9 @@
  * See: LICENSE.txt
  */
 
-#include "Entity.h"
-#include "Path.h"
-#include "TextureLoader.h"
+#include "Entity.hpp"
+#include "Path.hpp"
+#include "TextureLoader.hpp"
 
 using namespace std;
 

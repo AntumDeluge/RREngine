@@ -8,13 +8,11 @@
 #ifndef RRE_GAME_LOOP
 #define RRE_GAME_LOOP
 
-#include "GameMode.h"
+#include "GameMode.hpp"
 
 
 /**
  * Handles draw rate & stepping of game logic.
- *
- * TODO: rename file to GameLoop.hpp
  */
 namespace GameLoop {
 

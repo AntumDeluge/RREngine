@@ -6,10 +6,10 @@
 
 //#include <pugixml.hpp>
 
-#include "Dialog.h"
-#include "Filesystem.h"
-#include "Logger.h"
-#include "Path.h"
+#include "Dialog.hpp"
+#include "Filesystem.hpp"
+#include "Logger.hpp"
+#include "Path.hpp"
 #include "factory/EntityFactory.hpp"
 
 //using namespace pugi;

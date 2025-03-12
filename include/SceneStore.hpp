@@ -9,7 +9,7 @@
 
 #include <string>
 
-#include "Scene.h"
+#include "Scene.hpp"
 
 
 /**
@@ -17,7 +17,6 @@
  *
  * TODO:
  * - rename to SceneFactory
- * - rename file to SceneFactory.hpp
  * - move to factory directory
  */
 namespace SceneStore {

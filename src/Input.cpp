@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <string>
 
-#include "Input.h"
+#include "Input.hpp"
 
 using namespace std;
 

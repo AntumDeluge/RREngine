@@ -4,7 +4,7 @@
  * See: LICENSE.txt
  */
 
-#include "ImageImpl.h"
+#include "ImageImpl.hpp"
 
 
 Logger ImageImpl::logger = Logger::getLogger("ImageImpl");

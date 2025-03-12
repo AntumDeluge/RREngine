@@ -6,14 +6,14 @@
 
 #include "config.h"
 
-#include "AudioStore.h"
-#include "DataLoader.h"
-#include "FontMap.h"
-#include "FontMapLoader.h"
-#include "FontStore.h"
-#include "Logger.h"
-#include "SceneStore.h"
-#include "SingletonRepo.h"
+#include "AudioStore.hpp"
+#include "DataLoader.hpp"
+#include "FontMap.hpp"
+#include "FontMapLoader.hpp"
+#include "FontStore.hpp"
+#include "Logger.hpp"
+#include "SceneStore.hpp"
+#include "SingletonRepo.hpp"
 #include "store/EntityStore.hpp"
 #include "store/SpriteStore.hpp"
 

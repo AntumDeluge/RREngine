@@ -10,8 +10,6 @@
 
 /**
  * Wrapper for loading game data.
- *
- * TODO: rename file to DataLoader.hpp
  */
 namespace DataLoader {
 

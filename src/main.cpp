@@ -17,14 +17,14 @@ using namespace std;
 
 #include "cxxopts.hpp"
 
-#include "DataLoader.h"
-#include "GameConfig.h"
-#include "GameLoop.h"
-#include "GameWindow.h"
-#include "Logger.h"
-#include "Path.h"
-#include "StrUtil.h"
-#include "reso.h"
+#include "DataLoader.hpp"
+#include "GameConfig.hpp"
+#include "GameLoop.hpp"
+#include "GameWindow.hpp"
+#include "Logger.hpp"
+#include "Path.hpp"
+#include "StrUtil.hpp"
+#include "reso.hpp"
 
 
 namespace RRE {

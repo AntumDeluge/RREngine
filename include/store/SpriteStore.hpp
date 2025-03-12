@@ -9,7 +9,7 @@
 
 #include <string>
 
-#include "Sprite.h"
+#include "Sprite.hpp"
 
 
 /**

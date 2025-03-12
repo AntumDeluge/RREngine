@@ -4,7 +4,7 @@
  * See: LICENSE.txt
  */
 
-#include "AnimatedSprite.h"
+#include "AnimatedSprite.hpp"
 
 using namespace std;
 

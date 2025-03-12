@@ -14,14 +14,14 @@
 
 #include <tinyxml2.h>
 
-#include "Dialog.h"
-#include "Filesystem.h"
-#include "FontMap.h"
-#include "FontMapLoader.h"
-#include "FontStore.h"
-#include "Logger.h"
-#include "Path.h"
-#include "TextureLoader.h"
+#include "Dialog.hpp"
+#include "Filesystem.hpp"
+#include "FontMap.hpp"
+#include "FontMapLoader.hpp"
+#include "FontStore.hpp"
+#include "Logger.hpp"
+#include "Path.hpp"
+#include "TextureLoader.hpp"
 #include "builtin/conf/fonts.h"
 #if HAVE_BUILTIN_FONT_MAP
 #include "builtin/tileset/fontmap_png.h"

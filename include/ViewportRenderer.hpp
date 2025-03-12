@@ -9,7 +9,7 @@
 
 #include <cstdint> // uint*_t
 
-#include "ImageImpl.h"
+#include "ImageImpl.hpp"
 
 
 /**
@@ -17,7 +17,6 @@
  *
  * TODO:
  * - support scaling in draw methods
- * - rename file to ViewportRenderer.hpp
  */
 class ViewportRenderer {
 public:

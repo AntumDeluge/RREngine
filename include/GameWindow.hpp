@@ -4,22 +4,20 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_GAME_WINDOW_H
-#define RRE_GAME_WINDOW_H
+#ifndef RRE_GAME_WINDOW
+#define RRE_GAME_WINDOW
 
 #include <string>
 
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_video.h>
 
-#include "Logger.h"
-#include "Viewport.h"
+#include "Logger.hpp"
+#include "Viewport.hpp"
 
 
 /**
  * Manages the window frame.
- *
- * TODO: rename file to GameWindow.hpp
  */
 class GameWindow {
 private:
@@ -159,4 +157,4 @@ public:
 	void stopMusic();
 };
 
-#endif /* RRE_GAME_WINDOW_H */
+#endif /* RRE_GAME_WINDOW */

@@ -14,10 +14,10 @@ using namespace std;
 
 using namespace tinyxml2;
 
-#include "AudioStore.h"
-#include "Filesystem.h"
-#include "Logger.h"
-#include "Path.h"
+#include "AudioStore.hpp"
+#include "Filesystem.hpp"
+#include "Logger.hpp"
+#include "Path.hpp"
 
 
 namespace AudioStore {

@@ -12,8 +12,6 @@
 
 /**
  * File & directory path related functions.
- *
- * TODO: rename file to Path.hpp
  */
 namespace Path {
 

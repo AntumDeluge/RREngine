@@ -11,14 +11,14 @@
 
 using namespace std;
 
-#include "FontStore.h"
-#include "GameConfig.h"
-#include "GameLoop.h"
-#include "SceneStore.h"
-#include "SingletonRepo.h"
-#include "TextureLoader.h"
-#include "Viewport.h"
-#include "reso.h"
+#include "FontStore.hpp"
+#include "GameConfig.hpp"
+#include "GameLoop.hpp"
+#include "SceneStore.hpp"
+#include "SingletonRepo.hpp"
+#include "TextureLoader.hpp"
+#include "Viewport.hpp"
+#include "reso.hpp"
 
 
 Logger Viewport::logger = Logger::getLogger("Viewport");

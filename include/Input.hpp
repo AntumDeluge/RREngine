@@ -12,14 +12,13 @@
 #include <SDL2/SDL_keyboard.h>
 #include <SDL2/SDL_keycode.h>
 
-#include "Logger.h"
+#include "Logger.hpp"
 
 
 /**
  * Manages user input.
  *
  * TODO:
- * - rename file to Input.hpp
  * - _maybe_ convert to namespace
  */
 class Input {

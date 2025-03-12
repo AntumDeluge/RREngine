@@ -12,9 +12,9 @@
 
 #include "SDL2/SDL_rect.h"
 
-#include "Logger.h"
-#include "Sprite.h"
-#include "ViewportRenderer.h"
+#include "Logger.hpp"
+#include "Sprite.hpp"
+#include "ViewportRenderer.hpp"
 
 
 /**

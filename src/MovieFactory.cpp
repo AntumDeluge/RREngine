@@ -7,13 +7,13 @@
 #include <cstdint> // uint*_t
 #include <tinyxml2.h>
 
-#include "Dialog.h"
-#include "Filesystem.h"
-#include "ImageImpl.h"
-#include "Logger.h"
-#include "MovieFactory.h"
-#include "Path.h"
-#include "TextureLoader.h"
+#include "Dialog.hpp"
+#include "Filesystem.hpp"
+#include "ImageImpl.hpp"
+#include "Logger.hpp"
+#include "MovieFactory.hpp"
+#include "Path.hpp"
+#include "TextureLoader.hpp"
 
 using namespace std;
 using namespace tinyxml2;

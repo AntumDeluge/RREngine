@@ -4,7 +4,7 @@
  * See: LICENSE.txt
  */
 
-#include "Logger.h"
+#include "Logger.hpp"
 #include "store/EntityStore.hpp"
 
 using namespace std;

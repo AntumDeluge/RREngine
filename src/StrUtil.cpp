@@ -9,7 +9,7 @@
 
 using namespace std;
 
-#include "StrUtil.h"
+#include "StrUtil.hpp"
 
 
 template <typename T>

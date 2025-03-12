@@ -7,10 +7,10 @@
 #include <SDL2/SDL.h> // SDL2 defines SDL_Init in main header, this has been moved to SDL_init.h in SDL3
 #include <SDL2/SDL_image.h>
 
-#include "AudioStore.h"
-#include "Dialog.h"
-#include "GameWindow.h"
-#include "SingletonRepo.h"
+#include "AudioStore.hpp"
+#include "Dialog.hpp"
+#include "GameWindow.hpp"
+#include "SingletonRepo.hpp"
 
 using namespace std;
 

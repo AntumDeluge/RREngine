@@ -17,11 +17,11 @@ using namespace std;
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_timer.h>
 
-#include "GameLogic.h"
-#include "GameLoop.h"
-#include "Logger.h"
-#include "SingletonRepo.h"
-#include "Viewport.h"
+#include "GameLogic.hpp"
+#include "GameLoop.hpp"
+#include "Logger.hpp"
+#include "SingletonRepo.hpp"
+#include "Viewport.hpp"
 
 
 namespace GameLoop {

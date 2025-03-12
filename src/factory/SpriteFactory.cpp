@@ -8,7 +8,7 @@
 #include <string>
 
 #include "Animation.hpp"
-#include "AnimatedSprite.h"
+#include "AnimatedSprite.hpp"
 #include "factory/SpriteFactory.hpp"
 
 using namespace std;

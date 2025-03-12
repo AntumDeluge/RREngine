@@ -8,10 +8,10 @@
 
 #include <tinyxml2.h>
 
-#include "Dialog.h"
-#include "Filesystem.h"
-#include "Logger.h"
-#include "Path.h"
+#include "Dialog.hpp"
+#include "Filesystem.hpp"
+#include "Logger.hpp"
+#include "Path.hpp"
 #include "factory/SpriteFactory.hpp"
 #include "store/SpriteStore.hpp"
 

@@ -8,7 +8,7 @@
 //~ #include <string>
 #endif
 
-#include "GameLogic.h"
+#include "GameLogic.hpp"
 #include "config.h"
 
 

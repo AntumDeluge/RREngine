@@ -6,8 +6,8 @@
 
 #include <algorithm> // std::find
 
-#include "Scene.h"
-#include "SingletonRepo.h"
+#include "Scene.hpp"
+#include "SingletonRepo.hpp"
 
 using namespace std;
 

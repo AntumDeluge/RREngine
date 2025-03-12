@@ -9,11 +9,11 @@
 
 using namespace tinyxml2;
 
-#include "Filesystem.h"
-#include "Logger.h"
-#include "Path.h"
-#include "Sprite.h"
-#include "TextureLoader.h"
+#include "Filesystem.hpp"
+#include "Logger.hpp"
+#include "Path.hpp"
+#include "Sprite.hpp"
+#include "TextureLoader.hpp"
 
 using namespace std;
 

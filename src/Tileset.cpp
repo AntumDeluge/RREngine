@@ -4,7 +4,7 @@
  * See: LICENSE.txt
  */
 
-#include "Tileset.h"
+#include "Tileset.hpp"
 
 
 Tileset::Tileset(SDL_Texture* texture, uint16_t first_gid, uint16_t last_gid)

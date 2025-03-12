@@ -4,16 +4,14 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_SINGLETON_REPO_H
-#define RRE_SINGLETON_REPO_H
+#ifndef RRE_SINGLETON_REPO
+#define RRE_SINGLETON_REPO
 
-#include "GameLogic.h"
-#include "GameWindow.h"
-#include "Input.h"
-#include "Viewport.h"
+#include "GameLogic.hpp"
+#include "GameWindow.hpp"
+#include "Input.hpp"
+#include "Viewport.hpp"
 
-
-// TODO: rename file to SingletonRepo.hpp
 
 /**
  * Retrieves game logic singleton.
@@ -49,4 +47,4 @@ static inline Input* GetInput() { return Input::get(); }
  */
 static inline Viewport* GetViewport() { return Viewport::get(); }
 
-#endif /* RRE_SINGLETON_REPO_H */
+#endif /* RRE_SINGLETON_REPO */

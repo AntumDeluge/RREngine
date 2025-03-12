@@ -9,8 +9,8 @@
 
 #include <string>
 
-#include "FontMap.h"
-#include "Sprite.h"
+#include "FontMap.hpp"
+#include "Sprite.hpp"
 
 
 /**

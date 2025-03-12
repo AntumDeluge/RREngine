@@ -13,12 +13,12 @@ using namespace std;
 
 using namespace tinyxml2;
 
-#include "Dialog.h"
-#include "Filesystem.h"
-#include "GameConfig.h"
-#include "Logger.h"
-#include "MovieFactory.h"
-#include "Path.h"
+#include "Dialog.hpp"
+#include "Filesystem.hpp"
+#include "GameConfig.hpp"
+#include "Logger.hpp"
+#include "MovieFactory.hpp"
+#include "Path.hpp"
 
 
 namespace GameConfig {

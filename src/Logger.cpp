@@ -9,8 +9,8 @@
 #include <iostream>
 #include <sstream>
 
-#include "Logger.h"
-#include "Path.h"
+#include "Logger.hpp"
+#include "Path.hpp"
 
 using namespace std;
 

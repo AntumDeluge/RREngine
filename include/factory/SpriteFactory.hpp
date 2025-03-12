@@ -9,7 +9,7 @@
 
 #include <tinyxml2.h>
 
-#include "Sprite.h"
+#include "Sprite.hpp"
 
 
 /**

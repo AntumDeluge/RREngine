@@ -14,8 +14,8 @@
 
 using namespace std;
 
-#include "Path.h"
-#include "StrUtil.h"
+#include "Path.hpp"
+#include "StrUtil.hpp"
 
 #ifdef __WIN32__
 const char replaceNode = '/';

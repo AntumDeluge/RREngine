@@ -12,8 +12,8 @@
 
 #include <SDL2/SDL_render.h>
 
-#include "ImageImpl.h"
-#include "Logger.h"
+#include "ImageImpl.hpp"
+#include "Logger.hpp"
 
 
 /**

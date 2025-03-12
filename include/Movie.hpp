@@ -16,11 +16,11 @@
 
 #include <SDL2/SDL_timer.h>
 
-#include "FontMap.h"
-#include "ImageImpl.h"
-#include "Logger.h"
-#include "Sprite.h"
-#include "ViewportRenderer.h"
+#include "FontMap.hpp"
+#include "ImageImpl.hpp"
+#include "Logger.hpp"
+#include "Sprite.hpp"
+#include "ViewportRenderer.hpp"
 
 
 /**
