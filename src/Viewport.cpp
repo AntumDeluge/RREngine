@@ -15,7 +15,7 @@
 #include "TextureLoader.hpp"
 #include "Viewport.hpp"
 #include "reso.hpp"
-#include "store/FontStore.hpp"
+#include "store/FontMapStore.hpp"
 #include "store/SceneStore.hpp"
 
 using namespace std;
@@ -68,7 +68,7 @@ void Viewport::shutdown() {
 
 void Viewport::setCurrentFPS(uint32_t fps) {
 	this->current_fps = fps;
-	this->fps_sprite = FontStore::buildTextSprite(this->font_map, "FPS: "
+	this->fps_sprite = FontMapStore::buildTextSprite(this->font_map, "FPS: "
 			+ to_string(this->current_fps));
 }
 
@@ -254,7 +254,7 @@ void Viewport::drawText() {
 }
 
 void Viewport::addText(string text) {
-	this->text_sprites.push_back(FontStore::buildTextSprite(this->font_map, text));
+	this->text_sprites.push_back(FontMapStore::buildTextSprite(this->font_map, text));
 }
 
 void Viewport::clearText() {

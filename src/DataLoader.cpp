@@ -13,7 +13,7 @@
 #include "Logger.hpp"
 #include "SingletonRepo.hpp"
 #include "store/AudioStore.hpp"
-#include "store/FontStore.hpp"
+#include "store/FontMapStore.hpp"
 #include "store/EntityStore.hpp"
 #include "store/SceneStore.hpp"
 #include "store/SpriteStore.hpp"
@@ -41,7 +41,7 @@ bool DataLoader::load() {
 	}
 #endif
 
-	FontMap* font_main = FontStore::getMap("main");
+	FontMap* font_main = FontMapStore::getMap("main");
 	if (font_main != nullptr) {
 		GetViewport()->setFontMap(font_main);
 	}

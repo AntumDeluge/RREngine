@@ -25,7 +25,7 @@
 #if HAVE_BUILTIN_FONT_MAP
 #include "builtin/tileset/fontmap_png.h"
 #endif
-#include "store/FontStore.hpp"
+#include "store/FontMapStore.hpp"
 
 using namespace std;
 using namespace tinyxml2;
@@ -152,9 +152,9 @@ bool _parseFont(XMLElement* el, const uint8_t data[], const size_t data_size) {
 
 	// add parsed data to font store
 	if (data != nullptr) {
-		FontStore::addMap(id, new FontMap(TextureLoader::loadFM(data, data_size), char_map, w, h));
+		FontMapStore::addMap(id, new FontMap(TextureLoader::loadFM(data, data_size), char_map, w, h));
 	} else {
-		FontStore::addMap(id, new FontMap(TextureLoader::load(rpath), char_map, w, h));
+		FontMapStore::addMap(id, new FontMap(TextureLoader::load(rpath), char_map, w, h));
 	}
 
 	return true;

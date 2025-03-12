@@ -6,7 +6,7 @@
 
 #include "Logger.hpp"
 #include "SingletonRepo.hpp"
-#include "store/FontStore.hpp"
+#include "store/FontMapStore.hpp"
 
 using namespace std;
 
@@ -14,22 +14,22 @@ using namespace std;
 // font map cache
 unordered_map<string, FontMap*> fmap_cache = {};
 
-void FontStore::addMap(string font_id, FontMap* font_map) {
+void FontMapStore::addMap(string font_id, FontMap* font_map) {
 	if (fmap_cache.find(font_id) != fmap_cache.end()) {
-		Logger::getLogger("FontStore").warn("Overwriting font map with id \"" + font_id + "\"");
+		Logger::getLogger("FontMapStore").warn("Overwriting font map with id \"" + font_id + "\"");
 	}
 	fmap_cache[font_id] = font_map;
 }
 
-FontMap* FontStore::getMap(string font_id) {
+FontMap* FontMapStore::getMap(string font_id) {
 	if (fmap_cache.find(font_id) != fmap_cache.end()) {
 		return fmap_cache[font_id];
 	}
 	return nullptr;
 }
 
-Sprite* FontStore::buildTextSprite(FontMap* font_map, string text) {
-	Logger logger = Logger::getLogger("FontStore");
+Sprite* FontMapStore::buildTextSprite(FontMap* font_map, string text) {
+	Logger logger = Logger::getLogger("FontMapStore");
 
 	// TODO: cache text sprites for redraw (probably in Viewport class)
 

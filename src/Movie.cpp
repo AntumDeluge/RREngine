@@ -7,7 +7,7 @@
 #include "Movie.hpp"
 #include "SingletonRepo.hpp"
 #include "reso.hpp"
-#include "store/FontStore.hpp"
+#include "store/FontMapStore.hpp"
 
 using namespace std;
 
@@ -54,13 +54,13 @@ void Movie::render(ViewportRenderer* viewport) {
 }
 
 void Movie::addText(FontMap* font_map, uint32_t expires, string text) {
-	Sprite* sprite = FontStore::buildTextSprite(font_map, text);
+	Sprite* sprite = FontMapStore::buildTextSprite(font_map, text);
 	sprite->setExpiration(expires);
 	this->text_sprites.push_back(sprite);
 }
 
 void Movie::addText(FontMap* font_map, string text) {
-	this->text_sprites.push_back(FontStore::buildTextSprite(font_map, text));
+	this->text_sprites.push_back(FontMapStore::buildTextSprite(font_map, text));
 }
 
 void Movie::addText(uint32_t expires, string text) {

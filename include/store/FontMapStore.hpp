@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_FONT_STORE_H
-#define RRE_FONT_STORE_H
+#ifndef RRE_FONT_MAP_STORE
+#define RRE_FONT_MAP_STORE
 
 #include <string>
 
@@ -15,12 +15,8 @@
 
 /**
  * Caches font mappings from configuration.
- *
- * TODO:
- * - rename to FontMapStore
- * - rename file to FontMapStore.hpp
  */
-namespace FontStore {
+namespace FontMapStore {
 
 	/**
 	 * Caches a font mapping.
@@ -55,4 +51,4 @@ namespace FontStore {
 	Sprite* buildTextSprite(FontMap* font_map, std::string text);
 };
 
-#endif /* RRE_FONT_STORE_H */
+#endif /* RRE_FONT_MAP_STORE */
