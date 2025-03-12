@@ -14,6 +14,7 @@
 #include "Logger.h"
 #include "SceneStore.h"
 #include "SingletonRepo.h"
+#include "SpriteStore.hpp"
 
 
 namespace DataLoader {
@@ -44,6 +45,10 @@ bool DataLoader::load() {
 	}
 
 	if (!AudioStore::load()) {
+		return false;
+	}
+
+	if (!SpriteStore::load()) {
 		return false;
 	}
 
