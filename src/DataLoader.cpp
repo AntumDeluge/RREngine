@@ -14,6 +14,7 @@
 #include "Logger.h"
 #include "SceneStore.h"
 #include "SingletonRepo.h"
+#include "store/EntityStore.hpp"
 #include "store/SpriteStore.hpp"
 
 
@@ -49,6 +50,10 @@ bool DataLoader::load() {
 	}
 
 	if (!SpriteStore::load()) {
+		return false;
+	}
+
+	if (!EntityStore::load()) {
 		return false;
 	}
 

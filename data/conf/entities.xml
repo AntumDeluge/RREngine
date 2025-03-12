@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<files>
-</files>
+<entities>
+	<!-- TODO: load from files in sub-directory -->
+
+	<entity id="player" sprite="player">
+	</entity>
+
+</entities>
