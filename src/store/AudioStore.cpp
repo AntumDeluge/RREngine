@@ -14,7 +14,7 @@ using namespace std;
 
 using namespace tinyxml2;
 
-#include "AudioStore.hpp"
+#include "store/AudioStore.hpp"
 #include "Filesystem.hpp"
 #include "Logger.hpp"
 #include "Path.hpp"

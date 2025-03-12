@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_VIEWPORT_H
-#define RRE_VIEWPORT_H
+#ifndef RRE_VIEWPORT
+#define RRE_VIEWPORT
 
 #include <vector>
 
@@ -16,10 +16,10 @@
 #include "ImageImpl.hpp"
 #include "Logger.hpp"
 #include "Movie.hpp"
-#include "MovieFactory.hpp"
 #include "Scene.hpp"
 #include "Sprite.hpp"
 #include "ViewportRenderer.hpp"
+#include "factory/MovieFactory.hpp"
 
 
 /**
@@ -293,4 +293,4 @@ private:
 	void drawFPS();
 };
 
-#endif /* RRE_VIEWPORT_H */
+#endif /* RRE_VIEWPORT */

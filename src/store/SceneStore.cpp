@@ -14,9 +14,9 @@
 #include "Filesystem.hpp"
 #include "Logger.hpp"
 #include "Path.hpp"
-#include "SceneStore.hpp"
 #include "TextureLoader.hpp"
 #include "Tileset.hpp"
+#include "store/SceneStore.hpp"
 
 using namespace std;
 

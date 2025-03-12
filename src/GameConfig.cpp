@@ -17,8 +17,8 @@ using namespace tinyxml2;
 #include "Filesystem.hpp"
 #include "GameConfig.hpp"
 #include "Logger.hpp"
-#include "MovieFactory.hpp"
 #include "Path.hpp"
+#include "factory/MovieFactory.hpp"
 
 
 namespace GameConfig {

@@ -18,7 +18,6 @@
 #include "Filesystem.hpp"
 #include "FontMap.hpp"
 #include "FontMapLoader.hpp"
-#include "FontStore.hpp"
 #include "Logger.hpp"
 #include "Path.hpp"
 #include "TextureLoader.hpp"
@@ -26,6 +25,7 @@
 #if HAVE_BUILTIN_FONT_MAP
 #include "builtin/tileset/fontmap_png.h"
 #endif
+#include "store/FontStore.hpp"
 
 using namespace std;
 using namespace tinyxml2;

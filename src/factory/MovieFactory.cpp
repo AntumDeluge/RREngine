@@ -11,9 +11,9 @@
 #include "Filesystem.hpp"
 #include "ImageImpl.hpp"
 #include "Logger.hpp"
-#include "MovieFactory.hpp"
 #include "Path.hpp"
 #include "TextureLoader.hpp"
+#include "factory/MovieFactory.hpp"
 
 using namespace std;
 using namespace tinyxml2;

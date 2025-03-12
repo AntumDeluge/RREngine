@@ -9,14 +9,14 @@
 #include <iostream>
 #include <string>
 
-#include "FontStore.hpp"
 #include "GameConfig.hpp"
 #include "GameLoop.hpp"
-#include "SceneStore.hpp"
 #include "SingletonRepo.hpp"
 #include "TextureLoader.hpp"
 #include "Viewport.hpp"
 #include "reso.hpp"
+#include "store/FontStore.hpp"
+#include "store/SceneStore.hpp"
 
 using namespace std;
 

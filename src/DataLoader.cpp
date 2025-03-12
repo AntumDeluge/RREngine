@@ -4,17 +4,18 @@
  * See: LICENSE.txt
  */
 
+
 #include "config.h"
 
-#include "AudioStore.hpp"
 #include "DataLoader.hpp"
 #include "FontMap.hpp"
 #include "FontMapLoader.hpp"
-#include "FontStore.hpp"
 #include "Logger.hpp"
-#include "SceneStore.hpp"
 #include "SingletonRepo.hpp"
+#include "store/AudioStore.hpp"
+#include "store/FontStore.hpp"
 #include "store/EntityStore.hpp"
+#include "store/SceneStore.hpp"
 #include "store/SpriteStore.hpp"
 
 

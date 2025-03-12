@@ -4,9 +4,9 @@
  * See: LICENSE.txt
  */
 
-#include "FontStore.hpp"
 #include "Logger.hpp"
 #include "SingletonRepo.hpp"
+#include "store/FontStore.hpp"
 
 using namespace std;
 
