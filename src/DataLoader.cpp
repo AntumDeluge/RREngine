@@ -14,7 +14,7 @@
 #include "Logger.h"
 #include "SceneStore.h"
 #include "SingletonRepo.h"
-#include "SpriteStore.hpp"
+#include "store/SpriteStore.hpp"
 
 
 namespace DataLoader {
