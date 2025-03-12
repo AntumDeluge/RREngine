@@ -11,6 +11,8 @@
 
 /**
  * Defined game modes enumeration.
+ *
+ * TODO: rename file to GameMode.hpp
  */
 namespace GameMode {
 	enum Mode {

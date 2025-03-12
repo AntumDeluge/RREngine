@@ -20,6 +20,8 @@
 
 /**
  * Sprite interface class.
+ *
+ * TODO: rename file to Sprite.hpp
  */
 class Sprite: public ImageImpl {
 private:

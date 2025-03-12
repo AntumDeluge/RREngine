@@ -13,6 +13,8 @@
 
 /**
  * Handles draw rate & stepping of game logic.
+ *
+ * TODO: rename file to GameLoop.hpp
  */
 namespace GameLoop {
 

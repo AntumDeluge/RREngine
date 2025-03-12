@@ -15,6 +15,10 @@
 
 /**
  * Caches font mappings from configuration.
+ *
+ * TODO:
+ * - rename to FontMapStore
+ * - rename file to FontMapStore.hpp
  */
 namespace FontStore {
 

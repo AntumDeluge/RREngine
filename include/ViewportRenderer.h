@@ -15,7 +15,9 @@
 /**
  * Abstract base class for viewport.
  *
- * TODO: support scaling in draw methods
+ * TODO:
+ * - support scaling in draw methods
+ * - rename file to ViewportRenderer.hpp
  */
 class ViewportRenderer {
 public:

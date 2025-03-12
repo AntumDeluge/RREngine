@@ -18,6 +18,8 @@
 
 /**
  * Manages the window frame.
+ *
+ * TODO: rename file to GameWindow.hpp
  */
 class GameWindow {
 private:
@@ -44,7 +46,11 @@ private:
 	/** The system window instance. */
 	SDL_Window* window;
 
-	/** Renderer where images are drawn. */
+	/**
+	 * Renderer where images are drawn.
+	 * 
+	 * TODO: use abstract `ViewportRender`
+	 */
 	Viewport* viewport;
 
 	/** Active music. */
@@ -132,6 +138,8 @@ public:
 
 	/**
 	 * Retrieves the drawing renderer.
+	 *
+	 * TODO: use abstract `ViewportRenderer`
 	 *
 	 * @return
 	 *   Viewport renderer instance.

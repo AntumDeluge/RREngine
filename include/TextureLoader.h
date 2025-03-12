@@ -18,6 +18,8 @@
 /**
  * Namespace for loading PNG images into SDL textures.
  *
+ * TODO: rename file to TextureLoader.hpp
+ *
  * FIXME: need failsafes in case renderer not initialized (E.g. trying to get a texture within Viewport constructor)
  */
 namespace TextureLoader {

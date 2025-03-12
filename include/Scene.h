@@ -25,6 +25,9 @@
  * - need collision mapping to match collision layer
  * - support additional background with parallax scrolling
  * - create separate class called SceneBuilder to serve as framework to rendering scene
+ * - rename file to Scene.hpp
+ * - don't use pointers for layers
+ * - defined a SceneLayer class that can support animation
  */
 class Scene {
 private:

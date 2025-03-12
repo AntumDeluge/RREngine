@@ -12,6 +12,8 @@
 
 /**
  * Caches audio paths from configuration.
+ *
+ * TODO: rename file to AudioStore.hpp
  */
 namespace AudioStore {
 

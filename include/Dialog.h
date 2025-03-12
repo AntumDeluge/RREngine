@@ -12,6 +12,8 @@
 
 /**
  * Wrapper for displaying notification dialogs.
+ *
+ * TODO: rename file to Dialog.hpp
  */
 namespace Dialog {
 

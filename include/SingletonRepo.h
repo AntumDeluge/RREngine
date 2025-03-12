@@ -13,6 +13,8 @@
 #include "Viewport.h"
 
 
+// TODO: rename file to SingletonRepo.hpp
+
 /**
  * Retrieves game logic singleton.
  *
@@ -39,6 +41,8 @@ static inline Input* GetInput() { return Input::get(); }
 
 /**
  * Retrieves viewport renderer singleton.
+ *
+ * TODO: change return type to `ViewportRenderer`
  *
  * @return
  *   `Viewport` singleton instance.

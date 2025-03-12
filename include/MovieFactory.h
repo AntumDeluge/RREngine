@@ -14,6 +14,10 @@
 
 /**
  * Manages configured movies.
+ *
+ * TODO:
+ * - rename file to MovieFactory.hpp
+ * - move to factory directory
  */
 namespace MovieFactory {
 

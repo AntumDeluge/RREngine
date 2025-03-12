@@ -23,7 +23,13 @@
 #include "ViewportRenderer.h"
 
 
-/** Type representing <duration (ms), image>. */
+/**
+ * Type representing <duration (ms), image>.
+ *
+ * TODO:
+ * - don't use pointers
+ * - invert order (<image, duration>) to match sprite animations
+ */
 typedef std::pair<uint32_t, ImageImpl*> MovieFrame;
 
 /** Type representing a series of movie frames. */
@@ -31,6 +37,8 @@ typedef std::vector<MovieFrame> MovieFrameList;
 
 /**
  * A playable movie.
+ *
+ * TODO: rename file to Movie.hpp
  */
 class Movie {
 private:
@@ -39,7 +47,11 @@ private:
 	/** Frames drawn for this movie. */
 	MovieFrameList frames;
 
-	/** Text drawn for this movie. */
+	/**
+	 * Text drawn for this movie.
+	 *
+	 * TODO: don't use pointers
+	 */
 	std::vector<Sprite*> text_sprites;
 
 	/** Index of frame to be drawn. */

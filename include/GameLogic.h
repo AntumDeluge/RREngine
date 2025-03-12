@@ -14,6 +14,10 @@
 
 /**
  * Singleton class to handle game stepping.
+ *
+ * TODO:
+ * - rename file to GameLogic.hpp
+ * - _maybe_ change to namespace
  */
 class GameLogic {
 private:

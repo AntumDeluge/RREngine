@@ -21,10 +21,14 @@ typedef mode_t dperm;
 
 /**
  * Wrapper for filesystem related functions.
+ *
+ * TODO: rename file to Filesystem.hpp
  */
 namespace Filesystem {
 
 	/** Checks for existing file.
+	 *
+	 * TODO: _maybe_ replace with calls to `std::filesystem::is_regular_file`
 	 *
 	 * @param path
 	 *   String path to file.

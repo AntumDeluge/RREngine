@@ -17,6 +17,10 @@
 
 /**
  * Manages user input.
+ *
+ * TODO:
+ * - rename file to Input.hpp
+ * - _maybe_ convert to namespace
  */
 class Input {
 private:

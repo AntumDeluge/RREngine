@@ -14,6 +14,8 @@
 
 /**
  * Base class to define images.
+ *
+ * TODO: rename file to ImagImpl.hpp
  */
 class ImageImpl {
 private:

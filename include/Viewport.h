@@ -25,7 +25,9 @@
 /**
  * Interface for rendering images.
  *
- * TODO: move rendering functions to new renderer class or Scene
+ * TODO:
+ * - move rendering functions to new renderer class or Scene
+ * - rename file to Viewport.hpp
  */
 class Viewport: public ViewportRenderer {
 private:
@@ -45,7 +47,7 @@ private:
 	 */
 	~Viewport() {}
 
-	// delete copy constructor & assignment operator
+	// delete copy constructor & assignment operator for singleton
 	Viewport(const Viewport&) = delete;
 	Viewport& operator=(const Viewport&) = delete;
 
@@ -56,7 +58,11 @@ private:
 	/** Detected FPS. */
 	uint16_t current_fps;
 
-	/** Current game mode. */
+	/**
+	 * Current game mode.
+	 *
+	 * TODO: _maybe_ use `GameLoop.getMode` instead
+	 */
 	GameMode::Mode mode;
 
 	/** Texture drawn on background during `GameMode::MENU` or `GameMode::TITLE`. */

@@ -20,6 +20,8 @@
  * Class to handle drawing bitmap text.
  *
  * Only monospace text is supported.
+ *
+ * TODO: rename file to FontMap.hpp
  */
 class FontMap: public ImageImpl {
 private:

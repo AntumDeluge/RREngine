@@ -12,6 +12,8 @@
 
 /**
  * String related functions.
+ *
+ * TODO: rename file to StrUtil.hpp
  */
 namespace StrUtil {
 

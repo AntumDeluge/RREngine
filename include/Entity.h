@@ -19,6 +19,8 @@
 
 /**
  * Represents an entity object in scene.
+ *
+ * TODO: rename file to Entity.hpp
  */
 class Entity {
 private:

@@ -16,6 +16,8 @@
 
 /**
  * Namespace for loading & accessing game configuration from `data/conf/game.xml`.
+ *
+ * TODO: rename file to GameConfig.hpp
  */
 namespace GameConfig {
 
@@ -53,6 +55,8 @@ namespace GameConfig {
 
 	/**
 	 * Retrieves a configured background image ID for a menu.
+	 *
+	 * TODO: rename to getMenuBackgroundId
 	 *
 	 * @param id
 	 *   Menu identifier.

@@ -15,7 +15,10 @@
 /**
  * Functions for loading & retrieving scene data.
  *
- * TODO: rename to SceneFactory
+ * TODO:
+ * - rename to SceneFactory
+ * - rename file to SceneFactory.hpp
+ * - move to factory directory
  */
 namespace SceneStore {
 

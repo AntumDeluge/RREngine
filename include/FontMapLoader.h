@@ -11,7 +11,9 @@
 /**
  * Caches font maps from configuration.
  *
- * TODO: rename to FontMapFactory
+ * TODO:
+ * - rename to FontMapFactory
+ * - rename file to FontMapFactory.hpp
  */
 namespace FontMapLoader {
 
