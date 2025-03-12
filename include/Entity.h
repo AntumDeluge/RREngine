@@ -32,6 +32,9 @@ private:
 	/** Entity's collision rectangle. */
 	SDL_Rect rect;
 
+	/** Default constructor. */
+	Entity(): Entity(nullptr) {}
+
 public:
 	/**
 	 * Creates an entity with collision rectangle.
@@ -73,15 +76,33 @@ public:
 	 */
 	Entity(std::string sprite_id);
 
-	/** Default constructor. */
-	Entity(): Entity(nullptr) {}
-
 	/** Default destructor. */
 	~Entity() {
 		if (this->sprite != nullptr) {
 			delete this->sprite;
 			this->sprite = nullptr;
 		}
+	}
+
+	/**
+	 * Factory creation.
+	 *
+	 * @return
+	 *   An un-initialized entity object.
+	 */
+	static Entity create() {
+		return Entity();
+	}
+
+	/**
+	 * Equality comparison operator.
+	 *
+	 * @param other
+	 *   Entity to compare against.
+	 */
+	bool operator==(Entity& other) const {
+		return sprite == other.sprite && rect.x == other.rect.x && rect.y == other.rect.y
+				&& rect.w == other.rect.w && rect.h == other.rect.h;
 	}
 
 	/**
@@ -158,5 +179,9 @@ public:
 	 */
 	void render(ViewportRenderer* viewport);
 };
+
+
+/** Null entity for checking state of initialization. */
+static const Entity NullEntity = Entity::create();
 
 #endif /* RRE_ENTITY */
