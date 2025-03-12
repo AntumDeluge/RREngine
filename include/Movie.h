@@ -25,13 +25,21 @@
 
 /** Type representing <duration (ms), image>. */
 typedef std::pair<uint32_t, ImageImpl*> MovieFrame;
+
+/** Type representing a series of movie frames. */
 typedef std::vector<MovieFrame> MovieFrameList;
 
+/**
+ * A playable movie.
+ */
 class Movie {
 private:
 	static Logger logger;
 
+	/** Frames drawn for this movie. */
 	MovieFrameList frames;
+
+	/** Text drawn for this movie. */
 	std::vector<Sprite*> text_sprites;
 
 	/** Index of frame to be drawn. */
@@ -42,9 +50,18 @@ private:
 	bool playing = false;
 
 public:
-	// default constructor
+	/** Default constructor. */
 	Movie() {}
+
+	/**
+	 * Creates a new movie.
+	 *
+	 * @param frames
+	 *   Frames drawn for this movie.
+	 */
 	Movie(MovieFrameList frames) { this->frames = frames; }
+
+	/** Default destructor. */
 	~Movie() {
 		this->clearText();
 		for (MovieFrame f: this->frames) {
@@ -53,13 +70,21 @@ public:
 		this->frames.clear();
 	}
 
+	/** Marks movie for playback. */
 	void play() {
 		this->frame_start = SDL_GetTicks64();
 		this->playing = true;
 	}
 
+	/**
+	 * Draws current frame onto the renderer.
+	 *
+	 * @param viewport
+	 *   Viewport renderer.
+	 */
 	void render(ViewportRenderer* viewport);
 
+	/** Handles callback when movie finishes. */
 	void onComplete() {
 #if RRE_DEBUGGING
 		this->logger.debug("Movie has ended");
@@ -68,15 +93,57 @@ public:
 		// TODO: execute callback to notify thread that movie has finished
 	}
 
+	/**
+	 * Checks if movie has ended playback.
+	 *
+	 * @return
+	 *  `true` if not marked for playback.
+	 */
 	bool ended() {
 		return !this->playing;
 	}
 
+	/**
+	 * Adds a line of text to be drawn.
+	 *
+	 * @param font_map
+	 *   Font map reference.
+	 * @param expires
+	 *   When text sprite should be removed.
+	 * @param text
+	 *   Text representation to draw.
+	 */
 	void addText(FontMap* font_map, uint32_t expires, std::string text);
+
+	/**
+	 * Adds a line of text to be drawn that doesn't expire.
+	 *
+	 * @param font_map
+	 *   Font map reference.
+	 * @param text
+	 *   Text representation to draw.
+	 */
 	void addText(FontMap* font_map, std::string text);
+
+	/**
+	 * Adds a line of text to be drawn using default text map.
+	 *
+	 * @param expires
+	 *   When text sprite should be removed.
+	 * @param text
+	 *   Text representation to draw.
+	 */
 	void addText(uint32_t expires, std::string text);
+
+	/**
+	 * Adds a line of text to be drawn using default text map that doesn't expire.
+	 *
+	 * @param text
+	 *   Text representation to draw.
+	 */
 	void addText(std::string text);
 
+	/** Removes all text. */
 	void clearText() {
 		for (Sprite* s: this->text_sprites) {
 			delete s;

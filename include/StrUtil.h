@@ -10,6 +10,9 @@
 #include <string>
 
 
+/**
+ * String related functions.
+ */
 namespace StrUtil {
 
 	/**

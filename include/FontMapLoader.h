@@ -8,16 +8,26 @@
 #define RRE_FONT_MAP_LOADER_H
 
 
-// TODO: rename to FontMapsLoader
+/**
+ * Caches font maps from configuration.
+ *
+ * TODO: rename to FontMapFactory
+ */
 namespace FontMapLoader {
 
 	/**
 	 * Loads configured font maps from built-in data.
+	 *
+	 * @return
+	 *   `true` if loading completed without errors.
 	 */
 	bool loadBuiltin();
 
 	/**
 	 * Loads configured font maps from configuration in `data/conf/fonts.xml`.
+	 *
+	 * @return
+	 *   `true` if loading completed without errors.
 	 */
 	bool loadConfig();
 };

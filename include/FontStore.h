@@ -13,6 +13,9 @@
 #include "Sprite.h"
 
 
+/**
+ * Caches font mappings from configuration.
+ */
 namespace FontStore {
 
 	/**
@@ -25,8 +28,26 @@ namespace FontStore {
 	 */
 	void addMap(std::string font_id, FontMap* font_map);
 
+	/**
+	 * Retrieves a cached font mapping.
+	 *
+	 * @param font_id
+	 *   Font map identifier (path relative to data/tileset directory).
+	 * @return
+	 *   Reference to font map or `null` if not configured.
+	 */
 	FontMap* getMap(std::string font_id);
 
+	/**
+	 * Builds a text sprite.
+	 *
+	 * @param font_map
+	 *   Reference font map.
+	 * @param text
+	 *   Text for sprite to represent.
+	 * @return
+	 *   `Sprite` representing a line of text or `null` if font map reference is undefined.
+	 */
 	Sprite* buildTextSprite(FontMap* font_map, std::string text);
 };
 

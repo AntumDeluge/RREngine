@@ -19,7 +19,7 @@
  */
 class ViewportRenderer {
 public:
-	//virtual ViewportRenderer() = 0;
+	/** Virtual default destructor. */
 	virtual ~ViewportRenderer() {}
 
 	/**

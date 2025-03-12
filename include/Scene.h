@@ -28,9 +28,9 @@
  */
 class Scene {
 private:
-	/** Pixel width of each tile. */
+	/** Individual tile pixel width. */
 	uint16_t tile_width;
-	/** Pixel height of each tile. */
+	/** Individual tile pixel height. */
 	uint16_t tile_height;
 
 	/** Scene tilesets. */
@@ -52,12 +52,21 @@ private:
 	/** Top tiled layer drawn over entities. */
 	tmx::TileLayer* foreground;
 
+	/** Parallax scrolling foreground layer. */
 	tmx::ImageLayer* s_foreground;
 
 	/** Entities currently occupying this scene. */
 	std::vector<Entity*> entities;
 
 public:
+	/**
+	 * Creates a new scene.
+	 *
+	 * @param tile_width
+	 *   Individual tile pixel width.
+	 * @param tile_height
+	 *   Individual tile pixel height.
+	 */
 	Scene(uint16_t tile_width, uint16_t tile_height) {
 		this->tile_width = tile_width;
 		this->tile_height = tile_height;
@@ -72,6 +81,7 @@ public:
 		this->s_foreground = nullptr;
 	}
 
+	/** Default destructor. */
 	~Scene() {
 		delete this->s_background;
 		this->s_background = nullptr;
@@ -97,22 +107,86 @@ public:
 		this->entities.clear();
 	}
 
+	/**
+	 * Adds a tileset to use in scene.
+	 *
+	 * @param tileset
+	 *   Tileset to be added.
+	 */
 	void addTileset(Tileset tileset) {
 		this->tilesets.push_back(tileset);
 	}
 
 	/**
-	 * Builds scene layers.
+	 * Draws scene on renderer.
+	 *
+	 * @param viewport
+	 *   Viewport renderer.
 	 */
 	void render(ViewportRenderer* viewport);
 
+	/**
+	 * Sets layer to use for scrolling background 1.
+	 *
+	 * @param layer
+	 *   Image layer definition.
+	 */
 	void setLayerSBackground(tmx::ImageLayer* layer) { this->s_background = layer; }
+
+	/**
+	 * Sets layer to use for scrolling background 2.
+	 *
+	 * @param layer
+	 *   Image layer definition.
+	 */
 	void setLayerSBackground2(tmx::ImageLayer* layer) { this->s_background2 = layer; }
+
+	/**
+	 * Sets layer to use for background.
+	 *
+	 * @param layer
+	 *   Tile layer definition.
+	 */
 	void setLayerBackground(tmx::TileLayer* layer) { this->background = layer; }
+
+	/**
+	 * Sets layer to use for terrain.
+	 *
+	 * @param layer
+	 *   Tile layer definition.
+	 */
 	void setLayerTerrain(tmx::TileLayer* layer) { this->terrain = layer; }
+
+	/**
+	 * Sets layer to use for objects.
+	 *
+	 * @param layer
+	 *   Tile layer definition.
+	 */
 	void setLayerObjects(tmx::TileLayer* layer) { this->objects = layer; }
+
+	/**
+	 * Sets layer to use for collision.
+	 *
+	 * @param layer
+	 *   Tile layer definition.
+	 */
 	void setLayerCollision(tmx::TileLayer* layer) { this->collision = layer; }
+
+	/**
+	 * Sets layer to use for foreground.
+	 *
+	 * @param layer
+	 *   Tile layer definition.
+	 */
 	void setLayerForeground(tmx::TileLayer* layer) { this->foreground = layer; }
+
+	/**
+	 * Sets layer to use for scrolling foreground.
+	 *
+	 * @param layer
+	 *   Image layer definition.
+	 */
 	void setLayerSForeground(tmx::ImageLayer* layer) { this->s_foreground = layer; }
 
 	/**

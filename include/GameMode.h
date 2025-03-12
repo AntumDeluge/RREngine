@@ -9,12 +9,20 @@
 #define RRE_GAME_MODE
 
 
+/**
+ * Defined game modes enumeration.
+ */
 namespace GameMode {
 	enum Mode {
+		/** Game has not started. */
 		NONE,
+		/** Intro movie is being played. */
 		INTRO,
+		/** Title menu is being displayed. */
 		TITLE,
+		/** Game is in an active scene. */
 		SCENE,
+		/** Game is in a paused scene. */
 		SCENE_PAUSED
 	};
 };

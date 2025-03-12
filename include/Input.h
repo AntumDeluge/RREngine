@@ -4,8 +4,6 @@
  * See: LICENSE.txt
  */
 
-/** Configured input class. */
-
 #ifndef RRE_INPUT_H
 #define RRE_INPUT_H
 
@@ -17,15 +15,23 @@
 #include "Logger.h"
 
 
+/**
+ * Manages user input.
+ */
 class Input {
 private:
 	static Logger logger;
 
+	/** List of keyboard keys currently depressed. */
 	std::vector<SDL_Keycode> pressed_keys;
 
-	// singleton class
+	/** Static singleton instance. */
 	static Input* instance;
+
+	/** Default constructor. */
 	Input() {}
+
+	/** Defaul destructor. */
 	~Input() {
 		if (Input::instance != nullptr) {
 			delete Input::instance;
@@ -33,7 +39,7 @@ private:
 		}
 	}
 
-	// delete copy constructor & assignment operator
+	// delete copy constructor & assignment operator for singleton
 	Input(const Input&) = delete;
 	Input& operator=(const Input&) = delete;
 
@@ -59,6 +65,12 @@ private:
 	bool keyIsPressed(SDL_Keycode key);
 
 public:
+	/**
+	 * Initializes & retrieves singleton instance.
+	 *
+	 * @return
+	 *   Static singleton instance.
+	 */
 	static Input* get() {
 		if (instance == nullptr) {
 			instance = new Input();
@@ -66,7 +78,20 @@ public:
 		return instance;
 	}
 
+	/**
+	 * Interprets keyboard key down events.
+	 *
+	 * @param key
+	 *   Depressed key.
+	 */
 	void onKeyDown(SDL_Keysym key);
+
+	/**
+	 * Interprets keyboard key up events.
+	 *
+	 * @param key
+	 *   Released key.
+	 */
 	void onKeyUp(SDL_Keysym key);
 };
 

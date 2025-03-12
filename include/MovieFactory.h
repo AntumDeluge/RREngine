@@ -12,8 +12,19 @@
 #include "Movie.h"
 
 
+/**
+ * Manages configured movies.
+ */
 namespace MovieFactory {
 
+	/**
+	 * Builds & retrieves a configured movie.
+	 *
+	 * @param id
+	 *   Movie identifier.
+	 * @return
+	 *   Move instance or `null` if not configured.
+	 */
 	Movie* getMovie(std::string id);
 }
 

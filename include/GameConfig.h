@@ -23,17 +23,52 @@ namespace GameConfig {
 	 * Loads game configuration from `data/conf/game.xml` into memory.
 	 *
 	 * @return
+	 *   Return code (0 if completed without errors).
 	 */
 	int load();
 
+	/**
+	 * Retrieves configured game title.
+	 *
+	 * @return
+	 *   Text to display in window title bar.
+	 */
 	std::string getTitle();
 
+	/**
+	 * Retrieves configured game scaling.
+	 *
+	 * @return
+	 *   Multiplier by which window should be scaled.
+	 */
 	uint16_t getScale();
 
+	/**
+	 * Retrieves intro movie.
+	 *
+	 * @return
+	 *   Movie to play at game startup or `null` if not configured.
+	 */
 	Movie* getIntro();
 
+	/**
+	 * Retrieves a configured background image ID for a menu.
+	 *
+	 * @param id
+	 *   Menu identifier.
+	 * @return
+	 *   Background identifier or empty string if not configured.
+	 */
 	std::string getBackground(std::string id);
 
+	/**
+	 * Retrieves a configured music ID for a menu.
+	 *
+	 * @param id
+	 *   Menu Identifier.
+	 * @return
+	 *   Music identifier or empty string if not configured.
+	 */
 	std::string getMenuMusicId(std::string id);
 };
 

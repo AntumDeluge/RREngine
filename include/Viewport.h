@@ -22,39 +22,67 @@
 #include "ViewportRenderer.h"
 
 
-// TODO: move rendering functions to new renderer class or Scene
+/**
+ * Interface for rendering images.
+ *
+ * TODO: move rendering functions to new renderer class or Scene
+ */
 class Viewport: public ViewportRenderer {
 private:
 	/** Logger instance for this class. */
 	static Logger logger;
 
-	// singleton class
+	/** Static singleton instance. */
 	static Viewport* instance;
+
+	/** Default constructor. */
 	Viewport();
-	// deletion of pointer members handled in Viewport.shutdown
+
+	/**
+	 * Default destructor.
+	 *
+	 * NOTE: deletion of pointer members handled in `Viewport.shutdown`
+	 */
 	~Viewport() {}
 
 	// delete copy constructor & assignment operator
 	Viewport(const Viewport&) = delete;
 	Viewport& operator=(const Viewport&) = delete;
 
+	/** The system renderer. */
 	SDL_Renderer* renderer;
+	/** Font map for drawing text. */
 	FontMap* font_map;
+	/** Detected FPS. */
 	uint16_t current_fps;
 
+	/** Current game mode. */
 	GameMode::Mode mode;
 
+	/** Texture drawn on background during `GameMode::MENU` or `GameMode::TITLE`. */
 	SDL_Texture* background;
+	/** Text sprite representing RPS that can be drawn on renderer. */
 	Sprite* fps_sprite;
+	/** Scene rendered during `GameMode::SCENE`. */
 	Scene* scene;
 
 	/** Currently playing movie. */
 	Movie* movie;
 
-	// TODO: replace with text sprite class with x/y offsets
+	/**
+	 * Text sprite to draw on renderer.
+	 *
+	 * TODO: replace with text sprite class with x/y offsets
+	 */
 	std::vector<Sprite*> text_sprites;
 
 public:
+	/**
+	 * Initializes & retrieves singleton instance.
+	 *
+	 * @return
+	 *   Static singleton instance.
+	 */
 	static Viewport* get() {
 		if (instance == nullptr) {
 			instance = new Viewport();
@@ -62,6 +90,7 @@ public:
 		return instance;
 	}
 
+	/** Cleans up viewport initializations. */
 	static void destroy() {
 		if (Viewport::instance != nullptr) {
 			Viewport::instance->shutdown();
@@ -91,9 +120,36 @@ public:
 	 */
 	SDL_Renderer* getRenderer() { return this->renderer; }
 
+	/**
+	 * Sets font map to use for drawing text.
+	 *
+	 * @param font_map
+	 *   New font map.
+	 */
 	void setFontMap(FontMap* font_map) { this->font_map = font_map; }
+
+	/**
+	 * Retrieves the font map used for drawing text.
+	 *
+	 * @return
+	 *   Current font map instance.
+	 */
 	FontMap* getFontMap() { return this->font_map; }
+
+	/**
+	 * Updates FPS value.
+	 *
+	 * @param fps
+	 *   Detected FPS.
+	 */
 	void setCurrentFPS(uint16_t fps);
+
+	/**
+	 * Sets scaling factor of game window.
+	 *
+	 * @param scale
+	 *   New scaling factor.
+	 */
 	void setScale(uint16_t scale);
 
 	/**
@@ -136,14 +192,62 @@ public:
 	 */
 	void setMode(GameMode::Mode mode);
 
+	/**
+	 * Draws a texture on the renderer.
+	 *
+	 * @param texture
+	 *   Texture reference to draw.
+	 * @param s_rect
+	 *   Drawing points of source image.
+	 * @param t_rect
+	 *   Drawing points of target renderer.
+	 */
 	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect);
+
+	/**
+	 * Draws a texture on the renderer.
+	 *
+	 * @param texture
+	 *   Texture reference.
+	 * @param rect
+	 *   Drawing points of both source image & target renderer.
+	 */
 	void drawTexture(SDL_Texture* texture, SDL_Rect rect) { this->drawTexture(texture, rect, rect); }
 
+	/**
+	 * Draws an image on the renderer.
+	 *
+	 * @param img
+	 *   Image reference.
+	 * @param sx
+	 * @param xy
+	 * @param s_width
+	 * @param s_height
+	 * @param x
+	 *   Left-most point to draw on renderer.
+	 * @param y
+	 *   Top-most point to draw on renderer.
+	 */
 	void drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width, uint32_t t_height,
 			uint32_t x, uint32_t y) override;
+
+	/**
+	 * Draw an image on the renderer.
+	 *
+	 * @param img
+	 *   Image reference.
+	 * @param x
+	 *   Left-most point to draw on renderer.
+	 * @param y
+	 *   Top-most point to draw on renderer.
+	 */
 	void drawImage(ImageImpl* img, uint32_t x, uint32_t y) override;
 
-	// TODO: rename to render
+	/**
+	 * Renders the current scene, movie, menu, etc. on viewport.
+	 *
+	 * TODO: rename to render
+	 */
 	void draw();
 
 	/**
@@ -160,13 +264,26 @@ public:
 	void clearText();
 
 private:
-	// TODO: replace with methods in Scene class
+	/**
+	 * Renders current scene on viewport.
+	 *
+	 * TODO: replace with methods in Scene class
+	 */
 	void drawScene();
+
+	/** Renders current background image on viewport. */
 	void drawBackground();
+
+	/** Renders current foreground image on viewport. */
 	void drawForeground();
 
+	/** Renders configured title menu on viewport. */
 	void drawTitle();
+
+	/** Renders text sprites on viewport. */
 	void drawText();
+
+	/** Renders FPS text sprite on viewport. */
 	void drawFPS();
 };
 

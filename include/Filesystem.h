@@ -19,6 +19,9 @@ typedef mode_t dperm;
 #endif
 
 
+/**
+ * Wrapper for filesystem related functions.
+ */
 namespace Filesystem {
 
 	/** Checks for existing file.
@@ -32,12 +35,48 @@ namespace Filesystem {
 	 */
 	bool fexist(const std::string path);
 
+	/**
+	 * Creates a new directory tree in the filesystem.
+	 *
+	 * FIXME: unused?
+	 *
+	 * @param path
+	 *   Path to new directory.
+	 * @param mode
+	 *   Directory permissions.
+	 */
 	int mkdir(const std::string path, dperm mode);
 
+	/**
+	 * Creates a new directory tree in the filesystem with default permissions.
+	 *
+	 * FIXME: unused?
+	 *
+	 * @param path
+	 *   Path to new directory.
+	 */
 	int mkdir(const std::string path);
 
+	/**
+	 * Retrieves contents of a system directory.
+	 *
+	 * @param path
+	 *   Path to directory to be examined.
+	 * @param recurse
+	 *   If `true`, get contents of sub-directories recursively.
+	 * @return
+	 *   List of directory objects.
+	 */
 	std::vector<std::filesystem::directory_entry> listDir(std::string path, bool recurse);
 
+	/**
+	 * Retrieves contents of a system directory without recursion.
+	 *
+	 * @param path
+	 *   Path to directory to be examined.
+	 * @return
+	 *   List of directory objects.
+	 */
 	static inline std::vector<std::filesystem::directory_entry> listDir(std::string path) {
 		return listDir(path, false);
 	}

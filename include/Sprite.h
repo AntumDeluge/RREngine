@@ -25,17 +25,45 @@ class Sprite: public ImageImpl {
 private:
 	static Logger logger;
 
+	/** Timestamp at which this sprite should no longer be drawn on renderer. */
 	uint32_t expires = 0;
 
 public:
+	/**
+	 * Creates a new sprite.
+	 *
+	 * @param texture
+	 *   Image texture used for drawing on renderer.
+	 */
 	Sprite(SDL_Texture* texture): ImageImpl(texture) {}
+
+	/**
+	 * Creates a new sprite.
+	 *
+	 * @param id
+	 *   Identifier used to retrieve image texture for drawing on renderer from configuration.
+	 */
 	Sprite(std::string id);
+
+	/** Default constructor. */
 	Sprite(): Sprite(nullptr) {}
 
+	/**
+	 * Sets sprite expiration.
+	 *
+	 * @param expires
+	 *   Timestamp at which this sprite should no longer be drawn on renderer.
+	 */
 	void setExpiration(uint32_t expires) {
 		this->expires = expires;
 	}
 
+	/**
+	 * Checks if the sprite has expired.
+	 *
+	 * @return
+	 *   `true` if current time is at least the same as expiration timestamp.
+	 */
 	bool expired() {
 		return this->expires != 0 && SDL_GetTicks64() >= this->expires;
 	}

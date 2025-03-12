@@ -13,11 +13,13 @@
 
 
 /**
- * Image implemtation representing a tileset.
+ * Image implementation representing a tileset.
  */
 class Tileset : public ImageImpl {
 private:
+	/** Minimum global ID for this tileset in scene. */
 	uint32_t first_gid;
+	/** Maximum global ID for this tileset in scene. */
 	uint32_t last_gid;
 
 public:

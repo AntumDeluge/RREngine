@@ -10,6 +10,9 @@
 #include <string>
 
 
+/**
+ * Caches audio paths from configuration.
+ */
 namespace AudioStore {
 
 	/**
@@ -20,6 +23,14 @@ namespace AudioStore {
 	 */
 	bool load();
 
+	/**
+	 * Retrieves configured path to music file.
+	 *
+	 * @param id
+	 *   Music file identifier (path relative to data/music directory).
+	 * @return
+	 *   Absolute path to music file.
+	 */
 	std::string getMusicPath(const std::string id);
 }
 

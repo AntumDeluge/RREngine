@@ -11,14 +11,35 @@
 #include "GameMode.h"
 
 
+/**
+ * Handles draw rate & stepping of game logic.
+ */
 namespace GameLoop {
 
+	/**
+	 * Starts the game loop & initializes game mode.
+	 */
 	void start();
 
+	/**
+	 * Marks game loop for ending & clean up.
+	 */
 	void end();
 
+	/**
+	 * Retrieves current game mode.
+	 *
+	 * @return
+	 *   Game mode.
+	 */
 	GameMode::Mode getMode();
 
+	/**
+	 * Updates current game mode.
+	 *
+	 * @param mode
+	 *   New game mode.
+	 */
 	void setMode(GameMode::Mode mode);
 };
 

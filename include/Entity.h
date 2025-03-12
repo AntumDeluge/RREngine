@@ -148,6 +148,12 @@ public:
 	 */
 	bool collides(Entity* other);
 
+	/**
+	 * Draws entity sprite on viewport render.
+	 *
+	 * @param viewport
+	 *   Viewport renderer.
+	 */
 	void render(ViewportRenderer* viewport);
 };
 

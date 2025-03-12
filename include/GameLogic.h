@@ -7,11 +7,14 @@
 #ifndef RRE_GAME_LOGIC_H
 #define RRE_GAME_LOGIC_H
 
-#include <cstdint>
+#include <cstdint> // *int*_t
 
 #include "Logger.h"
 
 
+/**
+ * Singleton class to handle game stepping.
+ */
 class GameLogic {
 private:
 	// TODO: make static
@@ -25,13 +28,19 @@ private:
 	/** Time (in milliseconds) of current step. */
 	uint64_t step_time;
 
-	// singleton class
+	/** Static singleton instance. */
 	static GameLogic* instance;
+
+	/**
+	 * Constructs the game logic instance.
+	 */
 	GameLogic() {
 		this->logger = Logger::getLogger("GameLogic");
 		this->prev_step_time = 0;
 		this->step_time = 0;
 	}
+
+	/** Default destructor. */
 	~GameLogic() {}
 
 	// delete copy constructor & assignment operator
@@ -39,6 +48,12 @@ private:
 	GameLogic& operator=(const GameLogic&) = delete;
 
 public:
+	/**
+	 * Initializes & retrieves singleton instance.
+	 *
+	 * @return
+	 *   Static singleton instance.
+	 */
 	static GameLogic* get() {
 		if (GameLogic::instance == nullptr) {
 			GameLogic::instance = new GameLogic();
