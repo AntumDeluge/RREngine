@@ -11,48 +11,36 @@ using namespace std;
 
 Logger AnimatedSprite::logger = Logger::getLogger("AnimatedSprite");
 
+// dummy animation to return in case animations have not been initialized
+const static Animation _dummy_mode = Animation();
+
 AnimatedSprite::AnimatedSprite(SDL_Texture* texture): Sprite(texture) {
-	// create dummy mode
-	this->default_mode = "dummy";
-	this->addMode(this->default_mode, true, {});
-	this->setMode(this->default_mode);
+	// no animations have been defined yet
+	current_mode = nullptr;
+	default_mode = "dummy";
 }
 
-AnimatedSprite::AnimatedSprite(std::string id): Sprite(id) {
-	// create dummy mode
-	this->default_mode = "dummy";
-	this->addMode(this->default_mode, true, {});
-	this->setMode(this->default_mode);
-}
-
-AnimatedSprite::AnimatedSprite(): AnimatedSprite(nullptr) {}
-
-void AnimatedSprite::addMode(string id, bool loop, Animation* animation) {
-	this->modes[id] = new AnimationMode;
-	this->modes[id]->first = loop;
-	this->modes[id]->second = animation;
+AnimatedSprite::AnimatedSprite(string id): Sprite(id) {
+	// no animations have been defined yet
+	current_mode = nullptr;
+	default_mode = "dummy";
 }
 
 void AnimatedSprite::setMode(string id) {
-	if (this->modes.find(id) != this->modes.end()) {
-		this->current_mode = this->modes[id];
+	if (modes.find(id) != modes.end()) {
+		current_mode = &modes[id];
 		return;
 	}
-
-	this->logger.warn("Unrecognized animation mode: " + id);
-	this->current_mode = this->getDefaultMode();
+	logger.warn("Unrecognized animation mode: " + id);
+	current_mode = getDefaultMode();
 }
 
-AnimationMode* AnimatedSprite::getDefaultMode() {
-	if (this->modes.find(this->default_mode) != this->modes.end()) {
-		return this->modes[this->default_mode];
+const Animation* AnimatedSprite::getDefaultMode() {
+	if (modes.find(default_mode) != modes.end()) {
+		return &modes[default_mode];
 	}
-
-	// dummy mode
-	AnimationMode* dummy;
-	dummy->first = true;
-	dummy->second = new Animation;
-	return dummy;
+	// return a dummy mode to prevent errors
+	return &_dummy_mode;
 }
 
 

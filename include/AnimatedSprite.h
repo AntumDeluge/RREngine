@@ -7,77 +7,95 @@
 #ifndef RRE_ANIMATED_SPRITE
 #define RRE_ANIMATED_SPRITE
 
-#include <cstdint> // uint*_t
+#include <cstdint> // *int*_t
 #include <string>
-//#include <tuple>
 #include <unordered_map>
-#include <utility> // std::pair
-#include <vector>
 
 #include <SDL2/SDL_render.h>
 
+#include "Animation.hpp"
 #include "Logger.h"
 #include "Sprite.h"
 #include "ViewportRenderer.h"
 
 
 /**
- * Represents a frame of animation with duration indexed by tile index.
- */
-typedef std::pair<uint16_t, uint32_t> AnimationFrame;
-
-/**
- * Represents animation frames & durations.
+ * Animated sprite to be drawn on viewport renderer.
  *
- * FIXME: should a fixed size type be used instead of std::vector?
+ * TODO: rename file to AnimatedSprite.hpp
  */
-typedef std::vector<AnimationFrame> Animation;
-
-//typedef std::tuple<std::string, bool, Animation> AnimationMode;
-typedef std::pair<bool, Animation*> AnimationMode;
-
 class AnimatedSprite: public Sprite {
 private:
 	static Logger logger;
 
-	/** All available animation modes of this sprite. */
-	std::unordered_map<std::string, AnimationMode*> modes;
+	/** Available animation modes of this sprite. */
+	std::unordered_map<std::string, const Animation> modes;
 
 	/** Animation currently being displayed. */
-	AnimationMode* current_mode;
+	Animation* current_mode;
 
+	/** Identifier for sprite's default animation mode. */
 	std::string default_mode;
 
 	/** Frame currently being drawn. */
-	//AnimationFrame* current_frame;
 	uint16_t frame_index = 0;
 	/** Time when frame animation began. */
 	uint32_t frame_start = 0;
 
 public:
+	/**
+	 * Creates an animated sprite.
+	 *
+	 * @param texture
+	 *   Image texture used for drawing.
+	 */
 	AnimatedSprite(SDL_Texture* texture);
-	AnimatedSprite(std::string id);
-	AnimatedSprite();
 
+	/**
+	 * Creates an animated sprite.
+	 *
+	 * @param id
+	 *   Texture identifier used to load from configuration.
+	 */
+	AnimatedSprite(std::string id);
+
+	/**
+	 * Default constructor.
+	 *
+	 * Creates an uninitialized animated sprite.
+	 */
+	AnimatedSprite(): AnimatedSprite(nullptr) {}
+
+	/** Default destructor. */
 	~AnimatedSprite() {
-		for (std::pair<std::string, AnimationMode*> m: this->modes) {
-			if (m.second != nullptr) {
-				if (m.second->second != nullptr) {
-					delete m.second->second;
-					m.second->second = nullptr;
-				}
-				delete m.second;
-				m.second = nullptr;
-			}
-		}
 		this->modes.clear();
 		this->current_mode = nullptr; // should have been deleted in modes loop
 	}
 
-	void addMode(std::string id, bool loop, Animation* animation);
+	/**
+	 * Adds an animation mode to sprite.
+	 *
+	 * @param id
+	 *   Mode identifier.
+	 * @param animation
+	 *   Animation definition.
+	 */
+	void addMode(std::string id, const Animation animation) { modes[id] = animation; }
 
+	/**
+	 * Sets the current animation mode.
+	 *
+	 * @param id
+	 *   Mode identifier. If `id` isn't configured, an uninitialized animation definition is used.
+	 */
 	void setMode(std::string id);
 
+	/**
+	 * Sets ID of default animation mode.
+	 *
+	 * @param id
+	 *   Mode identifier.
+	 */
 	void setDefaultMode(std::string id) {
 		this->default_mode = id;
 	}
@@ -90,12 +108,21 @@ public:
 private:
 	/**
 	 * Checks if current animation should loop playback.
+	 *
+	 * @return
+	 *   `true` if current animation definition is configured to loop.
 	 */
 	bool loops() {
-		return this->current_mode->first;
+		return this->current_mode->loop;
 	}
 
-	AnimationMode* getDefaultMode();
+	/**
+	 * Retrieves a reference to the configured default animation mode.
+	 *
+	 * @return
+	 *   Default animation definition or uninitialized animation if default not configured.
+	 */
+	const Animation* getDefaultMode();
 };
 
 #endif /* RRE_ANIMATED_SPRITE */
