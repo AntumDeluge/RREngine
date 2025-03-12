@@ -4,12 +4,13 @@
  * See: LICENSE.txt
  */
 
+#include "config.h"
+
 #if RRE_DEBUGGING
 //~ #include <string>
 #endif
 
 #include "GameLogic.hpp"
-#include "config.h"
 
 
 // initialize singleton instance to NULL

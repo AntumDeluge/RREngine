@@ -10,7 +10,7 @@
 #include <cstdint> // uint*_t
 #include <string>
 
-#include "SDL2/SDL_rect.h"
+#include <SDL2/SDL_rect.h>
 
 #include "Logger.hpp"
 #include "Sprite.hpp"

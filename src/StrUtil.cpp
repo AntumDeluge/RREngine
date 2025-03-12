@@ -7,9 +7,9 @@
 #include <sstream>
 #include <type_traits>
 
-using namespace std;
-
 #include "StrUtil.hpp"
+
+using namespace std;
 
 
 template <typename T>

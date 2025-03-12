@@ -9,8 +9,6 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
 #include "FontStore.hpp"
 #include "GameConfig.hpp"
 #include "GameLoop.hpp"
@@ -19,6 +17,8 @@ using namespace std;
 #include "TextureLoader.hpp"
 #include "Viewport.hpp"
 #include "reso.hpp"
+
+using namespace std;
 
 
 Logger Viewport::logger = Logger::getLogger("Viewport");

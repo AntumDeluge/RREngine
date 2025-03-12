@@ -9,9 +9,9 @@
 #include <windows.h> // CreateDirectory
 #endif
 
-using namespace std;
-
 #include "Filesystem.hpp"
+
+using namespace std;
 
 
 bool Filesystem::fexist(const string path) {
