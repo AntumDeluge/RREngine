@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<files>
-	<file>characters</file>
-</files>
+<sprites>
+	<!-- TODO: load from files in sub-directory -->
+
+	<sprite id="player">
+		<filename>character</filename>
+		<size width="32" height="32" />
+		<animation>
+			<frame index="6" delay="4000" />
+			<frame index="7" delay="500" />
+		</animation>
+	</sprite>
+
+</sprites>
