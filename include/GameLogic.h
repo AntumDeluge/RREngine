@@ -27,6 +27,8 @@ private:
 	/**
 	 * Delay (in milliseconds) for each step.
 	 *
+	 * Default is 300ms.
+	 *
 	 * FIXME: doesn't need to be static in singleton.
 	 */
 	static uint32_t step_delay;

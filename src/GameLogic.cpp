@@ -15,7 +15,7 @@
 // initialize singleton instance to NULL
 GameLogic* GameLogic::instance = nullptr;
 // default step delay is 300ms
-uint16_t GameLogic::step_delay = 300;
+uint32_t GameLogic::step_delay = 300;
 
 #if RRE_DEBUGGING
 // for debugging delay between steps
