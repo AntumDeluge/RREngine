@@ -141,8 +141,6 @@ void GameWindow::shutdown() {
 	Mix_CloseAudio();
 	Mix_Quit();
 	IMG_Quit();
-	Viewport::destroy();
-	this->viewport = nullptr;
 	SDL_DestroyWindow(this->window);
 	SDL_Quit();
 }

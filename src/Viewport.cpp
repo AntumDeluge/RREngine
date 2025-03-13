@@ -24,7 +24,8 @@ using namespace std;
 Logger Viewport::logger = Logger::getLogger("Viewport");
 
 // initialize singleton instance
-Viewport* Viewport::instance = nullptr;
+unique_ptr<Viewport> Viewport::instance = nullptr;
+mutex Viewport::mtx;
 
 Viewport::Viewport() {
 	this->renderer = nullptr;

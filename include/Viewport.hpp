@@ -7,6 +7,8 @@
 #ifndef RRE_VIEWPORT
 #define RRE_VIEWPORT
 
+#include <memory> // std::unique_ptr, std::make_unique
+#include <mutex>
 #include <vector>
 
 #include <SDL2/SDL_render.h>
@@ -34,17 +36,9 @@ private:
 	static Logger logger;
 
 	/** Static singleton instance. */
-	static Viewport* instance;
-
-	/** Default constructor. */
-	Viewport();
-
-	/**
-	 * Default destructor.
-	 *
-	 * NOTE: deletion of pointer members handled in `Viewport.shutdown`
-	 */
-	~Viewport() {}
+	static std::unique_ptr<Viewport> instance;
+	/** Mutex for thread safety. */
+	static std::mutex mtx;
 
 	// delete copy constructor & assignment operator for singleton
 	Viewport(const Viewport&) = delete;
@@ -82,6 +76,14 @@ private:
 	std::vector<Sprite*> text_sprites;
 
 public:
+	/** Default constructor. */
+	Viewport();
+
+	/**
+	 * Default destructor.
+	 */
+	~Viewport() {}
+
 	/**
 	 * Initializes & retrieves singleton instance.
 	 *
@@ -89,20 +91,11 @@ public:
 	 *   Static singleton instance.
 	 */
 	static Viewport* get() {
-		if (instance == nullptr) {
-			instance = new Viewport();
+		if (!instance) {
+			std::lock_guard<std::mutex> lock(mtx); // lock for thread safety
+			instance = std::make_unique<Viewport>();
 		}
-		return instance;
-	}
-
-	/** Cleans up viewport initializations. */
-	static void destroy() {
-		if (Viewport::instance != nullptr) {
-			Viewport::instance->shutdown();
-			// FIXME: segmentation fault?
-			delete Viewport::instance;
-		}
-		Viewport::instance = nullptr;
+		return instance.get();
 	}
 
 	/**
