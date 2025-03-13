@@ -8,6 +8,8 @@
 #define RRE_GAME_LOGIC_H
 
 #include <cstdint> // *int*_t
+#include <memory> // std::unique_ptr, std::make_unique
+#include <mutex>
 
 #include "Logger.hpp"
 
@@ -37,13 +39,16 @@ private:
 	/** Time (in milliseconds) of current step. */
 	uint64_t step_time;
 
-	/**
-	 * Static singleton instance.
-	 *
-	 * FIXME: needs destroyed at process end
-	 */
-	static GameLogic* instance;
+	/** Static singleton instance. */
+	static std::unique_ptr<GameLogic> instance;
+	/** Mutex for thread safety. */
+	static std::mutex mtx;
 
+	// delete copy constructor & assignment operator
+	GameLogic(const GameLogic&) = delete;
+	GameLogic& operator=(const GameLogic&) = delete;
+
+public:
 	/**
 	 * Constructs the game logic instance.
 	 */
@@ -56,11 +61,6 @@ private:
 	/** Default destructor. */
 	~GameLogic() {}
 
-	// delete copy constructor & assignment operator
-	GameLogic(const GameLogic&) = delete;
-	GameLogic& operator=(const GameLogic&) = delete;
-
-public:
 	/**
 	 * Initializes & retrieves singleton instance.
 	 *
@@ -68,10 +68,11 @@ public:
 	 *   Static singleton instance.
 	 */
 	static GameLogic* get() {
-		if (GameLogic::instance == nullptr) {
-			GameLogic::instance = new GameLogic();
+		if (!instance) {
+			std::lock_guard<std::mutex> lock(mtx); // lock for thread safety
+			instance = std::make_unique<GameLogic>();
 		}
-		return GameLogic::instance;
+		return instance.get();
 	}
 
 	/**

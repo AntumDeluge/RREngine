@@ -12,9 +12,13 @@
 
 #include "GameLogic.hpp"
 
+using namespace std;
+
 
 // initialize singleton instance to NULL
-GameLogic* GameLogic::instance = nullptr;
+unique_ptr<GameLogic> GameLogic::instance = nullptr;
+mutex GameLogic::mtx;
+
 // default step delay is 300ms
 uint32_t GameLogic::step_delay = 300;
 
