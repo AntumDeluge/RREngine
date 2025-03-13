@@ -28,6 +28,8 @@ namespace EntityStore {
 	/**
 	 * Retrieves an entity from cache.
 	 *
+	 * NOTE: perhaps should return a shared pointer
+	 *
 	 * @param id
 	 *   Entity identifier.
 	 * @return

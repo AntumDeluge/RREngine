@@ -28,6 +28,8 @@ namespace SpriteStore {
 	/**
 	 * Retrieves a sprite from cache.
 	 *
+	 * NOTE: perhaps should return a shared pointer
+	 *
 	 * @param id
 	 *   Sprite identifier.
 	 * @return
