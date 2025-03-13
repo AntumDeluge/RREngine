@@ -7,6 +7,8 @@
 #ifndef RRE_GAME_WINDOW
 #define RRE_GAME_WINDOW
 
+#include <memory> // std::unique_ptr, std::make_unique
+#include <mutex>
 #include <string>
 
 #include <SDL2/SDL_mixer.h>
@@ -26,13 +28,9 @@ private:
 	Logger logger;
 
 	/** Static singleton instance. */
-	static GameWindow* instance;
-
-	/** Default constructor. */
-	GameWindow();
-
-	/** Default destructor. */
-	~GameWindow() {}
+	static std::unique_ptr<GameWindow> instance;
+	/** Mutex for thread safety. */
+	static std::mutex mtx;
 
 	// delete copy constructor & assignment operator for singleton
 	GameWindow(const GameWindow&) = delete;
@@ -58,6 +56,12 @@ private:
 	bool quit;
 
 public:
+	/** Default constructor. */
+	GameWindow();
+
+	/** Default destructor. */
+	~GameWindow() {}
+
 	/**
 	 * Initializes & retrieves singleton instance.
 	 *
@@ -65,20 +69,11 @@ public:
 	 *   Static singleton instance.
 	 */
 	static GameWindow* get() {
-		if (instance == nullptr) {
-			instance = new GameWindow();
+		if (!instance) {
+			std::lock_guard<std::mutex> lock(mtx); // lock for thread safety
+			instance = std::make_unique<GameWindow>();
 		}
-		return instance;
-	}
-
-	/** Handles deletion of singleton instance. */
-	static void destroy() {
-		if (GameWindow::instance != nullptr) {
-			GameWindow::instance->shutdown();
-			// FIXME: segmentation fault?
-			delete GameWindow::instance;
-		}
-		GameWindow::instance = nullptr;
+		return instance.get();
 	}
 
 	/**

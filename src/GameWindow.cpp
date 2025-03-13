@@ -16,7 +16,8 @@ using namespace std;
 
 
 // initialize singleton instance
-GameWindow* GameWindow::instance = nullptr;
+unique_ptr<GameWindow> GameWindow::instance = nullptr;
+mutex GameWindow::mtx;
 
 GameWindow::GameWindow() {
 	this->logger = Logger::getLogger("GameWindow");
