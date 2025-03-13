@@ -10,10 +10,12 @@
 #include "Filesystem.hpp"
 #include "Logger.hpp"
 #include "Path.hpp"
+#include "Sprite.hpp"
+#include "TextureLoader.hpp"
 #include "factory/EntityFactory.hpp"
 
-//using namespace pugi;
 using namespace std;
+using namespace tinyxml2;
 
 
 static Logger _logger = Logger::getLogger("EntityFactory");
@@ -32,48 +34,36 @@ static void _onConfigError(string msg) {
 	_onConfigError("", msg);
 }
 
-Entity EntityFactory::getEntity(string id) {
-	string entity_conf = Path::rabs("data/conf/entities.xml");
-	if (!Filesystem::fexist(entity_conf)) {
-		_onConfigError("Entity configuration not found: " + entity_conf);
-		return nullptr;
-	}
-
-	// pugixml example
-//	pugi::xml_document doc;
-//	if (doc.load_file(entity_conf.c_str()).status != pugi::status_ok) {
-//		_onConfigError("Failed to load entities configuration: " + entity_conf);
-//		return nullptr;
-//	}
-//
-//	pugi::xml_node root = doc.document_element().child("entities");
-//	if (root.type() == pugi::node_null) {
-//		_onConfigError("XML Parsing Error", "Root tag \"entities\" not found: " + entity_conf);
-//		return nullptr;
-//	}
-//
-//	pugi::xml_node entity_tag = root.child("entity");
-//	while (entity_tag.type() != pugi::node_null) {
-//		pugi::xml_attribute id_attr = entity_tag.attribute("id");
-//		if (id_attr.empty()) {
-//			_onConfigError("XML Parsing Error", "Attribute \"id\" not found: " + entity_conf);
-//			return nullptr;
-//		} else if (id.compare(id_attr.value()) == 0) {
-//			// entity with matching ID found
-//			break;
-//		}
-//
-//		entity_tag = entity_tag.next_sibling("entity");
-//	}
-//
-//	if (entity_tag.type() == pugi::node_null) {
-//		_onConfigError("Entity \"" + id + "\" not configured: " + entity_conf);
-//		return nullptr;
-//	}
-
+Entity EntityFactory::build(XMLElement* el) {
 	Entity entity = Entity::create();
 
-	// TODO:
+	Sprite* sprite = nullptr;
+	const XMLAttribute* attr_sprite = el->FindAttribute("sprite");
+	if (!attr_sprite) {
+		_logger.warn("Entity sprite not configured");
+	} else {
+		// FIXME: should be using a shared pointer returned from SpriteStore
+		sprite = new Sprite(TextureLoader::load(attr_sprite->Value()));
+	}
+
+	uint32_t width = 0, height = 0;
+	const XMLAttribute* attr_width = el->FindAttribute("width");
+	if (attr_width != nullptr) {
+		width = attr_width->UnsignedValue();
+	}
+	const XMLAttribute* attr_height = el->FindAttribute("height");
+	if (attr_height != nullptr) {
+		height = attr_height->UnsignedValue();
+	}
+
+	if (width == 0 or height == 0) {
+		_logger.warn("Entity dimensions not configured correctly; falling back to sprite dimensions");
+		entity = Entity(sprite);
+	} else {
+		entity = Entity(sprite, width, height);
+	}
+
+	// TODO: other entity attributes.
 
 	return entity;
 }

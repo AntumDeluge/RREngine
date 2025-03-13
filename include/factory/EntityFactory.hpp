@@ -9,21 +9,20 @@
 
 #include <string>
 
+#include <tinyxml2.h>
+
 #include "Entity.hpp"
 
 
 namespace EntityFactory {
 
 	/**
-	 * Creates a new entity from configuration.
+	 * Builds an entity from configuration.
 	 *
-	 * TODO: create from an entity template stored in memory instead of reading from filesystem
-	 *       every call
-	 *
-	 * @param id
-	 *   Entity's identifier.
+	 * @param el
+	 *   Parsed entity element.
 	 */
-	Entity getEntity(std::string id);
+	Entity build(tinyxml2::XMLElement* el);
 }
 
 #endif /* RRE_ENTITY_FACTORY */
