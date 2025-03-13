@@ -17,7 +17,8 @@ using namespace std;
 Logger Input::logger = Logger::getLogger("Input");
 
 // initialize singleton instance
-Input* Input::instance = nullptr;
+unique_ptr<Input> Input::instance = nullptr;
+mutex Input::mtx;
 
 bool Input::keyIsPressed(SDL_Keycode key) {
 	return find(this->pressed_keys.begin(), this->pressed_keys.end(), key) != this->pressed_keys.end();

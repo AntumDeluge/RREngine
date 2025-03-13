@@ -7,6 +7,8 @@
 #ifndef RRE_INPUT_H
 #define RRE_INPUT_H
 
+#include <memory> // std::unique_ptr, std::make_unique
+#include <mutex>
 #include <vector>
 
 #include <SDL2/SDL_keyboard.h>
@@ -29,19 +31,9 @@ private:
 	std::vector<SDL_Keycode> pressed_keys;
 
 	/** Static singleton instance. */
-	static Input* instance;
-
-	/** Default constructor. */
-	Input() {}
-
-	/** Defaul destructor. */
-	~Input() {
-		if (Input::instance != nullptr) {
-			// FIXME: segmentation fault?
-			delete Input::instance;
-			Input::instance = nullptr;
-		}
-	}
+	static std::unique_ptr<Input> instance;
+	/** Mutex for thread safety. */
+	static std::mutex mtx;
 
 	// delete copy constructor & assignment operator for singleton
 	Input(const Input&) = delete;
@@ -69,6 +61,12 @@ private:
 	bool keyIsPressed(SDL_Keycode key);
 
 public:
+	/** Default constructor. */
+	Input() {}
+
+	/** Defaul destructor. */
+	~Input() {}
+
 	/**
 	 * Initializes & retrieves singleton instance.
 	 *
@@ -76,10 +74,11 @@ public:
 	 *   Static singleton instance.
 	 */
 	static Input* get() {
-		if (instance == nullptr) {
-			instance = new Input();
+		if (!instance) {
+			std::lock_guard<std::mutex> lock(mtx); // lock for thread safety
+			instance = std::make_unique<Input>();
 		}
-		return instance;
+		return instance.get();
 	}
 
 	/**
