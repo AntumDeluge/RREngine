@@ -19,6 +19,8 @@ Entity::Entity(Sprite* sprite, uint16_t width, uint16_t height) {
 	this->rect.y = 0;
 	this->rect.w = width;
 	this->rect.h = height;
+	// initialize with no scene ID
+	id = 0;
 }
 
 Entity::Entity(Sprite* sprite) {
@@ -33,6 +35,8 @@ Entity::Entity(Sprite* sprite) {
 		this->rect.w = 0;
 		this->rect.h = 0;
 	}
+	// initialize with no scene ID
+	id = 0;
 }
 
 Entity::Entity(std::string sprite_id, uint16_t width, uint16_t height):

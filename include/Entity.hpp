@@ -30,6 +30,11 @@ private:
 	/** Entity's collision rectangle. */
 	SDL_Rect rect;
 
+	/**
+	 * Identifier set by current scene.
+	 */
+	uint32_t id;
+
 public:
 	/**
 	 * Creates an entity with collision rectangle.
@@ -80,6 +85,8 @@ public:
 	Entity(const Entity& other) {
 		sprite = other.sprite;
 		rect = other.rect;
+		// copied attributes should not include scene ID
+		id = 0;
 	}
 
 	/** Default constructor. */
@@ -100,6 +107,22 @@ public:
 		return sprite == other.sprite && rect.x == other.rect.x && rect.y == other.rect.y
 				&& rect.w == other.rect.w && rect.h == other.rect.h;
 	}
+
+	/**
+	 * Sets entity's scene ID.
+	 *
+	 * @param id
+	 *   Identifier to assign to entity in scene.
+	 */
+	void setId(uint32_t id) { this->id = id; }
+
+	/**
+	 * Retrieves entity's scene ID.
+	 *
+	 * @return
+	 *   Entity's numeric identifier as assigned by scene.
+	 */
+	uint32_t getId() { return id; }
 
 	/**
 	 * Update entity's position.

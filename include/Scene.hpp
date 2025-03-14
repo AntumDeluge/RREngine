@@ -63,6 +63,9 @@ private:
 	/** Entities currently occupying this scene. */
 	std::vector<Entity*> entities;
 
+	/** ID of next entity to be added to scene. */
+	uint32_t next_entity_id;
+
 public:
 	/**
 	 * Creates a new scene.
@@ -84,6 +87,8 @@ public:
 		this->collision = nullptr;
 		this->foreground = nullptr;
 		this->s_foreground = nullptr;
+
+		next_entity_id = 1;
 	}
 
 	/** Default destructor. */
@@ -200,7 +205,7 @@ public:
 	 * @param entity
 	 *   Entity to be added.
 	 */
-	void addEntity(Entity* entity) { this->entities.push_back(entity); }
+	void addEntity(Entity* entity);
 
 	/**
 	 * Removes an entity from the scene.

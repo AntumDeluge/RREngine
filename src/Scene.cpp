@@ -21,6 +21,13 @@ void Scene::render(ViewportRenderer* viewport) {
 }
 
 
+void Scene::addEntity(Entity* entity) {
+	entity->setId(next_entity_id);
+	entities.push_back(entity);
+	// increment for next entity to be added
+	next_entity_id++;
+}
+
 void Scene::removeEntity(Entity* entity) {
 	auto e_end = this->entities.end();
 	auto it = find(this->entities.begin(), e_end, entity);
