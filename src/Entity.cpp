@@ -24,13 +24,15 @@ Entity::Entity(Sprite* sprite, uint16_t width, uint16_t height) {
 
 Entity::Entity(Sprite* sprite) {
 	this->sprite = sprite;
-	// NOTE: are values of `SDL_Rect` implicitly set to 0 by default?
 	this->rect.x = 0;
 	this->rect.y = 0;
 	if (this->sprite != nullptr) {
 		// default to sprite dimensions
 		this->rect.w = this->sprite->getWidth();
 		this->rect.h = this->sprite->getHeight();
+	} else {
+		this->rect.w = 0;
+		this->rect.h = 0;
 	}
 }
 
