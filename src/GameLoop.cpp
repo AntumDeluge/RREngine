@@ -107,7 +107,7 @@ void GameLoop::start() {
 
 		// limit viewport redraw frequency to configured max FPS
 		if (time_now - last_draw_time >= draw_interval) {
-			viewport->draw();
+			viewport->render();
 			last_draw_time = time_now;
 #if RRE_DEBUGGING
 			f_drawn++;

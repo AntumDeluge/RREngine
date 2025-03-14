@@ -246,10 +246,8 @@ public:
 
 	/**
 	 * Renders the current scene, movie, menu, etc. on viewport.
-	 *
-	 * TODO: rename to render
 	 */
-	void draw();
+	void render();
 
 	/**
 	 * Adds a text sprite to be drawn in viewport.

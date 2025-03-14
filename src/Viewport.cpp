@@ -191,7 +191,7 @@ void Viewport::drawImage(ImageImpl* img, uint32_t x, uint32_t y) {
 	this->drawTexture(img->getTexture(), s_rect, t_rect);
 }
 
-void Viewport::draw() {
+void Viewport::render() {
 	SDL_RenderClear(this->renderer);
 	// TODO: create Scene class that handles drawing tiles
 	if (this->mode == GameMode::SCENE) {
