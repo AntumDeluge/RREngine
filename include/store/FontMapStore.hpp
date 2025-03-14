@@ -26,7 +26,7 @@ namespace FontMapStore {
 	 * @param font_map
 	 *   Font map instance.
 	 */
-	void addMap(std::string font_id, FontMap* font_map);
+	void add(std::string font_id, FontMap* font_map);
 
 	/**
 	 * Retrieves a cached font mapping.
@@ -36,7 +36,7 @@ namespace FontMapStore {
 	 * @return
 	 *   Reference to font map or `null` if not configured.
 	 */
-	FontMap* getMap(std::string font_id);
+	FontMap* get(std::string font_id);
 
 	/**
 	 * Builds a text sprite.

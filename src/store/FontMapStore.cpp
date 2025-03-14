@@ -14,14 +14,14 @@ using namespace std;
 // font map cache
 static unordered_map<string, FontMap*> fmap_cache = {};
 
-void FontMapStore::addMap(string font_id, FontMap* font_map) {
+void FontMapStore::add(string font_id, FontMap* font_map) {
 	if (fmap_cache.find(font_id) != fmap_cache.end()) {
 		Logger::getLogger("FontMapStore").warn("Overwriting font map with id \"" + font_id + "\"");
 	}
 	fmap_cache[font_id] = font_map;
 }
 
-FontMap* FontMapStore::getMap(string font_id) {
+FontMap* FontMapStore::get(string font_id) {
 	if (fmap_cache.find(font_id) != fmap_cache.end()) {
 		return fmap_cache[font_id];
 	}

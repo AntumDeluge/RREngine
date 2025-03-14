@@ -152,9 +152,9 @@ bool _parseFont(XMLElement* el, const uint8_t data[], const size_t data_size) {
 
 	// add parsed data to font store
 	if (data != nullptr) {
-		FontMapStore::addMap(id, new FontMap(TextureLoader::loadFM(data, data_size), char_map, w, h));
+		FontMapStore::add(id, new FontMap(TextureLoader::loadFM(data, data_size), char_map, w, h));
 	} else {
-		FontMapStore::addMap(id, new FontMap(TextureLoader::load(rpath), char_map, w, h));
+		FontMapStore::add(id, new FontMap(TextureLoader::load(rpath), char_map, w, h));
 	}
 
 	return true;
