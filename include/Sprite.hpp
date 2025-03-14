@@ -85,7 +85,7 @@ public:
 	}
 
 	/** Default constructor. */
-	Sprite(): Sprite(nullptr) {
+	Sprite(): ImageImpl() {
 		tile_width = 0;
 		tile_height = 0;
 	}
