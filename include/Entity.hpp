@@ -74,6 +74,17 @@ public:
 	 */
 	Entity(std::string sprite_id);
 
+	/**
+	 * Copy constructor.
+	 *
+	 * @param other
+	 *   Entity to be copied.
+	 */
+	Entity(const Entity& other) {
+		sprite = other.sprite;
+		rect = other.rect;
+	}
+
 	/** Default destructor. */
 	~Entity() {
 		if (this->sprite != nullptr) {
