@@ -40,7 +40,7 @@ Entity EntityFactory::build(XMLElement* el) {
 	if (!attr_sprite) {
 		_logger.warn("Entity sprite not configured");
 	} else {
-		sprite = SpriteStore::getSprite(attr_sprite->Value());
+		sprite = SpriteStore::get(attr_sprite->Value());
 	}
 
 	uint32_t width = 0, height = 0;

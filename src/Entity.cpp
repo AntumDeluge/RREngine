@@ -40,9 +40,9 @@ Entity::Entity(Sprite* sprite) {
 }
 
 Entity::Entity(std::string sprite_id, uint16_t width, uint16_t height):
-		Entity(SpriteStore::getSprite(sprite_id), width, height) {}
+		Entity(SpriteStore::get(sprite_id), width, height) {}
 
-Entity::Entity(string sprite_id): Entity(SpriteStore::getSprite(sprite_id)) {}
+Entity::Entity(string sprite_id): Entity(SpriteStore::get(sprite_id)) {}
 
 
 bool Entity::collides(uint16_t x, uint16_t y, uint16_t len, bool horizontal) {

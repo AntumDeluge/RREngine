@@ -83,7 +83,7 @@ bool SpriteStore::load() {
 	return true;
 }
 
-Sprite* SpriteStore::getSprite(string id) {
+Sprite* SpriteStore::get(string id) {
 	Sprite* sprite;
 	// check cache first
 	if (_cache.find(id) != _cache.end()) {

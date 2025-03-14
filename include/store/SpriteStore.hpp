@@ -36,7 +36,7 @@ namespace SpriteStore {
 	 *   Reference to a sprite instance. If not found, an uninitialized sprite is returned. Can be
 	 *   checked with `Sprite.ready()`.
 	 */
-	Sprite* getSprite(std::string id);
+	Sprite* get(std::string id);
 }
 
 #endif /* RRE_SPRITE_STORE */
