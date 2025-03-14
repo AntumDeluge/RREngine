@@ -34,7 +34,7 @@ namespace EntityStore {
 	 *   Copy of an entity instance. If not found, `NullEntity` is returned.
 	 *   FIXME: player entities should be unique instead of a copy
 	 */
-	Entity getEntity(std::string id);
+	Entity get(std::string id);
 }
 
 #endif /* RRE_ENTITY_STORE */

@@ -79,7 +79,7 @@ bool EntityStore::load() {
 	return true;
 }
 
-Entity EntityStore::getEntity(string id) {
+Entity EntityStore::get(string id) {
 	if (_cache.find(id) == _cache.end()) {
 		_logger.error("Entity \"" + id + "\" not available");
 		return NullEntity;
