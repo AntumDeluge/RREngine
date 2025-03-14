@@ -141,7 +141,7 @@ public:
 	 * @param fps
 	 *   Detected FPS.
 	 */
-	void setCurrentFPS(uint32_t fps);
+	void setCurrentFPS(uint32_t fps) override;
 
 	/**
 	 * Sets scaling factor of game window.
@@ -247,7 +247,7 @@ public:
 	/**
 	 * Renders the current scene, movie, menu, etc. on viewport.
 	 */
-	void render();
+	void render() override;
 
 	/**
 	 * Adds a text sprite to be drawn in viewport.

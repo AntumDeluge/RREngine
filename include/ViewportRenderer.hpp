@@ -7,7 +7,7 @@
 #ifndef RRE_VIEWPORT_RENDERER
 #define RRE_VIEWPORT_RENDERER
 
-#include <cstdint> // uint*_t
+#include <cstdint> // *int*_t
 
 #include <SDL2/SDL_render.h>
 
@@ -24,6 +24,14 @@ class ViewportRenderer {
 public:
 	/** Virtual default destructor. */
 	virtual ~ViewportRenderer() {}
+
+	/**
+	 * Updates FPS value.
+	 *
+	 * @param fps
+	 *   Detected FPS.
+	 */
+	virtual void setCurrentFPS(uint32_t fps) = 0;
 
 	/**
 	 * Draws a texture on the renderer.
@@ -75,6 +83,11 @@ public:
 	 *   Pixel position to draw on vertical axis of viewport.
 	 */
 	virtual void drawImage(ImageImpl* img, uint32_t x, uint32_t y) = 0;
+
+	/**
+	 * Renders the current scene, movie, menu, etc. on viewport.
+	 */
+	virtual void render() = 0;
 };
 
 #endif /* RRE_VIEWPORT_RENDERER */
