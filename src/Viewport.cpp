@@ -108,7 +108,7 @@ bool Viewport::setScene(string id) {
 		// empty string means no scene is to be set
 		return true;
 	}
-	this->scene = SceneStore::loadScene(id);
+	this->scene = SceneStore::get(id);
 	bool result = this->scene != nullptr;
 	if (!result) {
 		this->logger.error("Failed to set scene: " + id);

@@ -30,16 +30,16 @@ namespace SceneStore {
 	bool load();
 
 	/**
-	 * Loads & returns a scene.
+	 * Retrieves a scene configured scene.
 	 *
 	 * TODO: need a function to delete cached scene data from memory
 	 *
 	 * @param id
-	 *   Scene idenifier.
+	 *   Scene identifier.
 	 * @return
 	 *   New or cached scene data.
 	 */
-	Scene* loadScene(std::string id);
+	Scene* get(std::string id);
 };
 
 #endif /* RRE_SCENE_STORE */

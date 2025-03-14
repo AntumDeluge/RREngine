@@ -66,7 +66,7 @@ bool SceneStore::load() {
 	return true;
 }
 
-Scene* SceneStore::loadScene(string id) {
+Scene* SceneStore::get(string id) {
 	// look in cache first
 	if (SceneStore::scenes.find(id) != SceneStore::scenes.end()) {
 		return SceneStore::scenes[id];
