@@ -30,9 +30,6 @@ private:
 	/** Entity's collision rectangle. */
 	SDL_Rect rect;
 
-	/** Default constructor. */
-	Entity(): Entity(nullptr) {}
-
 public:
 	/**
 	 * Creates an entity with collision rectangle.
@@ -85,19 +82,12 @@ public:
 		rect = other.rect;
 	}
 
+	/** Default constructor. */
+	Entity(): Entity(nullptr) {}
+
 	/** Default destructor. */
 	~Entity() {
 		// sprite instance is unique pointer so shouldn't need to destroy here
-	}
-
-	/**
-	 * Factory creation.
-	 *
-	 * @return
-	 *   An un-initialized entity object.
-	 */
-	static Entity create() {
-		return Entity();
 	}
 
 	/**
@@ -188,6 +178,6 @@ public:
 
 
 /** Null entity for checking state of initialization. */
-static const Entity NullEntity = Entity::create();
+static const Entity NullEntity;
 
 #endif /* RRE_ENTITY */

@@ -33,7 +33,7 @@ static void _onConfigError(string msg) {
 }
 
 Entity EntityFactory::build(XMLElement* el) {
-	Entity entity = Entity::create();
+	Entity entity;
 
 	Sprite* sprite = nullptr;
 	const XMLAttribute* attr_sprite = el->FindAttribute("sprite");
