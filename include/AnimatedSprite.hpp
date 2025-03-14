@@ -36,9 +36,9 @@ private:
 	std::string default_mode;
 
 	/** Frame currently being drawn. */
-	uint16_t frame_index = 0;
+	uint32_t frame_index = 0;
 	/** Time when frame animation began. */
-	uint32_t frame_start = 0;
+	uint64_t frame_start = 0;
 
 public:
 	/**
@@ -129,10 +129,8 @@ public:
 		this->default_mode = id;
 	}
 
-	/**
-	 * Overrides `Sprite.render`
-	 */
-	void render(ViewportRenderer* viewport, uint16_t x, uint16_t y);
+	/** Overrides `Sprite.render`. */
+	void render(ViewportRenderer* viewport, uint32_t x, uint32_t y);
 
 private:
 	/**

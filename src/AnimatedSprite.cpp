@@ -44,6 +44,6 @@ const Animation* AnimatedSprite::getDefaultMode() {
 }
 
 
-void AnimatedSprite::render(ViewportRenderer* viewport, uint16_t x, uint16_t y) {
+void AnimatedSprite::render(ViewportRenderer* viewport, uint32_t x, uint32_t y) {
 	// TODO:
 }
