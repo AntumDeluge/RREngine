@@ -83,6 +83,9 @@ Sprite::Sprite(string id) : ImageImpl() {
 			this->height = height->UnsignedValue();
 		}
 	}
+
+	tile_width = this->width;
+	tile_height = this->height;
 }
 
 

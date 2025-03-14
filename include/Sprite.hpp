@@ -28,6 +28,12 @@ private:
 	/** Timestamp at which this sprite should no longer be drawn on renderer. */
 	uint32_t expires = 0;
 
+protected:
+	/** Visual pixel width. */
+	uint32_t tile_width;
+	/** Visual pixel height. */
+	uint32_t tile_height;
+
 public:
 	/**
 	 * Creates a new sprite.
@@ -35,7 +41,25 @@ public:
 	 * @param texture
 	 *   Image texture used for drawing on renderer.
 	 */
-	Sprite(SDL_Texture* texture): ImageImpl(texture) {}
+	Sprite(SDL_Texture* texture): ImageImpl(texture) {
+		tile_width = width;
+		tile_height = height;
+	}
+
+	/**
+	 * Creates a new sprite.
+	 *
+	 * @param texture
+	 *   Image texture used for drawing on renderer.
+	 * @param tile_width
+	 *   Pixel width of this sprite.
+	 * @param tile_height
+	 *   Pixel height of this sprite.
+	 */
+	Sprite(SDL_Texture* texture, uint32_t tile_width, uint32_t tile_height): Sprite(texture) {
+		this->tile_width = tile_width;
+		this->tile_height = tile_height;
+	}
 
 	/**
 	 * Creates a new sprite.
@@ -45,8 +69,26 @@ public:
 	 */
 	Sprite(std::string id);
 
+	/**
+	 * Creates a new sprite.
+	 *
+	 * @param id
+	 *   Identifier used to retrieve image texture for drawing on renderer from configuration.
+	 * @param tile_width
+	 *   Pixel width of this sprite.
+	 * @param tile_height
+	 *   Pixel height of this sprite.
+	 */
+	Sprite(std::string id, uint32_t tile_width, uint32_t tile_height): Sprite(id) {
+		this->tile_width = tile_width;
+		this->tile_height = tile_height;
+	}
+
 	/** Default constructor. */
-	Sprite(): Sprite(nullptr) {}
+	Sprite(): Sprite(nullptr) {
+		tile_width = 0;
+		tile_height = 0;
+	}
 
 	/**
 	 * Sets sprite expiration.

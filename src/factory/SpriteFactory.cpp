@@ -27,7 +27,6 @@ Sprite SpriteFactory::build(XMLElement* el) {
 		return sprite;
 	}
 
-	// TODO: sprites need dimensions (width/height); currently not used
 	uint32_t width = 0, height = 0;
 	XMLElement* el_size = el->FirstChildElement("size");
 	if (el_size != nullptr) {
@@ -39,6 +38,11 @@ Sprite SpriteFactory::build(XMLElement* el) {
 		if (attr_height != nullptr) {
 			height = attr_height->UnsignedValue();
 		}
+	}
+
+	if (width == 0 or height == 0) {
+		_logger.warn("Sprite with invalid dimensions: " + to_string(width) + "x"
+				+ to_string(height));
 	}
 
 	AnimationFrameSet frames;
@@ -60,10 +64,10 @@ Sprite SpriteFactory::build(XMLElement* el) {
 	string filename = el_filename->GetText();
 	if (frames.size() > 0) {
 		// animated sprite
-		sprite = AnimatedSprite(filename);
+		sprite = AnimatedSprite(filename, width, height);
 	} else {
 		// static sprite
-		sprite = Sprite(filename);
+		sprite = Sprite(filename, width, height);
 	}
 
 	return sprite;
