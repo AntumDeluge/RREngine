@@ -28,12 +28,11 @@ namespace EntityStore {
 	/**
 	 * Retrieves an entity from cache.
 	 *
-	 * NOTE: perhaps should return a shared pointer
-	 *
 	 * @param id
 	 *   Entity identifier.
 	 * @return
-	 *   Copy of entity instance. If not found, `NullEntity` is returned.
+	 *   Copy of an entity instance. If not found, `NullEntity` is returned.
+	 *   FIXME: player entities should be unique instead of a copy
 	 */
 	Entity getEntity(std::string id);
 }
