@@ -9,6 +9,8 @@
 
 #include <cstdint> // uint*_t
 
+#include <SDL2/SDL_render.h>
+
 #include "ImageImpl.hpp"
 
 
@@ -22,6 +24,28 @@ class ViewportRenderer {
 public:
 	/** Virtual default destructor. */
 	virtual ~ViewportRenderer() {}
+
+	/**
+	 * Draws a texture on the renderer.
+	 *
+	 * @param texture
+	 *   Texture reference to draw.
+	 * @param s_rect
+	 *   Drawing points of source image.
+	 * @param t_rect
+	 *   Drawing points of target renderer.
+	 */
+	virtual void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) = 0;
+
+	/**
+	 * Draws a texture on the renderer.
+	 *
+	 * @param texture
+	 *   Texture reference.
+	 * @param rect
+	 *   Drawing points of both source image & target renderer.
+	 */
+	virtual void drawTexture(SDL_Texture* texture, SDL_Rect rect) = 0;
 
 	/**
 	 * Draws an image on the viewport.

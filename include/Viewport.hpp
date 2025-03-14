@@ -201,7 +201,7 @@ public:
 	 * @param t_rect
 	 *   Drawing points of target renderer.
 	 */
-	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect);
+	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) override;
 
 	/**
 	 * Draws a texture on the renderer.
@@ -211,7 +211,9 @@ public:
 	 * @param rect
 	 *   Drawing points of both source image & target renderer.
 	 */
-	void drawTexture(SDL_Texture* texture, SDL_Rect rect) { this->drawTexture(texture, rect, rect); }
+	void drawTexture(SDL_Texture* texture, SDL_Rect rect) override {
+		this->drawTexture(texture, rect, rect);
+	}
 
 	/**
 	 * Draws an image on the renderer.
