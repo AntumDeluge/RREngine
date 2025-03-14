@@ -12,7 +12,7 @@ using namespace std;
 
 
 // font map cache
-unordered_map<string, FontMap*> fmap_cache = {};
+static unordered_map<string, FontMap*> fmap_cache = {};
 
 void FontMapStore::addMap(string font_id, FontMap* font_map) {
 	if (fmap_cache.find(font_id) != fmap_cache.end()) {
