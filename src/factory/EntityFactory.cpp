@@ -4,15 +4,13 @@
  * See: LICENSE.txt
  */
 
-//#include <pugixml.hpp>
-
 #include "Dialog.hpp"
 #include "Filesystem.hpp"
 #include "Logger.hpp"
 #include "Path.hpp"
 #include "Sprite.hpp"
-#include "TextureLoader.hpp"
 #include "factory/EntityFactory.hpp"
+#include "store/SpriteStore.hpp"
 
 using namespace std;
 using namespace tinyxml2;
@@ -42,8 +40,7 @@ Entity EntityFactory::build(XMLElement* el) {
 	if (!attr_sprite) {
 		_logger.warn("Entity sprite not configured");
 	} else {
-		// FIXME: should be using a shared pointer returned from SpriteStore
-		sprite = new Sprite(TextureLoader::load(attr_sprite->Value()));
+		sprite = SpriteStore::getSprite(attr_sprite->Value());
 	}
 
 	uint32_t width = 0, height = 0;
