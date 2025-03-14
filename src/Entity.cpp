@@ -5,8 +5,7 @@
  */
 
 #include "Entity.hpp"
-#include "Path.hpp"
-#include "TextureLoader.hpp"
+#include "store/SpriteStore.hpp"
 
 using namespace std;
 
@@ -37,10 +36,9 @@ Entity::Entity(Sprite* sprite) {
 }
 
 Entity::Entity(std::string sprite_id, uint16_t width, uint16_t height):
-		Entity(new Sprite(TextureLoader::load(Path::join("sprite", sprite_id))), width, height) {}
+		Entity(SpriteStore::getSprite(sprite_id), width, height) {}
 
-Entity::Entity(string sprite_id):
-Entity(new Sprite(TextureLoader::load(Path::join("sprite", sprite_id)))) {}
+Entity::Entity(string sprite_id): Entity(SpriteStore::getSprite(sprite_id)) {}
 
 
 bool Entity::collides(uint16_t x, uint16_t y, uint16_t len, bool horizontal) {
