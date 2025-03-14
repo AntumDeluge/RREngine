@@ -18,10 +18,12 @@
 namespace SpriteFactory {
 
 	/**
-	 * Builds a sprite from configuration.
+	 * Builds a unique sprite instance from configuration.
 	 *
 	 * @param el
 	 *   Parsed "sprite" element.
+	 * @return
+	 *   Unique sprite instance.
 	 */
 	Sprite build(tinyxml2::XMLElement* el);
 }

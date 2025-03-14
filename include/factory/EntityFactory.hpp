@@ -17,10 +17,12 @@
 namespace EntityFactory {
 
 	/**
-	 * Builds an entity from configuration.
+	 * Builds a unique entity instance from configuration.
 	 *
 	 * @param el
 	 *   Parsed entity element.
+	 * @return
+	 *   Unique entity instance.
 	 */
 	Entity build(tinyxml2::XMLElement* el);
 }
