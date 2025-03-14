@@ -87,10 +87,7 @@ public:
 
 	/** Default destructor. */
 	~Entity() {
-		if (this->sprite != nullptr) {
-			delete this->sprite;
-			this->sprite = nullptr;
-		}
+		// sprite instance is unique pointer so shouldn't need to destroy here
 	}
 
 	/**

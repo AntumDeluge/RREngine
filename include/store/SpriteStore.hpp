@@ -33,10 +33,10 @@ namespace SpriteStore {
 	 * @param id
 	 *   Sprite identifier.
 	 * @return
-	 *   Copy of sprite instance. If not found, an uninitialized sprite is returned. Can be checked
-	 *   with `Sprite.ready()`.
+	 *   Reference to a sprite instance. If not found, an uninitialized sprite is returned. Can be
+	 *   checked with `Sprite.ready()`.
 	 */
-	Sprite getSprite(std::string id);
+	Sprite* getSprite(std::string id);
 }
 
 #endif /* RRE_SPRITE_STORE */
