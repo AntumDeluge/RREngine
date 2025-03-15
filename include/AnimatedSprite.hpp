@@ -95,14 +95,12 @@ public:
 	}
 
 	/**
-	 * Adds an animation mode to sprite.
+	 * Adds animation modes to sprite.
 	 *
-	 * @param id
-	 *   Mode identifier.
-	 * @param animation
-	 *   Animation definition.
+	 * @param modes
+	 *   Animation modes mapping.
 	 */
-	void addMode(std::string id, Animation animation) { modes[id] = animation; }
+	void setModes(std::unordered_map<std::string, Animation> modes) { this->modes = modes; }
 
 	/**
 	 * Sets the current animation mode.
