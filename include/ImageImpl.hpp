@@ -45,6 +45,18 @@ public:
 	ImageImpl(SDL_Texture* texture);
 
 	/**
+	 * Copy constructor.
+	 *
+	 * @param other
+	 *   Image instance to be copied.
+	 */
+	ImageImpl(const ImageImpl& other) {
+		texture = other.texture;
+		width = other.width;
+		height = other.height;
+	}
+
+	/**
 	 * Default destructor.
 	 */
 	virtual ~ImageImpl() {
