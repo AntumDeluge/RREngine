@@ -84,17 +84,6 @@ public:
 		this->tile_height = tile_height;
 	}
 
-	/**
-	 * Copy constructor.
-	 *
-	 * @param other
-	 *   Sprite instance to be copied.
-	 */
-	Sprite(const Sprite& other): ImageImpl(other) {
-		tile_width = other.tile_width;
-		tile_height = other.tile_height;
-	}
-
 	/** Default constructor. */
 	Sprite(): ImageImpl() {
 		tile_width = 0;
