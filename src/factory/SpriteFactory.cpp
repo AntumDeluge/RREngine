@@ -6,6 +6,7 @@
 
 #include <cstdint> // *int*_t
 #include <string>
+#include <unordered_map>
 
 #include "Animation.hpp"
 #include "AnimatedSprite.hpp"
@@ -42,27 +43,56 @@ shared_ptr<Sprite> SpriteFactory::build(XMLElement* el) {
 				+ to_string(height));
 	}
 
-	AnimationFrameSet frames;
+	string default_mode = "";
+	unordered_map<string, Animation> animation_modes;
 	XMLElement* el_animation = el->FirstChildElement("animation");
-	if (el_animation != nullptr) {
-		XMLElement* el_f = el_animation->FirstChildElement("frame");
-		while (el_f != nullptr) {
-			const XMLAttribute* attr_index = el_f->FindAttribute("index");
-			const XMLAttribute* attr_delay = el_f->FindAttribute("delay");
+	while (el_animation) {
+		string mode_name = "";
+		AnimationFrameSet current_frames;
+
+		const XMLAttribute* attr_mode = el_animation->FindAttribute("mode");
+		if (attr_mode) {
+			mode_name = attr_mode->Value();
+		}
+		if (mode_name.compare("") == 0) {
+			_logger.error("XML Parsing Error: Animation frame without \"mode\" attribute");
+			return nullptr;
+		}
+
+		const XMLAttribute* attr_default = el_animation->FindAttribute("default");
+		if (mode_name.compare("") == 0 || (attr_default && attr_default->BoolValue())) {
+			default_mode = mode_name;
+		}
+
+		XMLElement* el_frame = el_animation->FirstChildElement("frame");
+		while (el_frame) {
+			const XMLAttribute* attr_index = el_frame->FindAttribute("index");
+			const XMLAttribute* attr_delay = el_frame->FindAttribute("delay");
 			if (attr_index != nullptr && attr_delay != nullptr) {
-				frames.push_back(AnimationFrame(attr_index->UnsignedValue(),
+				current_frames.push_back(AnimationFrame(attr_index->UnsignedValue(),
 						attr_delay->UnsignedValue()));
 			}
 
-			el_f = el_f->NextSiblingElement("frame");
+			el_frame = el_frame->NextSiblingElement("frame");
 		}
+
+		if (current_frames.size() == 0) {
+			_logger.error("XML Parsing Error: Animation without frames");
+			return nullptr;
+		}
+		animation_modes[mode_name] = current_frames;
+
+		el_animation = el_animation->NextSiblingElement("animation");
 	}
 
 	shared_ptr<Sprite> sprite_ptr;
 	string filename = el_filename->GetText();
-	if (frames.size() > 0) {
+	if (animation_modes.size() > 0) {
 		// animated sprite
 		sprite_ptr = make_shared<AnimatedSprite>(filename, width, height);
+		((AnimatedSprite*) sprite_ptr.get())->setModes(animation_modes);
+		((AnimatedSprite*) sprite_ptr.get())->setDefaultMode(default_mode);
+		((AnimatedSprite*) sprite_ptr.get())->setMode(default_mode);
 	} else {
 		// static sprite
 		uint32_t tile_index = 0;
