@@ -22,6 +22,7 @@ using namespace std;
 
 // DEBUG:
 #include "Entity.hpp"
+#include "store/EntityStore.hpp"
 
 
 namespace SceneStore {
@@ -152,7 +153,9 @@ Scene* SceneStore::get(string id) {
 
 	// DEBUG: test drawing entity in scene
 	// NOTE: deleted by scene
-	scene->addEntity(new Entity("character", 32, 32));
+	// FIXME:
+	// - scene shouldn't inherently add player
+	scene->addObject(new Entity(EntityStore::get("player")));
 
 	// cache for subsequent retrieval
 	SceneStore::scenes[id] = scene;
