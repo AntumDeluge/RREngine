@@ -66,7 +66,7 @@ Sprite::Sprite(string id) : ImageImpl() {
 		this->logger.error("Malformed sprite configuration; missing \"filename\" element: \""
 				+ conf_sprites + "\"");
 	} else {
-		this->texture = TextureLoader::load(Path::join("sprite", fileElement->GetText()));
+		setTexture(TextureLoader::load(Path::join("sprite", fileElement->GetText())));
 	}
 
 	XMLElement* sizeElement = spriteElement->FirstChildElement("size");
@@ -74,18 +74,16 @@ Sprite::Sprite(string id) : ImageImpl() {
 		this->logger.error("Malformed sprite configuration; missing \"size\" element: \""
 				+ conf_sprites + "\"");
 	} else {
-		const XMLAttribute* width = sizeElement->FindAttribute("w");
-		const XMLAttribute* height = sizeElement->FindAttribute("h");
-		if (width != nullptr) {
-			this->width = width->UnsignedValue();
+		const XMLAttribute* attr_width = sizeElement->FindAttribute("w");
+		const XMLAttribute* attr_height = sizeElement->FindAttribute("h");
+		if (attr_width != nullptr) {
+			tile_width = attr_width->UnsignedValue();
 		}
-		if (height != nullptr) {
-			this->height = height->UnsignedValue();
+		if (attr_height != nullptr) {
+			tile_height = attr_height->UnsignedValue();
 		}
 	}
 
-	tile_width = this->width;
-	tile_height = this->height;
 	tile_index = 0;
 }
 
