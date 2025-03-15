@@ -168,6 +168,14 @@ public:
 	bool collides(Entity* other);
 
 	/**
+	 * Checks if the entity has a drawable sprite.
+	 *
+	 * @return
+	 *   `true` if sprite is defined & marked ready.
+	 */
+	bool hasSprite() { return sprite != nullptr && sprite->ready(); }
+
+	/**
 	 * Draws entity sprite on viewport render.
 	 *
 	 * Overrides `Object.render`.

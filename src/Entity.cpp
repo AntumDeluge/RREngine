@@ -79,7 +79,9 @@ bool Entity::collides(Entity* other) {
 }
 
 void Entity::render(ViewportRenderer* viewport) {
-	if (this->sprite != nullptr) {
-		this->sprite->render(viewport, this->rect.x, this->rect.y);
+	if (!hasSprite()) {
+		return;
 	}
+
+	this->sprite->render(viewport, this->rect.x, this->rect.y);
 }
