@@ -23,7 +23,7 @@ using namespace tinyxml2;
 static Logger _logger = Logger::getLogger("SpriteStore");
 
 /** Holds loaded sprites in memory indexed by ID/path. */
-static unordered_map<string, Sprite*> _cache;
+static unordered_map<string, shared_ptr<Sprite>> _cache;
 
 static void _onConfigError(string title, string msg) {
 	if (!title.empty()) {
@@ -67,15 +67,13 @@ bool SpriteStore::load() {
 			return false;
 		}
 		string id = attr_id->Value();
-		Sprite sprite = SpriteFactory::build(el);
-		if (!sprite.ready()) {
+		shared_ptr<Sprite> sprite_ptr = SpriteFactory::build(el);
+		if (!sprite_ptr || !sprite_ptr->ready()) {
 			_onConfigError("Failed to load sprite \"" + id + "\": " + conf);
 			return false;
 		}
-		// make a unique pointer
-		unique_ptr<Sprite> ptr_sprite = make_unique<Sprite>(sprite);
 		// add to cache
-		_cache[id] = ptr_sprite.get();
+		_cache[id] = sprite_ptr;
 
 		el = el->NextSiblingElement("sprite");
 	}
@@ -87,7 +85,7 @@ Sprite* SpriteStore::get(string id) {
 	Sprite* sprite;
 	// check cache first
 	if (_cache.find(id) != _cache.end()) {
-		sprite = _cache[id];
+		sprite = _cache[id].get();
 		if (!sprite->ready()) {
 			_logger.warn("Returning uninitialized sprite: " + id);
 		}

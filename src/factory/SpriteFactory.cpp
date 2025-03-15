@@ -17,14 +17,11 @@ using namespace tinyxml2;
 
 static Logger _logger = Logger::getLogger("SpriteFactory");
 
-Sprite SpriteFactory::build(XMLElement* el) {
-	Sprite sprite;
-
+shared_ptr<Sprite> SpriteFactory::build(XMLElement* el) {
 	XMLElement* el_filename = el->FirstChildElement("filename");
 	if (el_filename == nullptr) {
 		_logger.error("Filename not configured");
-		// uninitialized object
-		return sprite;
+		return nullptr;
 	}
 
 	uint32_t width = 0, height = 0;
@@ -61,14 +58,24 @@ Sprite SpriteFactory::build(XMLElement* el) {
 		}
 	}
 
+	shared_ptr<Sprite> sprite_ptr;
 	string filename = el_filename->GetText();
 	if (frames.size() > 0) {
 		// animated sprite
-		sprite = AnimatedSprite(filename, width, height);
+		sprite_ptr = make_shared<AnimatedSprite>(filename, width, height);
 	} else {
 		// static sprite
-		sprite = Sprite(filename, width, height);
+		sprite_ptr = make_shared<Sprite>(filename, width, height);
 	}
 
-	return sprite;
+	if (!sprite_ptr->ready()) {
+		const XMLAttribute* attr_id = el->FindAttribute("id");
+		if (attr_id) {
+			_logger.warn("Built uninitialized sprite: " + string(attr_id->Value()));
+		} else {
+			_logger.warn("Built uninitialized sprite");
+		}
+	}
+
+	return sprite_ptr;
 }

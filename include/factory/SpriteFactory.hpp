@@ -7,6 +7,8 @@
 #ifndef RRE_SPRITE_FACTORY
 #define RRE_SPRITE_FACTORY
 
+#include <memory>
+
 #include <tinyxml2.h>
 
 #include "Sprite.hpp"
@@ -25,7 +27,7 @@ namespace SpriteFactory {
 	 * @return
 	 *   Unique sprite instance.
 	 */
-	Sprite build(tinyxml2::XMLElement* el);
+	std::shared_ptr<Sprite> build(tinyxml2::XMLElement* el);
 }
 
 #endif /* RRE_SPRITE_FACTORY */
