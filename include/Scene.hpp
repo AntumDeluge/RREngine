@@ -111,6 +111,7 @@ public:
 		delete this->s_foreground;
 		this->s_foreground = nullptr;
 
+		// NOTE: should objects by shared_ptr & destroyed automatically?
 		for (Object* obj: this->objects) {
 			delete obj;
 			obj = nullptr;
