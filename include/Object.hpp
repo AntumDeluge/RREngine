@@ -9,12 +9,15 @@
 
 #include <cstdint> // *int*_t
 
+#include "Logger.hpp"
 
 /**
  * In-game object base class.
  */
 class Object {
 private:
+	static Logger logger;
+
 	/** Objects identifier when added to a scene. */
 	uint32_t id;
 
