@@ -14,6 +14,7 @@
 #include <tmxlite/TileLayer.hpp>
 
 #include "Object.hpp"
+#include "SceneImpl.hpp"
 #include "Tileset.hpp"
 #include "ViewportRenderer.hpp"
 
@@ -31,7 +32,7 @@
  * FIXME: for parallax scrolling background layer 1, it might be better to use a full image instead
  *        of a tiling image layer
  */
-class Scene {
+class Scene: public SceneImpl {
 private:
 	/** Individual tile pixel width. */
 	uint16_t tile_width;
@@ -133,7 +134,7 @@ public:
 	 * @param viewport
 	 *   Viewport renderer.
 	 */
-	void render(ViewportRenderer* viewport);
+	void render(ViewportRenderer* viewport) override;
 
 	/**
 	 * Sets layer to use for scrolling background 1.
