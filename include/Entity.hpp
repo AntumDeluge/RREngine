@@ -170,10 +170,12 @@ public:
 	/**
 	 * Draws entity sprite on viewport render.
 	 *
+	 * Overrides `Object.render`.
+	 *
 	 * @param viewport
 	 *   Viewport renderer.
 	 */
-	void render(ViewportRenderer* viewport);
+	void render(ViewportRenderer* viewport) override;
 };
 
 

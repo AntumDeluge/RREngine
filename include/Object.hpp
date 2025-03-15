@@ -10,6 +10,8 @@
 #include <cstdint> // *int*_t
 
 #include "Logger.hpp"
+#include "ViewportRenderer.hpp"
+
 
 /**
  * In-game object base class.
@@ -78,6 +80,14 @@ public:
 	 *   Identifier assigned to object by scene.
 	 */
 	uint32_t getId() { return id; }
+
+	/**
+	 * Draws object sprite on viewport render.
+	 *
+	 * @param viewport
+	 *   Viewport renderer.
+	 */
+	virtual void render(ViewportRenderer* viewport) = 0;
 };
 
 #endif /* RRE_OBJECT */
