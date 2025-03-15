@@ -124,6 +124,14 @@ public:
 	}
 
 	/**
+	 * Updates tile index to be drawn.
+	 *
+	 * @param index
+	 *   New tile index.
+	 */
+	void setTileIndex(uint32_t index) { tile_index = index; }
+
+	/**
 	 * Draws this sprite on the viewport.
 	 *
 	 * @param viewport
