@@ -161,7 +161,7 @@ void Viewport::drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_wi
 		uint32_t s_height, uint32_t x, uint32_t y) {
 	SDL_Rect s_rect;
 	s_rect.x = sx;
-	s_rect.y = sx;
+	s_rect.y = sy;
 	s_rect.w = s_width;
 	s_rect.h = s_height;
 
