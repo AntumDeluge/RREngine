@@ -10,6 +10,11 @@
 Logger ImageImpl::logger = Logger::getLogger("ImageImpl");
 
 ImageImpl::ImageImpl(SDL_Texture* texture): ImageImpl() {
+	setTexture(texture);
+}
+
+
+void ImageImpl::setTexture(SDL_Texture* texture) {
 	if (texture == nullptr) {
 		this->logger.warn("Image constructed with null texture");
 		return;

@@ -28,6 +28,14 @@ protected:
 	/** Full image height (in pixels). */
 	int height;
 
+	/**
+	 * Sets texture used by this image.
+	 *
+	 * @param texture
+	 *   Drawable texture.
+	 */
+	void setTexture(SDL_Texture* texture);
+
 public:
 	/** Default Constructor. */
 	ImageImpl() {
