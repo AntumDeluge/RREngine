@@ -13,25 +13,25 @@ using namespace std;
 
 
 void Scene::render(ViewportRenderer* viewport) {
-	for (Entity* entity: this->entities) {
-		entity->render(viewport);
+	for (Object* obj: this->objects) {
+		obj->render(viewport);
 	}
 
 	// TODO:
 }
 
 
-void Scene::addEntity(Entity* entity) {
-	entity->setId(next_entity_id);
-	entities.push_back(entity);
-	// increment for next entity to be added
-	next_entity_id++;
+void Scene::addObject(Object* obj) {
+	obj->setId(next_object_id);
+	objects.push_back(obj);
+	// increment for next object to be added
+	next_object_id++;
 }
 
-void Scene::removeEntity(Entity* entity) {
-	auto e_end = this->entities.end();
-	auto it = find(this->entities.begin(), e_end, entity);
+void Scene::removeObject(Object* obj) {
+	auto e_end = this->objects.end();
+	auto it = find(this->objects.begin(), e_end, obj);
 	if (it != e_end) {
-		this->entities.erase(it);
+		this->objects.erase(it);
 	}
 }

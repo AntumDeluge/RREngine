@@ -13,7 +13,7 @@
 #include <tmxlite/ImageLayer.hpp>
 #include <tmxlite/TileLayer.hpp>
 
-#include "Entity.hpp"
+#include "Object.hpp"
 #include "Tileset.hpp"
 #include "ViewportRenderer.hpp"
 
@@ -51,7 +51,7 @@ private:
 	/** Terrain layer drawn under entities. */
 	tmx::TileLayer* terrain;
 	/** Entities located in scene. */
-	tmx::TileLayer* objects;
+	tmx::TileLayer* objects_layer;
 	/** Terrain layer containing collision info. */
 	tmx::TileLayer* collision;
 	/** Top tiled layer drawn over entities. */
@@ -60,11 +60,11 @@ private:
 	/** Parallax scrolling foreground layer. */
 	tmx::ImageLayer* s_foreground;
 
-	/** Entities currently occupying this scene. */
-	std::vector<Entity*> entities;
+	/** Objects currently occupying this scene. */
+	std::vector<Object*> objects;
 
-	/** ID of next entity to be added to scene. */
-	uint32_t next_entity_id;
+	/** ID of next object to be added to scene. */
+	uint32_t next_object_id;
 
 public:
 	/**
@@ -83,12 +83,12 @@ public:
 		this->s_background2 = nullptr;
 		this->background = nullptr;
 		this->terrain = nullptr;
-		this->objects = nullptr;
+		this->objects_layer = nullptr;
 		this->collision = nullptr;
 		this->foreground = nullptr;
 		this->s_foreground = nullptr;
 
-		next_entity_id = 1;
+		next_object_id = 1;
 	}
 
 	/** Default destructor. */
@@ -101,8 +101,8 @@ public:
 		this->background = nullptr;
 		delete this->terrain;
 		this->terrain = nullptr;
-		delete this->objects;
-		this->objects = nullptr;
+		delete this->objects_layer;
+		this->objects_layer = nullptr;
 		delete this->collision;
 		this->collision = nullptr;
 		delete this->foreground;
@@ -110,11 +110,11 @@ public:
 		delete this->s_foreground;
 		this->s_foreground = nullptr;
 
-		for (Entity* e: this->entities) {
-			delete e;
-			e = nullptr;
+		for (Object* obj: this->objects) {
+			delete obj;
+			obj = nullptr;
 		}
-		this->entities.clear();
+		this->objects.clear();
 	}
 
 	/**
@@ -173,7 +173,7 @@ public:
 	 * @param layer
 	 *   Tile layer definition.
 	 */
-	void setLayerObjects(tmx::TileLayer* layer) { this->objects = layer; }
+	void setLayerObjects(tmx::TileLayer* layer) { this->objects_layer = layer; }
 
 	/**
 	 * Sets layer to use for collision.
@@ -200,20 +200,20 @@ public:
 	void setLayerSForeground(tmx::ImageLayer* layer) { this->s_foreground = layer; }
 
 	/**
-	 * Adds an entity to the scene.
+	 * Adds an object to the scene.
 	 *
-	 * @param entity
-	 *   Entity to be added.
+	 * @param obj
+	 *   Object to be added.
 	 */
-	void addEntity(Entity* entity);
+	void addObject(Object* obj);
 
 	/**
-	 * Removes an entity from the scene.
+	 * Removes an object from the scene.
 	 *
-	 * @param entity
-	 *   Entity to be removed.
+	 * @param obj
+	 *   Object to be removed.
 	 */
-	void removeEntity(Entity* entity);
+	void removeObject(Object* obj);
 };
 
 #endif /* RRE_SCENE */
