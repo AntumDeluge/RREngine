@@ -142,7 +142,7 @@ public:
 	}
 
 	/** Overrides `Sprite.render`. */
-	void render(ViewportRenderer* viewport, uint32_t x, uint32_t y);
+	void render(ViewportRenderer* viewport, uint32_t x, uint32_t y) override;
 
 private:
 	/**

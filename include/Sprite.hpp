@@ -131,7 +131,7 @@ public:
 	 * @param y
 	 *   Pixel drawing position on vertical axis.
 	 */
-	void render(ViewportRenderer* viewport, uint32_t x, uint32_t y);
+	virtual void render(ViewportRenderer* viewport, uint32_t x, uint32_t y);
 };
 
 #endif /* RRE_SPRITE_H */
