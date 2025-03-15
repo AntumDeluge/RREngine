@@ -64,5 +64,11 @@ void AnimatedSprite::render(ViewportRenderer* viewport, uint32_t x, uint32_t y) 
 		return;
 	}
 
-	// TODO:
+	uint32_t tile_index = current_mode->current();
+	uint32_t cols = width / tile_width;
+	uint32_t index_x = tile_index % cols;
+	uint32_t index_y = tile_index / cols;
+
+	viewport->drawImage(this,
+			index_x*tile_width, index_y*tile_height, tile_width, tile_height, x, y);
 }
