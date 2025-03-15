@@ -59,5 +59,10 @@ const Animation* AnimatedSprite::getDefaultMode() {
 
 
 void AnimatedSprite::render(ViewportRenderer* viewport, uint32_t x, uint32_t y) {
+	if (!ready()) {
+		logger.warn("Animated sprite texture not ready");
+		return;
+	}
+
 	// TODO:
 }
