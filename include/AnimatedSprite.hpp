@@ -89,6 +89,18 @@ public:
 	}
 
 	/**
+	 * Copy constructor.
+	 *
+	 * @param other
+	 *   Sprite instance to be copied.
+	 */
+	AnimatedSprite(const AnimatedSprite& other): Sprite(other) {
+		modes = other.modes; // FIXME: crashes (uncaught exception of type std::length_error: vector)
+		current_mode = other.current_mode;
+		default_mode = other.default_mode;
+	}
+
+	/**
 	 * Default constructor.
 	 *
 	 * Creates an uninitialized animated sprite.
