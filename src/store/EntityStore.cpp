@@ -67,7 +67,7 @@ bool EntityStore::load() {
 		}
 		string id = attr_id->Value();
 		Entity e = EntityFactory::build(el);
-		if (e == NullEntity) {
+		if (NullEntity.equals(e)) {
 			_onConfigError("Failed to build Entity \"" + id + "\": " + conf);
 			return false;
 		}
