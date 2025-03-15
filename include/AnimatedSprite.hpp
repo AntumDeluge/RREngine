@@ -30,7 +30,7 @@ private:
 	std::unordered_map<std::string, Animation> modes;
 
 	/** Animation currently being displayed. */
-	const Animation* current_mode;
+	Animation* current_mode;
 
 	/** Identifier for sprite's default animation mode. */
 	std::string default_mode;
@@ -142,7 +142,7 @@ private:
 	 * @return
 	 *   Default animation definition or uninitialized animation if default not configured.
 	 */
-	const Animation* getDefaultMode();
+	Animation* getDefaultMode();
 };
 
 #endif /* RRE_ANIMATED_SPRITE */

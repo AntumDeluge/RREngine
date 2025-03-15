@@ -12,7 +12,7 @@ using namespace std;
 Logger AnimatedSprite::logger = Logger::getLogger("AnimatedSprite");
 
 // dummy animation to return in case animations have not been initialized
-const static Animation _dummy_mode = Animation();
+static Animation _dummy_mode = Animation();
 
 AnimatedSprite::AnimatedSprite(SDL_Texture* texture): Sprite(texture) {
 	// no animations have been defined yet
@@ -49,7 +49,7 @@ void AnimatedSprite::setMode(string id) {
 	current_mode = getDefaultMode();
 }
 
-const Animation* AnimatedSprite::getDefaultMode() {
+Animation* AnimatedSprite::getDefaultMode() {
 	if (modes.find(default_mode) != modes.end()) {
 		return &modes[default_mode];
 	}
