@@ -4,9 +4,9 @@
 	<!-- TODO: load from files in sub-directory -->
 
 	<sprite id="player">
-		<filename>character</filename>
+		<filename index="6">character</filename>
 		<size width="32" height="32" />
-		<animation>
+		<animation mode="idle" default="true">
 			<frame index="6" delay="4000" />
 			<frame index="7" delay="500" />
 		</animation>
