@@ -90,5 +90,6 @@ Sprite::Sprite(string id) : ImageImpl() {
 
 
 void Sprite::render(ViewportRenderer* viewport, uint32_t x, uint32_t y) {
-	viewport->drawImage(this, 0, 0, this->width, this->height, x, y);
+	// TODO: get image index
+	viewport->drawImage(this, 0, 0, tile_width, tile_height, x, y);
 }
