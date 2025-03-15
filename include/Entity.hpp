@@ -42,7 +42,7 @@ public:
 	 * @param height
 	 *   Entity's pixel height.
 	 */
-	Entity(Sprite* sprite, uint16_t width, uint16_t height);
+	Entity(Sprite* sprite, uint32_t width, uint32_t height);
 
 	/**
 	 * Creates an entity with collision rectangle using sprite's dimensions.
@@ -62,7 +62,7 @@ public:
 	 * @param height
 	 *   Entity's pixel height.
 	 */
-	Entity(std::string sprite_id, uint16_t width, uint16_t height);
+	Entity(std::string sprite_id, uint32_t width, uint32_t height);
 
 	/**
 	 * Creates an entity with collision rectangle using sprite's dimensions.
@@ -107,7 +107,7 @@ public:
 	 * @param x
 	 *   New pixel position on horizontal axis.
 	 */
-	void setX(uint16_t x) { this->rect.x = x; }
+	void setX(uint32_t x) { this->rect.x = x; }
 
 	/**
 	 * Update entity's position.
@@ -115,7 +115,7 @@ public:
 	 * @param y
 	 *   New pixel position on vertical axis.
 	 */
-	void setY(uint16_t y) { this->rect.y = y; }
+	void setY(uint32_t y) { this->rect.y = y; }
 
 	/**
 	 * Change the entity's collision dimensions.
@@ -123,7 +123,7 @@ public:
 	 * @param width
 	 *   Entity's new pixel width.
 	 */
-	void setWidth(uint16_t width) { this->rect.w = width; }
+	void setWidth(uint32_t width) { this->rect.w = width; }
 
 	/**
 	 * Change the entity's collision dimensions.
@@ -131,7 +131,7 @@ public:
 	 * @param width
 	 *   Entity's new pixel width.
 	 */
-	void setheight(uint16_t height) { this->rect.h = height; }
+	void setheight(uint32_t height) { this->rect.h = height; }
 
 	/**
 	 * Retrieves entity's collision dimensions.
@@ -155,7 +155,7 @@ public:
 	 * @return
 	 *   `true` if this entity's collision box clips vector at any point.
 	 */
-	bool collides(uint16_t x, uint16_t y, uint16_t len, bool horizontal);
+	bool collides(uint32_t x, uint32_t y, uint32_t len, bool horizontal);
 
 	/**
 	 * Checks if this entity collides with another.
