@@ -10,6 +10,7 @@
 #include <cstdint> // *int*_t
 
 #include "Logger.hpp"
+#include "SceneImpl.hpp"
 #include "ViewportRenderer.hpp"
 
 
@@ -80,6 +81,16 @@ public:
 	 *   Identifier assigned to object by scene.
 	 */
 	uint32_t getId() { return id; }
+
+	/**
+	 * Callback when added to a scene.
+	 *
+	 * @param scene
+	 *   Scene to which entity has been added.
+	 */
+	void onAdded(SceneImpl* scene) {
+		// inheriting classes can implement
+	}
 
 	/**
 	 * Draws object sprite on viewport render.

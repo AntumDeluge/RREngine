@@ -26,6 +26,7 @@ void Scene::addObject(Object* obj) {
 	objects.push_back(obj);
 	// increment for next object to be added
 	next_object_id++;
+	obj->onAdded(this);
 }
 
 void Scene::removeObject(Object* obj) {
