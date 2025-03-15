@@ -59,11 +59,7 @@ public:
 	 * @param tile_height
 	 *   Pixel height of this sprite.
 	 */
-	AnimatedSprite(SDL_Texture* texture, uint32_t tile_width, uint32_t tile_height):
-		AnimatedSprite(texture) {
-		this->tile_width = tile_width;
-		this->tile_height = tile_height;
-	}
+	AnimatedSprite(SDL_Texture* texture, uint32_t tile_width, uint32_t tile_height);
 
 	/**
 	 * Creates an animated sprite.
@@ -83,10 +79,7 @@ public:
 	 * @param tile_height
 	 *   Pixel height of this sprite.
 	 */
-	AnimatedSprite(std::string id, uint32_t tile_width, uint32_t tile_height): AnimatedSprite(id) {
-		this->tile_width = tile_width;
-		this->tile_height = tile_height;
-	}
+	AnimatedSprite(std::string id, uint32_t tile_width, uint32_t tile_height);
 
 	/**
 	 * Default constructor.

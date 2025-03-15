@@ -34,6 +34,9 @@ protected:
 	/** Visual pixel height. */
 	uint32_t tile_height;
 
+	/** Image tile index that should be drawn. */
+	uint32_t tile_index;
+
 public:
 	/**
 	 * Creates a new sprite.
@@ -44,6 +47,7 @@ public:
 	Sprite(SDL_Texture* texture): ImageImpl(texture) {
 		tile_width = width;
 		tile_height = height;
+		tile_index = 0;
 	}
 
 	/**
@@ -55,10 +59,14 @@ public:
 	 *   Pixel width of this sprite.
 	 * @param tile_height
 	 *   Pixel height of this sprite.
+	 * @param tile_index
+	 *   Image tile index that should be drawn.
 	 */
-	Sprite(SDL_Texture* texture, uint32_t tile_width, uint32_t tile_height): Sprite(texture) {
+	Sprite(SDL_Texture* texture, uint32_t tile_width, uint32_t tile_height, uint32_t tile_index)
+	: Sprite(texture) {
 		this->tile_width = tile_width;
 		this->tile_height = tile_height;
+		this->tile_index = tile_index;
 	}
 
 	/**
@@ -78,16 +86,21 @@ public:
 	 *   Pixel width of this sprite.
 	 * @param tile_height
 	 *   Pixel height of this sprite.
+	 * @param tile_index
+	 *   Image tile index that should be drawn.
 	 */
-	Sprite(std::string id, uint32_t tile_width, uint32_t tile_height): Sprite(id) {
+	Sprite(std::string id, uint32_t tile_width, uint32_t tile_height, uint32_t tile_index)
+	: Sprite(id) {
 		this->tile_width = tile_width;
 		this->tile_height = tile_height;
+		this->tile_index = tile_index;
 	}
 
 	/** Default constructor. */
 	Sprite(): ImageImpl() {
 		tile_width = 0;
 		tile_height = 0;
+		tile_index = 0;
 	}
 
 	/**

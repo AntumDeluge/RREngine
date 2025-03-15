@@ -65,7 +65,12 @@ shared_ptr<Sprite> SpriteFactory::build(XMLElement* el) {
 		sprite_ptr = make_shared<AnimatedSprite>(filename, width, height);
 	} else {
 		// static sprite
-		sprite_ptr = make_shared<Sprite>(filename, width, height);
+		uint32_t tile_index = 0;
+		const XMLAttribute* attr_index = el_filename->FindAttribute("index");
+		if (attr_index) {
+			tile_index = attr_index->UnsignedValue();
+		}
+		sprite_ptr = make_shared<Sprite>(filename, width, height, tile_index);
 	}
 
 	if (!sprite_ptr->ready()) {

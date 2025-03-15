@@ -20,7 +20,21 @@ AnimatedSprite::AnimatedSprite(SDL_Texture* texture): Sprite(texture) {
 	default_mode = "dummy";
 }
 
+AnimatedSprite::AnimatedSprite(SDL_Texture* texture, uint32_t tile_width, uint32_t tile_height)
+: Sprite(texture, tile_width, tile_height, 0) {
+	// no animations have been defined yet
+	current_mode = nullptr;
+	default_mode = "dummy";
+}
+
 AnimatedSprite::AnimatedSprite(string id): Sprite(id) {
+	// no animations have been defined yet
+	current_mode = nullptr;
+	default_mode = "dummy";
+}
+
+AnimatedSprite::AnimatedSprite(std::string id, uint32_t tile_width, uint32_t tile_height)
+: Sprite(id, tile_width, tile_height, 0) {
 	// no animations have been defined yet
 	current_mode = nullptr;
 	default_mode = "dummy";
