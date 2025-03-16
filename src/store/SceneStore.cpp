@@ -6,7 +6,7 @@
 
 #include "config.h"
 
-#include <cstddef> // size_t
+#include <cstdint> // *int*_t
 #include <unordered_map>
 
 #include <tmxlite/Map.hpp>
@@ -93,8 +93,8 @@ Scene* SceneStore::get(string id) {
 	Scene* scene = new Scene(map.getTileSize().x, map.getTileSize().y);
 	// TODO: get map dimensions
 	//auto map_size = map.getSize();
-	size_t width = 0;
-	size_t height = 0;
+	uint32_t width = 0;
+	uint32_t height = 0;
 
 	// parse tilesets
 	for (tmx::Tileset ts: map.getTilesets()) {

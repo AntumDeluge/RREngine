@@ -8,7 +8,6 @@
 #ifndef RRE_TEXTURE_LOADER
 #define RRE_TEXTURE_LOADER
 
-#include <cstddef> // size_t
 #include <cstdint> // uint*_t
 #include <string>
 
@@ -50,7 +49,7 @@ namespace TextureLoader {
 	 * @return
 	 *   Texture.
 	 */
-	SDL_Texture* loadFM(const uint8_t data[], const size_t data_size);
+	SDL_Texture* loadFM(const uint8_t data[], const uint32_t data_size);
 };
 
 #endif /* RRE_TEXTURE_LOADER */

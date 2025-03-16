@@ -92,7 +92,7 @@ unordered_map<wchar_t, int> _parseCharacters(XMLElement* el) {
  * @return
  *   `true` if parsing succeeded.
  */
-bool _parseFont(XMLElement* el, const uint8_t data[], const size_t data_size) {
+bool _parseFont(XMLElement* el, const uint8_t data[], const uint32_t data_size) {
 	vector<string> err;
 
 	string id = "";
@@ -191,7 +191,7 @@ bool FontMapFactory::loadBuiltin() {
 	}
 
 #if HAVE_BUILTIN_FONT_MAP
-	return _parseFont(el, fontmap_png, sizeof(fontmap_png));
+	return _parseFont(el, fontmap_png, (uint32_t) sizeof(fontmap_png));
 #else
 	// shouldn't get here
 	return false;

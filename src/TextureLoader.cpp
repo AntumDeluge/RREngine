@@ -47,7 +47,7 @@ SDL_Texture* TextureLoader::load(string rdpath) {
 	return TextureLoader::absLoad(apath);
 }
 
-SDL_Texture* TextureLoader::loadFM(const uint8_t data[], const size_t data_size) {
+SDL_Texture* TextureLoader::loadFM(const uint8_t data[], const uint32_t data_size) {
 	Logger logger = Logger::getLogger("TextureLoader");
 
 	SDL_RWops* rw = SDL_RWFromMem((uint8_t*) data, data_size);
