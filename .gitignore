@@ -5,3 +5,6 @@ build*/*
 
 ## documentation build directory
 doc/site/
+
+## IDE-specific project data
+.vscode/*
