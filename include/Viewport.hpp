@@ -44,8 +44,6 @@ private:
 	Viewport(const Viewport&) = delete;
 	Viewport& operator=(const Viewport&) = delete;
 
-	/** The system renderer. */
-	SDL_Renderer* renderer;
 	/** Font map for drawing text. */
 	FontMap* font_map;
 	/** Detected FPS. */
@@ -110,14 +108,6 @@ public:
 	 * Cleans up renderer & data memory.
 	 */
 	void shutdown();
-
-	/**
-	 * Retrieves the viewport renderer where pixel data is drawn.
-	 *
-	 * @return
-	 *   SDL_Renderer instance.
-	 */
-	SDL_Renderer* getRenderer() { return this->renderer; }
 
 	/**
 	 * Sets font map to use for drawing text.

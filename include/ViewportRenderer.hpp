@@ -21,9 +21,21 @@
  * - support scaling in draw methods
  */
 class ViewportRenderer {
+protected:
+	/** The system renderer. */
+	SDL_Renderer* renderer;
+
 public:
 	/** Virtual default destructor. */
 	virtual ~ViewportRenderer() {}
+
+	/**
+	 * Retrieves the viewport renderer where pixel data is drawn.
+	 *
+	 * @return
+	 *   SDL_Renderer instance.
+	 */
+	SDL_Renderer* getRenderer() { return this->renderer; }
 
 	/**
 	 * Updates FPS value.
