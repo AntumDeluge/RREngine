@@ -138,11 +138,10 @@ if(EXAMPLE)
 
 	find_program(FFMPEG_EXE ffmpeg)
 	if(NOT FFMPEG_EXE)
-		message("-- WARNING: ffmpeg executable not found; cannot build example music")
+		message("-- WARNING: ffmpeg not found; cannot build example music")
 	else()
-		message("-- ffmpeg executable found")
-		add_custom_command(
-			TARGET game POST_BUILD
+		message("-- ffmpeg found")
+		execute_process(
 			COMMAND ${CMAKE_COMMAND} -E echo "Converting audio sources to Ogg/Vorbis ..."
 		)
 		foreach(MUSIC_FLAC ${MUSIC_SOURCE_FILES})
@@ -151,10 +150,7 @@ if(EXAMPLE)
 			cmake_path(GET MUSIC_OGG_TARGET PARENT_PATH MUSIC_OGG_DIR)
 			file(MAKE_DIRECTORY "${MUSIC_OGG_DIR}")
 
-			add_custom_command(
-				# FIXME: OUTPUT signature not working
-				#~ OUTPUT "${MUSIC_OGG_TARGET}"
-				TARGET game POST_BUILD
+			execute_process(
 				COMMAND "${FFMPEG_EXE}"
 					-y
 					-hide_banner
