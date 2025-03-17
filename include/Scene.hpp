@@ -13,6 +13,7 @@
 #include <tmxlite/ImageLayer.hpp>
 #include <tmxlite/TileLayer.hpp>
 
+#include "Logger.hpp"
 #include "Object.hpp"
 #include "SceneImpl.hpp"
 #include "Tileset.hpp"
@@ -34,6 +35,8 @@
  */
 class Scene: public SceneImpl {
 private:
+	static Logger logger;
+
 	/** Individual tile pixel width. */
 	uint16_t tile_width;
 	/** Individual tile pixel height. */

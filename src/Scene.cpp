@@ -12,6 +12,8 @@
 using namespace std;
 
 
+Logger Scene::logger = Logger::getLogger("Scene");
+
 void Scene::render(ViewportRenderer* viewport) {
 	for (Object* obj: this->objects) {
 		obj->render(viewport);
