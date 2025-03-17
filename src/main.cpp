@@ -10,10 +10,9 @@
 #include "config.h"
 
 #include <cstdint> // uint*_t
+#include <cstdlib> // exit
 #include <iostream>
 #include <string>
-
-using namespace std;
 
 #include "cxxopts.hpp"
 
@@ -25,6 +24,8 @@ using namespace std;
 #include "Path.hpp"
 #include "StrUtil.hpp"
 #include "reso.hpp"
+
+using namespace std;
 
 
 namespace RRE {
