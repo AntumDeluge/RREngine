@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="16" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="16" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="1">
  <properties>
   <property name="parallax1" value="filename_here"/>
  </properties>
@@ -8,29 +8,29 @@
  </tileset>
  <imagelayer id="7" name="s_background2"/>
  <imagelayer id="6" name="s_background"/>
- <layer id="1" name="background" width="16" height="14">
+ <layer id="1" name="background" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJzjY2Bg4BvFo3gUDwgGAI07DEE=
+   eJzjY2Bg4BvFo3gUD0kMALtoDSE=
   </data>
  </layer>
- <layer id="3" name="terrain" width="16" height="14">
+ <layer id="3" name="terrain" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2DoAiYK8UADABfAACE=
+   eJxjYBgFo2DoAiYK8VAHACAAACE=
   </data>
  </layer>
- <layer id="9" name="objects" width="16" height="14">
+ <layer id="9" name="objects" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDBQAAAOAAAE=
+   eJxjYBgFo2AUDFUAAAPAAAE=
   </data>
  </layer>
- <layer id="5" name="collision" width="16" height="14">
+ <layer id="5" name="collision" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2DkAg4KMaUAADSAAIE=
+   eJxjYBgFo2DkAg4K8UADAFTAAIE=
   </data>
  </layer>
- <layer id="10" name="foreground" width="16" height="14">
+ <layer id="10" name="foreground" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDBQAAAOAAAE=
+   eJxjYBgFo2AUDFUAAAPAAAE=
   </data>
  </layer>
  <imagelayer id="11" name="s_foreground"/>
