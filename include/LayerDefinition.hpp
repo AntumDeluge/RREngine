@@ -8,6 +8,6 @@
 #include <vector>
 
 
-typedef const std::pair<uint32_t, uint8_t> GID;
+typedef std::pair<uint32_t, uint8_t> TileDefinition;
 
-typedef const std::vector<GID> LayerDefinition;
+typedef std::vector<TileDefinition> LayerDefinition;
