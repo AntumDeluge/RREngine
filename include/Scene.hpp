@@ -45,6 +45,9 @@ private:
 	/** Individual tile pixel height. */
 	uint32_t tile_height;
 
+	/** Collision mappings defined by collision layer. */
+	std::vector<std::vector<uint8_t>> collision_map;
+
 	/** Scene tilesets. */
 	std::vector<Tileset*> tilesets;
 
@@ -87,6 +90,8 @@ public:
 		this->height = height;
 		this->tile_width = tile_width;
 		this->tile_height = tile_height;
+
+		collision_map = std::vector<std::vector<uint8_t>>(this->height, std::vector<uint8_t>(this->width, 0));
 
 		this->s_background = nullptr;
 		this->s_background2 = nullptr;
@@ -196,7 +201,7 @@ public:
 	 * @param layer
 	 *   Tile layer definition.
 	 */
-	void setLayerCollision(LayerDefinition ldef) { collision = ldef; }
+	void setLayerCollision(LayerDefinition ldef);
 
 	/**
 	 * Sets layer to use for foreground.
@@ -213,6 +218,14 @@ public:
 	 *   Image layer definition.
 	 */
 	void setLayerSForeground(tmx::ImageLayer* layer) { this->s_foreground = layer; }
+
+	/**
+	 * Adds a point of collision to map.
+	 *
+	 * @param x
+	 * @param y
+	 */
+	void setCollisionPoint(uint32_t x, uint32_t y) { collision_map[x][y] = 1; }
 
 	/**
 	 * Adds an object to the scene.

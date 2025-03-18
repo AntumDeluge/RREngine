@@ -14,6 +14,24 @@ using namespace std;
 
 Logger Scene::logger = Logger::getLogger("Scene");
 
+void Scene::setLayerCollision(LayerDefinition ldef) {
+	collision = ldef;
+
+	uint32_t offset_x = 0, offset_y = 0;
+	for (TileDefinition tdef: collision) {
+		// global IDs start at 1, not 0
+		if (tdef.first > 0) {
+			setCollisionPoint(offset_x, offset_y);
+		}
+
+		offset_x++;
+		if (offset_x * tile_width >= width) {
+			offset_y++;
+			offset_x = 0;
+		}
+	}
+}
+
 void Scene::render(ViewportRenderer* viewport) {
 	// TODO: build layers as single image instead of drawing each tile individually
 	renderTileLayer(viewport, background);
