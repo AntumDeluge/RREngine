@@ -138,6 +138,20 @@ public:
 	void render(ViewportRenderer* viewport) override;
 
 	/**
+	 * Draws a tile layer on renderer.
+	 *
+	 * TODO:
+	 * - build single image for rendering from tiles before drawing instead of drawing individual tiles (excluding animated ones)
+	 * - support flipped tiles
+	 *
+	 * @param viewport
+	 *   Viewport renderer.
+	 * @param gids
+	 *   Layer definition.
+	 */
+	void renderTileLayer(ViewportRenderer* viewport, std::vector<uint32_t> gids);
+
+	/**
 	 * Sets layer to use for scrolling background 1.
 	 *
 	 * @param layer
