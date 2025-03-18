@@ -9,7 +9,9 @@
 #include <cstdint> // *int*_t
 #include <unordered_map>
 
+#include <tmxlite/ImageLayer.hpp>
 #include <tmxlite/Map.hpp>
+#include <tmxlite/TileLayer.hpp>
 
 #include "Filesystem.hpp"
 #include "Logger.hpp"
