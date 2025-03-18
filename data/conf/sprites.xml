@@ -8,7 +8,13 @@
 		<size width="32" height="32" />
 		<animation mode="idle" default="true">
 			<frame index="6" delay="4000" />
-			<frame index="7" delay="500" />
+			<frame index="7" delay="250" />
+		</animation>
+		<animation mode="run">
+			<frame index="10" delay="100" />
+			<frame index="9" delay="100" />
+			<frame index="10" delay="100" />
+			<frame index="11" delay="100" />
 		</animation>
 	</sprite>
 
