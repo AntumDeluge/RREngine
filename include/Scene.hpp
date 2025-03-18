@@ -46,7 +46,7 @@ private:
 	uint32_t tile_height;
 
 	/** Scene tilesets. */
-	std::vector<Tileset> tilesets;
+	std::vector<Tileset*> tilesets;
 
 	/** Parallax scrolling background layer 1. */
 	tmx::ImageLayer* s_background;
@@ -125,6 +125,12 @@ public:
 			obj = nullptr;
 		}
 		this->objects.clear();
+
+		for (Tileset* ts: tilesets) {
+			delete ts;
+			ts = nullptr;
+		}
+		tilesets.clear();
 	}
 
 	/**
@@ -133,7 +139,7 @@ public:
 	 * @param tileset
 	 *   Tileset to be added.
 	 */
-	void addTileset(Tileset tileset) {
+	void addTileset(Tileset* tileset) {
 		this->tilesets.push_back(tileset);
 	}
 

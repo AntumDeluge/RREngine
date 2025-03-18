@@ -110,7 +110,7 @@ Scene* SceneStore::get(string id) {
 			continue;
 		}
 
-		scene->addTileset(Tileset(texture, ts.getFirstGID(), ts.getLastGID()));
+		scene->addTileset(new Tileset(texture, ts.getFirstGID(), ts.getLastGID()));
 	}
 
 	// parse layers
