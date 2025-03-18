@@ -31,20 +31,20 @@ void Scene::render(ViewportRenderer* viewport) {
 	// TODO: render other layers in front of objects
 }
 
-void Scene::renderTileLayer(ViewportRenderer* viewport, vector<uint32_t> gids) {
+void Scene::renderTileLayer(ViewportRenderer* viewport, LayerDefinition ldef) {
 	uint32_t g_offset_x = 0, g_offset_y = 0;
-	for (uint32_t gid: gids) {
+	for (TileDefinition tdef: ldef) {
 		Tileset* tileset = nullptr;
 		// find tileset with matching GID
 		for (Tileset* t: tilesets) {
-			if (gid >= t->getFirstGID() && gid <= t->getLastGID()) {
+			if (tdef.first >= t->getFirstGID() && tdef.first <= t->getLastGID()) {
 				tileset = t;
 				break;
 			}
 		}
 
 		if (tileset != nullptr) {
-			uint32_t tile_index = gid - tileset->getFirstGID();
+			uint32_t tile_index = tdef.first - tileset->getFirstGID();
 			uint32_t cols = tileset->getWidth() / tile_width;
 			uint32_t index_x = tile_index % cols;
 			uint32_t index_y = tile_index / cols;

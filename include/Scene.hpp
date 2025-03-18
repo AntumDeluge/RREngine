@@ -12,6 +12,7 @@
 
 #include <tmxlite/ImageLayer.hpp>
 
+#include "LayerDefinition.hpp"
 #include "Logger.hpp"
 #include "Object.hpp"
 #include "SceneImpl.hpp"
@@ -52,18 +53,16 @@ private:
 	/** Parallax scrolling background layer 2. */
 	tmx::ImageLayer* s_background2;
 
-	// TODO: use LayerDefinition type
-
 	/** Bottom tiled layer. */
-	std::vector<uint32_t> background;
+	LayerDefinition background;
 	/** Terrain layer drawn under entities. */
-	std::vector<uint32_t> terrain;
+	LayerDefinition terrain;
 	/** Entities located in scene. */
-	std::vector<uint32_t> objects_layer;
+	LayerDefinition objects_layer;
 	/** Terrain layer containing collision info. */
-	std::vector<uint32_t> collision;
+	LayerDefinition collision;
 	/** Top tiled layer drawn over entities. */
-	std::vector<uint32_t> foreground;
+	LayerDefinition foreground;
 
 	/** Parallax scrolling foreground layer. */
 	tmx::ImageLayer* s_foreground;
@@ -149,7 +148,7 @@ public:
 	 * @param gids
 	 *   Layer definition.
 	 */
-	void renderTileLayer(ViewportRenderer* viewport, std::vector<uint32_t> gids);
+	void renderTileLayer(ViewportRenderer* viewport, LayerDefinition ldef);
 
 	/**
 	 * Sets layer to use for scrolling background 1.
@@ -173,7 +172,7 @@ public:
 	 * @param layer
 	 *   Tile layer definition.
 	 */
-	void setLayerBackground(std::vector<uint32_t> layer) { background = layer; };
+	void setLayerBackground(LayerDefinition ldef) { background = ldef; };
 
 	/**
 	 * Sets layer to use for terrain.
@@ -181,7 +180,7 @@ public:
 	 * @param layer
 	 *   Tile layer definition.
 	 */
-	void setLayerTerrain(std::vector<uint32_t> layer) { terrain = layer; }
+	void setLayerTerrain(LayerDefinition ldef) { terrain = ldef; }
 
 	/**
 	 * Sets layer to use for objects.
@@ -189,7 +188,7 @@ public:
 	 * @param layer
 	 *   Tile layer definition.
 	 */
-	void setLayerObjects(std::vector<uint32_t> layer) { objects_layer = layer; }
+	void setLayerObjects(LayerDefinition ldef) { objects_layer = ldef; }
 
 	/**
 	 * Sets layer to use for collision.
@@ -197,7 +196,7 @@ public:
 	 * @param layer
 	 *   Tile layer definition.
 	 */
-	void setLayerCollision(std::vector<uint32_t> layer) { collision = layer; }
+	void setLayerCollision(LayerDefinition ldef) { collision = ldef; }
 
 	/**
 	 * Sets layer to use for foreground.
@@ -205,7 +204,7 @@ public:
 	 * @param layer
 	 *   Tile layer definition.
 	 */
-	void setLayerForeground(std::vector<uint32_t> layer) { foreground = layer; }
+	void setLayerForeground(LayerDefinition ldef) { foreground = ldef; }
 
 	/**
 	 * Sets layer to use for scrolling foreground.

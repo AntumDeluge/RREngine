@@ -15,6 +15,7 @@
 #include <tmxlite/Types.hpp>
 
 #include "Filesystem.hpp"
+#include "LayerDefinition.hpp"
 #include "Logger.hpp"
 #include "Path.hpp"
 #include "TextureLoader.hpp"
@@ -136,21 +137,21 @@ Scene* SceneStore::get(string id) {
 		} else if (layer.getType() == tmx::Layer::Type::Tile) {
 			tmx::TileLayer t_layer = dynamic_cast<const tmx::TileLayer&>(*layerPtr);
 
-			vector<uint32_t> gids;
+			LayerDefinition ldef;
 			for (tmx::TileLayer::Tile tile: t_layer.getTiles()) {
-				gids.push_back(tile.ID);
+				ldef.push_back(TileDefinition(tile.ID, tile.flipFlags));
 			}
 
 			if (layerName == "background") {
-				scene->setLayerBackground(gids);
+				scene->setLayerBackground(ldef);
 			} else if (layerName == "terrain") {
-				scene->setLayerTerrain(gids);
+				scene->setLayerTerrain(ldef);
 			} else if (layerName == "objects") {
-				scene->setLayerObjects(gids);
+				scene->setLayerObjects(ldef);
 			} else if (layerName == "collision") {
-				scene->setLayerCollision(gids);
+				scene->setLayerCollision(ldef);
 			} else if (layerName == "foreground") {
-				scene->setLayerForeground(gids);
+				scene->setLayerForeground(ldef);
 			} else {
 				logger.warn("Unknown tile layer \"" + layerName + "\": " + map_path);
 			}
