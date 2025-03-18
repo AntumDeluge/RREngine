@@ -11,7 +11,6 @@
 #include <vector>
 
 #include <tmxlite/ImageLayer.hpp>
-#include <tmxlite/TileLayer.hpp>
 
 #include "Logger.hpp"
 #include "Object.hpp"
@@ -53,16 +52,18 @@ private:
 	/** Parallax scrolling background layer 2. */
 	tmx::ImageLayer* s_background2;
 
+	// TODO: use LayerDefinition type
+
 	/** Bottom tiled layer. */
-	tmx::TileLayer* background;
+	std::vector<uint32_t> background;
 	/** Terrain layer drawn under entities. */
-	tmx::TileLayer* terrain;
+	std::vector<uint32_t> terrain;
 	/** Entities located in scene. */
-	tmx::TileLayer* objects_layer;
+	std::vector<uint32_t> objects_layer;
 	/** Terrain layer containing collision info. */
-	tmx::TileLayer* collision;
+	std::vector<uint32_t> collision;
 	/** Top tiled layer drawn over entities. */
-	tmx::TileLayer* foreground;
+	std::vector<uint32_t> foreground;
 
 	/** Parallax scrolling foreground layer. */
 	tmx::ImageLayer* s_foreground;
@@ -90,11 +91,6 @@ public:
 
 		this->s_background = nullptr;
 		this->s_background2 = nullptr;
-		this->background = nullptr;
-		this->terrain = nullptr;
-		this->objects_layer = nullptr;
-		this->collision = nullptr;
-		this->foreground = nullptr;
 		this->s_foreground = nullptr;
 
 		next_object_id = 1;
@@ -106,16 +102,6 @@ public:
 		this->s_background = nullptr;
 		delete this->s_background2;
 		this->s_background2 = nullptr;
-		delete this->background;
-		this->background = nullptr;
-		delete this->terrain;
-		this->terrain = nullptr;
-		delete this->objects_layer;
-		this->objects_layer = nullptr;
-		delete this->collision;
-		this->collision = nullptr;
-		delete this->foreground;
-		this->foreground = nullptr;
 		delete this->s_foreground;
 		this->s_foreground = nullptr;
 
@@ -173,7 +159,7 @@ public:
 	 * @param layer
 	 *   Tile layer definition.
 	 */
-	void setLayerBackground(tmx::TileLayer* layer) { this->background = layer; }
+	void setLayerBackground(std::vector<uint32_t> layer) { background = layer; };
 
 	/**
 	 * Sets layer to use for terrain.
@@ -181,7 +167,7 @@ public:
 	 * @param layer
 	 *   Tile layer definition.
 	 */
-	void setLayerTerrain(tmx::TileLayer* layer) { this->terrain = layer; }
+	void setLayerTerrain(std::vector<uint32_t> layer) { terrain = layer; }
 
 	/**
 	 * Sets layer to use for objects.
@@ -189,7 +175,7 @@ public:
 	 * @param layer
 	 *   Tile layer definition.
 	 */
-	void setLayerObjects(tmx::TileLayer* layer) { this->objects_layer = layer; }
+	void setLayerObjects(std::vector<uint32_t> layer) { objects_layer = layer; }
 
 	/**
 	 * Sets layer to use for collision.
@@ -197,7 +183,7 @@ public:
 	 * @param layer
 	 *   Tile layer definition.
 	 */
-	void setLayerCollision(tmx::TileLayer* layer) { this->collision = layer; }
+	void setLayerCollision(std::vector<uint32_t> layer) { collision = layer; }
 
 	/**
 	 * Sets layer to use for foreground.
@@ -205,7 +191,7 @@ public:
 	 * @param layer
 	 *   Tile layer definition.
 	 */
-	void setLayerForeground(tmx::TileLayer* layer) { this->foreground = layer; }
+	void setLayerForeground(std::vector<uint32_t> layer) { foreground = layer; }
 
 	/**
 	 * Sets layer to use for scrolling foreground.

@@ -136,16 +136,21 @@ Scene* SceneStore::get(string id) {
 		} else if (layer.getType() == tmx::Layer::Type::Tile) {
 			tmx::TileLayer t_layer = dynamic_cast<const tmx::TileLayer&>(*layerPtr);
 
+			vector<uint32_t> gids;
+			for (tmx::TileLayer::Tile tile: t_layer.getTiles()) {
+				gids.push_back(tile.ID);
+			}
+
 			if (layerName == "background") {
-				scene->setLayerBackground(&t_layer);
+				scene->setLayerBackground(gids);
 			} else if (layerName == "terrain") {
-				scene->setLayerTerrain(&t_layer);
+				scene->setLayerTerrain(gids);
 			} else if (layerName == "objects") {
-				scene->setLayerObjects(&t_layer);
+				scene->setLayerObjects(gids);
 			} else if (layerName == "collision") {
-				scene->setLayerCollision(&t_layer);
+				scene->setLayerCollision(gids);
 			} else if (layerName == "foreground") {
-				scene->setLayerForeground(&t_layer);
+				scene->setLayerForeground(gids);
 			} else {
 				logger.warn("Unknown tile layer \"" + layerName + "\": " + map_path);
 			}
