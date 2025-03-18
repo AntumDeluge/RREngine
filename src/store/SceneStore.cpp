@@ -12,6 +12,7 @@
 #include <tmxlite/ImageLayer.hpp>
 #include <tmxlite/Map.hpp>
 #include <tmxlite/TileLayer.hpp>
+#include <tmxlite/Types.hpp>
 
 #include "Filesystem.hpp"
 #include "Logger.hpp"
@@ -92,11 +93,8 @@ Scene* SceneStore::get(string id) {
 		return nullptr;
 	}
 
-	Scene* scene = new Scene(map.getTileSize().x, map.getTileSize().y);
-	// TODO: get map dimensions
-	//auto map_size = map.getSize();
-	uint32_t width = 0;
-	uint32_t height = 0;
+	tmx::FloatRect bounds = map.getBounds();
+	Scene* scene = new Scene(bounds.width, bounds.height, map.getTileSize().x, map.getTileSize().y);
 
 	// parse tilesets
 	for (tmx::Tileset ts: map.getTilesets()) {

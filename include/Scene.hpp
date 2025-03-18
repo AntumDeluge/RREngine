@@ -37,10 +37,13 @@ class Scene: public SceneImpl {
 private:
 	static Logger logger;
 
+	uint32_t width;
+	uint32_t height;
+
 	/** Individual tile pixel width. */
-	uint16_t tile_width;
+	uint32_t tile_width;
 	/** Individual tile pixel height. */
-	uint16_t tile_height;
+	uint32_t tile_height;
 
 	/** Scene tilesets. */
 	std::vector<Tileset> tilesets;
@@ -79,7 +82,9 @@ public:
 	 * @param tile_height
 	 *   Individual tile pixel height.
 	 */
-	Scene(uint16_t tile_width, uint16_t tile_height) {
+	Scene(uint32_t width, uint32_t height, uint32_t tile_width, uint32_t tile_height) {
+		this->width = width;
+		this->height = height;
 		this->tile_width = tile_width;
 		this->tile_height = tile_height;
 
