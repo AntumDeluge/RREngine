@@ -30,7 +30,7 @@ public:
 	 *   Texture to draw with renderer.
 	 * @param first_gid
 	 *   Global ID start.
-	 * @param tileHeight
+	 * @param last_gid
 	 *   Global ID end.
 	 */
 	Tileset(SDL_Texture* texture, uint16_t first_gid, uint16_t last_gid);
