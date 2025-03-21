@@ -10,9 +10,9 @@
 
 namespace MomentumDir {
 	enum e {
-		NONE = 0,
-		HOR = 1,
-		VER = 2
+		NONE = 0x00,
+		HOR = 0x01,
+		VER = 0x02
 	}
 }
 
