@@ -7,7 +7,7 @@
 #ifndef RRE_ENTITY
 #define RRE_ENTITY
 
-#include <cstdint> // uint*_t
+#include <cstdint> // *int*_t
 #include <string>
 
 #include <SDL2/SDL_rect.h>
@@ -30,6 +30,11 @@ private:
 
 	/** Entity's collision rectangle. */
 	SDL_Rect rect;
+
+	/** Direction entity is moving. */
+	uint8_t dir;
+	/** Rate of momentum. */
+	float momentum;
 
 public:
 	/**
