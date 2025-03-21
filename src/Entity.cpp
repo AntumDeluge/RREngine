@@ -5,6 +5,7 @@
  */
 
 #include "Entity.hpp"
+#include "MomentumDir.hpp"
 #include "store/SpriteStore.hpp"
 
 using namespace std;
@@ -19,6 +20,10 @@ Entity::Entity(Sprite* sprite, uint32_t width, uint32_t height) {
 	this->rect.y = 0;
 	this->rect.w = width;
 	this->rect.h = height;
+
+	// entity isn't moving yet
+	dir = MomentumDir::NONE;
+	momentum = 0;
 }
 
 Entity::Entity(Sprite* sprite) {
@@ -33,6 +38,10 @@ Entity::Entity(Sprite* sprite) {
 		this->rect.w = 0;
 		this->rect.h = 0;
 	}
+
+	// entity isn't moving yet
+	dir = MomentumDir::NONE;
+	momentum = 0;
 }
 
 Entity::Entity(std::string sprite_id, uint32_t width, uint32_t height):
