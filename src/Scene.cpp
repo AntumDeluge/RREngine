@@ -43,6 +43,10 @@ void Scene::render(ViewportRenderer* viewport) {
 	for (Object* obj: this->objects) {
 		obj->render(viewport);
 	}
+	// player instance not in object list
+	if (player != nullptr) {
+		player->render(viewport);
+	}
 
 	renderTileLayer(viewport, foreground);
 
@@ -93,4 +97,12 @@ void Scene::removeObject(Object* obj) {
 	if (it != e_end) {
 		this->objects.erase(it);
 	}
+}
+
+void Scene::addPlayer(Player* player) {
+	player->setId(next_object_id);
+	this->player = player;
+	// increment for next object to be added
+	next_object_id++;
+	player->onAdded(this);
 }

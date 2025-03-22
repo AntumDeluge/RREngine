@@ -15,6 +15,7 @@
 #include "LayerDefinition.hpp"
 #include "Logger.hpp"
 #include "Object.hpp"
+#include "Player.hpp"
 #include "SceneImpl.hpp"
 #include "Tileset.hpp"
 #include "ViewportRenderer.hpp"
@@ -73,6 +74,9 @@ private:
 	/** Objects currently occupying this scene. */
 	std::vector<Object*> objects;
 
+	/** Active player in this scene. */
+	Player* player;
+
 	/** ID of next object to be added to scene. */
 	uint32_t next_object_id;
 
@@ -96,6 +100,8 @@ public:
 		this->s_background = nullptr;
 		this->s_background2 = nullptr;
 		this->s_foreground = nullptr;
+
+		this->player = nullptr;
 
 		next_object_id = 1;
 	}
@@ -121,6 +127,12 @@ public:
 			ts = nullptr;
 		}
 		tilesets.clear();
+
+		// FIXME: player deletion should be handled by shutdown to prevent data loss when scene ends
+		if (player != nullptr) {
+			delete player;
+			player = nullptr;
+		}
 	}
 
 	/**
@@ -242,6 +254,22 @@ public:
 	 *   Object to be removed.
 	 */
 	void removeObject(Object* obj);
+
+	/**
+	 * Adds a player to this scene.
+	 *
+	 * @param player
+	 *   Player to be added.
+	 */
+	void addPlayer(Player* player);
+
+	/**
+	 * Retrieves active player in this scene.
+	 *
+	 * @return
+	 *   Player instance or `null` if no player is set.
+	 */
+	Player* getPlayer() { return player; }
 };
 
 #endif /* RRE_SCENE */
