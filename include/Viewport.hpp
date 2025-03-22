@@ -172,6 +172,14 @@ public:
 	bool setScene(std::string id);
 
 	/**
+	 * Retrieves current scene.
+	 *
+	 * @return
+	 *   Active scene instance.
+	 */
+	Scene* getScene() { return scene; }
+
+	/**
 	 * Sets drawing mode.
 	 *
 	 * TODO: rename to "setDrawMode"
