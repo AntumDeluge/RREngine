@@ -26,6 +26,7 @@ using namespace std;
 
 // DEBUG:
 #include "Entity.hpp"
+#include "Player.hpp"
 #include "reso.hpp"
 #include "store/EntityStore.hpp"
 
@@ -162,12 +163,14 @@ Scene* SceneStore::get(string id) {
 	// NOTE: deleted by scene
 	// FIXME:
 	// - scene shouldn't inherently add player
-	Entity* player = new Entity(EntityStore::get("player"));
+	Entity* ent = new Entity(EntityStore::get("player"));
+	Player* player = new Player((Player&) *ent);
+	delete ent;
 	uint32_t center_x = (RES1.first / 2) - (player->getRect().w / 2);
 	uint32_t center_y = (RES1.second / 2) + (player->getRect().h / 2);
 	player->setX(center_x);
 	player->setY(center_y-64);
-	scene->addObject(player);
+	scene->addPlayer(player);
 
 	// cache for subsequent retrieval
 	SceneStore::scenes[id] = scene;
