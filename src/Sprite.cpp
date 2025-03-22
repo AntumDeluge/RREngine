@@ -88,7 +88,7 @@ Sprite::Sprite(string id) : ImageImpl() {
 }
 
 
-void Sprite::render(ViewportRenderer* viewport, uint32_t x, uint32_t y) {
+void Sprite::render(ViewportRenderer* viewport, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
 	if (!ready()) {
 		logger.warn("Sprite texture not ready");
 		return;
@@ -99,5 +99,5 @@ void Sprite::render(ViewportRenderer* viewport, uint32_t x, uint32_t y) {
 	uint32_t index_y = tile_index / cols;
 
 	viewport->drawImage(this,
-			index_x*tile_width, index_y*tile_height, tile_width, tile_height, x, y);
+			index_x*tile_width, index_y*tile_height, tile_width, tile_height, x, y, flags);
 }

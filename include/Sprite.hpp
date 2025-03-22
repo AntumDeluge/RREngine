@@ -140,8 +140,24 @@ public:
 	 *   Pixel drawing position on horizontal axis.
 	 * @param y
 	 *   Pixel drawing position on vertical axis.
+	 * @param flags
+	 *   Flags to flip image horizontally & vertically.
 	 */
-	virtual void render(ViewportRenderer* viewport, uint32_t x, uint32_t y);
+	virtual void render(ViewportRenderer* viewport, uint32_t x, uint32_t y, SDL_RendererFlip flags);
+
+	/**
+	 * Draws this sprite on the viewport.
+	 *
+	 * @param viewport
+	 *   Viewport render instance.
+	 * @param x
+	 *   Pixel drawing position on horizontal axis.
+	 * @param y
+	 *   Pixel drawing position on vertical axis.
+	 */
+	virtual void render(ViewportRenderer* viewport, uint32_t x, uint32_t y) {
+		render(viewport, x, y, SDL_FLIP_NONE);
+	}
 };
 
 #endif /* RRE_SPRITE_H */

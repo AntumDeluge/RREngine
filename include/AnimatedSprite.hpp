@@ -121,7 +121,7 @@ public:
 	}
 
 	/** Overrides `Sprite.render`. */
-	void render(ViewportRenderer* viewport, uint32_t x, uint32_t y) override;
+	void render(ViewportRenderer* viewport, uint32_t x, uint32_t y, SDL_RendererFlip flags) override;
 
 private:
 	/**

@@ -54,8 +54,39 @@ public:
 	 *   Drawing points of source image.
 	 * @param t_rect
 	 *   Drawing points of target renderer.
+	 * @param flags
+	 *   Flags to flip image horizontally & vertically.
 	 */
-	virtual void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) = 0;
+	virtual void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect,
+			SDL_RendererFlip flags) = 0;
+
+	/**
+	 * Draws a texture on the renderer.
+	 *
+	 * @param texture
+	 *   Texture reference to draw.
+	 * @param s_rect
+	 *   Drawing points of source image.
+	 * @param t_rect
+	 *   Drawing points of target renderer.
+	 */
+	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) {
+		drawTexture(texture, s_rect, t_rect, SDL_FLIP_NONE);
+	}
+
+	/**
+	 * Draws a texture on the renderer.
+	 *
+	 * @param texture
+	 *   Texture reference.
+	 * @param rect
+	 *   Drawing points of both source image & target renderer.
+	 * @param flags
+	 *   Flags to flip image horizontally & vertically.
+	 */
+	void drawTexture(SDL_Texture* texture, SDL_Rect rect, SDL_RendererFlip flags) {
+		drawTexture(texture, rect, rect, flags);
+	}
 
 	/**
 	 * Draws a texture on the renderer.
@@ -65,7 +96,28 @@ public:
 	 * @param rect
 	 *   Drawing points of both source image & target renderer.
 	 */
-	virtual void drawTexture(SDL_Texture* texture, SDL_Rect rect) = 0;
+	void drawTexture(SDL_Texture* texture, SDL_Rect rect) {
+		drawTexture(texture, rect, rect, SDL_FLIP_NONE);
+	}
+
+	/**
+	 * Draws an image on the viewport.
+	 *
+	 * @param img
+	 *   Image to be drawn.
+	 * @param sx
+	 * @param sy
+	 * @param s_width
+	 * @param s_height
+	 * @param x
+	 *   Pixel position to draw on horizontal axis of viewport.
+	 * @param y
+	 *   Pixel position to draw on vertical axis of viewport.
+	 * @param flags
+	 *   Flags to flip image horizontally & vertically.
+	 */
+	virtual void drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width,
+			uint32_t t_height, uint32_t x, uint32_t y, SDL_RendererFlip flags) = 0;
 
 	/**
 	 * Draws an image on the viewport.
@@ -81,8 +133,24 @@ public:
 	 * @param y
 	 *   Pixel position to draw on vertical axis of viewport.
 	 */
-	virtual void drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width,
-			uint32_t t_height, uint32_t x, uint32_t y) = 0;
+	void drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width,
+			uint32_t s_height, uint32_t x, uint32_t y) {
+		drawImage(img, sx, sy, s_width, s_height, x, y, SDL_FLIP_NONE);
+	}
+
+	/**
+	 * Draws an image on the viewport.
+	 *
+	 * @param img
+	 *   Image to be drawn.
+	 * @param x
+	 *   Pixel position to draw on horizontal axis of viewport.
+	 * @param y
+	 *   Pixel position to draw on vertical axis of viewport.
+	 * @param flags
+	 *   Flags to flip image horizontally & vertically.
+	 */
+	virtual void drawImage(ImageImpl* img, uint32_t x, uint32_t y, SDL_RendererFlip flags) = 0;
 
 	/**
 	 * Draws an image on the viewport.
@@ -94,7 +162,9 @@ public:
 	 * @param y
 	 *   Pixel position to draw on vertical axis of viewport.
 	 */
-	virtual void drawImage(ImageImpl* img, uint32_t x, uint32_t y) = 0;
+	void drawImage(ImageImpl* img, uint32_t x, uint32_t y) {
+		drawImage(img, x, y, SDL_FLIP_NONE);
+	}
 
 	/**
 	 * Renders the current scene, movie, menu, etc. on viewport.

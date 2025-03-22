@@ -148,17 +148,18 @@ void Viewport::setMode(GameMode::Mode mode) {
 	this->mode = mode;
 }
 
-void Viewport::drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) {
+void Viewport::drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect, SDL_RendererFlip flags) {
 	if (texture == nullptr) {
 		this->logger.error("Sprite drawing error; sprite undefined");
 		return;
 	}
 
-	SDL_RenderCopy(this->renderer, texture, &s_rect, &t_rect);
+	//~ SDL_RenderCopy(this->renderer, texture, &s_rect, &t_rect);
+	SDL_RenderCopyEx(this->renderer, texture, &s_rect, &t_rect, 0, nullptr, flags);
 }
 
 void Viewport::drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width,
-		uint32_t s_height, uint32_t x, uint32_t y) {
+		uint32_t s_height, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
 	SDL_Rect s_rect;
 	s_rect.x = sx;
 	s_rect.y = sy;
@@ -171,10 +172,10 @@ void Viewport::drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_wi
 	t_rect.w = s_rect.w;
 	t_rect.h = s_rect.h;
 
-	this->drawTexture(img->getTexture(), s_rect, t_rect);
+	this->drawTexture(img->getTexture(), s_rect, t_rect, flags);
 }
 
-void Viewport::drawImage(ImageImpl* img, uint32_t x, uint32_t y) {
+void Viewport::drawImage(ImageImpl* img, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
 	SDL_Rect s_rect;
 	s_rect.x = 0;
 	s_rect.y = 0;
@@ -188,7 +189,7 @@ void Viewport::drawImage(ImageImpl* img, uint32_t x, uint32_t y) {
 	t_rect.w = s_rect.w;
 	t_rect.h = s_rect.h;
 
-	this->drawTexture(img->getTexture(), s_rect, t_rect);
+	this->drawTexture(img->getTexture(), s_rect, t_rect, flags);
 }
 
 void Viewport::render() {

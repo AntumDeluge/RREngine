@@ -189,58 +189,33 @@ public:
 	 */
 	void setMode(GameMode::Mode mode);
 
-	/**
-	 * Draws a texture on the renderer.
-	 *
-	 * @param texture
-	 *   Texture reference to draw.
-	 * @param s_rect
-	 *   Drawing points of source image.
-	 * @param t_rect
-	 *   Drawing points of target renderer.
-	 */
-	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) override;
+	/** Overrides `ViewportRenderer::drawTexture`. */
+	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect, SDL_RendererFlip flags) override;
 
 	/**
-	 * Draws a texture on the renderer.
+	 * Calls `ViewportRenderer::drawTexture`.
 	 *
-	 * @param texture
-	 *   Texture reference.
-	 * @param rect
-	 *   Drawing points of both source image & target renderer.
+	 * NOTE: why must this be explicitly declared?
 	 */
-	void drawTexture(SDL_Texture* texture, SDL_Rect rect) override {
-		this->drawTexture(texture, rect, rect);
+	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) {
+		ViewportRenderer::drawTexture(texture, s_rect, t_rect);
 	}
 
-	/**
-	 * Draws an image on the renderer.
-	 *
-	 * @param img
-	 *   Image reference.
-	 * @param sx
-	 * @param xy
-	 * @param s_width
-	 * @param s_height
-	 * @param x
-	 *   Left-most point to draw on renderer.
-	 * @param y
-	 *   Top-most point to draw on renderer.
-	 */
-	void drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width, uint32_t t_height,
-			uint32_t x, uint32_t y) override;
+	/** Overrides `ViewportRenderer::drawImage`. */
+	void drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width,
+			uint32_t t_height, uint32_t x, uint32_t y, SDL_RendererFlip flags) override;
+
+	/** Overrides `ViewportRenderer::drawImage`. */
+	void drawImage(ImageImpl* img, uint32_t x, uint32_t y, SDL_RendererFlip flags) override;
 
 	/**
-	 * Draw an image on the renderer.
+	 * Calls `ViewportRenderer::drawImage`.
 	 *
-	 * @param img
-	 *   Image reference.
-	 * @param x
-	 *   Left-most point to draw on renderer.
-	 * @param y
-	 *   Top-most point to draw on renderer.
+	 * NOTE: why must this be explicitly declared?
 	 */
-	void drawImage(ImageImpl* img, uint32_t x, uint32_t y) override;
+	void drawImage(ImageImpl* img, uint32_t x, uint32_t y) {
+		ViewportRenderer::drawImage(img, x, y);
+	}
 
 	/**
 	 * Renders the current scene, movie, menu, etc. on viewport.
