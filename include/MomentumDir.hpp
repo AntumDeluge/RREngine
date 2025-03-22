@@ -13,7 +13,7 @@ namespace MomentumDir {
 		NONE = 0x00,
 		HOR = 0x01,
 		VER = 0x02
-	}
+	};
 }
 
 #endif /* RRE_MOMENTUM_DIR */
