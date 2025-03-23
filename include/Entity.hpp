@@ -13,6 +13,7 @@
 #include <SDL2/SDL_rect.h>
 
 #include "Logger.hpp"
+#include "MomentumDir.hpp"
 #include "Object.hpp"
 #include "Sprite.hpp"
 #include "ViewportRenderer.hpp"
@@ -32,9 +33,13 @@ private:
 	SDL_Rect rect;
 
 	/** Direction entity is moving. */
-	uint8_t dir;
+	uint8_t dir = MomentumDir::NONE;
+	/** Last known horizontal direction. */
+	uint8_t last_h_dir = MomentumDir::NONE;
+	/** Last known vertical direction. */
+	uint8_t last_v_dir = MomentumDir::NONE;
 	/** Rate of momentum. */
-	float momentum;
+	float momentum = 0;
 
 public:
 	/**
@@ -145,6 +150,50 @@ public:
 	 *   Collision rectangle.
 	 */
 	SDL_Rect getRect() { return this->rect; }
+
+	/**
+	 * Adds direction of momentum to entity.
+	 *
+	 * @param dir
+	 *   Direction to be added.
+	 * @return
+	 *   Direction of momentum.
+	 */
+	uint8_t addDirection(uint8_t dir);
+
+	/**
+	 * Removes direction of momentum from entity.addDirection
+	 *
+	 * @param dir
+	 *   Direction to be removed.
+	 * @return
+	 *   Direction of momentum.
+	 */
+	uint8_t removeDirection(uint8_t dir);
+
+	/**
+	 * Retrieves entity's direction.
+	 *
+	 * @return
+	 *   Direction of momentum.
+	 */
+	uint8_t getDirection() { return dir; }
+
+	/**
+	 * Retrieves entity's horizontal direction.
+	 *
+	 * @return
+	 *   Last known horizontal direction of momentum.
+	 */
+	uint8_t getHDirection() { return last_h_dir; }
+
+	/**
+	 * Retrieves entity's vertical direction.
+	 *
+	 * @return
+	 *   Last known vertical direction of momentum.
+	 */
+	uint8_t getVDirection() { return last_v_dir; }
 
 	/**
 	 * Checks if this entity collides on a horizontal or vertical line.

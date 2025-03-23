@@ -20,10 +20,6 @@ Entity::Entity(Sprite* sprite, uint32_t width, uint32_t height) {
 	this->rect.y = 0;
 	this->rect.w = width;
 	this->rect.h = height;
-
-	// entity isn't moving yet
-	dir = MomentumDir::NONE;
-	momentum = 0;
 }
 
 Entity::Entity(Sprite* sprite) {
@@ -38,10 +34,6 @@ Entity::Entity(Sprite* sprite) {
 		this->rect.w = 0;
 		this->rect.h = 0;
 	}
-
-	// entity isn't moving yet
-	dir = MomentumDir::NONE;
-	momentum = 0;
 }
 
 Entity::Entity(std::string sprite_id, uint32_t width, uint32_t height):
@@ -49,6 +41,21 @@ Entity::Entity(std::string sprite_id, uint32_t width, uint32_t height):
 
 Entity::Entity(string sprite_id): Entity(SpriteStore::get(sprite_id)) {}
 
+
+uint8_t Entity::addDirection(uint8_t dir) {
+	if (dir == MomentumDir::LEFT || dir == MomentumDir::RIGHT) {
+		last_h_dir = dir;
+	} else if (dir == MomentumDir::UP || dir == MomentumDir::DOWN) {
+		last_v_dir = dir;
+	}
+	this->dir |= dir;
+	return this->dir;
+}
+
+uint8_t Entity::removeDirection(uint8_t dir) {
+	this->dir &= ~dir;
+	return this->dir;
+}
 
 bool Entity::collides(uint32_t x, uint32_t y, uint32_t len, bool horizontal) {
 	// this entity's right-most & bottom-most pixel collision

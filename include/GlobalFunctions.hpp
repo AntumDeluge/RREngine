@@ -12,4 +12,10 @@
 
 extern Player* GetPlayer();
 
+extern uint8_t GetPlayerDirection();
+
+extern uint8_t AddPlayerDirection(uint8_t dir);
+
+extern uint8_t RemovePlayerDirection(uint8_t dir);
+
 #endif /* RRE_GLOBAL_FUNCTIONS */

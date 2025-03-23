@@ -6,6 +6,7 @@
 
 #include "GlobalFunctions.hpp"
 #include "Logger.hpp"
+#include "MomentumDir.hpp"
 #include "Player.hpp"
 #include "Scene.hpp"
 #include "SingletonRepo.hpp"
@@ -20,4 +21,34 @@ Player* GetPlayer() {
 		return nullptr;
 	}
 	return scene->getPlayer();
+}
+
+uint8_t GetPlayerDirection() {
+	Player* player = GetPlayer();
+	if (!player) {
+		_logger.warn("Player not available");
+		return MomentumDir::NONE;
+	}
+
+	return player->getDirection();
+}
+
+uint8_t AddPlayerDirection(uint8_t dir) {
+	Player* player = GetPlayer();
+	if (!player) {
+		_logger.warn("Player not available");
+		return MomentumDir::NONE;
+	}
+
+	return player->addDirection(dir);
+}
+
+uint8_t RemovePlayerDirection(uint8_t dir) {
+	Player* player = GetPlayer();
+	if (!player) {
+		_logger.warn("Player not available");
+		return MomentumDir::NONE;
+	}
+
+	return player->removeDirection(dir);
 }
