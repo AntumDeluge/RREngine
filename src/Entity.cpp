@@ -47,8 +47,10 @@ Entity::Entity(string sprite_id): Entity(SpriteStore::get(sprite_id)) {}
 uint8_t Entity::addDirection(uint8_t dir) {
 	if (dir == MomentumDir::LEFT || dir == MomentumDir::RIGHT) {
 		last_h_dir = dir;
+		momentum = base_momentum;
 	} else if (dir == MomentumDir::UP || dir == MomentumDir::DOWN) {
 		last_v_dir = dir;
+		momentum = base_momentum;
 	}
 	this->dir |= dir;
 	return this->dir;
@@ -56,6 +58,9 @@ uint8_t Entity::addDirection(uint8_t dir) {
 
 uint8_t Entity::removeDirection(uint8_t dir) {
 	this->dir &= ~dir;
+	if (this->dir == MomentumDir::NONE) {
+		momentum = 0;
+	}
 	return this->dir;
 }
 
