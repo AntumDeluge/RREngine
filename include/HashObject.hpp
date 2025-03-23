@@ -28,6 +28,18 @@ public:
 	/** Default constructor. */
 	HashObject() {}
 
+	/**
+	 * Copy constructor.
+	 *
+	 * @param other
+	 *   Object to be copied.
+	 */
+	HashObject(const HashObject& other) {
+		for (auto p: other.data) {
+			set(p.first, p.second);
+		}
+	}
+
 	/** Virtual default destructor. */
 	virtual ~HashObject() = default;
 

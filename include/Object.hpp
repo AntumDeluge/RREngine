@@ -41,7 +41,7 @@ public:
 	 * @param other
 	 *   Object to be copied.
 	 */
-	Object(const Object& other) {
+	Object(const Object& other): HashObject(other) {
 		// copied attributes should not include scene ID
 		id = 0;
 	}
