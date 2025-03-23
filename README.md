@@ -121,8 +121,6 @@ __CMake Options:__
 - `-DEXAMPLE=on`: Copy example game data files to build directory.
 
 ---
-## TODO
+## Links
 
-- Likely switch to a stream based XML parser such as Expat.
-- Maybe switch to [pugixml](https://pugixml.org/) as it is used by tmxlite.
-- Add Lua scripting support.
+- [TODO](TODO.md)
