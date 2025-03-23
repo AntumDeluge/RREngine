@@ -72,7 +72,7 @@ if(WIN32)
 	list(APPEND CPP_SOURCE "${PROJECT_SOURCE_DIR}/win_resources.rc")
 endif()
 
-add_executable(game ${CPP_SOURCE})
+add_executable(game ${CPP_SOURCE} ${LUA_C_SOURCE})
 target_link_libraries(game PRIVATE ${LIBS})
 
 if(NOT DEBUG)

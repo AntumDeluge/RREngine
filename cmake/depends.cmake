@@ -40,6 +40,13 @@ if(STATIC AND NOT MSVC)
 endif()
 
 
+# bundled Lua library source
+file(GLOB_RECURSE LUA_C_SOURCE "${PROJECT_SOURCE_DIR}/lib/lua/src/*.c")
+# exclude Lua interpreter/compiler executables source
+list(REMOVE_ITEM LUA_C_SOURCE "${PROJECT_SOURCE_DIR}/lib/lua/src/lua.c")
+list(REMOVE_ITEM LUA_C_SOURCE "${PROJECT_SOURCE_DIR}/lib/lua/src/luac.c")
+
+
 # compiler include paths
 
 include_directories(
@@ -52,6 +59,7 @@ include_directories(
 	"${SDL2IMAGE_INCLUDE_DIRS}"
 	# bundled libraries
 	"${PROJECT_SOURCE_DIR}/lib/cxxopts"
+	"${PROJECT_SOURCE_DIR}/lib/lua/src"
 )
 
 

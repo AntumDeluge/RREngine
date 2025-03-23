@@ -32,9 +32,10 @@ Example data:
 ---
 ## Building
 
-### Included Libraries
+### Bundled Libraries
 
 - [cxxopts](https://github.com/jarro2783/cxxopts) v3.2.0 ([MIT](lib/cxxopts/LICENSE.txt))
+- [lua](https://lua.org/) v5.4.7 ([MIT](lib/lua/LICENSE.txt))
 
 ### External Libraries
 
