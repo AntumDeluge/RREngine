@@ -108,7 +108,7 @@ public:
 	 * @param id
 	 *   Mode identifier. If `id` isn't configured, an uninitialized animation definition is used.
 	 */
-	void setMode(std::string id);
+	void setMode(std::string id) override;
 
 	/**
 	 * Sets ID of default animation mode.

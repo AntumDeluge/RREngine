@@ -132,6 +132,15 @@ public:
 	void setTileIndex(uint32_t index) { tile_index = index; }
 
 	/**
+	 * Does nothing in this implementation. Inheriting classes can override.
+	 *
+	 * @param id
+	 */
+	virtual void setMode(std::string id) {
+		// does nothing in this implemention
+	}
+
+	/**
 	 * Draws this sprite on the viewport.
 	 *
 	 * @param viewport
