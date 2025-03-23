@@ -9,6 +9,7 @@
 
 #include <cstdint> // *int*_t
 
+#include "HashObject.hpp"
 #include "Logger.hpp"
 #include "SceneImpl.hpp"
 #include "ViewportRenderer.hpp"
@@ -17,7 +18,7 @@
 /**
  * In-game object base class.
  */
-class Object {
+class Object: public HashObject {
 private:
 	static Logger logger;
 
