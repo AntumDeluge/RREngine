@@ -48,6 +48,7 @@ uint8_t Entity::addDirection(uint8_t dir) {
 	if (dir == MomentumDir::LEFT || dir == MomentumDir::RIGHT) {
 		last_h_dir = dir;
 		momentum = base_momentum;
+		this->sprite->setMode("run");
 	} else if (dir == MomentumDir::UP || dir == MomentumDir::DOWN) {
 		last_v_dir = dir;
 		momentum = base_momentum;
@@ -60,6 +61,7 @@ uint8_t Entity::removeDirection(uint8_t dir) {
 	this->dir &= ~dir;
 	if (this->dir == MomentumDir::NONE) {
 		momentum = 0;
+		this->sprite->setMode("idle");
 	}
 	return this->dir;
 }
