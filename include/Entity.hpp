@@ -104,6 +104,9 @@ public:
 		// sprite instance is unique pointer so shouldn't need to destroy here
 	}
 
+	/** Overrides `Object.logic`. */
+	void logic() override;
+
 	/** Overrides `Object.equals`. */
 	bool equals(const Object& obj) const override {
 		if (!obj.instanceof<Entity>()) {

@@ -44,6 +44,16 @@ Entity::Entity(std::string sprite_id, uint32_t width, uint32_t height):
 Entity::Entity(string sprite_id): Entity(SpriteStore::get(sprite_id)) {}
 
 
+void Entity::logic() {
+	if (momentum > 0 && last_h_dir != MomentumDir::NONE) {
+		if (last_h_dir == MomentumDir::RIGHT) {
+			this->rect.x += momentum;
+		} else if (last_h_dir == MomentumDir::LEFT) {
+			this->rect.x -= momentum;
+		}
+	}
+}
+
 uint8_t Entity::addDirection(uint8_t dir) {
 	if (dir == MomentumDir::LEFT || dir == MomentumDir::RIGHT) {
 		last_h_dir = dir;
