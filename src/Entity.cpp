@@ -4,6 +4,8 @@
  * See: LICENSE.txt
  */
 
+#include <SDL2/SDL_render.h>
+
 #include "Entity.hpp"
 #include "MomentumDir.hpp"
 #include "store/SpriteStore.hpp"
@@ -99,5 +101,9 @@ void Entity::render(ViewportRenderer* viewport) {
 		return;
 	}
 
-	this->sprite->render(viewport, this->rect.x, this->rect.y);
+	SDL_RendererFlip flags = SDL_FLIP_NONE;
+	if (last_h_dir == MomentumDir::LEFT) {
+		flags = SDL_FLIP_HORIZONTAL;
+	}
+	this->sprite->render(viewport, this->rect.x, this->rect.y, flags);
 }
