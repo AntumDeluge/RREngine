@@ -121,6 +121,19 @@ __CMake Options:__
 - `-DEXAMPLE=on`: Copy example game data files to build directory.
 
 ---
+## Building Documentation
+
+Documentation is built using [MkDocs](https://www.mkdocs.org/). You will need to install
+[Python](https://python.org/) & the `mkdocs` module:
+
+```
+$ python -m pip install mkdocs
+```
+
+Run `mkdocs build` from root directory. To preview documenation run `mkdocs serve` then
+open http://localhost:8000/ in a web browser.
+
+---
 ## Links
 
 - [TODO](TODO.md)
