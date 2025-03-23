@@ -24,6 +24,10 @@ bool Input::keyIsPressed(SDL_Keycode key) {
 	return find(this->pressed_keys.begin(), this->pressed_keys.end(), key) != this->pressed_keys.end();
 }
 
+bool Input::keyIsDirection(SDL_Keycode key) {
+	return key == left || key == right || key == up || key == down;
+}
+
 void Input::onKeyDown(SDL_Keysym keysym) {
 	if (this->keyIsPressed(keysym.sym)) {
 		return;

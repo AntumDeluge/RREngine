@@ -60,6 +60,16 @@ private:
 	 */
 	bool keyIsPressed(SDL_Keycode key);
 
+	/**
+	 * Checks if a key is considered a direction press.
+	 *
+	 * @param key
+	 *   Keycode to check.
+	 * @return
+	 *   `true` if key is "left", "right", "up", or "down".
+	 */
+	bool keyIsDirection(SDL_Keycode key);
+
 public:
 	/** Default constructor. */
 	Input() {}
