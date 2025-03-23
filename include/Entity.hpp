@@ -40,8 +40,6 @@ private:
 	uint8_t last_v_dir = MomentumDir::NONE;
 	/** Rate of momentum. */
 	float momentum = 0;
-	/** Default rate of momentum (0 means entity does not move). */
-	float base_momentum = 0;
 
 public:
 	/**
@@ -93,7 +91,6 @@ public:
 	Entity(const Entity& other): Object(other) {
 		sprite = other.sprite;
 		rect = other.rect;
-		base_momentum = other.base_momentum;
 	}
 
 	/** Default constructor. */
@@ -220,14 +217,6 @@ public:
 	float getMomentum() {
 		return momentum;
 	}
-
-	/**
-	 * Sets rate of momentum to use while entity is moving.
-	 *
-	 * @param momentum
-	 *   Rate of momentum.
-	 */
-	void setBaseMomentum(float momentum) { base_momentum = momentum; }
 
 	/**
 	 * Checks if this entity collides on a horizontal or vertical line.

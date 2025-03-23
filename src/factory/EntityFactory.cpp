@@ -60,14 +60,12 @@ Entity EntityFactory::build(XMLElement* el) {
 		entity = Entity(sprite, width, height);
 	}
 
-	float momentum = -1;
+	float momentum = 0;
 	XMLElement* el_momentum = el->FirstChildElement("momentum");
 	if (el_momentum) {
 		momentum = el_momentum->FloatText();
 	}
-	if (momentum >= 0) {
-		entity.setBaseMomentum(momentum);
-	}
+	entity.set("base_momentum", momentum);
 
 	// TODO: other entity attributes.
 
