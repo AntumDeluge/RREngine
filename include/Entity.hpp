@@ -196,6 +196,26 @@ public:
 	uint8_t getVDirection() { return last_v_dir; }
 
 	/**
+	 * Sets entity's rate of momentum per game logic step.
+	 *
+	 * @param momentum
+	 *   New momentum.
+	 */
+	void setMomentum(float momentum) {
+		this->momentum = momentum;
+	}
+
+	/**
+	 * Retrieves entity's rate of momentum per game logic step.
+	 *
+	 * @return
+	 *   Current momentum.
+	 */
+	float getMomentum() {
+		return momentum;
+	}
+
+	/**
 	 * Checks if this entity collides on a horizontal or vertical line.
 	 *
 	 * @param x
