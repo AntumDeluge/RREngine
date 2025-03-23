@@ -7,9 +7,10 @@
 #ifndef RRE_SCENE
 #define RRE_SCENE
 
-#include <cstdint> // uint*_t
+#include <cstdint> // *int*_t
 #include <vector>
 
+#include <SDL2/SDL_rect.h>
 #include <tmxlite/ImageLayer.hpp>
 
 #include "LayerDefinition.hpp"
@@ -273,6 +274,8 @@ public:
 	 *   Player instance or `null` if no player is set.
 	 */
 	Player* getPlayer() { return player; }
+
+	bool collidesGround(SDL_Rect rect) override;
 };
 
 #endif /* RRE_SCENE */

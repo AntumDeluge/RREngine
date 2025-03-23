@@ -115,3 +115,8 @@ void Scene::addPlayer(Player* player) {
 	next_object_id++;
 	player->onAdded(this);
 }
+
+bool Scene::collidesGround(SDL_Rect rect) {
+	// TODO:
+	return false;
+}
