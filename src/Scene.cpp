@@ -32,6 +32,15 @@ void Scene::setLayerCollision(LayerDefinition ldef) {
 	}
 }
 
+void Scene::logic() {
+	if (player) {
+		player->logic();
+	}
+	for (Object* obj: objects) {
+		obj->logic();
+	}
+}
+
 void Scene::render(ViewportRenderer* viewport) {
 	// TODO: build layers as single image instead of drawing each tile individually
 	renderTileLayer(viewport, background);

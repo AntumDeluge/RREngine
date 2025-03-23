@@ -48,6 +48,11 @@ public:
 	/** Virtual default destructor. */
 	virtual ~Object() = default;
 
+	/** Called every logic step when added to scene. */
+	virtual void logic() {
+		// does nothing in this implementation
+	}
+
 	/**
 	 * Checks for equality between this & another object.
 	 *

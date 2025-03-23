@@ -145,6 +145,9 @@ public:
 		this->tilesets.push_back(tileset);
 	}
 
+	/** Called every game logic step. */
+	void logic() override;
+
 	/**
 	 * Draws scene on renderer.
 	 *

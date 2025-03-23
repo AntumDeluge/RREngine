@@ -15,6 +15,8 @@ public:
 	/** Virtual default destructor. */
 	virtual ~SceneImpl() {}
 
+	virtual void logic() = 0;
+
 	virtual void render(ViewportRenderer* viewport) = 0;
 };
 #endif /* RRE_SCENE_IMPL */

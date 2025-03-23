@@ -11,6 +11,8 @@
 #endif
 
 #include "GameLogic.hpp"
+#include "Scene.hpp"
+#include "SingletonRepo.hpp"
 
 using namespace std;
 
@@ -34,6 +36,11 @@ void GameLogic::step(uint64_t step_time) {
 	uint32_t step_diff = this->step_time - prev_step_time;
 	//~ this->logger.debug("time since last step: " + std::to_string(step_diff) + "ms");
 #endif
+
+	Scene* scene = GetViewport()->getScene();
+	if (scene) {
+		scene->logic();
+	}
 
 	// TODO:
 
