@@ -9,7 +9,9 @@
 #include <algorithm>
 #include <string>
 
+#include "GlobalFunctions.hpp"
 #include "Input.hpp"
+#include "MomentumDir.hpp"
 
 using namespace std;
 
@@ -34,9 +36,27 @@ void Input::onKeyDown(SDL_Keysym keysym) {
 	}
 	this->pressed_keys.push_back(keysym.sym);
 
+	if (keyIsDirection(keysym.sym)) {
+		uint8_t new_dir = GetPlayerDirection();
+		switch(keysym.sym) {
+			case SDLK_LEFT:
+				new_dir = AddPlayerDirection(MomentumDir::LEFT);
+				break;
+			case SDLK_RIGHT:
+				new_dir = AddPlayerDirection(MomentumDir::RIGHT);
+				break;
+			case SDLK_UP:
+				new_dir = AddPlayerDirection(MomentumDir::UP);
+				break;
+			case SDLK_DOWN:
+				new_dir = AddPlayerDirection(MomentumDir::DOWN);
+				break;
+		}
+
 #ifdef RRE_DEBUGGING
-	this->logger.debug("Key pressed: " + to_string(keysym.sym));
+		logger.debug("Player direction: " + to_string(new_dir));
 #endif
+	}
 }
 
 void Input::onKeyUp(SDL_Keysym keysym) {
@@ -45,7 +65,25 @@ void Input::onKeyUp(SDL_Keysym keysym) {
 	}
 	this->pressed_keys.erase(remove(this->pressed_keys.begin(), this->pressed_keys.end(), keysym.sym), this->pressed_keys.end());
 
+	if (keyIsDirection(keysym.sym)) {
+		uint8_t new_dir = GetPlayerDirection();
+		switch(keysym.sym) {
+			case SDLK_LEFT:
+				new_dir = RemovePlayerDirection(MomentumDir::LEFT);
+				break;
+			case SDLK_RIGHT:
+				new_dir = RemovePlayerDirection(MomentumDir::RIGHT);
+				break;
+			case SDLK_UP:
+				new_dir = RemovePlayerDirection(MomentumDir::UP);
+				break;
+			case SDLK_DOWN:
+				new_dir = RemovePlayerDirection(MomentumDir::DOWN);
+				break;
+		}
+
 #ifdef RRE_DEBUGGING
-	this->logger.debug("Key released: " + to_string(keysym.sym));
+		logger.debug("Player direction: " + to_string(new_dir));
 #endif
+	}
 }
