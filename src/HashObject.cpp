@@ -4,21 +4,12 @@
  * See: LICENSE.txt
  */
 
-#include <sstream>
-
 #include "HashObject.hpp"
 
 using namespace std;
 
 
 Logger HashObject::logger = Logger::getLogger("HashObject");
-
-template <typename T>
-void HashObject::set(string key, T value) {
-	stringstream ss;
-	ss << value;
-	data[key] = ss.str();
-}
 
 int32_t HashObject::getInt(string key) {
 	string s_value = get(key);

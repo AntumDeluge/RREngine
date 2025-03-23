@@ -8,6 +8,7 @@
 #define RRE_HASH_OBJECT
 
 #include <cstdint> // *int*_t
+#include <sstream>
 #include <string>
 #include <unordered_map>
 
@@ -62,7 +63,11 @@ public:
 	 *   Property value.
 	 */
 	template <typename T>
-	void set(std::string key, T value);
+	void set(std::string key, T value) {
+		std::stringstream ss;
+		ss << value;
+		data[key] = ss.str();
+	}
 
 	/**
 	 * Removes a property.
