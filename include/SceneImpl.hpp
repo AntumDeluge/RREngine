@@ -21,6 +21,24 @@ public:
 
 	virtual void render(ViewportRenderer* viewport) = 0;
 
+	/**
+	 * Checks if a rectangle collides against a ground tile.
+	 *
+	 * @param rect
+	 *   Area to check.
+	 * @return
+	 *   `true` if bottom of rectangle collides with horizontal line in collision map.
+	 */
 	virtual bool collidesGround(SDL_Rect rect) = 0;
+
+	/**
+	 * Checks if a rectangle collides again a wall tile.
+	 *
+	 * @param rect
+	 *   Area to check.
+	 * @return
+	 *   `true` if side of rectangle collides with vertical line in collision map.
+	 */
+	virtual bool collidesWall(SDL_Rect rect) = 0;
 };
 #endif /* RRE_SCENE_IMPL */

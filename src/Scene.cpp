@@ -120,3 +120,8 @@ bool Scene::collidesGround(SDL_Rect rect) {
 	// TODO:
 	return false;
 }
+
+bool Scene::collidesWall(SDL_Rect rect) {
+	// TODO:
+	return false;
+}

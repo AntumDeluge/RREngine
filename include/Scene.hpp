@@ -275,7 +275,11 @@ public:
 	 */
 	Player* getPlayer() { return player; }
 
+	/** Overrides `SceneImpl.collidesGround`. */
 	bool collidesGround(SDL_Rect rect) override;
+
+	/** Overrides `SceneImple.collidesWall`. */
+	bool collidesWall(SDL_Rect rect) override;
 };
 
 #endif /* RRE_SCENE */
