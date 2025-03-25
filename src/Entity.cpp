@@ -166,7 +166,13 @@ void Entity::render(ViewportImpl* viewport) {
 	if (face_dir == FaceDir::LEFT) {
 		flags = SDL_FLIP_HORIZONTAL;
 	}
-	sprite->render(viewport, this->rect.x, this->rect.y, flags);
+
+	// horizontally center sprite drawing
+	int32_t offset_x = (sprite->getTileWidth() - rect.w) / 2;
+	// align sprite to bottom of entity
+	int32_t offset_y = sprite->getTileHeight() - rect.h;
+
+	sprite->render(viewport, rect.x - offset_x, rect.y - offset_y, flags);
 
 #if RRE_DEBUGGING
 	// debug collision box & sprite alignment

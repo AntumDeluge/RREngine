@@ -122,6 +122,22 @@ public:
 	}
 
 	/**
+	 * Retrives drawing dimension of this sprite.
+	 *
+	 * @return
+	 *   Pixel width.
+	 */
+	uint32_t getTileWidth() { return tile_width; }
+
+	/**
+	 * Retrieves drawing dimension of this sprite.
+	 *
+	 * @return
+	 *   Pixel height.
+	 */
+	uint32_t getTileHeight() { return tile_height; }
+
+	/**
 	 * Draws this sprite on the viewport.
 	 *
 	 * @param viewport
