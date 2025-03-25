@@ -11,7 +11,6 @@
 #include <mutex>
 #include <vector>
 
-#include "FontMap.hpp"
 #include "GameMode.hpp"
 #include "Logger.hpp"
 #include "Movie.hpp"
@@ -106,21 +105,11 @@ public:
 	 */
 	void shutdown();
 
-	/**
-	 * Sets font map to use for drawing text.
-	 *
-	 * @param font_map
-	 *   New font map.
-	 */
-	void setFontMap(FontMap* font_map) { this->font_map = font_map; }
+	/** Overrides `ViewportImpl::setFontMap`. */
+	void setFontMap(FontMap* font_map) override { this->font_map = font_map; }
 
-	/**
-	 * Retrieves the font map used for drawing text.
-	 *
-	 * @return
-	 *   Current font map instance.
-	 */
-	FontMap* getFontMap() { return this->font_map; }
+	/** Overrides `ViewportImpl::getFontMap`. */
+	FontMap* getFontMap() override { return this->font_map; }
 
 	/**
 	 * Updates FPS value.

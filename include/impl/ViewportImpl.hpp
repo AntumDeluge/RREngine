@@ -11,6 +11,7 @@
 
 #include <SDL2/SDL_render.h>
 
+#include "FontMap.hpp"
 #include "Image.hpp"
 
 
@@ -36,6 +37,22 @@ public:
 	 *   SDL_Renderer instance.
 	 */
 	SDL_Renderer* getRenderer() { return this->renderer; }
+
+	/**
+	 * Sets font map to use for drawing text.
+	 *
+	 * @param font_map
+	 *   New font map.
+	 */
+	virtual void setFontMap(FontMap* font_map) = 0;
+
+	/**
+	 * Retrieves the font map used for drawing text.
+	 *
+	 * @return
+	 *   Current font map instance.
+	 */
+	virtual FontMap* getFontMap() = 0;
 
 	/**
 	 * Updates FPS value.
