@@ -111,6 +111,19 @@ public:
 	void setMode(std::string id) override;
 
 	/**
+	 * Retrieves ID of current mode.
+	 *
+	 * @return
+	 *   Mode identifier.
+	 */
+	std::string getModeId() override {
+		if (current_mode) {
+			return current_mode->getId();
+		}
+		return Sprite::getModeId();
+	}
+
+	/**
 	 * Sets ID of default animation mode.
 	 *
 	 * @param id

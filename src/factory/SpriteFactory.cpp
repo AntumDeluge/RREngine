@@ -80,7 +80,9 @@ shared_ptr<Sprite> SpriteFactory::build(XMLElement* el) {
 			_logger.error("XML Parsing Error: Animation without frames");
 			return nullptr;
 		}
-		animation_modes[mode_name] = Animation(true, current_frames);
+		Animation ani = Animation(true, current_frames);
+		ani.setId(mode_name);
+		animation_modes[mode_name] = ani;
 
 		el_animation = el_animation->NextSiblingElement("animation");
 	}

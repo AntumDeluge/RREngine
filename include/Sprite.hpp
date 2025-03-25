@@ -141,6 +141,14 @@ public:
 	}
 
 	/**
+	 * Returns empty string in this implementation. Inheriting classes can override.
+	 */
+	virtual std::string getModeId() {
+		// returns empty string in this implementation
+		return "";
+	}
+
+	/**
 	 * Draws this sprite on the viewport.
 	 *
 	 * @param viewport

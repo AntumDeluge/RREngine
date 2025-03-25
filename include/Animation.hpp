@@ -8,6 +8,7 @@
 #define RRE_ANIMATION
 
 #include <cstdint> // *int*_t
+#include <string>
 #include <utility> // std::pair
 #include <vector>
 
@@ -42,6 +43,9 @@ private:
 	/** Flag denoting if animation should loop after completions. */
 	bool loop;
 
+	/** Used to identify this animation. */
+	std::string id;
+
 public:
 
 	/**
@@ -69,6 +73,22 @@ public:
 	 * Constructs an "uninitialized" animation without any frames.
 	 */
 	Animation(): Animation(false, AnimationFrameSet()) {}
+
+	/**
+	 * Sets animation ID.
+	 *
+	 * @param id
+	 *   Animation identifier.
+	 */
+	void setId(std::string id) { this->id = id; }
+
+	/**
+	 * Retrieves animation ID.
+	 *
+	 * @return
+	 *   Animation identifier.
+	 */
+	std::string getId() { return id; }
 
 	/**
 	 * Checks if animation is ready.
