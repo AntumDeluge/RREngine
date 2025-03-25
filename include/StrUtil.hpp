@@ -17,6 +17,13 @@
 namespace StrUtil {
 
 	/**
+	 * Error for parsing string values.
+	 *
+	 * TODO: return `ParseError` from converstion/parsing functions
+	 */
+	//typedef std::pair<uint32_t, std::string> ParseError;
+
+	/**
 	 * Converts value to string.
 	 *
 	 * @param v
