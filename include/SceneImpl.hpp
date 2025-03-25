@@ -7,6 +7,8 @@
 #ifndef RRE_SCENE_IMPL
 #define RRE_SCENE_IMPL
 
+#include <cstdint> // *int*_t
+
 #include <SDL2/SDL_rect.h>
 
 #include "HashObject.hpp"
@@ -21,6 +23,18 @@ public:
 	virtual void logic() = 0;
 
 	virtual void render(ViewportRenderer* viewport) = 0;
+
+	/**
+	 * Checks for gravity rate at a given point.
+	 *
+	 * @param x
+	 *   Horizontal position.
+	 * @param y
+	 *   Vertical position.
+	 * @return
+	 *   Gravity at given position.
+	 */
+	virtual float getGravity(uint32_t x, uint32_t y) = 0;
 
 	/**
 	 * Checks if a rectangle collides against a ground tile.

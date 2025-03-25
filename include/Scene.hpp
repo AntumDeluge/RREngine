@@ -7,7 +7,6 @@
 #ifndef RRE_SCENE
 #define RRE_SCENE
 
-#include <cstdint> // *int*_t
 #include <vector>
 
 #include <SDL2/SDL_rect.h>
@@ -274,6 +273,9 @@ public:
 	 *   Player instance or `null` if no player is set.
 	 */
 	Player* getPlayer() { return player; }
+
+	/** Overrides `SceneImpl.getGravity`. */
+	float getGravity(uint32_t x, uint32_t y) override;
 
 	/** Overrides `SceneImpl.collidesGround`. */
 	bool collidesGround(SDL_Rect rect) override;

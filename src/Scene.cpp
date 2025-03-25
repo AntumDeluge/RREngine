@@ -116,6 +116,14 @@ void Scene::addPlayer(Player* player) {
 	player->onAdded(this);
 }
 
+float Scene::getGravity(uint32_t x, uint32_t y) {
+	// TODO: check gravity at given position
+	if (has("base_gravity")) {
+		return getFloat("base_gravity");
+	}
+	return 1.0;
+}
+
 bool Scene::collidesGround(SDL_Rect rect) {
 	// TODO:
 	return false;
