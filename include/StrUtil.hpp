@@ -70,6 +70,8 @@ namespace StrUtil {
 	/**
 	 * Converts string to unsigned integer.
 	 *
+	 * FIXME: should take a reference parameter & return error code
+	 *
 	 * @param st
 	 *   String to convert.
 	 * @return
