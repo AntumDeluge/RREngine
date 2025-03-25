@@ -69,33 +69,6 @@ public:
 		this->tile_index = tile_index;
 	}
 
-	/**
-	 * Creates a new sprite.
-	 *
-	 * @param id
-	 *   Identifier used to retrieve image texture for drawing on renderer from configuration.
-	 */
-	Sprite(std::string id);
-
-	/**
-	 * Creates a new sprite.
-	 *
-	 * @param id
-	 *   Identifier used to retrieve image texture for drawing on renderer from configuration.
-	 * @param tile_width
-	 *   Pixel width of this sprite.
-	 * @param tile_height
-	 *   Pixel height of this sprite.
-	 * @param tile_index
-	 *   Image tile index that should be drawn.
-	 */
-	Sprite(std::string id, uint32_t tile_width, uint32_t tile_height, uint32_t tile_index)
-	: Sprite(id) {
-		this->tile_width = tile_width;
-		this->tile_height = tile_height;
-		this->tile_index = tile_index;
-	}
-
 	/** Default constructor. */
 	Sprite(): Image() {
 		tile_width = 0;

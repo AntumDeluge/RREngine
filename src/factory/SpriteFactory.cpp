@@ -10,6 +10,8 @@
 
 #include "Animation.hpp"
 #include "AnimatedSprite.hpp"
+#include "Path.hpp"
+#include "TextureLoader.hpp"
 #include "factory/SpriteFactory.hpp"
 
 using namespace std;
@@ -88,10 +90,10 @@ shared_ptr<Sprite> SpriteFactory::build(XMLElement* el) {
 	}
 
 	shared_ptr<Sprite> sprite_ptr;
-	string filename = el_filename->GetText();
+	SDL_Texture* texture = TextureLoader::load(Path::join("sprite", el_filename->GetText()));
 	if (animation_modes.size() > 0) {
 		// animated sprite
-		sprite_ptr = make_shared<AnimatedSprite>(filename, width, height);
+		sprite_ptr = make_shared<AnimatedSprite>(texture, width, height);
 		((AnimatedSprite*) sprite_ptr.get())->setModes(animation_modes);
 		((AnimatedSprite*) sprite_ptr.get())->setDefaultMode(default_mode);
 		((AnimatedSprite*) sprite_ptr.get())->setMode(default_mode);
@@ -102,7 +104,7 @@ shared_ptr<Sprite> SpriteFactory::build(XMLElement* el) {
 		if (attr_index) {
 			tile_index = attr_index->UnsignedValue();
 		}
-		sprite_ptr = make_shared<Sprite>(filename, width, height, tile_index);
+		sprite_ptr = make_shared<Sprite>(texture, width, height, tile_index);
 	}
 
 	if (!sprite_ptr->ready()) {
