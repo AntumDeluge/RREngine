@@ -45,9 +45,9 @@ Entity::Entity(string sprite_id): Entity(SpriteStore::get(sprite_id)) {}
 
 void Entity::logic() {
 	if (momentum > 0) {
-		if (face_dir == FaceDir::RIGHT) {
+		if (dir & MomentumDir::RIGHT) {
 			this->rect.x += momentum;
-		} else {
+		} else if (dir & MomentumDir::LEFT) {
 			this->rect.x -= momentum;
 		}
 	}
