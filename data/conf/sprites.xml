@@ -16,6 +16,9 @@
 			<frame index="10" delay="100" />
 			<frame index="11" delay="100" />
 		</animation>
+		<animation mode="fall">
+			<frame index="0" delay="10000" />
+		</animation>
 	</sprite>
 
 </sprites>
