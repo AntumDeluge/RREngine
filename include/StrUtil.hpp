@@ -116,6 +116,16 @@ namespace StrUtil {
 	 *   Double value or 0 if conversion fails.
 	 */
 	double toDouble(std::string st);
+
+	/**
+	 * Converts string to boolean.
+	 *
+	 * @param st
+	 *   String to convert.
+	 * @return
+	 *   `true` if contents of string are "true" case insensitive.
+	 */
+	bool toBool(std::string st);
 }
 
 #endif /* RRE_STR_UTIL */

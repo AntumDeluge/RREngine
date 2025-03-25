@@ -121,3 +121,7 @@ double StrUtil::toDouble(string st) {
 	logger.error("Cannot convert string value \"" + st + "\" to double: " + err);
 	return 0;
 }
+
+bool StrUtil::toBool(string st) {
+	return StrUtil::toLower(StrUtil::trim(st)).compare("true") == 0;
+}
