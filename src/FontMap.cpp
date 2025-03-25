@@ -13,7 +13,7 @@ using namespace std;
 Logger FontMap::logger = Logger::getLogger("FontMap");
 
 FontMap::FontMap(SDL_Texture* texture, unordered_map<wchar_t, int> char_map, uint32_t c_width,
-		uint32_t c_height): ImageImpl(texture) {
+		uint32_t c_height): Image(texture) {
 	this->char_map = char_map;
 	this->c_width = c_width;
 	this->c_height = c_height;

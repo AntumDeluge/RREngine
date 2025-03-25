@@ -11,7 +11,7 @@
 
 #include <SDL2/SDL_render.h>
 
-#include "ImageImpl.hpp"
+#include "Image.hpp"
 
 
 /**
@@ -116,7 +116,7 @@ public:
 	 * @param flags
 	 *   Flags to flip image horizontally & vertically.
 	 */
-	virtual void drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width,
+	virtual void drawImage(Image* img, uint32_t sx, uint32_t sy, uint32_t s_width,
 			uint32_t t_height, uint32_t x, uint32_t y, SDL_RendererFlip flags) = 0;
 
 	/**
@@ -133,7 +133,7 @@ public:
 	 * @param y
 	 *   Pixel position to draw on vertical axis of viewport.
 	 */
-	void drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width,
+	void drawImage(Image* img, uint32_t sx, uint32_t sy, uint32_t s_width,
 			uint32_t s_height, uint32_t x, uint32_t y) {
 		drawImage(img, sx, sy, s_width, s_height, x, y, SDL_FLIP_NONE);
 	}
@@ -150,7 +150,7 @@ public:
 	 * @param flags
 	 *   Flags to flip image horizontally & vertically.
 	 */
-	virtual void drawImage(ImageImpl* img, uint32_t x, uint32_t y, SDL_RendererFlip flags) = 0;
+	virtual void drawImage(Image* img, uint32_t x, uint32_t y, SDL_RendererFlip flags) = 0;
 
 	/**
 	 * Draws an image on the viewport.
@@ -162,7 +162,7 @@ public:
 	 * @param y
 	 *   Pixel position to draw on vertical axis of viewport.
 	 */
-	void drawImage(ImageImpl* img, uint32_t x, uint32_t y) {
+	void drawImage(Image* img, uint32_t x, uint32_t y) {
 		drawImage(img, x, y, SDL_FLIP_NONE);
 	}
 

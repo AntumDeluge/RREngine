@@ -9,13 +9,13 @@
 
 #include <cstdint>
 
-#include "ImageImpl.hpp"
+#include "Image.hpp"
 
 
 /**
  * Image implementation representing a tileset.
  */
-class Tileset : public ImageImpl {
+class Tileset: public Image {
 private:
 	/** Minimum global ID for this tileset in scene. */
 	uint32_t first_gid;

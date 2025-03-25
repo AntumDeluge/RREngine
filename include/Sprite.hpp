@@ -13,7 +13,7 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_timer.h>
 
-#include "ImageImpl.hpp"
+#include "Image.hpp"
 #include "Logger.hpp"
 #include "ViewportRenderer.hpp"
 
@@ -21,7 +21,7 @@
 /**
  * Sprite interface class.
  */
-class Sprite: public ImageImpl {
+class Sprite: public Image {
 private:
 	static Logger logger;
 
@@ -44,7 +44,7 @@ public:
 	 * @param texture
 	 *   Image texture used for drawing on renderer.
 	 */
-	Sprite(SDL_Texture* texture): ImageImpl(texture) {
+	Sprite(SDL_Texture* texture): Image(texture) {
 		tile_width = width;
 		tile_height = height;
 		tile_index = 0;
@@ -97,7 +97,7 @@ public:
 	}
 
 	/** Default constructor. */
-	Sprite(): ImageImpl() {
+	Sprite(): Image() {
 		tile_width = 0;
 		tile_height = 0;
 		tile_index = 0;

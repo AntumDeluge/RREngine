@@ -17,7 +17,7 @@
 #include <SDL2/SDL_timer.h>
 
 #include "FontMap.hpp"
-#include "ImageImpl.hpp"
+#include "Image.hpp"
 #include "Logger.hpp"
 #include "Sprite.hpp"
 #include "ViewportRenderer.hpp"
@@ -30,7 +30,7 @@
  * - don't use pointers
  * - invert order (<image, duration>) to match sprite animations
  */
-typedef std::pair<uint32_t, ImageImpl*> MovieFrame;
+typedef std::pair<uint32_t, Image*> MovieFrame;
 
 /** Type representing a series of movie frames. */
 typedef std::vector<MovieFrame> MovieFrameList;

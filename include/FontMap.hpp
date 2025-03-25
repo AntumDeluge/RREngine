@@ -12,7 +12,7 @@
 
 #include <SDL2/SDL_render.h>
 
-#include "ImageImpl.hpp"
+#include "Image.hpp"
 #include "Logger.hpp"
 
 
@@ -21,7 +21,7 @@
  *
  * Only monospace text is supported.
  */
-class FontMap: public ImageImpl {
+class FontMap: public Image {
 private:
 	static Logger logger;
 

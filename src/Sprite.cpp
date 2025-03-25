@@ -20,7 +20,7 @@ using namespace std;
 
 Logger Sprite::logger = Logger::getLogger("Sprite");
 
-Sprite::Sprite(string id) : ImageImpl() {
+Sprite::Sprite(string id) : Image() {
 	// TODO: cache sprites at startup or scene loading (optimization?) in SpriteStore
 	const string conf_sprites = Path::join(Path::dir_root, "data/conf/sprites/characters.xml");
 	if (!Filesystem::fexist(conf_sprites)) {

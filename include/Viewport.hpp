@@ -11,11 +11,8 @@
 #include <mutex>
 #include <vector>
 
-#include <SDL2/SDL_render.h>
-
 #include "FontMap.hpp"
 #include "GameMode.hpp"
-#include "ImageImpl.hpp"
 #include "Logger.hpp"
 #include "Movie.hpp"
 #include "Scene.hpp"
@@ -202,18 +199,18 @@ public:
 	}
 
 	/** Overrides `ViewportRenderer::drawImage`. */
-	void drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width,
+	void drawImage(Image* img, uint32_t sx, uint32_t sy, uint32_t s_width,
 			uint32_t t_height, uint32_t x, uint32_t y, SDL_RendererFlip flags) override;
 
 	/** Overrides `ViewportRenderer::drawImage`. */
-	void drawImage(ImageImpl* img, uint32_t x, uint32_t y, SDL_RendererFlip flags) override;
+	void drawImage(Image* img, uint32_t x, uint32_t y, SDL_RendererFlip flags) override;
 
 	/**
 	 * Calls `ViewportRenderer::drawImage`.
 	 *
 	 * NOTE: why must this be explicitly declared?
 	 */
-	void drawImage(ImageImpl* img, uint32_t x, uint32_t y) {
+	void drawImage(Image* img, uint32_t x, uint32_t y) {
 		ViewportRenderer::drawImage(img, x, y);
 	}
 

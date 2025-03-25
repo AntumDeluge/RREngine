@@ -158,7 +158,7 @@ void Viewport::drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rec
 	SDL_RenderCopyEx(this->renderer, texture, &s_rect, &t_rect, 0, nullptr, flags);
 }
 
-void Viewport::drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_width,
+void Viewport::drawImage(Image* img, uint32_t sx, uint32_t sy, uint32_t s_width,
 		uint32_t s_height, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
 	SDL_Rect s_rect;
 	s_rect.x = sx;
@@ -175,7 +175,7 @@ void Viewport::drawImage(ImageImpl* img, uint32_t sx, uint32_t sy, uint32_t s_wi
 	this->drawTexture(img->getTexture(), s_rect, t_rect, flags);
 }
 
-void Viewport::drawImage(ImageImpl* img, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
+void Viewport::drawImage(Image* img, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
 	SDL_Rect s_rect;
 	s_rect.x = 0;
 	s_rect.y = 0;
@@ -230,7 +230,7 @@ void Viewport::drawTitle() {
 		return;
 	}
 
-	// FIXME: would it be better to store background as ImageImpl so we don't have to call `SDL_QueryTexture` every cycle?
+	// FIXME: would it be better to store background as Image so we don't have to call `SDL_QueryTexture` every cycle?
 	int w, h;
 	SDL_QueryTexture(this->background, NULL, NULL, &w, &h);
 

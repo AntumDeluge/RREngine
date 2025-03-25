@@ -4,17 +4,17 @@
  * See: LICENSE.txt
  */
 
-#include "ImageImpl.hpp"
+#include "Image.hpp"
 
 
-Logger ImageImpl::logger = Logger::getLogger("ImageImpl");
+Logger Image::logger = Logger::getLogger("Image");
 
-ImageImpl::ImageImpl(SDL_Texture* texture): ImageImpl() {
+Image::Image(SDL_Texture* texture): Image() {
 	setTexture(texture);
 }
 
 
-void ImageImpl::setTexture(SDL_Texture* texture) {
+void Image::setTexture(SDL_Texture* texture) {
 	if (texture == nullptr) {
 		this->logger.warn("Image constructed with null texture");
 		return;

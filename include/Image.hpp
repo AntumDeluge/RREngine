@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_IMAGE_IMPL
-#define RRE_IMAGE_IMPL
+#ifndef RRE_IMAGE
+#define RRE_IMAGE
 
 #include <SDL2/SDL_render.h>
 
@@ -15,7 +15,7 @@
 /**
  * Base class to define images.
  */
-class ImageImpl {
+class Image {
 private:
 	static Logger logger;
 
@@ -38,7 +38,7 @@ protected:
 
 public:
 	/** Default Constructor. */
-	ImageImpl() {
+	Image() {
 		this->texture = nullptr;
 		this->width = 0;
 		this->height = 0;
@@ -50,12 +50,12 @@ public:
 	 * @param texture
 	 *   Texture to draw with renderer.
 	 */
-	ImageImpl(SDL_Texture* texture);
+	Image(SDL_Texture* texture);
 
 	/**
 	 * Default destructor.
 	 */
-	virtual ~ImageImpl() {
+	virtual ~Image() {
 		if (texture != nullptr) {
 			SDL_DestroyTexture(texture);
 			texture = nullptr;
@@ -97,4 +97,4 @@ public:
 	}
 };
 
-#endif /* RRE_IMAGE_IMPL */
+#endif /* RRE_IMAGE */
