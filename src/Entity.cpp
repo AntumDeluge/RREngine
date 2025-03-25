@@ -67,7 +67,10 @@ uint8_t Entity::addDirection(uint8_t dir) {
 			face_dir = FaceDir::RIGHT;
 		}
 		momentum = getFloat("base_momentum");
-		this->sprite->setMode("run");
+		if (sprite->getModeId() != "fall") {
+			// update animation if not falling
+			this->sprite->setMode("run");
+		}
 	} else if (dir == MomentumDir::UP || dir == MomentumDir::DOWN) {
 		momentum = getFloat("base_momentum");
 	}
@@ -79,7 +82,10 @@ uint8_t Entity::removeDirection(uint8_t dir) {
 	this->dir &= ~dir;
 	if (this->dir == MomentumDir::NONE) {
 		momentum = 0;
-		this->sprite->setMode("idle");
+		if (sprite->getModeId() != "fall") {
+			// update animation if not falling
+			this->sprite->setMode("idle");
+		}
 	}
 	return this->dir;
 }
