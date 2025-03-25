@@ -18,6 +18,11 @@
  * Namespace for loading PNG images into SDL textures.
  *
  * FIXME: need failsafes in case renderer not initialized (E.g. trying to get a texture within Viewport constructor)
+ *
+ * TODO:
+ * - create ImageFactory
+ * - add function ImageFactory::crop to return cropped image
+ * - add function ImageFactory::collate to create collage from multiple image sources
  */
 namespace TextureLoader {
 
