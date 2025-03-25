@@ -4,6 +4,7 @@
  * See: LICENSE.txt
  */
 
+#include <cctype> // std::tolower, std::toupper
 #include <sstream>
 #include <type_traits>
 
@@ -37,6 +38,22 @@ string StrUtil::trim(string st) {
 	}
 	std::size_t l = st.find_last_not_of(" \t\n\r\f\v");
 	return st.substr(f, l - f + 1); // @suppress("Invalid arguments")
+}
+
+string StrUtil::toLower(string st) {
+	string l_value = "";
+	for (uint32_t idx = 0; idx < st.length(); idx++) {
+		l_value += tolower(st[idx]);
+	}
+	return l_value;
+}
+
+string StrUtil::toUpper(string st) {
+	string u_value = "";
+	for (uint32_t idx = 0; idx < st.length(); idx++) {
+		u_value += toupper(st[idx]);
+	}
+	return u_value;
 }
 
 int32_t StrUtil::toInt(string st) {

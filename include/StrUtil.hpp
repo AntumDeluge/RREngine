@@ -38,6 +38,26 @@ namespace StrUtil {
 	std::string trim(std::string st);
 
 	/**
+	 * Converts all characters to lowercase.
+	 *
+	 * @param st
+	 *   String to be converted.
+	 * @return
+	 *   Lowercase string.
+	 */
+	std::string toLower(std::string st);
+
+	/**
+	 * Converts all characters to uppercase.
+	 *
+	 * @param st
+	 *   String to be converted.
+	 * @return
+	 *   Uppercase string.
+	 */
+	std::string toUpper(std::string st);
+
+	/**
 	 * Converts string to integer.
 	 *
 	 * @param st
