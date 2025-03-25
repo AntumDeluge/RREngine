@@ -5,18 +5,20 @@
  */
 
 #include <cstdint> // uint*_t
-#include <tinyxml2.h>
+
+#include <pugixml.hpp>
 
 #include "Dialog.hpp"
 #include "Filesystem.hpp"
 #include "Image.hpp"
 #include "Logger.hpp"
 #include "Path.hpp"
+#include "StrUtil.hpp"
 #include "TextureLoader.hpp"
 #include "factory/MovieFactory.hpp"
 
+using namespace pugi;
 using namespace std;
-using namespace tinyxml2;
 
 
 namespace MovieFactory {
@@ -32,55 +34,55 @@ Movie* MovieFactory::getMovie(string id) {
 		return nullptr;
 	}
 
-	XMLDocument doc;
-	if (doc.LoadFile(movies_conf.c_str()) != XML_SUCCESS) {
+	xml_document doc;
+	if (doc.load_file(movies_conf.c_str()).status != status_ok) {
 		string msg = "Failed to load movies configuration: " + movies_conf;
 		MovieFactory::logger.error(msg);
 		Dialog::error(msg);
 		return nullptr;
 	}
 
-	XMLElement* root = doc.FirstChildElement("movies");
-	if (root == nullptr) {
+	xml_node root = doc.child("movies");
+	if (root.type() == node_null) {
 		string msg = "Root element \"movies\" not found: " + movies_conf;
 		MovieFactory::logger.error("XML Parsing Error: " + msg);
 		Dialog::error("XML Parsing Error", msg);
 		return nullptr;
 	}
 
-	XMLElement* movie_el = root->FirstChildElement("movie");
-	while (movie_el != nullptr) {
-		const XMLAttribute* id_attr = movie_el->FindAttribute("id");
-		if (id_attr == nullptr) {
+	xml_node movie_el = root.child("movie");
+	while (movie_el.type() != node_null) {
+		xml_attribute id_attr = movie_el.attribute("id");
+		if (id_attr.empty()) {
 			string msg = "Missing attribute \"id\" in movie tag: " + movies_conf;
 			MovieFactory::logger.error("XML Parsing Error: " + msg);
 			Dialog::error("XML Parsing Error", msg);
 			return nullptr;
 		}
-		if (id.compare(id_attr->Value()) == 0) {
+		if (id.compare(id_attr.value()) == 0) {
 			break;
 		}
 
-		movie_el = movie_el->NextSiblingElement("movie");
+		movie_el = movie_el.next_sibling("movie");
 	}
 
 	MovieFrameList frames;
 	//vector<pair<uint16_t, Sprite*>> text_sprites;
 	vector<string> texts;
 
-	if (movie_el != nullptr) {
-		XMLElement* frame_el = movie_el->FirstChildElement("frame");
-		while (frame_el != nullptr) {
-			const XMLAttribute* ms_attr = frame_el->FindAttribute("ms");
-			if (ms_attr == nullptr) {
+	if (movie_el.type() != node_null) {
+		xml_node frame_el = movie_el.child("frame");
+		while (frame_el.type() != node_null) {
+			xml_attribute ms_attr = frame_el.attribute("ms");
+			if (ms_attr.empty()) {
 				string msg = "Frame tag without \"ms\" attribute: "
 						+ movies_conf;
 				MovieFactory::logger.error("XML Parsing Error: " + msg);
 				Dialog::error("XML Parsing Error", msg);
 				return nullptr;
 			}
-			uint32_t duration = ms_attr->UnsignedValue();
-			string frame_id = frame_el->GetText();
+			uint32_t duration = StrUtil::toUInt(ms_attr.value());
+			string frame_id = frame_el.text().get();
 			Image* img = new Image(TextureLoader::load(Path::join("movie", frame_id)));
 			if (!img->ready()) {
 				string msg = "Failed to load movie frame image \"" + frame_id
@@ -91,26 +93,26 @@ Movie* MovieFactory::getMovie(string id) {
 			}
 			frames.push_back({duration, img});
 
-			frame_el = frame_el->NextSiblingElement("frame");
+			frame_el = frame_el.next_sibling("frame");
 		}
 
-		XMLElement* text_el = movie_el->FirstChildElement("text");
-		while (text_el != nullptr) {
-			string text = text_el->GetText();
+		xml_node text_el = movie_el.child("text");
+		while (text_el.type() != node_null) {
+			string text = text_el.text().get();
 
 			// TODO: support delay & duration
 
-			const XMLAttribute* delay_attr = text_el->FindAttribute("delay");
-			uint16_t delay = delay_attr != nullptr ? delay_attr->UnsignedValue()
-					: 0;
+			xml_attribute delay_attr = text_el.attribute("delay");
+			// FIXME: should this be uint32_t?
+			uint16_t delay = !delay_attr.empty() ? StrUtil::toUInt(delay_attr.value()) : 0;
 
-			const XMLAttribute* duration_attr = text_el->FindAttribute("duration");
-			uint16_t duration = duration_attr != nullptr
-					? duration_attr->UnsignedValue() : 0;
+			xml_attribute duration_attr = text_el.attribute("duration");
+			// FIXME: should this be uint32_t?
+			uint16_t duration = !duration_attr.empty() ? StrUtil::toUInt(duration_attr.value()) : 0;
 
 			texts.push_back(text);
 
-			text_el = text_el->NextSiblingElement("text");
+			text_el = text_el.next_sibling("text");
 		}
 	}
 
