@@ -10,6 +10,7 @@
 #include <cstdint> // *int*_t
 
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_video.h>
 
 #include "FontMap.hpp"
 #include "Image.hpp"
@@ -29,6 +30,19 @@ protected:
 public:
 	/** Virtual default destructor. */
 	virtual ~ViewportImpl() {}
+
+	/**
+	 * Initializes the pixel data renderer.
+	 *
+	 * @param window
+	 *   Window where renderer should draw.
+	 */
+	virtual void init(SDL_Window* window) = 0;
+
+	/**
+	 * Cleans up renderer & data memory.
+	 */
+	virtual void shutdown() = 0;
 
 	/**
 	 * Retrieves the viewport renderer where pixel data is drawn.

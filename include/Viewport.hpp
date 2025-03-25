@@ -92,18 +92,11 @@ public:
 		return instance.get();
 	}
 
-	/**
-	 * Initializes the pixel data renderer.
-	 *
-	 * @param window
-	 *   Window where renderer should draw.
-	 */
-	void init(SDL_Window* window);
+	/** Overrides `ViweportImpl::init`. */
+	void init(SDL_Window* window) override;
 
-	/**
-	 * Cleans up renderer & data memory.
-	 */
-	void shutdown();
+	/** Overrides `ViewportImpl::shutdown`. */
+	void shutdown() override;
 
 	/** Overrides `ViewportImpl::setFontMap`. */
 	void setFontMap(FontMap* font_map) override { this->font_map = font_map; }
