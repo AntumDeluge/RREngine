@@ -9,10 +9,11 @@
 
 #include <SDL2/SDL_rect.h>
 
+#include "HashObject.hpp"
 #include "ViewportRenderer.hpp"
 
 
-class SceneImpl {
+class SceneImpl: public HashObject {
 public:
 	/** Virtual default destructor. */
 	virtual ~SceneImpl() {}
