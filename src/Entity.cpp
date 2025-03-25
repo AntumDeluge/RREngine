@@ -45,9 +45,13 @@ Entity::Entity(string sprite_id): Entity(SpriteStore::get(sprite_id)) {}
 
 void Entity::logic() {
 	if (scene && !scene->collidesGround(rect)) {
-		sprite->setMode("fall");
+		if (sprite->getModeId() != "fall") {
+			sprite->setMode("fall");
+		}
 		// apply gravity
 		rect.y += getGravity() * 2;
+	} else if (sprite->getModeId() == "fall") {
+		sprite->setMode("idle");
 	}
 
 	if (momentum > 0) {
