@@ -8,3 +8,7 @@
 
 
 Logger GameVisuals::logger = Logger::getLogger("GameVisuals");
+
+// initialize singleton instance
+unique_ptr<GameVisuals> GameVisuals::instance = nullptr;
+mutex GameVisuals::mtx;
