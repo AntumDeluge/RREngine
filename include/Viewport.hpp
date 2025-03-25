@@ -100,21 +100,11 @@ public:
 	/** Overrides `ViewportImpl::getFontMap`. */
 	FontMap* getFontMap() override { return this->font_map; }
 
-	/**
-	 * Updates FPS value.
-	 *
-	 * @param fps
-	 *   Detected FPS.
-	 */
+	/** Overrides `ViewportImpl::setCurrentFPS`. */
 	void setCurrentFPS(uint32_t fps) override;
 
-	/**
-	 * Sets scaling factor of game window.
-	 *
-	 * @param scale
-	 *   New scaling factor.
-	 */
-	void setScale(uint16_t scale);
+	/** Overrides `ViewportImpl::setScale`. */
+	void setScale(uint16_t scale) override;
 
 	/**
 	 * Unsets background texture.

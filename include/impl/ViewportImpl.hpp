@@ -78,6 +78,14 @@ public:
 	virtual void setCurrentFPS(uint32_t fps) = 0;
 
 	/**
+	 * Sets scaling factor of game window.
+	 *
+	 * @param scale
+	 *   New scaling factor.
+	 */
+	virtual void setScale(uint16_t scale) = 0;
+
+	/**
 	 * Sets drawing mode.
 	 *
 	 * @param mode
