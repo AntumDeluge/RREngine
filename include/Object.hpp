@@ -103,6 +103,13 @@ public:
 	}
 
 	/**
+	 * Callback when removed from a scene.
+	 */
+	void onRemoved() {
+		this->scene = nullptr;
+	}
+
+	/**
 	 * Draws object sprite on viewport render.
 	 *
 	 * @param viewport

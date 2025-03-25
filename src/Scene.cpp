@@ -105,6 +105,7 @@ void Scene::removeObject(Object* obj) {
 	auto it = find(this->objects.begin(), e_end, obj);
 	if (it != e_end) {
 		this->objects.erase(it);
+		obj->onRemoved();
 	}
 }
 
