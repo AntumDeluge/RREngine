@@ -22,8 +22,7 @@
  */
 class GameLogic {
 private:
-	// TODO: make static
-	Logger logger;
+	static Logger logger;
 
 	/**
 	 * Delay (in milliseconds) for each step.
@@ -53,7 +52,6 @@ public:
 	 * Constructs the game logic instance.
 	 */
 	GameLogic() {
-		this->logger = Logger::getLogger("GameLogic");
 		this->prev_step_time = 0;
 		this->step_time = 0;
 	}

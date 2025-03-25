@@ -17,6 +17,8 @@
 using namespace std;
 
 
+Logger GameLogic::logger = Logger::getLogger("GameLogic");
+
 // initialize singleton instance to NULL
 unique_ptr<GameLogic> GameLogic::instance = nullptr;
 mutex GameLogic::mtx;
