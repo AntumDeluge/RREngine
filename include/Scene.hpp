@@ -281,7 +281,7 @@ public:
 	bool collidesGround(SDL_Rect rect) override;
 
 	/** Overrides `SceneImple.collidesWall`. */
-	bool collidesWall(SDL_Rect rect) override;
+	bool collidesWall(uint8_t dir, SDL_Rect rect) override;
 };
 
 #endif /* RRE_SCENE */

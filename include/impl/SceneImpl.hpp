@@ -49,11 +49,13 @@ public:
 	/**
 	 * Checks if a rectangle collides again a wall tile.
 	 *
+	 * @param dir
+	 *   Direction of entity momentum.
 	 * @param rect
 	 *   Area to check.
 	 * @return
 	 *   `true` if side of rectangle collides with vertical line in collision map.
 	 */
-	virtual bool collidesWall(SDL_Rect rect) = 0;
+	virtual bool collidesWall(uint8_t dir, SDL_Rect rect) = 0;
 };
 #endif /* RRE_SCENE_IMPL */

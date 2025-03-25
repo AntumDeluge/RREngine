@@ -144,7 +144,7 @@ bool Scene::collidesGround(SDL_Rect rect) {
 	return false;
 }
 
-bool Scene::collidesWall(SDL_Rect rect) {
+bool Scene::collidesWall(uint8_t dir, SDL_Rect rect) {
 	// TODO:
 	return false;
 }
