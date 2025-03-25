@@ -16,9 +16,9 @@
 #include "Logger.hpp"
 #include "Object.hpp"
 #include "Player.hpp"
-#include "SceneImpl.hpp"
 #include "Tileset.hpp"
 #include "ViewportRenderer.hpp"
+#include "impl/SceneImpl.hpp"
 
 
 /**

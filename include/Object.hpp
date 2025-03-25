@@ -11,8 +11,8 @@
 
 #include "HashObject.hpp"
 #include "Logger.hpp"
-#include "SceneImpl.hpp"
 #include "ViewportRenderer.hpp"
+#include "impl/SceneImpl.hpp"
 
 
 /**
