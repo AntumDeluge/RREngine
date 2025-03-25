@@ -13,6 +13,7 @@
 #include <SDL2/SDL_video.h>
 
 #include "FontMap.hpp"
+#include "GameMode.hpp"
 #include "Image.hpp"
 
 
@@ -75,6 +76,14 @@ public:
 	 *   Detected FPS.
 	 */
 	virtual void setCurrentFPS(uint32_t fps) = 0;
+
+	/**
+	 * Sets drawing mode.
+	 *
+	 * @param mode
+	 *   Game mode use to determine how to execute drawing instructions.
+	 */
+	virtual void setRenderMode(GameMode::Mode mode) = 0;
 
 	/**
 	 * Draws a texture on the renderer.

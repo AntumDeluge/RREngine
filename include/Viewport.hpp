@@ -11,7 +11,6 @@
 #include <mutex>
 #include <vector>
 
-#include "GameMode.hpp"
 #include "Logger.hpp"
 #include "Movie.hpp"
 #include "Sprite.hpp"
@@ -132,13 +131,8 @@ public:
 	 */
 	bool setBackground(std::string rdpath);
 
-	/**
-	 * Sets drawing mode.
-	 *
-	 * @param mode
-	 *   Game mode use to determine how to execute drawing instructions.
-	 */
-	void setRenderMode(GameMode::Mode mode);
+	/** Overrides `ViewportImpl::setRenderMode`. */
+	void setRenderMode(GameMode::Mode mode) override;
 
 	/** Overrides `ViewportImpl::drawTexture`. */
 	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect, SDL_RendererFlip flags) override;
