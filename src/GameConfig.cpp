@@ -5,20 +5,22 @@
  * See: LICENSE.txt
  */
 
+#include "config.h"
+
 #include <unordered_map>
 
-using namespace std;
-
-#include <tinyxml2.h>
-
-using namespace tinyxml2;
+#include <pugixml.hpp>
 
 #include "Dialog.hpp"
 #include "Filesystem.hpp"
 #include "GameConfig.hpp"
 #include "Logger.hpp"
 #include "Path.hpp"
+#include "StrUtil.hpp"
 #include "factory/MovieFactory.hpp"
+
+using namespace pugi;
+using namespace std;
 
 
 namespace GameConfig {
@@ -62,88 +64,91 @@ int GameConfig::load() {
 		return 0;
 	}
 
-	XMLDocument doc;
-	if (doc.LoadFile(GameConfig::file_conf.c_str()) != 0) {
+	xml_document doc;
+	if (doc.load_file(GameConfig::file_conf.c_str()).status != status_ok) {
 		onConfigError("XML Loading Error", "Failed to load game configuration");
 		return 1;
 	}
 
-	XMLElement* el_root = doc.RootElement();
-	if (el_root == nullptr) {
+	xml_node el_root = doc.child("game");
+	if (el_root.type() == node_null) {
 		onConfigError("XML Parsing Error", "Root element not found");
 		return 1;
 	}
 
-	XMLElement* el_intro = el_root->FirstChildElement("intro");
-	if (el_intro != nullptr) {
-		const XMLAttribute* intro_movie_attr = el_intro->FindAttribute("movie");
-		if (intro_movie_attr == nullptr) {
+	xml_node el_intro = el_root.child("intro");
+	if (el_intro.type() != node_null) {
+		xml_attribute attr_movie = el_intro.attribute("movie");
+		if (attr_movie.empty()) {
 			onConfigError("XML Parsing Error",
 					"Intro element without \"movie\" attribute");
 			return 1;
 		}
-		intro_id = intro_movie_attr->Value();
+		intro_id = attr_movie.value();
 	}
 
-	XMLElement* el_title = el_root->FirstChildElement("title");
-	if (el_title == nullptr) {
+	xml_node el_title = el_root.child("title");
+	if (el_title.type() != node_null) {
+		title = el_title.text().get();
+	}
+	if (title.empty()) {
 		GameConfig::logger.warn("Game title not configured");
-	} else {
-		title = el_title->GetText();
-	}
-	if (title.compare("") == 0) {
-		// default title
-		title = "R&R Engine";
+		title = "R&R Engine " + string(RRE_VERSION);
 	}
 
-	XMLElement* el_scale = el_root->FirstChildElement("scale");
-	if (el_scale != nullptr && el_scale->QueryUnsignedText((uint32_t*) &scale) != 0) {
-		onConfigError("XML Parsing Error", "\"scale\" value must be integer");
-		return 1;
-	}
-	if (scale == 0) {
-		GameConfig::logger.warn("Scale must be a positive integer");
-		scale = 1;
+	xml_node el_scale = el_root.child("scale");
+	if (el_scale.type() != node_null) { // && StrUtil::toUint())
+		scale = StrUtil::toUInt(el_scale.text().get());
+		if (!scale) {
+			scale = 1;
+			onConfigError("XML Parsing Error", "\"scale\" value must be integer greater than 0");
+			return 1;
+		}
 	}
 	if (scale > 4) {
 		GameConfig::logger.warn("Currently scaling the game window more than 4x is not supported");
 		scale = 4;
 	}
 
-	XMLElement* el_step_delay = el_root->FirstChildElement("step_delay");
-	if (el_step_delay) {
-		step_delay = el_step_delay->UnsignedText();
+	xml_node el_step_delay = el_root.child("step_delay");
+	if (el_step_delay.type() != node_null) {
+		step_delay = StrUtil::toUInt(el_step_delay.text().get());
+	}
+	if (!step_delay) {
+		GameConfig::logger.warn("Step delay must be a positive integer");
+		// reset to default value
+		step_delay = 300;
 	}
 
-	XMLElement* el_menu = el_root->FirstChildElement("menu");
-	while (el_menu != nullptr) {
-		const XMLAttribute* attr_id = el_menu->FindAttribute("id");
-		if (attr_id == nullptr) {
+	xml_node el_menu = el_root.child("menu");
+	while (el_menu.type() != node_null) {
+		xml_attribute attr_id = el_menu.attribute("id");
+		if (attr_id.empty()) {
 			onConfigError("XML Parsing Error", "\"menu\" element without \"id\" attribute");
 			return 1;
 		}
 
-		string id = attr_id->Value();
+		string id = attr_id.value();
 		if (id.compare("") == 0) {
 			onConfigError("XML Parsing Error", "\"id\" attribute without value");
 			return 1;
 		}
 
-		const XMLAttribute* attr_bg = el_menu->FindAttribute("background");
-		if (attr_bg == nullptr) {
+		xml_attribute attr_bg = el_menu.attribute("background");
+		if (attr_bg.empty()) {
 			GameConfig::logger.warn("Menu (" + id + ") without background");
 		} else {
-			menu_backgrounds[id] = Path::join("background", attr_bg->Value());
+			menu_backgrounds[id] = Path::join("background", attr_bg.value());
 		}
 
-		const XMLAttribute* attr_music = el_menu->FindAttribute("music");
-		if (attr_music == nullptr) {
+		xml_attribute attr_music = el_menu.attribute("music");
+		if (attr_music.empty()) {
 			GameConfig::logger.warn("Menu (" + id + ") without music");
 		} else {
-			menu_music_ids[id] = attr_music->Value();
+			menu_music_ids[id] = attr_music.value();
 		}
 
-		el_menu = el_menu->NextSiblingElement("menu");
+		el_menu = el_menu.next_sibling("menu");
 	}
 
 	// TODO: add option for aspect ratio
