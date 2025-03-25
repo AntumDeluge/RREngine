@@ -23,6 +23,12 @@ if(NOT TINYXML2_VERSION)
 	message(FATAL_ERROR "Please install tinyxml2")
 endif()
 
+# pugixml
+pkg_search_module(PUGIXML pugixml ${MODULE_PARAMS})
+if(NOT PUGIXML_VERSION)
+	message(FATAL_ERROR "Please install pugixml")
+endif()
+
 # tmxlite
 pkg_search_module(TMXLITE tmxlite ${MODULE_PARAMS})
 if(NOT TMXLITE_VERSION)
@@ -74,6 +80,7 @@ if(NOT STATIC)
 		${SDL2MIXER_LIBRARIES}
 		${SDL2IMAGE_LIBRARIES}
 		${TINYXML2_LIBRARIES}
+		${PUGIXML_LIBRARIES}
 		${TMXLITE_LIBRARIES}
 	)
 else()
@@ -82,6 +89,7 @@ else()
 		${SDL2MIXER_STATIC_LIBRARIES}
 		${SDL2IMAGE_STATIC_LIBRARIES}
 		${TINYXML2_STATIC_LIBRARIES}
+		${PUGIXML_STATIC_LIBRARIES}
 		${TMXLITE_STATIC_LIBRARIES}
 	)
 endif()
