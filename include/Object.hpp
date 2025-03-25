@@ -29,9 +29,13 @@ private:
 	bool operator==(const Object&) = delete;
 
 protected:
+	/** Scene this object is added to. */
+	SceneImpl* scene;
+
 	Object() {
 		// initialize with no scene ID
 		id = 0;
+		scene = nullptr;
 	}
 
 public:
@@ -95,7 +99,7 @@ public:
 	 *   Scene to which entity has been added.
 	 */
 	void onAdded(SceneImpl* scene) {
-		// inheriting classes can implement
+		this->scene = scene;
 	}
 
 	/**
