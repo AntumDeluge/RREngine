@@ -154,7 +154,7 @@ public:
 	SDL_Rect getRect() { return this->rect; }
 
 	/**
-	 * Adds direction of momentum to entity.
+	 * Adds direction of momentum to entity & updates facing direction.
 	 *
 	 * @param dir
 	 *   Direction to be added.

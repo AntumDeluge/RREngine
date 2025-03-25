@@ -56,8 +56,14 @@ void Entity::logic() {
 uint8_t Entity::addDirection(uint8_t dir) {
 	if (dir == MomentumDir::LEFT || dir == MomentumDir::RIGHT) {
 		if (dir == MomentumDir::LEFT) {
+			// remove old direction in case button/key not released
+			this->dir &= ~MomentumDir::RIGHT;
+			// update facing direction
 			face_dir = FaceDir::LEFT;
 		} else {
+			// remove old direction in case button/key not released
+			this->dir &= ~MomentumDir::LEFT;
+			// update facing direction
 			face_dir = FaceDir::RIGHT;
 		}
 		momentum = getFloat("base_momentum");
