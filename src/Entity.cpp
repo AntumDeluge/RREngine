@@ -54,7 +54,7 @@ void Entity::logic() {
 		sprite->setMode("idle");
 	}
 
-	if (momentum > 0) {
+	if (momentum > 0 && !scene->collidesWall(dir, rect)) {
 		if (dir & MomentumDir::RIGHT) {
 			this->rect.x += momentum;
 		} else if (dir & MomentumDir::LEFT) {

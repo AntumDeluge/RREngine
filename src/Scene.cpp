@@ -8,6 +8,7 @@
 
 #include "Scene.hpp"
 #include "SingletonRepo.hpp"
+#include "enum/MomentumDir.hpp"
 
 using namespace std;
 
@@ -145,6 +146,36 @@ bool Scene::collidesGround(SDL_Rect rect) {
 }
 
 bool Scene::collidesWall(uint8_t dir, SDL_Rect rect) {
-	// TODO:
+	const bool use_left = dir & MomentumDir::LEFT;
+
+	// downscale to match collision map
+	SDL_Rect small_rect;
+	small_rect.x = rect.x / tile_width;
+	small_rect.y = rect.y / tile_height;
+	small_rect.w = max<int32_t>(rect.w / tile_width, 1);
+	small_rect.h = max<int32_t>(rect.h / tile_height, 1);
+
+	// position at side of entity
+	int32_t pos_x = small_rect.x;
+	if (!use_left) {
+		pos_x += small_rect.w;
+		if (pos_x - 1 < 0) {
+			// left edge of scene is collision
+			// FIXME: doesn't work
+			return true;
+		}
+	} else if (pos_x + 1 > width / tile_width) {
+		// right edge of scene is collision
+		// FIXME: doesn't work
+		return true;
+	}
+	// check entire height of entity
+	for (int32_t pos_y = small_rect.y; pos_y < small_rect.y + small_rect.h; pos_y++) {
+		// FIXME: should be looking at neighbor tile
+		// int32_t x = use_left ? pos_x - 1 : pos_x + 1;
+		if (collision_map[pos_x][pos_y]) {
+			return true;
+		}
+	}
 	return false;
 }

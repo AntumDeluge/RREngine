@@ -15,17 +15,17 @@
  </layer>
  <layer id="3" name="terrain" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2DoAiYK8VAHACAAACE=
+   eJxjYBgFo4B8wISEmQfYLSDARCIe6gAAJXQAIg==
   </data>
  </layer>
- <layer id="9" name="objects" width="16" height="15">
+ <layer id="9" name="objects" width="16" height="15" visible="0">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUDFUAAAPAAAE=
   </data>
  </layer>
  <layer id="5" name="collision" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2DkAg4K8UADAFTAAIE=
+   eJxjYBgFo2DgAAcS5qTQLH4q6OcgEQ80AAB+zACg
   </data>
  </layer>
  <layer id="10" name="foreground" width="16" height="15">
