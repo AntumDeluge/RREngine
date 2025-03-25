@@ -9,11 +9,12 @@
 #include "Logger.hpp"
 #include "Path.hpp"
 #include "Sprite.hpp"
+#include "StrUtil.hpp"
 #include "factory/EntityFactory.hpp"
 #include "store/SpriteStore.hpp"
 
+using namespace pugi;
 using namespace std;
-using namespace tinyxml2;
 
 
 static Logger _logger = Logger::getLogger("EntityFactory");
@@ -32,25 +33,25 @@ static void _onConfigError(string msg) {
 	_onConfigError("", msg);
 }
 
-Entity EntityFactory::build(XMLElement* el) {
+Entity EntityFactory::build(xml_node el) {
 	Entity entity;
 
 	Sprite* sprite = nullptr;
-	const XMLAttribute* attr_sprite = el->FindAttribute("sprite");
-	if (!attr_sprite) {
+	xml_attribute attr_sprite = el.attribute("sprite");
+	if (attr_sprite.empty()) {
 		_logger.warn("Entity sprite not configured");
 	} else {
-		sprite = SpriteStore::get(attr_sprite->Value());
+		sprite = SpriteStore::get(attr_sprite.value());
 	}
 
 	uint32_t width = 0, height = 0;
-	const XMLAttribute* attr_width = el->FindAttribute("width");
-	if (attr_width != nullptr) {
-		width = attr_width->UnsignedValue();
+	xml_attribute attr_width = el.attribute("width");
+	if (!attr_width.empty()) {
+		width = StrUtil::toUInt(attr_width.value());
 	}
-	const XMLAttribute* attr_height = el->FindAttribute("height");
-	if (attr_height != nullptr) {
-		height = attr_height->UnsignedValue();
+	xml_attribute attr_height = el.attribute("height");
+	if (!attr_height.empty()) {
+		height = StrUtil::toUInt(attr_height.value());
 	}
 
 	if (width == 0 or height == 0) {
@@ -61,9 +62,9 @@ Entity EntityFactory::build(XMLElement* el) {
 	}
 
 	float momentum = 0;
-	XMLElement* el_momentum = el->FirstChildElement("momentum");
-	if (el_momentum) {
-		momentum = el_momentum->FloatText();
+	xml_node el_momentum = el.child("momentum");
+	if (el_momentum.type() != node_null) {
+		momentum = StrUtil::toFloat(el_momentum.text().get());
 	}
 	entity.set("base_momentum", momentum);
 

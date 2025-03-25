@@ -9,7 +9,7 @@
 
 #include <string>
 
-#include <tinyxml2.h>
+#include <pugixml.hpp>
 
 #include "Entity.hpp"
 
@@ -24,7 +24,7 @@ namespace EntityFactory {
 	 * @return
 	 *   Unique entity instance.
 	 */
-	Entity build(tinyxml2::XMLElement* el);
+	Entity build(pugi::xml_node el);
 }
 
 #endif /* RRE_ENTITY_FACTORY */

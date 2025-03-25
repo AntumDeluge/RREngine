@@ -6,7 +6,7 @@
 
 #include <unordered_map>
 
-#include <tinyxml2.h>
+#include <pugixml.hpp>
 
 #include "Dialog.hpp"
 #include "Filesystem.hpp"
@@ -15,8 +15,8 @@
 #include "factory/EntityFactory.hpp"
 #include "store/EntityStore.hpp"
 
+using namespace pugi;
 using namespace std;
-using namespace tinyxml2;
 
 
 static Logger _logger = Logger::getLogger("EntityStore");
@@ -46,26 +46,26 @@ bool EntityStore::load() {
 		return true;
 	}
 
-	XMLDocument doc;
-	if (doc.LoadFile(conf.c_str()) != XML_SUCCESS) {
+	xml_document doc;
+	if (doc.load_file(conf.c_str()).status != status_ok) {
 		_onConfigError("Failed to load config: " + conf);
 		return false;
 	}
 
-	XMLElement* root = doc.FirstChildElement("entities");
-	if (!root) {
+	xml_node root = doc.child("entities");
+	if (root.type() == node_null) {
 		_onConfigError("XML Parsing Error", "Root element \"entities\" not found: " + conf);
 		return false;
 	}
 
-	XMLElement* el = root->FirstChildElement("entity");
-	while (el) {
-		const XMLAttribute* attr_id = el->FindAttribute("id");
-		if (!attr_id) {
+	xml_node el = root.child("entity");
+	while (el.type() != node_null) {
+		xml_attribute attr_id = el.attribute("id");
+		if (attr_id.empty()) {
 			_onConfigError("XML Parsing Error", "Entity without \"id\" attribute: " + conf);
 			return false;
 		}
-		string id = attr_id->Value();
+		string id = attr_id.value();
 		Entity e = EntityFactory::build(el);
 		if (NullEntity.equals(e)) {
 			_onConfigError("Failed to build Entity \"" + id + "\": " + conf);
@@ -73,7 +73,7 @@ bool EntityStore::load() {
 		}
 		_cache[id] = e;
 
-		el = el->NextSiblingElement("entity");
+		el = el.next_sibling("entity");
 	}
 
 	return true;
