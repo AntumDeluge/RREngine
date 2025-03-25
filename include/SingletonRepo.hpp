@@ -8,6 +8,7 @@
 #define RRE_SINGLETON_REPO
 
 #include "GameLogic.hpp"
+#include "GameVisuals.hpp"
 #include "GameWindow.hpp"
 #include "Input.hpp"
 #include "Viewport.hpp"
@@ -20,6 +21,14 @@
  *   `GameLogic` singleton instance.
  */
 static inline GameLogic* GetGameLogic() { return GameLogic::get(); }
+
+/**
+ * Retrieves game visuals singleton.
+ *
+ * @return
+ *   `GameVisuals` singleton instance.
+ */
+static inline GameVisuals* GetGameVisuals() { return GameVisuals::get(); }
 
 /**
  * Retrieves game window singleton.

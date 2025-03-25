@@ -137,6 +137,8 @@ public:
 
 	/**
 	 * Unsets scene data.
+	 *
+	 * TODO: move scene methods to `GameVisuals`
 	 */
 	void unsetScene();
 
