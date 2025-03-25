@@ -7,6 +7,7 @@
 #ifndef RRE_STR_UTIL
 #define RRE_STR_UTIL
 
+#include <cstdint> // *int*_t
 #include <string>
 
 
@@ -35,6 +36,66 @@ namespace StrUtil {
 	 *   Trimmed string.
 	 */
 	std::string trim(std::string st);
+
+	/**
+	 * Converts string to integer.
+	 *
+	 * @param st
+	 *   String to convert.
+	 * @return
+	 *   Integer value or 0 if conversion fails.
+	 */
+	int32_t toInt(std::string st);
+
+	/**
+	 * Converts string to unsigned integer.
+	 *
+	 * @param st
+	 *   String to convert.
+	 * @return
+	 *   Unsigned integer value or 0 if conversion fails.
+	 */
+	uint32_t toUInt(std::string st);
+
+	/**
+	 * Converts string to long.
+	 *
+	 * @param st
+	 *   String to convert.
+	 * @return
+	 *   Long value or 0 if conversion fails.
+	 */
+	int64_t toLong(std::string st);
+
+	/**
+	 * Converts string to unsigned long.
+	 *
+	 * @param st
+	 *   String to convert.
+	 * @return
+	 *   Unsigned long value or 0 if conversion fails.
+	 */
+	uint64_t toULong(std::string st);
+
+	/**
+	 * Converts string to float.
+	 *
+	 * @param st
+	 *   String to convert.
+	 * @return
+	 *   Float value or 0 if conversion fails.
+	 */
+	float toFloat(std::string st);
+
+	/**
+	 * Converts string to double.
+	 *
+	 * @param st
+	 *   String to convert.
+	 * @return
+	 *   Double value or 0 if conversion fails.
+	 */
+	double toDouble(std::string st);
 }
 
 #endif /* RRE_STR_UTIL */
