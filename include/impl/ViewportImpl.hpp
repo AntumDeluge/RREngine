@@ -13,8 +13,8 @@
 #include <SDL2/SDL_video.h>
 
 #include "FontMap.hpp"
-#include "GameMode.hpp"
 #include "Image.hpp"
+#include "enum/GameMode.hpp"
 
 
 /**

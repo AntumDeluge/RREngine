@@ -8,7 +8,7 @@
 #ifndef RRE_GAME_LOOP
 #define RRE_GAME_LOOP
 
-#include "GameMode.hpp"
+#include "enum/GameMode.hpp"
 
 
 /**
