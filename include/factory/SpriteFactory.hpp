@@ -9,7 +9,7 @@
 
 #include <memory>
 
-#include <tinyxml2.h>
+#include <pugixml.hpp>
 
 #include "Sprite.hpp"
 
@@ -27,7 +27,7 @@ namespace SpriteFactory {
 	 * @return
 	 *   Unique sprite instance.
 	 */
-	std::shared_ptr<Sprite> build(tinyxml2::XMLElement* el);
+	std::shared_ptr<Sprite> build(pugi::xml_node el);
 }
 
 #endif /* RRE_SPRITE_FACTORY */

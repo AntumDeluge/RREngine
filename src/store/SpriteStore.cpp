@@ -7,7 +7,7 @@
 #include <memory>
 #include <unordered_map>
 
-#include <tinyxml2.h>
+#include <pugixml.hpp>
 
 #include "Dialog.hpp"
 #include "Filesystem.hpp"
@@ -16,8 +16,8 @@
 #include "factory/SpriteFactory.hpp"
 #include "store/SpriteStore.hpp"
 
+using namespace pugi;
 using namespace std;
-using namespace tinyxml2;
 
 
 static Logger _logger = Logger::getLogger("SpriteStore");
@@ -47,26 +47,26 @@ bool SpriteStore::load() {
 		return true;
 	}
 
-	XMLDocument doc;
-	if (doc.LoadFile(conf.c_str()) != XML_SUCCESS) {
+	xml_document doc;
+	if (doc.load_file(conf.c_str()).status != status_ok) {
 		_onConfigError("Failed to load sprite configuration: " + conf);
 		return false;
 	}
 
-	XMLElement* root = doc.FirstChildElement("sprites");
-	if (root == nullptr) {
+	xml_node root = doc.child("sprites");
+	if (root.type() == node_null) {
 		_onConfigError("XML Parsing Error", "Root tag \"sprites\" not found: " + conf);
 		return false;
 	}
 
-	XMLElement* el = root->FirstChildElement("sprite");
-	while (el != nullptr) {
-		const XMLAttribute* attr_id = el->FindAttribute("id");
-		if (attr_id == nullptr) {
+	xml_node el = root.child("sprite");
+	while(el.type() != node_null) {
+		xml_attribute attr_id = el.attribute("id");
+		if (attr_id.empty()) {
 			_onConfigError("XML Parsing Error", "Sprite tag without \"id\" attribute: " + conf);
 			return false;
 		}
-		string id = attr_id->Value();
+		string id = attr_id.value();
 		shared_ptr<Sprite> sprite_ptr = SpriteFactory::build(el);
 		if (!sprite_ptr || !sprite_ptr->ready()) {
 			_onConfigError("Failed to load sprite \"" + id + "\": " + conf);
@@ -75,7 +75,7 @@ bool SpriteStore::load() {
 		// add to cache
 		_cache[id] = sprite_ptr;
 
-		el = el->NextSiblingElement("sprite");
+		el = el.next_sibling("sprite");
 	}
 
 	return true;
