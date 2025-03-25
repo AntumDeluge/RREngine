@@ -83,8 +83,8 @@ int main(int argc, char** argv) {
 
 	uint16_t scale = GameConfig::getScale();
 	// initial window dimensions
-	int width = RES1.first * scale;
-	int height = RES1.second * scale;
+	int width = NATIVE_RES.first * scale;
+	int height = NATIVE_RES.second * scale;
 
 #if RRE_DEBUGGING
 	logger.debug("Game title: " + GameConfig::getTitle());

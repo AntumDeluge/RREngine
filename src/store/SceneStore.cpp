@@ -166,8 +166,8 @@ Scene* SceneStore::get(string id) {
 	Entity* ent = new Entity(EntityStore::get("player"));
 	Player* player = new Player((Player&) *ent);
 	delete ent;
-	uint32_t center_x = (RES1.first / 2) - (player->getRect().w / 2);
-	uint32_t center_y = (RES1.second / 2) + (player->getRect().h / 2);
+	uint32_t center_x = (NATIVE_RES.first / 2) - (player->getRect().w / 2);
+	uint32_t center_y = (NATIVE_RES.second / 2) + (player->getRect().h / 2);
 	player->setX(center_x);
 	player->setY(center_y-64);
 	scene->addPlayer(player);

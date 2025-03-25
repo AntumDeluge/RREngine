@@ -12,4 +12,4 @@
  *
  * NOTE: 256x240 appears to be standard NES resolution, but 256x224 might be used as well
  */
-const static inline std::pair<int, int> RES1 = std::pair<int, int>(256, 240);
+const static inline std::pair<int, int> NATIVE_RES = std::pair<int, int>(256, 240);

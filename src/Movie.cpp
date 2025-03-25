@@ -45,8 +45,8 @@ void Movie::render(ViewportImpl* viewport) {
 	for (Sprite* s: this->text_sprites) {
 		uint16_t s_height = s->getHeight();
 		// TODO: need sprite class that defines text position
-		uint16_t center_x = (RES1.first / 2) - (s->getWidth() / 2);
-		uint16_t center_y = (RES1.second / 2) - (s_height / 2);
+		uint16_t center_x = (NATIVE_RES.first / 2) - (s->getWidth() / 2);
+		uint16_t center_y = (NATIVE_RES.second / 2) - (s_height / 2);
 		viewport->drawImage(s, center_x, center_y + y_offset);
 
 		y_offset += s_height + 1;

@@ -211,7 +211,7 @@ void Viewport::drawTitle() {
 	SDL_QueryTexture(this->background, NULL, NULL, &w, &h);
 
 	this->drawTexture(this->background, (SDL_Rect) {0, 0, w, h},
-			(SDL_Rect) {0, 0, RES1.first, RES1.second});
+			(SDL_Rect) {0, 0, NATIVE_RES.first, NATIVE_RES.second});
 }
 
 void Viewport::drawText() {
@@ -219,8 +219,8 @@ void Viewport::drawText() {
 	for (Sprite* s: this->text_sprites) {
 		uint16_t s_height = s->getHeight();
 		// TODO: need sprite class that defines text position
-		uint16_t center_x = (RES1.first / 2) - (s->getWidth() / 2);
-		uint16_t center_y = (RES1.second / 2) - (s_height / 2);
+		uint16_t center_x = (NATIVE_RES.first / 2) - (s->getWidth() / 2);
+		uint16_t center_y = (NATIVE_RES.second / 2) - (s_height / 2);
 		this->drawImage(s, center_x, center_y + y_offset);
 
 		y_offset += s_height + 1;
