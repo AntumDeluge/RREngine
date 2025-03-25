@@ -8,16 +8,12 @@
 
 #include <unordered_map>
 
-using namespace std;
-
-#include <tinyxml2.h>
-
-using namespace tinyxml2;
-
-#include "store/AudioStore.hpp"
 #include "Filesystem.hpp"
 #include "Logger.hpp"
 #include "Path.hpp"
+#include "store/AudioStore.hpp"
+
+using namespace std;
 
 
 namespace AudioStore {
