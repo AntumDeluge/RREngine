@@ -172,6 +172,14 @@ Scene* SceneStore::get(string id) {
 	player->setY(center_y-64);
 	scene->addPlayer(player);
 
+	// DEBUG:
+	Entity* enemy = new Entity(EntityStore::get("enemy"));
+	if (!enemy->equals(NullEntity)) {
+		enemy->setX(center_x+64);
+		enemy->setY(center_y-64);
+		scene->addObject(enemy);
+	}
+
 	// cache for subsequent retrieval
 	SceneStore::scenes[id] = scene;
 	return scene;
