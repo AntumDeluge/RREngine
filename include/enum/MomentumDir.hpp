@@ -7,10 +7,12 @@
 #ifndef RRE_MOMENTUM_DIR
 #define RRE_MOMENTUM_DIR
 
+#include <cstdint> // *int*_t
+
 
 namespace MomentumDir {
 	/** Enumeration representing unsigned short. */
-	enum Dir {
+	enum Dir: uint8_t {
 		NONE =  0,
 		LEFT =  1 << 0,
 		RIGHT = 1 << 1,
