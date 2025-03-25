@@ -4,6 +4,9 @@
  * See: LICENSE.txt
  */
 
+#ifndef RRE_RESO
+#define RRE_RESO
+
 #include <utility> // pair
 
 
@@ -13,3 +16,5 @@
  * NOTE: 256x240 appears to be standard NES resolution, but 256x224 might be used as well
  */
 const static inline std::pair<int, int> NATIVE_RES = std::pair<int, int>(256, 240);
+
+#endif /* RRE_RESO */
