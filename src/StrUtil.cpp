@@ -63,7 +63,7 @@ int32_t StrUtil::toInt(string st) {
 	} catch (const exception& e) {
 		err = e.what();
 	}
-	logger.error("Cannot convert string value \"" + st + "\" to int: " + err);
+	logger.error("Cannot convert string value \"", st, "\" to int: ", err);
 	return 0;
 }
 
@@ -74,7 +74,7 @@ uint32_t StrUtil::toUInt(string st) {
 	} catch (const exception& e) {
 		err = e.what();
 	}
-	logger.error("Cannot convert string value \"" + st + "\" to unsigned int: " + err);
+	logger.error("Cannot convert string value \"", st, "\" to unsigned int: ", err);
 	return 0;
 }
 
@@ -85,7 +85,7 @@ int64_t StrUtil::toLong(string st) {
 	} catch (const exception& e) {
 		err = e.what();
 	}
-	logger.error("Cannot convert string value \"" + st + "\" to long: " + err);
+	logger.error("Cannot convert string value \"", st, "\" to long: ", err);
 	return 0;
 }
 
@@ -96,7 +96,7 @@ uint64_t StrUtil::toULong(string st) {
 	} catch (const exception& e) {
 		err = e.what();
 	}
-	logger.error("Cannot convert string value \"" + st + "\" to unsigned long: " + err);
+	logger.error("Cannot convert string value \"", st, "\" to unsigned long: ", err);
 	return 0;
 }
 
@@ -107,7 +107,7 @@ float StrUtil::toFloat(string st) {
 	} catch (const exception& e) {
 		err = e.what();
 	}
-	logger.error("Cannot convert string value \"" + st + "\" to float: " + err);
+	logger.error("Cannot convert string value \"", st, "\" to float: ", err);
 	return 0;
 }
 
@@ -118,7 +118,7 @@ double StrUtil::toDouble(string st) {
 	} catch (const exception& e) {
 		err = e.what();
 	}
-	logger.error("Cannot convert string value \"" + st + "\" to double: " + err);
+	logger.error("Cannot convert string value \"", st, "\" to double: ", err);
 	return 0;
 }
 

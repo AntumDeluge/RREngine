@@ -27,7 +27,7 @@ static unordered_map<string, shared_ptr<Sprite>> _cache;
 
 static void _onConfigError(string title, string msg) {
 	if (!title.empty()) {
-		_logger.error(title + ": " + msg);
+		_logger.error(title, ": ", msg);
 		Dialog::error(title, msg);
 	} else {
 		_logger.error(msg);
@@ -42,7 +42,7 @@ static void _onConfigError(string msg) {
 bool SpriteStore::load() {
 	string conf = Path::rabs("data/conf/sprites.xml");
 	if (!Filesystem::fexist(conf)) {
-		_logger.warn("Sprite configuration not found: " + conf);
+		_logger.warn("Sprite configuration not found: ", conf);
 		// don't halt execution
 		return true;
 	}
@@ -87,11 +87,11 @@ Sprite* SpriteStore::get(string id) {
 	if (_cache.find(id) != _cache.end()) {
 		sprite = _cache[id].get();
 		if (!sprite->ready()) {
-			_logger.warn("Returning uninitialized sprite: " + id);
+			_logger.warn("Returning uninitialized sprite: ", id);
 		}
 	} else {
 		// if not cached an uninitialized sprite is returned
-		_logger.warn("Sprite not available: " + id);
+		_logger.warn("Sprite not available: ", id);
 	}
 	return sprite;
 }

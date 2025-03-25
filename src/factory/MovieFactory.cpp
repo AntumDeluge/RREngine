@@ -45,7 +45,7 @@ Movie* MovieFactory::getMovie(string id) {
 	xml_node root = doc.child("movies");
 	if (root.type() == node_null) {
 		string msg = "Root element \"movies\" not found: " + movies_conf;
-		MovieFactory::logger.error("XML Parsing Error: " + msg);
+		MovieFactory::logger.error("XML Parsing Error: ", msg);
 		Dialog::error("XML Parsing Error", msg);
 		return nullptr;
 	}
@@ -55,7 +55,7 @@ Movie* MovieFactory::getMovie(string id) {
 		xml_attribute id_attr = movie_el.attribute("id");
 		if (id_attr.empty()) {
 			string msg = "Missing attribute \"id\" in movie tag: " + movies_conf;
-			MovieFactory::logger.error("XML Parsing Error: " + msg);
+			MovieFactory::logger.error("XML Parsing Error: ", msg);
 			Dialog::error("XML Parsing Error", msg);
 			return nullptr;
 		}
@@ -77,7 +77,7 @@ Movie* MovieFactory::getMovie(string id) {
 			if (ms_attr.empty()) {
 				string msg = "Frame tag without \"ms\" attribute: "
 						+ movies_conf;
-				MovieFactory::logger.error("XML Parsing Error: " + msg);
+				MovieFactory::logger.error("XML Parsing Error: ", msg);
 				Dialog::error("XML Parsing Error", msg);
 				return nullptr;
 			}

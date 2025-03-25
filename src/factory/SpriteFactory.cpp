@@ -42,8 +42,7 @@ shared_ptr<Sprite> SpriteFactory::build(xml_node el) {
 	}
 
 	if (width == 0 or height == 0) {
-		_logger.warn("Sprite with invalid dimensions: " + to_string(width) + "x"
-				+ to_string(height));
+		_logger.warn("Sprite with invalid dimensions: ", to_string(width), "x", to_string(height));
 	}
 
 	string default_mode = "";
@@ -112,7 +111,7 @@ shared_ptr<Sprite> SpriteFactory::build(xml_node el) {
 	if (!sprite_ptr->ready()) {
 		xml_attribute attr_id = el.attribute("id");
 		if (!attr_id.empty()) {
-			_logger.warn("Built uninitialized sprite: " + string(attr_id.value()));
+			_logger.warn("Built uninitialized sprite: ", attr_id.value());
 		} else {
 			_logger.warn("Built uninitialized sprite");
 		}

@@ -21,7 +21,7 @@ static Logger _logger = Logger::getLogger("EntityFactory");
 
 static void _onConfigError(string title, string msg) {
 	if (!title.empty()) {
-		_logger.error(title + ": " + msg);
+		_logger.error(title, ": ", msg);
 		Dialog::error(title, msg);
 	} else {
 		_logger.error(msg);

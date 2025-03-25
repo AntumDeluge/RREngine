@@ -7,8 +7,12 @@
 #ifndef RRE_LOGGER_H
 #define RRE_LOGGER_H
 
+#include <iostream>
+#include <sstream>
 #include <string>
 #include <unordered_map>
+
+#include "StrUtil.hpp"
 
 
 /** Defined logging levels. */
@@ -137,23 +141,49 @@ public:
 	/**
 	 * Logs a message.
 	 *
-	 * TODO: allow varargs for message
+	 * Defined in header to allow dynamic creation of necessary instances.
 	 *
 	 * @param level
 	 *   Message urgency level.
 	 * @param msg
 	 *   Text to output.
+	 * @param rem
+	 *   Any additional text to append to message.
 	 */
-	void log(LogLevel level, std::string msg);
+	template <typename... vargs>
+	void log(LogLevel level, std::string msg, vargs... rem) {
+		if (this->level < level || this->level == SILENT || level == SILENT) {
+			// do nothing
+			return;
+		}
 
-	/**
-	 * Logs a message at "info" urgency level.
-	 *
-	 * @param msg
-	 *   Text to output.
-	 */
-	void log(std::string msg) {
-		this->log(INFO, msg);
+		std::ostringstream os;
+		switch (level) {
+			case WARN:
+				os << "WARN:  ";
+				break;
+			case ERROR:
+				os << "ERROR: ";
+				break;
+			case DEBUG:
+				os << "DEBUG: ";
+				break;
+			default:
+				os << "INFO:  ";
+		}
+
+		os << "(" << id << ") " << msg;
+
+		// append remaining messages
+		((os << StrUtil::check(rem)), ...);
+
+		const std::string st = os.str();
+		if (level == ERROR) {
+			std::cerr << st << std::endl;
+		} else {
+			std::cout << st << std::endl;
+		}
+		write(st);
 	}
 
 	/**
@@ -161,9 +191,25 @@ public:
 	 *
 	 * @param msg
 	 *   Text to output.
+	 * @param rem
+	 *   Any additional text to append to message.
 	 */
-	void info(std::string msg) {
-		this->log(INFO, msg);
+	template <typename... vargs>
+	void log(std::string msg, vargs... rem) {
+		this->log(INFO, msg, rem...);
+	}
+
+	/**
+	 * Logs a message at "info" urgency level.
+	 *
+	 * @param msg
+	 *   Text to output.
+	 * @param rem
+	 *   Any additional text to append to message.
+	 */
+	template <typename... vargs>
+	void info(std::string msg, vargs... rem) {
+		this->log(INFO, msg, rem...);
 	}
 
 	/**
@@ -171,9 +217,12 @@ public:
 	 *
 	 * @param msg
 	 *   Text to output.
+	 * @param rem
+	 *   Any additional text to append to message.
 	 */
-	void warn(std::string msg) {
-		this->log(WARN, msg);
+	template <typename... vargs>
+	void warn(std::string msg, vargs... rem) {
+		this->log(WARN, msg, rem...);
 	}
 
 	/**
@@ -181,9 +230,12 @@ public:
 	 *
 	 * @param msg
 	 *   Text to output.
+	 * @param rem
+	 *   Any additional text to append to message.
 	 */
-	void error(std::string msg) {
-		this->log(ERROR, msg);
+	template <typename... vargs>
+	void error(std::string msg, vargs... rem) {
+		this->log(ERROR, msg, rem...);
 	}
 
 	/**
@@ -191,9 +243,12 @@ public:
 	 *
 	 * @parm msg
 	 *   Text to output.
+	 * @param rem
+	 *   Any additional text to append to message.
 	 */
-	void debug(std::string msg) {
-		this->log(DEBUG, msg);
+	template <typename... vargs>
+	void debug(std::string msg, vargs... rem) {
+		this->log(DEBUG, msg, rem...);
 	}
 
 	/**

@@ -26,7 +26,7 @@ bool GameVisuals::setScene(string id) {
 	scene = SceneStore::get(id);
 	bool result = scene != nullptr;
 	if (!result) {
-		logger.error("Failed to set scene: " + id);
+		logger.error("Failed to set scene: ", id);
 	}
 	return result;
 }

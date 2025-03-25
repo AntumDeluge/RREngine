@@ -25,7 +25,7 @@ SDL_Texture* TextureLoader::absLoad(string apath) {
 
 	SDL_Texture* texture = GetRenderer()->textureFromPath(apath);
 	if (texture == nullptr) {
-		logger.error("Failed to load texture: " + string(IMG_GetError()));
+		logger.error("Failed to load texture: ", IMG_GetError());
 	} else {
 		SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
 	}
@@ -46,20 +46,20 @@ SDL_Texture* TextureLoader::load(string rdpath) {
 SDL_Texture* TextureLoader::loadFM(const uint8_t data[], const uint32_t data_size) {
 	SDL_RWops* rw = SDL_RWFromMem((uint8_t*) data, data_size);
 	if (rw == nullptr) {
-		logger.error("Failed to load texture from memory: " + string(SDL_GetError()));
+		logger.error("Failed to load texture from memory: ", SDL_GetError());
 		return nullptr;
 	}
 
 	SDL_Surface* surface = IMG_Load_RW(rw, 1);
 	if (surface == nullptr) {
-		logger.error("Failed to load texture from memory: " + string(IMG_GetError()));
+		logger.error("Failed to load texture from memory: ", IMG_GetError());
 		return nullptr;
 	}
 
 	SDL_Texture* texture = GetRenderer()->textureFromSurface(surface);
 	SDL_FreeSurface(surface);
 	if (texture == nullptr) {
-		logger.error("Failed to load texture from memory: " + string(SDL_GetError()));
+		logger.error("Failed to load texture from memory: ", SDL_GetError());
 		return nullptr;
 	}
 

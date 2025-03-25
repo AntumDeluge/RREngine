@@ -33,7 +33,7 @@ void GameLogic::step(uint64_t step_time) {
 
 #if RRE_DEBUGGING
 	uint32_t step_diff = this->step_time - prev_step_time;
-	//~ this->logger.debug("time since last step: " + std::to_string(step_diff) + "ms");
+	//~ this->logger.debug("time since last step: ", std::to_string(step_diff), "ms");
 #endif
 
 	SceneImpl* scene = GetGameVisuals()->getScene();
@@ -52,6 +52,6 @@ void GameLogic::setStepDelay(uint32_t delay) {
 	step_delay = delay;
 
 #if RRE_DEBUGGING
-	logger.debug("Step delay set to " + to_string(step_delay) + "ms");
+	logger.debug("Step delay set to ", to_string(step_delay), "ms");
 #endif
 }

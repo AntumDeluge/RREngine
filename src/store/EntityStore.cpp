@@ -26,7 +26,7 @@ static unordered_map<string, Entity> _cache;
 
 static void _onConfigError(string title, string msg) {
 	if (!title.empty()) {
-		_logger.error(title + ": " + msg);
+		_logger.error(title, ": ", msg);
 		Dialog::error(title, msg);
 	} else {
 		_logger.error(msg);
@@ -81,7 +81,7 @@ bool EntityStore::load() {
 
 Entity EntityStore::get(string id) {
 	if (_cache.find(id) == _cache.end()) {
-		_logger.error("Entity \"" + id + "\" not available");
+		_logger.error("Entity \"", id, "\" not available");
 		return NullEntity;
 	}
 	return _cache[id];

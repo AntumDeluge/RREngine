@@ -52,7 +52,7 @@ bool SceneStore::load() {
 
 	string dir_scene = Path::rabs("data/scene");
 	if (!filesystem::is_directory(dir_scene)) {
-		logger.warn("Scene data directory not found: " + dir_scene);
+		logger.warn("Scene data directory not found: ", dir_scene);
 	} else {
 		for (filesystem::directory_entry item: Filesystem::listDir(dir_scene, true)) {
 			string p = item.path().string();
@@ -64,7 +64,7 @@ bool SceneStore::load() {
 			SceneStore::scene_paths[id] = p;
 
 #if RRE_DEBUGGING
-			logger.debug("Loaded scene path with ID \"" + id + "\" (" + p + ")");
+			logger.debug("Loaded scene path with ID \"", id, "\" (", p, ")");
 #endif
 		}
 	}
@@ -84,14 +84,14 @@ Scene* SceneStore::get(string id) {
 	// get map file path
 	string map_path;
 	if (SceneStore::scene_paths.find(id) == SceneStore::scene_paths.end()) {
-		logger.warn("Scene not found: " + id);
+		logger.warn("Scene not found: ", id);
 		return nullptr;
 	}
 	map_path = SceneStore::scene_paths[id];
 
 	tmx::Map map;
 	if (!map.load(map_path)) {
-		logger.error("Failed to load scene map: " + map_path);
+		logger.error("Failed to load scene map: ", map_path);
 		return nullptr;
 	}
 
@@ -103,12 +103,12 @@ Scene* SceneStore::get(string id) {
 		string image_path = Path::norm(ts.getImagePath());
 
 #ifdef RRE_DEBUGGING
-		logger.debug("Loading tileset: " + ts.getName() + " (" + image_path + ")");
+		logger.debug("Loading tileset: ", ts.getName(), " (", image_path, ")");
 #endif
 
 		SDL_Texture* texture = TextureLoader::absLoad(image_path);
 		if (texture == nullptr) {
-			logger.error("Failed to load tileset: " + image_path);
+			logger.error("Failed to load tileset: ", image_path);
 			continue;
 		}
 
@@ -124,7 +124,7 @@ Scene* SceneStore::get(string id) {
 		string layerName = layer.getName();
 
 		if (!layer.getVisible()) {
-			logger.warn("Layer not visible: " + layerName);
+			logger.warn("Layer not visible: ", layerName);
 			continue;
 		}
 
@@ -138,7 +138,7 @@ Scene* SceneStore::get(string id) {
 			} else if (layerName == "s_foreground") {
 				scene->setLayerSForeground(&i_layer);
 			} else {
-				logger.warn("Unknown image layer \"" + layerName + "\": " + map_path);
+				logger.warn("Unknown image layer \"", layerName, "\": ", map_path);
 			}
 		} else if (layer.getType() == tmx::Layer::Type::Tile) {
 			tmx::TileLayer t_layer = dynamic_cast<const tmx::TileLayer&>(*layerPtr);
@@ -159,7 +159,7 @@ Scene* SceneStore::get(string id) {
 			} else if (layerName == "foreground") {
 				scene->setLayerForeground(ldef);
 			} else {
-				logger.warn("Unknown tile layer \"" + layerName + "\": " + map_path);
+				logger.warn("Unknown tile layer \"", layerName, "\": ", map_path);
 			}
 		}
 	}

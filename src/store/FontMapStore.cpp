@@ -16,7 +16,7 @@ static unordered_map<string, FontMap*> fmap_cache = {};
 
 void FontMapStore::add(string font_id, FontMap* font_map) {
 	if (fmap_cache.find(font_id) != fmap_cache.end()) {
-		Logger::getLogger("FontMapStore").warn("Overwriting font map with id \"" + font_id + "\"");
+		Logger::getLogger("FontMapStore").warn("Overwriting font map with id \"", font_id, "\"");
 	}
 	fmap_cache[font_id] = font_map;
 }
@@ -56,7 +56,7 @@ Sprite* FontMapStore::buildTextSprite(FontMap* font_map, string text) {
 	SDL_Texture* t_texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA32,
 			SDL_TEXTUREACCESS_TARGET, full_width, c_height);
 	if (t_texture == nullptr) {
-		logger.error((string) "Cannot build text sprite: " + SDL_GetError());
+		logger.error((string) "Cannot build text sprite: ", SDL_GetError());
 		return nullptr;
 	}
 	SDL_SetTextureBlendMode(t_texture, SDL_BLENDMODE_BLEND);
@@ -86,7 +86,9 @@ Sprite* FontMapStore::buildTextSprite(FontMap* font_map, string text) {
 		}
 		int c_index = font_map->getCharIndex(c);
 		if (c_index < 0) {
-			logger.error("Unsupported font map character: \"" + string(1, c) + "\""); // @suppress("Symbol is not resolved")
+			logger.error("Unsupported font map character: \"", string(1, c), "\"");
+			// FIXME: `StrUtil::check` doesn't support wide characters
+			// logger.error("Unsupported font map character: \"", c, "\"");
 			c_index = 0;
 		}
 
@@ -110,8 +112,8 @@ Sprite* FontMapStore::buildTextSprite(FontMap* font_map, string text) {
 	int t_width, t_height;
 	SDL_QueryTexture(t_texture, nullptr, nullptr, &t_width, &t_height);
 	if (t_width != full_width || t_height != c_height) {
-		logger.warn("Expected sprite dimensions of " + to_string(full_width) + "x"
-				+ to_string(c_height) + " but got " + to_string(t_width) + "x" + to_string(t_height));
+		logger.warn("Expected sprite dimensions of ", to_string(full_width), "x",
+				to_string(c_height), " but got ", to_string(t_width), "x", to_string(t_height));
 	}
 
 	return new Sprite(t_texture);

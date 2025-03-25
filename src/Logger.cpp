@@ -6,9 +6,6 @@
 
 #include "config.h"
 
-#include <iostream>
-#include <sstream>
-
 #include "Logger.hpp"
 #include "Path.hpp"
 
@@ -51,36 +48,4 @@ void Logger::setVerbose(bool verbose) {
 
 void Logger::write(string msg) {
 	// TODO: export to file
-}
-
-void Logger::log(LogLevel level, string msg) {
-	if (this->level < level || this->level == SILENT || level == SILENT) {
-		// do nothing
-		return;
-	}
-
-	ostringstream os;
-	switch (level) {
-		case WARN:
-			os << "WARN:  ";
-			break;
-		case ERROR:
-			os << "ERROR: ";
-			break;
-		case DEBUG:
-			os << "DEBUG: ";
-			break;
-		default:
-			os << "INFO:  ";
-	}
-
-	os << "(" << this->id << ") " << msg;
-
-	const string st = os.str();
-	if (level == ERROR) {
-		cerr << st << endl;
-	} else {
-		cout << st << endl;
-	}
-	this->write(st);
 }

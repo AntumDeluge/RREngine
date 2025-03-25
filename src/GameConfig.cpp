@@ -60,7 +60,7 @@ int GameConfig::load() {
 	}
 
 	if (!Filesystem::fexist(GameConfig::file_conf)) {
-		GameConfig::logger.warn("Game configuration not found: \"" + GameConfig::file_conf + "\"");
+		GameConfig::logger.warn("Game configuration not found: \"", GameConfig::file_conf, "\"");
 		return 0;
 	}
 
@@ -136,14 +136,14 @@ int GameConfig::load() {
 
 		xml_attribute attr_bg = el_menu.attribute("background");
 		if (attr_bg.empty()) {
-			GameConfig::logger.warn("Menu (" + id + ") without background");
+			GameConfig::logger.warn("Menu (", id, ") without background");
 		} else {
 			menu_backgrounds[id] = Path::join("background", attr_bg.value());
 		}
 
 		xml_attribute attr_music = el_menu.attribute("music");
 		if (attr_music.empty()) {
-			GameConfig::logger.warn("Menu (" + id + ") without music");
+			GameConfig::logger.warn("Menu (", id, ") without music");
 		} else {
 			menu_music_ids[id] = attr_music.value();
 		}

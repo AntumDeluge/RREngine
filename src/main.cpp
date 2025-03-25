@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
 	Logger logger = Logger::getLogger("main");
 
 #if RRE_DEBUGGING
-	logger.debug("Compiled using C++ standard: " + to_string(__cplusplus));
+	logger.debug("Compiled using C++ standard: ", to_string(__cplusplus));
 #endif
 
 	// change to executable directory
@@ -90,8 +90,8 @@ int main(int argc, char** argv) {
 	GetGameLogic()->setStepDelay(GameConfig::getStepDelay());
 
 #if RRE_DEBUGGING
-	logger.debug("Game title: " + GameConfig::getTitle());
-	logger.debug("Window scale: " + to_string(GameConfig::getScale()));
+	logger.debug("Game title: ", GameConfig::getTitle());
+	logger.debug("Window scale: ", to_string(GameConfig::getScale()));
 #endif
 
 	result = win->init(width, height);

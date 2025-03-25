@@ -32,7 +32,7 @@ void AnimatedSprite::setMode(string id) {
 		current_mode = &modes[id];
 		return;
 	}
-	logger.warn("Unrecognized animation mode: " + id);
+	logger.warn("Unrecognized animation mode: ", id);
 	current_mode = getDefaultMode();
 }
 

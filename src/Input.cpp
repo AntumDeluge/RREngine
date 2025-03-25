@@ -54,7 +54,7 @@ void Input::onKeyDown(SDL_Keysym keysym) {
 		}
 
 #ifdef RRE_DEBUGGING
-		logger.debug("Player direction: " + to_string(new_dir));
+		logger.debug("Player direction: ", to_string(new_dir));
 #endif
 	}
 }
@@ -83,7 +83,7 @@ void Input::onKeyUp(SDL_Keysym keysym) {
 		}
 
 #ifdef RRE_DEBUGGING
-		logger.debug("Player direction: " + to_string(new_dir));
+		logger.debug("Player direction: ", to_string(new_dir));
 #endif
 	}
 }
