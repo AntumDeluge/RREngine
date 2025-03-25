@@ -18,14 +18,10 @@
 using namespace std;
 
 
-// FIXME: can't instantiate logger here
-//~ namespace TextureLoader {
-	//~ Logger logger = Logger::getLogger("TextureLoader");
-//~ };
+static Logger logger = Logger::getLogger("TextureLoader");
 
 SDL_Texture* TextureLoader::absLoad(string apath) {
 	// TODO: cache loaded textures
-	Logger logger = Logger::getLogger("TextureLoader");
 
 	SDL_Texture * texture = IMG_LoadTexture(GetViewport()->getRenderer(), apath.c_str());
 	if (texture == nullptr) {
@@ -48,8 +44,6 @@ SDL_Texture* TextureLoader::load(string rdpath) {
 }
 
 SDL_Texture* TextureLoader::loadFM(const uint8_t data[], const uint32_t data_size) {
-	Logger logger = Logger::getLogger("TextureLoader");
-
 	SDL_RWops* rw = SDL_RWFromMem((uint8_t*) data, data_size);
 	if (rw == nullptr) {
 		logger.error("Failed to load texture from memory: " + string(SDL_GetError()));
