@@ -55,7 +55,7 @@ void Entity::logic() {
 			sprite->setMode("fall");
 		}
 		// apply gravity
-		rect.y += getGravity() * 2;
+		rect.y += getGravity() * 4;
 	} else if (sprite->getModeId() == "fall") {
 		if (dir & MomentumDir::LEFT || dir & MomentumDir::RIGHT) {
 			sprite->setMode("run");
