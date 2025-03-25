@@ -46,7 +46,7 @@ void GameLoop::start() {
 	SDL_Event event;
 
 	// delay (in milliseconds) for each game logic step
-	uint16_t step_interval = logic->getStepDelay();
+	uint32_t step_interval = logic->getStepDelay();
 	// time (in milliseconds) at which game logic was most recently executed
 	uint64_t time_prev = SDL_GetTicks64();
 
