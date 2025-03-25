@@ -11,6 +11,7 @@
 #include "GameVisuals.hpp"
 #include "GameWindow.hpp"
 #include "Input.hpp"
+#include "Renderer.hpp"
 #include "Viewport.hpp"
 
 
@@ -45,6 +46,14 @@ static inline GameWindow* GetGameWindow() { return GameWindow::get(); }
  *   `Input` singleton instance.
  */
 static inline Input* GetInput() { return Input::get(); }
+
+/**
+ * Retrieves viewport renderer.
+ *
+ * @return
+ *   Renderer instance.
+ */
+static inline Renderer* GetRenderer() { return Viewport::get()->getRenderer(); }
 
 /**
  * Retrieves viewport renderer singleton.

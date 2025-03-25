@@ -27,7 +27,8 @@ unique_ptr<Viewport> Viewport::instance = nullptr;
 mutex Viewport::mtx;
 
 Viewport::Viewport() {
-	this->renderer = nullptr;
+	renderer = new Renderer();
+
 	// TODO: initial viewport font should be configured in game.xml
 	this->font_map = nullptr; // cannot be set here because font maps have not yet loaded
 	this->current_fps = 0;
@@ -38,25 +39,8 @@ Viewport::Viewport() {
 	this->movie = nullptr;
 }
 
-void Viewport::init(SDL_Window* window) {
-	if (this->renderer != nullptr) {
-		this->logger.warn("Viewport instance already initialized");
-		return;
-	}
-
-#if RRE_DEBUGGING
-	this->logger.debug("Creating Viewport renderer ...");
-#endif
-
-	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	SDL_SetRenderDrawBlendMode(this->renderer, SDL_BLENDMODE_BLEND);
-	//~ SDL_SetRenderDrawColor(this->renderer, 0, 0, 20, SDL_ALPHA_OPAQUE);
-}
-
 void Viewport::shutdown() {
 	this->unsetBackground();
-	SDL_DestroyRenderer(this->renderer);
-	this->renderer = nullptr;
 	SDL_DestroyTexture(this->background);
 	delete this->font_map;
 	delete this->fps_sprite;
@@ -71,7 +55,7 @@ void Viewport::setCurrentFPS(uint32_t fps) {
 }
 
 void Viewport::setScale(uint16_t scale) {
-	SDL_RenderSetScale(this->renderer, scale, scale);
+	renderer->setScale(scale);
 }
 
 void Viewport::unsetBackground() {
@@ -124,14 +108,9 @@ void Viewport::setRenderMode(GameMode::Mode mode) {
 	this->mode = mode;
 }
 
-void Viewport::drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect, SDL_RendererFlip flags) {
-	if (texture == nullptr) {
-		this->logger.error("Sprite drawing error; sprite undefined");
-		return;
-	}
-
-	//~ SDL_RenderCopy(this->renderer, texture, &s_rect, &t_rect);
-	SDL_RenderCopyEx(this->renderer, texture, &s_rect, &t_rect, 0, nullptr, flags);
+void Viewport::drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect,
+		SDL_RendererFlip flags) {
+	renderer->drawTexture(texture, s_rect, t_rect, flags);
 }
 
 void Viewport::drawImage(Image* img, uint32_t sx, uint32_t sy, uint32_t s_width,
@@ -169,7 +148,8 @@ void Viewport::drawImage(Image* img, uint32_t x, uint32_t y, SDL_RendererFlip fl
 }
 
 void Viewport::render() {
-	SDL_RenderClear(this->renderer);
+	renderer->setDrawColor(0, 0, 0, 0);
+	renderer->clear();
 	// TODO: create Scene class that handles drawing tiles
 	if (this->mode == GameMode::SCENE) {
 		this->drawScene();
@@ -184,7 +164,7 @@ void Viewport::render() {
 		}
 	}
 	this->drawText();
-	SDL_RenderPresent(this->renderer);
+	renderer->present();
 }
 
 void Viewport::drawScene() {

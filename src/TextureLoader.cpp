@@ -23,7 +23,7 @@ static Logger logger = Logger::getLogger("TextureLoader");
 SDL_Texture* TextureLoader::absLoad(string apath) {
 	// TODO: cache loaded textures
 
-	SDL_Texture * texture = IMG_LoadTexture(GetViewport()->getRenderer(), apath.c_str());
+	SDL_Texture* texture = GetRenderer()->textureFromPath(apath);
 	if (texture == nullptr) {
 		logger.error("Failed to load texture: " + string(IMG_GetError()));
 	} else {
@@ -56,7 +56,7 @@ SDL_Texture* TextureLoader::loadFM(const uint8_t data[], const uint32_t data_siz
 		return nullptr;
 	}
 
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(GetViewport()->getRenderer(), surface);
+	SDL_Texture* texture = GetRenderer()->textureFromSurface(surface);
 	SDL_FreeSurface(surface);
 	if (texture == nullptr) {
 		logger.error("Failed to load texture from memory: " + string(SDL_GetError()));

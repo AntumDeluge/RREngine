@@ -10,10 +10,10 @@
 #include <cstdint> // *int*_t
 
 #include <SDL2/SDL_render.h>
-#include <SDL2/SDL_video.h>
 
 #include "FontMap.hpp"
 #include "Image.hpp"
+#include "Renderer.hpp"
 #include "enum/GameMode.hpp"
 
 
@@ -24,21 +24,9 @@
  * - support scaling in draw methods
  */
 class ViewportImpl {
-protected:
-	/** The system renderer. */
-	SDL_Renderer* renderer;
-
 public:
 	/** Virtual default destructor. */
 	virtual ~ViewportImpl() {}
-
-	/**
-	 * Initializes the pixel data renderer.
-	 *
-	 * @param window
-	 *   Window where renderer should draw.
-	 */
-	virtual void init(SDL_Window* window) = 0;
 
 	/**
 	 * Cleans up renderer & data memory.
@@ -51,7 +39,7 @@ public:
 	 * @return
 	 *   SDL_Renderer instance.
 	 */
-	SDL_Renderer* getRenderer() { return this->renderer; }
+	virtual Renderer* getRenderer() = 0;
 
 	/**
 	 * Sets font map to use for drawing text.

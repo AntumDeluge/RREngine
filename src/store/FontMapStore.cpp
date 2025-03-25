@@ -51,7 +51,7 @@ Sprite* FontMapStore::buildTextSprite(FontMap* font_map, string text) {
 	// source image
 	SDL_Texture* s_texture = font_map->getTexture();
 
-	SDL_Renderer* renderer = GetViewport()->getRenderer();
+	SDL_Renderer* renderer = SDL_GetRenderer(GetGameWindow()->getElement());
 
 	SDL_Texture* t_texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA32,
 			SDL_TEXTUREACCESS_TARGET, full_width, c_height);

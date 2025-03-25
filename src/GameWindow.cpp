@@ -91,7 +91,6 @@ int GameWindow::init(const string title, const int width, const int height) {
 	}
 
 	this->viewport = GetViewport();
-	this->viewport->init(this->window);
 
 	return 0;
 }

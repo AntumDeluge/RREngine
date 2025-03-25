@@ -38,6 +38,9 @@ private:
 	Viewport(const Viewport&) = delete;
 	Viewport& operator=(const Viewport&) = delete;
 
+	/** Drawing renderer. */
+	Renderer* renderer;
+
 	/** Font map for drawing text. */
 	FontMap* font_map;
 	/** Detected FPS. */
@@ -72,7 +75,12 @@ public:
 	/**
 	 * Default destructor.
 	 */
-	~Viewport() {}
+	~Viewport() {
+		if (renderer) {
+			delete renderer;
+			renderer = nullptr;
+		}
+	}
 
 	/**
 	 * Initializes & retrieves singleton instance.
@@ -88,11 +96,11 @@ public:
 		return instance.get();
 	}
 
-	/** Overrides `ViweportImpl::init`. */
-	void init(SDL_Window* window) override;
-
 	/** Overrides `ViewportImpl::shutdown`. */
 	void shutdown() override;
+
+	/** Overrides `ViewportImpl::getRenderer`. */
+	Renderer* getRenderer() override { return renderer; }
 
 	/** Overrides `ViewportImpl::setFontMap`. */
 	void setFontMap(FontMap* font_map) override { this->font_map = font_map; }

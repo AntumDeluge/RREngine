@@ -4,7 +4,6 @@
  * See: LICENSE.txt
  */
 
-#include <SDL2/SDL_render.h>
 #include <SDL2/SDL_timer.h>
 
 #include "FadeEffect.hpp"
@@ -12,7 +11,7 @@
 
 FadeEffect::FadeEffect(uint32_t f_time)
 : viewport(GetViewport()), f_time(f_time), step_rate(f_time / 256) {
-	SDL_GetRenderDrawColor(viewport->getRenderer(), &f_color.r, &f_color.g, &f_color.b, nullptr);
+	f_color = GetRenderer()->getDrawColor();
 }
 
 void FadeEffect::stepFadeIn() {
