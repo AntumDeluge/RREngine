@@ -13,9 +13,9 @@
 #include <SDL2/SDL_rect.h>
 
 #include "Logger.hpp"
-#include "MomentumDir.hpp"
 #include "Object.hpp"
 #include "Sprite.hpp"
+#include "enum/MomentumDir.hpp"
 #include "impl/ViewportImpl.hpp"
 
 

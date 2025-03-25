@@ -6,10 +6,10 @@
 
 #include "GlobalFunctions.hpp"
 #include "Logger.hpp"
-#include "MomentumDir.hpp"
 #include "Player.hpp"
 #include "Scene.hpp"
 #include "SingletonRepo.hpp"
+#include "enum/MomentumDir.hpp"
 
 
 static Logger _logger = Logger::getLogger("GlobalFunctions");

@@ -11,7 +11,7 @@
 
 #include "GlobalFunctions.hpp"
 #include "Input.hpp"
-#include "MomentumDir.hpp"
+#include "enum/MomentumDir.hpp"
 
 using namespace std;
 

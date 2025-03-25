@@ -7,7 +7,6 @@
 #include <SDL2/SDL_render.h>
 
 #include "Entity.hpp"
-#include "MomentumDir.hpp"
 #include "store/SpriteStore.hpp"
 
 using namespace std;
