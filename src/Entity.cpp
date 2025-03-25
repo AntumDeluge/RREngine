@@ -51,7 +51,11 @@ void Entity::logic() {
 		// apply gravity
 		rect.y += getGravity() * 2;
 	} else if (sprite->getModeId() == "fall") {
-		sprite->setMode("idle");
+		if (dir & MomentumDir::LEFT || dir & MomentumDir::RIGHT) {
+			sprite->setMode("run");
+		} else {
+			sprite->setMode("idle");
+		}
 	}
 
 	if (momentum > 0 && !scene->collidesWall(dir, rect)) {
