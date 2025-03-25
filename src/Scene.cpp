@@ -130,13 +130,13 @@ bool Scene::collidesGround(SDL_Rect rect) {
 	SDL_Rect small_rect;
 	small_rect.x = rect.x / tile_width;
 	small_rect.y = rect.y / tile_height;
-	small_rect.w = max<uint32_t>(rect.w / tile_width, 1);
-	small_rect.h = max<uint32_t>(rect.h / tile_height, 1);
+	small_rect.w = max<int32_t>(rect.w / tile_width, 1);
+	small_rect.h = max<int32_t>(rect.h / tile_height, 1);
 
 	// position of bottom of entity
-	uint32_t pos_y = small_rect.y + small_rect.h;
+	int32_t pos_y = small_rect.y + small_rect.h;
 	// check entire width of entity
-	for (int pos_x = small_rect.x; pos_x < small_rect.x + small_rect.w; pos_x++) {
+	for (int32_t pos_x = small_rect.x; pos_x < small_rect.x + small_rect.w; pos_x++) {
 		if (collision_map[pos_x][pos_y]) {
 			return true;
 		}
