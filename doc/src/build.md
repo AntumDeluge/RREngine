@@ -8,7 +8,8 @@ See [downloads section](download.md) for how to get source code.
 - [SDL2](https://libsdl.org/)
 - [SDL2_mixer](https://wiki.libsdl.org/SDL2_mixer)
 - [SDL2_image](https://wiki.libsdl.org/SDL2_image)
-- [TinyXML-2](http://leethomason.github.io/tinyxml2/)
+- [pugixml](https://github.com/zeux/pugixml)
+- [tmxlite](https://github.com/fallahn/tmxlite)
 
 ## Required Build Tools
 
@@ -51,7 +52,6 @@ $ cmake -B build
 -- Found PkgConfig: ...
 -- Checking for one of the modules 'SDL2_mixer>=2.0.0'
 -- Checking for one of the modules 'SDL2_image>=2.0.0'
--- Checking for one of the modules 'tinyxml2'
 -- Configuring done (2.9s)
 -- Generating done (0.0s)
 -- Build files have been written to: ...

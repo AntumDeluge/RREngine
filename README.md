@@ -43,7 +43,6 @@ Example data:
 - [SDL2](https://libsdl.org/) (zlib) ([source](https://github.com/libsdl-org/SDL/releases))
 - [SDL2_mixer](https://wiki.libsdl.org/SDL2_mixer) (zlib) ([source](https://github.com/libsdl-org/SDL_mixer/releases))
 - [SDL2_image](https://wiki.libsdl.org/SDL2_image) (zlib) ([source](https://github.com/libsdl-org/SDL_image/releases))
-- [TinyXML-2](http://leethomason.github.io/tinyxml2/) (zlib) ([source](https://github.com/leethomason/tinyxml2/releases))
 - [pugixml](https://pugixml.org/) (MIT) ([source](https://github.com/zeux/pugixml))
 - [tmxlite](https://github.com/fallahn/tmxlite) (zlib)
 
@@ -88,7 +87,6 @@ $ cmake -B build
 -- Found PkgConfig: ...
 -- Checking for one of the modules 'SDL2_mixer>=2.0.0'
 -- Checking for one of the modules 'SDL2_image>=2.0.0'
--- Checking for one of the modules 'tinyxml2'
 -- Configuring done (2.9s)
 -- Generating done (0.0s)
 -- Build files have been written to: ...

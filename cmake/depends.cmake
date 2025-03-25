@@ -17,12 +17,6 @@ if(NOT SDL2IMAGE_VERSION)
 	message(FATAL_ERROR "Required library SDL2_image or compatible version (>=2.0.0) not found")
 endif()
 
-# TinyXML-2
-pkg_search_module(TINYXML2 tinyxml2 ${MODULE_PARAMS})
-if(NOT TINYXML2_VERSION)
-	message(FATAL_ERROR "Please install tinyxml2")
-endif()
-
 # pugixml
 pkg_search_module(PUGIXML pugixml ${MODULE_PARAMS})
 if(NOT PUGIXML_VERSION)
@@ -79,7 +73,6 @@ if(NOT STATIC)
 		${SDL2_LIBRARIES}
 		${SDL2MIXER_LIBRARIES}
 		${SDL2IMAGE_LIBRARIES}
-		${TINYXML2_LIBRARIES}
 		${PUGIXML_LIBRARIES}
 		${TMXLITE_LIBRARIES}
 	)
@@ -88,7 +81,6 @@ else()
 		${SDL2_STATIC_LIBRARIES}
 		${SDL2MIXER_STATIC_LIBRARIES}
 		${SDL2IMAGE_STATIC_LIBRARIES}
-		${TINYXML2_STATIC_LIBRARIES}
 		${PUGIXML_STATIC_LIBRARIES}
 		${TMXLITE_STATIC_LIBRARIES}
 	)
