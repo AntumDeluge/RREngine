@@ -15,12 +15,13 @@
 using namespace std;
 
 
+Logger GameWindow::logger = Logger::getLogger("GameWindow");
+
 // initialize singleton instance
 unique_ptr<GameWindow> GameWindow::instance = nullptr;
 mutex GameWindow::mtx;
 
 GameWindow::GameWindow() {
-	this->logger = Logger::getLogger("GameWindow");
 	this->title = "R&R Engine";
 	this->window = nullptr;
 	this->viewport = nullptr;

@@ -24,8 +24,7 @@
 class GameWindow {
 private:
 	/** Logger instance. */
-	// TODO: make static
-	Logger logger;
+	static Logger logger;
 
 	/** Static singleton instance. */
 	static std::unique_ptr<GameWindow> instance;
