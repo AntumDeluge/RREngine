@@ -44,6 +44,12 @@ Entity::Entity(string sprite_id): Entity(SpriteStore::get(sprite_id)) {}
 
 
 void Entity::logic() {
+	if (scene && !scene->collidesGround(rect)) {
+		sprite->setMode("fall");
+		// apply gravity
+		rect.y += getGravity() * 2;
+	}
+
 	if (momentum > 0) {
 		if (dir & MomentumDir::RIGHT) {
 			this->rect.x += momentum;
@@ -88,6 +94,16 @@ uint8_t Entity::removeDirection(uint8_t dir) {
 		}
 	}
 	return this->dir;
+}
+
+float Entity::getGravity() {
+	if (scene) {
+		return scene->getGravity(rect.x + rect.w / 2, rect.y + rect.h);
+	}
+	if (has("base_gravity")) {
+		return getFloat("base_gravity");
+	}
+	return 1.0;
 }
 
 bool Entity::collides(uint32_t x, uint32_t y, uint32_t len, bool horizontal) {

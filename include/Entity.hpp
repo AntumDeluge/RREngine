@@ -202,6 +202,14 @@ public:
 	}
 
 	/**
+	 * Retrieves gravitational force to apply to this entity.
+	 *
+	 * @return
+	 *   Gravity force rate.
+	 */
+	float getGravity();
+
+	/**
 	 * Checks if this entity collides on a horizontal or vertical line.
 	 *
 	 * @param x
