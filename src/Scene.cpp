@@ -4,7 +4,7 @@
  * See: LICENSE.txt
  */
 
-#include <algorithm> // std::find
+#include <algorithm> // std::find, std::max, std::min
 
 #include "Scene.hpp"
 #include "SingletonRepo.hpp"
@@ -126,7 +126,21 @@ float Scene::getGravity(uint32_t x, uint32_t y) {
 }
 
 bool Scene::collidesGround(SDL_Rect rect) {
-	// TODO:
+	// downscale to match collision map
+	SDL_Rect small_rect;
+	small_rect.x = rect.x / tile_width;
+	small_rect.y = rect.y / tile_height;
+	small_rect.w = max<uint32_t>(rect.w / tile_width, 1);
+	small_rect.h = max<uint32_t>(rect.h / tile_height, 1);
+
+	// position of bottom of entity
+	uint32_t pos_y = small_rect.y + small_rect.h;
+	// check entire width of entity
+	for (int pos_x = small_rect.x; pos_x < small_rect.x + small_rect.w; pos_x++) {
+		if (collision_map[pos_x][pos_y]) {
+			return true;
+		}
+	}
 	return false;
 }
 
