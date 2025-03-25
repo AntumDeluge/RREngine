@@ -8,12 +8,15 @@
 #define RRE_MOMENTUM_DIR
 
 
-typedef enum MomentumDir {
-	NONE =  0,
-	LEFT =  1 << 0,
-	RIGHT = 1 << 1,
-	UP =    1 << 2,
-	DOWN =  1 << 3
-} MomentumDir;
+namespace MomentumDir {
+	/** Enumeration representing unsigned short. */
+	enum Dir {
+		NONE =  0,
+		LEFT =  1 << 0,
+		RIGHT = 1 << 1,
+		UP =    1 << 2,
+		DOWN =  1 << 3
+	};
+}
 
 #endif /* RRE_MOMENTUM_DIR */
