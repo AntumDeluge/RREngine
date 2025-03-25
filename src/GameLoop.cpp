@@ -134,5 +134,5 @@ GameMode::Mode GameLoop::getMode() {
 
 void GameLoop::setMode(GameMode::Mode mode) {
 	GameLoop::mode = mode;
-	GetViewport()->setMode(GameLoop::mode);
+	GetViewport()->setRenderMode(GameLoop::mode);
 }

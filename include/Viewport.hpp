@@ -135,12 +135,10 @@ public:
 	/**
 	 * Sets drawing mode.
 	 *
-	 * TODO: rename to "setDrawMode"
-	 *
 	 * @param mode
 	 *   Game mode use to determine how to execute drawing instructions.
 	 */
-	void setMode(GameMode::Mode mode);
+	void setRenderMode(GameMode::Mode mode);
 
 	/** Overrides `ViewportImpl::drawTexture`. */
 	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect, SDL_RendererFlip flags) override;

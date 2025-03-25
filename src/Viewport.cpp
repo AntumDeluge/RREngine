@@ -92,7 +92,7 @@ bool Viewport::setBackground(string rdpath) {
 	return result;
 }
 
-void Viewport::setMode(GameMode::Mode mode) {
+void Viewport::setRenderMode(GameMode::Mode mode) {
 	GetGameWindow()->stopMusic();
 	this->clearText();
 	this->unsetBackground();
