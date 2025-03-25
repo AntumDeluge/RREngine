@@ -7,4 +7,8 @@
 		<momentum>1.0</momentum>
 	</entity>
 
+	<entity id="enemy" sprite="enemy" width="32" height="32">
+		<momentum>1.0</momentum>
+	</entity>
+
 </entities>
