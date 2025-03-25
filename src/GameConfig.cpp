@@ -34,6 +34,7 @@ namespace GameConfig {
 // - make static?
 string title = "";
 uint16_t scale = 1;
+static uint32_t step_delay = 300;
 unordered_map<string, string> menu_backgrounds;
 unordered_map<string, string> menu_music_ids;
 string intro_id = "";
@@ -109,6 +110,11 @@ int GameConfig::load() {
 		scale = 4;
 	}
 
+	XMLElement* el_step_delay = el_root->FirstChildElement("step_delay");
+	if (el_step_delay) {
+		step_delay = el_step_delay->UnsignedText();
+	}
+
 	XMLElement* el_menu = el_root->FirstChildElement("menu");
 	while (el_menu != nullptr) {
 		const XMLAttribute* attr_id = el_menu->FindAttribute("id");
@@ -173,4 +179,8 @@ string GameConfig::getMenuMusicId(string id) {
 		return menu_music_ids[id];
 	}
 	return "";
+}
+
+uint32_t GameConfig::getStepDelay() {
+	return step_delay;
 }

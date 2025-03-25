@@ -22,6 +22,7 @@
 #include "GameWindow.hpp"
 #include "Logger.hpp"
 #include "Path.hpp"
+#include "SingletonRepo.hpp"
 #include "StrUtil.hpp"
 #include "reso.hpp"
 
@@ -85,6 +86,8 @@ int main(int argc, char** argv) {
 	// initial window dimensions
 	int width = NATIVE_RES.first * scale;
 	int height = NATIVE_RES.second * scale;
+
+	GetGameLogic()->setStepDelay(GameConfig::getStepDelay());
 
 #if RRE_DEBUGGING
 	logger.debug("Game title: " + GameConfig::getTitle());

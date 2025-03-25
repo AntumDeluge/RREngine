@@ -8,7 +8,7 @@
 #ifndef RRE_GAME_CONFIG
 #define RRE_GAME_CONFIG
 
-#include <cstdint> // uint*_t
+#include <cstdint> // *int*_t
 #include <string>
 
 #include "Movie.hpp"
@@ -72,6 +72,14 @@ namespace GameConfig {
 	 *   Music identifier or empty string if not configured.
 	 */
 	std::string getMenuMusicId(std::string id);
+
+	/**
+	 * Retrieves configured step delay for game.
+	 *
+	 * @return
+	 *   Step delay in milliseconds.
+	 */
+	uint32_t getStepDelay();
 };
 
 #endif /* RRE_GAME_CONFIG */

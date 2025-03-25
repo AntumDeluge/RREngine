@@ -47,3 +47,11 @@ void GameLogic::step(uint64_t step_time) {
 	this->prev_step_time = this->step_time;
 #endif
 }
+
+void GameLogic::setStepDelay(uint32_t delay) {
+	step_delay = delay;
+
+#if RRE_DEBUGGING
+	logger.debug("Step delay set to " + to_string(step_delay) + "ms");
+#endif
+}

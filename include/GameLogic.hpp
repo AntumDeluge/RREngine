@@ -96,8 +96,6 @@ public:
 	 *   Step delay in milliseconds.
 	 */
 	void setStepDelay(uint32_t delay);
-		step_delay = delay;
-	}
 
 	/**
 	 * Retrieves time of previous game logic step.
