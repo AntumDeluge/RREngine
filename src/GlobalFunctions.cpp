@@ -15,12 +15,12 @@
 static Logger _logger = Logger::getLogger("GlobalFunctions");
 
 Player* GetPlayer() {
-	Scene* scene = GetViewport()->getScene();
+	SceneImpl* scene = GetGameVisuals()->getScene();
 	if (!scene) {
 		_logger.warn("Scene not available");
 		return nullptr;
 	}
-	return scene->getPlayer();
+	return dynamic_cast<Scene*>(scene)->getPlayer();
 }
 
 uint8_t GetPlayerDirection() {

@@ -14,7 +14,6 @@
 #include "GameMode.hpp"
 #include "Logger.hpp"
 #include "Movie.hpp"
-#include "Scene.hpp"
 #include "Sprite.hpp"
 #include "factory/MovieFactory.hpp"
 #include "impl/ViewportImpl.hpp"
@@ -56,8 +55,6 @@ private:
 	SDL_Texture* background;
 	/** Text sprite representing RPS that can be drawn on renderer. */
 	Sprite* fps_sprite;
-	/** Scene rendered during `GameMode::SCENE`. */
-	Scene* scene;
 
 	/** Currently playing movie. */
 	Movie* movie;
@@ -134,31 +131,6 @@ public:
 	 *   `true` if a texture was set.
 	 */
 	bool setBackground(std::string rdpath);
-
-	/**
-	 * Unsets scene data.
-	 *
-	 * TODO: move scene methods to `GameVisuals`
-	 */
-	void unsetScene();
-
-	/**
-	 * Sets current scene data.
-	 *
-	 * @param id
-	 *   Scene identifier.
-	 * @return
-	 *   `true` if scene was set.
-	 */
-	bool setScene(std::string id);
-
-	/**
-	 * Retrieves current scene.
-	 *
-	 * @return
-	 *   Active scene instance.
-	 */
-	Scene* getScene() { return scene; }
 
 	/**
 	 * Sets drawing mode.

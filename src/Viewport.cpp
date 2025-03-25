@@ -16,7 +16,6 @@
 #include "Viewport.hpp"
 #include "reso.hpp"
 #include "store/FontMapStore.hpp"
-#include "store/SceneStore.hpp"
 
 using namespace std;
 
@@ -36,7 +35,6 @@ Viewport::Viewport() {
 	this->mode = GameMode::NONE;
 	this->background = nullptr;
 	this->fps_sprite = nullptr;
-	this->scene = nullptr;
 	this->movie = nullptr;
 }
 
@@ -62,7 +60,6 @@ void Viewport::shutdown() {
 	SDL_DestroyTexture(this->background);
 	delete this->font_map;
 	delete this->fps_sprite;
-	this->unsetScene();
 	delete this->movie;
 	this->movie = nullptr;
 }
@@ -95,33 +92,12 @@ bool Viewport::setBackground(string rdpath) {
 	return result;
 }
 
-void Viewport::unsetScene() {
-	// clear any text from previous scene
-	this->clearText();
-	delete this->scene;
-	this->scene = nullptr;
-}
-
-bool Viewport::setScene(string id) {
-	this->unsetScene();
-	if (id.empty()) {
-		// empty string means no scene is to be set
-		return true;
-	}
-	this->scene = SceneStore::get(id);
-	bool result = this->scene != nullptr;
-	if (!result) {
-		this->logger.error("Failed to set scene: " + id);
-	}
-	return result;
-}
-
 void Viewport::setMode(GameMode::Mode mode) {
 	GetGameWindow()->stopMusic();
 	this->clearText();
 	this->unsetBackground();
 	if (mode == GameMode::TITLE) {
-		this->setScene("");
+		GetGameVisuals()->setScene("");
 		this->setBackground(GameConfig::getBackground("title"));
 		GetGameWindow()->playMusic(GameConfig::getMenuMusicId("title"));
 
@@ -129,7 +105,7 @@ void Viewport::setMode(GameMode::Mode mode) {
 		this->addText("press enter");
 	} else if (mode == GameMode::SCENE) {
 		// DEBUG: placeholder example
-		this->setScene("map1");
+		GetGameVisuals()->setScene("map1");
 		this->addText("Sorry, nothing to do");
 		this->addText("here yet. :(");
 	} else if (mode == GameMode::INTRO) {
@@ -213,7 +189,7 @@ void Viewport::render() {
 
 void Viewport::drawScene() {
 	this->drawBackground();
-	if (this->scene != nullptr) this->scene->render(this);
+	GetGameVisuals()->renderScene();
 	this->drawForeground();
 }
 

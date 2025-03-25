@@ -9,8 +9,10 @@
 
 #include <memory> // std::unique_ptr, std::make_unique
 #include <mutex>
+#include <string>
 
 #include "Logger.hpp"
+#include "impl/SceneImpl.hpp"
 
 
 class GameVisuals {
@@ -27,14 +29,21 @@ private:
 	GameVisuals(const GameVisuals&) = delete;
 	GameVisuals& operator=(const GameVisuals&) = delete;
 
-	public:
+	/** Scene rendered during `GameMode::SCENE`. */
+	SceneImpl* scene;
+
+public:
 	/** Default constructor. */
-	GameVisuals() {}
+	GameVisuals() {
+		scene = nullptr;
+	}
 
 	/**
 	 * Default destructor.
 	 */
-	~GameVisuals() {}
+	~GameVisuals() {
+		unsetScene();
+	}
 
 	/**
 	 * Initializes & retrieves singleton instance.
@@ -49,6 +58,30 @@ private:
 		}
 		return instance.get();
 	}
+
+	/**
+	 * Sets current scene data.
+	 *
+	 * @param id
+	 *   Scene identifier.
+	 * @return
+	 *   `true` if scene was set.
+	 */
+	bool setScene(std::string id);
+
+	/** Unsets scene data. */
+	void unsetScene();
+
+	/**
+	 * Retrieves current scene.
+	 *
+	 * @return
+	 *   Active scene instance.
+	 */
+	SceneImpl* getScene() { return scene; }
+
+	/** Renders current scene on viewport. */
+	void renderScene();
 };
 
 #endif /* RRE_GAME_VISUALS */
