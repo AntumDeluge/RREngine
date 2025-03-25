@@ -11,7 +11,7 @@
 
 
 namespace MomentumDir {
-	/** Enumeration representing unsigned short. */
+	/** Enumeration representing entity direction of momentum. */
 	enum Dir: uint8_t {
 		NONE =  0,
 		LEFT =  1 << 0,
