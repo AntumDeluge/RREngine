@@ -15,6 +15,7 @@
 #include "Logger.hpp"
 #include "Object.hpp"
 #include "Sprite.hpp"
+#include "enum/FaceDir.hpp"
 #include "enum/MomentumDir.hpp"
 #include "impl/ViewportImpl.hpp"
 
@@ -32,12 +33,10 @@ private:
 	/** Entity's collision rectangle. */
 	SDL_Rect rect;
 
+	/** Direction entity is facing. */
+	uint8_t face_dir = FaceDir::RIGHT;
 	/** Direction entity is moving. */
 	uint8_t dir = MomentumDir::NONE;
-	/** Last known horizontal direction. */
-	uint8_t last_h_dir = MomentumDir::NONE;
-	/** Last known vertical direction. */
-	uint8_t last_v_dir = MomentumDir::NONE;
 	/** Rate of momentum. */
 	float momentum = 0;
 
@@ -181,22 +180,6 @@ public:
 	 *   Direction of momentum.
 	 */
 	uint8_t getDirection() { return dir; }
-
-	/**
-	 * Retrieves entity's horizontal direction.
-	 *
-	 * @return
-	 *   Last known horizontal direction of momentum.
-	 */
-	uint8_t getHDirection() { return last_h_dir; }
-
-	/**
-	 * Retrieves entity's vertical direction.
-	 *
-	 * @return
-	 *   Last known vertical direction of momentum.
-	 */
-	uint8_t getVDirection() { return last_v_dir; }
 
 	/**
 	 * Sets entity's rate of momentum per game logic step.

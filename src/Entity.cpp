@@ -44,10 +44,10 @@ Entity::Entity(string sprite_id): Entity(SpriteStore::get(sprite_id)) {}
 
 
 void Entity::logic() {
-	if (momentum > 0 && last_h_dir != MomentumDir::NONE) {
-		if (last_h_dir == MomentumDir::RIGHT) {
+	if (momentum > 0) {
+		if (face_dir == FaceDir::RIGHT) {
 			this->rect.x += momentum;
-		} else if (last_h_dir == MomentumDir::LEFT) {
+		} else {
 			this->rect.x -= momentum;
 		}
 	}
@@ -55,11 +55,14 @@ void Entity::logic() {
 
 uint8_t Entity::addDirection(uint8_t dir) {
 	if (dir == MomentumDir::LEFT || dir == MomentumDir::RIGHT) {
-		last_h_dir = dir;
+		if (dir == MomentumDir::LEFT) {
+			face_dir = FaceDir::LEFT;
+		} else {
+			face_dir = FaceDir::RIGHT;
+		}
 		momentum = getFloat("base_momentum");
 		this->sprite->setMode("run");
 	} else if (dir == MomentumDir::UP || dir == MomentumDir::DOWN) {
-		last_v_dir = dir;
 		momentum = getFloat("base_momentum");
 	}
 	this->dir |= dir;
@@ -118,7 +121,7 @@ void Entity::render(ViewportImpl* viewport) {
 	}
 
 	SDL_RendererFlip flags = SDL_FLIP_NONE;
-	if (last_h_dir == MomentumDir::LEFT) {
+	if (face_dir == FaceDir::LEFT) {
 		flags = SDL_FLIP_HORIZONTAL;
 	}
 	this->sprite->render(viewport, this->rect.x, this->rect.y, flags);
