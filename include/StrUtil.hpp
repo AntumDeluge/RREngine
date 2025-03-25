@@ -26,6 +26,8 @@ namespace StrUtil {
 	/**
 	 * Converts value to string.
 	 *
+	 * FIXME: wide character strings not supported
+	 *
 	 * @param v
 	 *   Value to be converted (`std::string`, `char`, or `char*`).
 	 * @return
