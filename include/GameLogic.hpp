@@ -28,10 +28,8 @@ private:
 	 * Delay (in milliseconds) for each step.
 	 *
 	 * Default is 300ms.
-	 *
-	 * FIXME: doesn't need to be static in singleton.
 	 */
-	static uint32_t step_delay;
+	uint32_t step_delay = 300;
 
 	/** Time (in milliseconds) of previous step. */
 	uint64_t prev_step_time;
@@ -87,8 +85,8 @@ public:
 	 * @return
 	 *   Step delay in milliseconds.
 	 */
-	static uint32_t getStepDelay() {
-		return GameLogic::step_delay;
+	uint32_t getStepDelay() {
+		return step_delay;
 	}
 
 	/**
@@ -97,8 +95,8 @@ public:
 	 * @param delay
 	 *   Step delay in milliseconds.
 	 */
-	static void setStepDelay(uint32_t delay) {
-		GameLogic::step_delay = delay;
+	void setStepDelay(uint32_t delay);
+		step_delay = delay;
 	}
 
 	/**

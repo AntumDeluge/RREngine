@@ -23,9 +23,6 @@ Logger GameLogic::logger = Logger::getLogger("GameLogic");
 unique_ptr<GameLogic> GameLogic::instance = nullptr;
 mutex GameLogic::mtx;
 
-// default step delay is 300ms
-uint32_t GameLogic::step_delay = 300;
-
 #if RRE_DEBUGGING
 // for debugging delay between steps
 uint64_t prev_step_time = 0;
