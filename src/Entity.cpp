@@ -4,10 +4,16 @@
  * See: LICENSE.txt
  */
 
+#include "config.h"
+
 #include <SDL2/SDL_render.h>
 
 #include "Entity.hpp"
 #include "store/SpriteStore.hpp"
+
+#if RRE_DEBUGGING
+#include "SingletonRepo.hpp"
+#endif
 
 using namespace std;
 
@@ -160,5 +166,14 @@ void Entity::render(ViewportImpl* viewport) {
 	if (face_dir == FaceDir::LEFT) {
 		flags = SDL_FLIP_HORIZONTAL;
 	}
-	this->sprite->render(viewport, this->rect.x, this->rect.y, flags);
+	sprite->render(viewport, this->rect.x, this->rect.y, flags);
+
+#if RRE_DEBUGGING
+	// debug collision box & sprite alignment
+	Renderer* renderer = GetRenderer();
+	renderer->save();
+	renderer->setDrawColor(0, 255, 0, 255);
+	renderer->drawRect(rect);
+	renderer->restore();
+#endif
 }
