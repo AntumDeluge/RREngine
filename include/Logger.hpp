@@ -137,6 +137,8 @@ public:
 	/**
 	 * Logs a message.
 	 *
+	 * TODO: allow varargs for message
+	 *
 	 * @param level
 	 *   Message urgency level.
 	 * @param msg
