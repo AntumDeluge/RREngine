@@ -7,18 +7,19 @@
 #include "config.h"
 
 #include <cstddef> // size_t
-#include <cstdint> // uint*_t
+#include <cstdint> // *int*_t
 #include <string>
 #include <unordered_map>
 #include <vector>
 
-#include <tinyxml2.h>
+#include <pugixml.hpp>
 
 #include "Dialog.hpp"
 #include "Filesystem.hpp"
 #include "FontMap.hpp"
 #include "Logger.hpp"
 #include "Path.hpp"
+#include "StrUtil.hpp"
 #include "TextureLoader.hpp"
 #include "builtin/conf/fonts.h"
 #if HAVE_BUILTIN_FONT_MAP
@@ -27,8 +28,8 @@
 #include "factory/FontMapFactory.hpp"
 #include "store/FontMapStore.hpp"
 
+using namespace pugi;
 using namespace std;
-using namespace tinyxml2;
 
 
 namespace FontMapFactory {
@@ -46,29 +47,29 @@ namespace FontMapFactory {
  * @return
  *   Mapping of indexed characters.
  */
-unordered_map<wchar_t, int> _parseCharacters(XMLElement* el) {
-	unordered_map<wchar_t, int> empty_map;
-	unordered_map<wchar_t, int> char_map;
+unordered_map<wchar_t, int32_t> _parseCharacters(xml_node el) {
+	unordered_map<wchar_t, int32_t> empty_map;
+	unordered_map<wchar_t, int32_t> char_map;
 
-	XMLElement* cel = el->FirstChildElement("char");
-	while (cel != nullptr) {
-		const XMLAttribute* attr = cel->FindAttribute("index");
-		if (attr == nullptr) {
+	xml_node cel = el.child("char");
+	while (cel.type() != node_null) {
+		xml_attribute attr = cel.attribute("index");
+		if (attr.empty()) {
 			string msg = "Missing attribute \"index\" in XML element \"char\"";
 			FontMapFactory::logger.error("XML Parsing Error: " + msg);
 			Dialog::error("XML Parsing Error", msg);
 			return empty_map;
 		}
 
-		const int start_index = attr->IntValue();
-		const string value = cel->GetText();
+		const int start_index = StrUtil::toInt(attr.value());
+		const string value = cel.text().get();
 		for (int idx = 0; idx < value.length(); idx++) {
 			int index_offset = start_index + idx;
 			wchar_t c = value[idx];
 			char_map[c] = index_offset;
 		}
 
-		cel = cel->NextSiblingElement("char");
+		cel = cel.next_sibling("char");
 	}
 
 	if (char_map.size() == 0) {
@@ -92,7 +93,7 @@ unordered_map<wchar_t, int> _parseCharacters(XMLElement* el) {
  * @return
  *   `true` if parsing succeeded.
  */
-bool _parseFont(XMLElement* el, const uint8_t data[], const uint32_t data_size) {
+bool _parseFont(xml_node el, const uint8_t data[], const uint32_t data_size) {
 	vector<string> err;
 
 	string id = "";
@@ -100,32 +101,32 @@ bool _parseFont(XMLElement* el, const uint8_t data[], const uint32_t data_size) 
 	int w = 0;
 	int h = 0;
 
-	XMLAttribute* attr = (XMLAttribute*) el->FindAttribute("id");
-	if (attr == nullptr) {
+	xml_attribute attr = el.attribute("id");
+	if (attr.empty()) {
 		err.push_back("Missing font attribute \"id\"");
 	} else {
-		id = attr->Value();
+		id = attr.value();
 	}
 
-	attr = (XMLAttribute*) el->FindAttribute("tileset");
-	if (attr == nullptr) {
+	attr = el.attribute("tileset");
+	if (attr.empty()) {
 		err.push_back("Missing font attribute \"tileset\"");
 	} else {
-		rpath = Path::join("tileset", attr->Value());
+		rpath = Path::join("tileset", attr.value());
 	}
 
-	attr = (XMLAttribute*) el->FindAttribute("w");
-	if (attr == nullptr) {
+	attr = el.attribute("w");
+	if (attr.empty()) {
 		err.push_back("Missing font attribute \"w\"");
 	} else {
-		w = attr->IntValue();
+		w = StrUtil::toInt(attr.value());
 	}
 
-	attr = (XMLAttribute*) el->FindAttribute("h");
-	if (attr == nullptr) {
+	attr = el.attribute("h");
+	if (attr.empty()) {
 		err.push_back("Missing font attribute \"h\"");
 	} else {
-		h = attr->IntValue();
+		h = StrUtil::toInt(attr.value());
 	}
 
 	if (!err.empty()) {
@@ -166,24 +167,24 @@ bool FontMapFactory::loadBuiltin() {
 	FontMapFactory::logger.debug("Loading built-in fonts config");
 #endif
 
-	XMLDocument doc;
-	if (doc.Parse(builtin_fonts_config.c_str()) != XML_SUCCESS) {
+	xml_document doc;
+	if (doc.load_string(builtin_fonts_config.c_str()).status != status_ok) {
 		string msg = "Failed to load built-in fonts config";
 		FontMapFactory::logger.error(msg);
 		Dialog::error(msg);
 		return false;
 	}
 
-	XMLElement* root = doc.FirstChildElement("fonts");
-	if (root == nullptr) {
+	xml_node root = doc.child("fonts");
+	if (root.type() == node_null) {
 		string msg = "Root element \"fonts\" not found";
 		FontMapFactory::logger.error("XML Parsing Error: " + msg);
 		Dialog::error("XML Parsing Error", msg);
 		return false;
 	}
 
-	XMLElement* el = root->FirstChildElement("font");
-	if (el == nullptr) {
+	xml_node el = root.child("font");
+	if (el.type() == node_null) {
 		string msg = "Built-in font not configured";
 		FontMapFactory::logger.error("XML Parsing Error: " + msg);
 		Dialog::error("XML Parsing Error", msg);
@@ -216,28 +217,28 @@ bool FontMapFactory::loadConfig() {
 		return true;
 	}
 
-	XMLDocument doc;
-	if (doc.LoadFile(conf_fonts.c_str()) != XML_SUCCESS) {
+	xml_document doc;
+	if (doc.load_file(conf_fonts.c_str()).status != status_ok) {
 		string msg = "Failed to load fonts config: \"" + conf_fonts + "\"";
 		FontMapFactory::logger.error(msg);
 		Dialog::error(msg);
 		return false;
 	}
 
-	XMLElement* root = doc.FirstChildElement("fonts");
-	if (root == nullptr) {
+	xml_node root = doc.child("fonts");
+	if (root.type() == node_null) {
 		string msg = "Root element \"fonts\" not found: \"" + conf_fonts + "\"";
 		FontMapFactory::logger.error("XML Parsing Error: " + msg);
 		Dialog::error("XML Parsing Error", msg);
 		return false;
 	}
 
-	XMLElement* el = root->FirstChildElement("font");
-	while (el != nullptr) {
+	xml_node el = root.child("font");
+	while (el.type() != node_null) {
 		if (!_parseFont(el, nullptr, 0)) {
 			return false;
 		}
-		el = el->NextSiblingElement("font");
+		el = el.next_sibling("font");
 	}
 
 	return true;
