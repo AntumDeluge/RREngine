@@ -15,7 +15,7 @@
 #include <SDL2/SDL_video.h>
 
 #include "Logger.hpp"
-#include "Viewport.hpp"
+#include "impl/ViewportImpl.hpp"
 
 
 /**
@@ -42,12 +42,8 @@ private:
 	/** The system window instance. */
 	SDL_Window* window;
 
-	/**
-	 * Renderer where images are drawn.
-	 *
-	 * TODO: use abstract `ViewportRender`
-	 */
-	Viewport* viewport;
+	/** Renderer where images are drawn. */
+	ViewportImpl* viewport;
 
 	/** Active music. */
 	Mix_Music* music;
@@ -133,12 +129,10 @@ public:
 	/**
 	 * Retrieves the drawing renderer.
 	 *
-	 * TODO: use abstract `ViewportImpl`
-	 *
 	 * @return
 	 *   Viewport renderer instance.
 	 */
-	Viewport* getViewport() { return this->viewport; }
+	ViewportImpl* getViewport() { return this->viewport; }
 
 	/**
 	 * Sets music to play.

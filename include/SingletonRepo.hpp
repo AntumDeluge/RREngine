@@ -49,11 +49,9 @@ static inline Input* GetInput() { return Input::get(); }
 /**
  * Retrieves viewport renderer singleton.
  *
- * TODO: change return type to `ViewportImpl`
- *
  * @return
  *   `Viewport` singleton instance.
  */
-static inline Viewport* GetViewport() { return Viewport::get(); }
+static inline ViewportImpl* GetViewport() { return Viewport::get(); }
 
 #endif /* RRE_SINGLETON_REPO */
