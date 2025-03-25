@@ -123,6 +123,11 @@ Scene* SceneStore::get(string id) {
 		tmx::Layer& layer = *layerPtr;
 		string layerName = layer.getName();
 
+		if (!layer.getVisible()) {
+			logger.warn("Layer not visible: " + layerName);
+			continue;
+		}
+
 		if (layer.getType() == tmx::Layer::Type::Image) {
 			tmx::ImageLayer i_layer = dynamic_cast<const tmx::ImageLayer&>(*layerPtr);
 
