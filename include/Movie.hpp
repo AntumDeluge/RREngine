@@ -20,7 +20,7 @@
 #include "Image.hpp"
 #include "Logger.hpp"
 #include "Sprite.hpp"
-#include "ViewportRenderer.hpp"
+#include "impl/ViewportImpl.hpp"
 
 
 /**
@@ -92,7 +92,7 @@ public:
 	 * @param viewport
 	 *   Viewport renderer.
 	 */
-	void render(ViewportRenderer* viewport);
+	void render(ViewportImpl* viewport);
 
 	/**
 	 * Handles callback when movie finishes.

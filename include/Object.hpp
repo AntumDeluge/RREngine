@@ -11,8 +11,8 @@
 
 #include "HashObject.hpp"
 #include "Logger.hpp"
-#include "ViewportRenderer.hpp"
 #include "impl/SceneImpl.hpp"
+#include "impl/ViewportImpl.hpp"
 
 
 /**
@@ -104,7 +104,7 @@ public:
 	 * @param viewport
 	 *   Viewport renderer.
 	 */
-	virtual void render(ViewportRenderer* viewport) = 0;
+	virtual void render(ViewportImpl* viewport) = 0;
 };
 
 #endif /* RRE_OBJECT */

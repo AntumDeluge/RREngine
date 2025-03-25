@@ -14,7 +14,7 @@ using namespace std;
 
 Logger Movie::logger = Logger::getLogger("Movie");
 
-void Movie::render(ViewportRenderer* viewport) {
+void Movie::render(ViewportImpl* viewport) {
 
 	uint16_t frames_count = this->frames.size();
 	if (!this->playing || frames_count == 0) {

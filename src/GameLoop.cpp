@@ -21,7 +21,7 @@ using namespace std;
 #include "GameLoop.hpp"
 #include "Logger.hpp"
 #include "SingletonRepo.hpp"
-#include "ViewportRenderer.hpp"
+#include "impl/ViewportImpl.hpp"
 
 
 namespace GameLoop {
@@ -39,7 +39,7 @@ void GameLoop::start() {
 	GameLoop::logger.debug("Starting game loop ...");
 #endif
 
-	ViewportRenderer* viewport = GetViewport();
+	ViewportImpl* viewport = GetViewport();
 	GameLogic* logic = GetGameLogic();
 
 	// most recent input event

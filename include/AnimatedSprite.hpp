@@ -16,7 +16,7 @@
 #include "Animation.hpp"
 #include "Logger.hpp"
 #include "Sprite.hpp"
-#include "ViewportRenderer.hpp"
+#include "impl/ViewportImpl.hpp"
 
 
 /**
@@ -121,7 +121,7 @@ public:
 	}
 
 	/** Overrides `Sprite.render`. */
-	void render(ViewportRenderer* viewport, uint32_t x, uint32_t y, SDL_RendererFlip flags) override;
+	void render(ViewportImpl* viewport, uint32_t x, uint32_t y, SDL_RendererFlip flags) override;
 
 private:
 	/**

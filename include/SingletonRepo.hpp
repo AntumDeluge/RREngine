@@ -40,7 +40,7 @@ static inline Input* GetInput() { return Input::get(); }
 /**
  * Retrieves viewport renderer singleton.
  *
- * TODO: change return type to `ViewportRenderer`
+ * TODO: change return type to `ViewportImpl`
  *
  * @return
  *   `Viewport` singleton instance.

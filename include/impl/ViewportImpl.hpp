@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_VIEWPORT_RENDERER
-#define RRE_VIEWPORT_RENDERER
+#ifndef RRE_VIEWPORT_IMPL
+#define RRE_VIEWPORT_IMPL
 
 #include <cstdint> // *int*_t
 
@@ -20,14 +20,14 @@
  * TODO:
  * - support scaling in draw methods
  */
-class ViewportRenderer {
+class ViewportImpl {
 protected:
 	/** The system renderer. */
 	SDL_Renderer* renderer;
 
 public:
 	/** Virtual default destructor. */
-	virtual ~ViewportRenderer() {}
+	virtual ~ViewportImpl() {}
 
 	/**
 	 * Retrieves the viewport renderer where pixel data is drawn.
@@ -172,4 +172,4 @@ public:
 	virtual void render() = 0;
 };
 
-#endif /* RRE_VIEWPORT_RENDERER */
+#endif /* RRE_VIEWPORT_IMPL */

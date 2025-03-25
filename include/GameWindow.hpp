@@ -133,7 +133,7 @@ public:
 	/**
 	 * Retrieves the drawing renderer.
 	 *
-	 * TODO: use abstract `ViewportRenderer`
+	 * TODO: use abstract `ViewportImpl`
 	 *
 	 * @return
 	 *   Viewport renderer instance.

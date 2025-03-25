@@ -41,7 +41,7 @@ void Scene::logic() {
 	}
 }
 
-void Scene::render(ViewportRenderer* viewport) {
+void Scene::render(ViewportImpl* viewport) {
 	// TODO: build layers as single image instead of drawing each tile individually
 	renderTileLayer(viewport, background);
 	renderTileLayer(viewport, terrain);
@@ -62,7 +62,7 @@ void Scene::render(ViewportRenderer* viewport) {
 	// TODO: render other layers in front of objects
 }
 
-void Scene::renderTileLayer(ViewportRenderer* viewport, LayerDefinition ldef) {
+void Scene::renderTileLayer(ViewportImpl* viewport, LayerDefinition ldef) {
 	uint32_t g_offset_x = 0, g_offset_y = 0;
 	for (TileDefinition tdef: ldef) {
 		Tileset* tileset = nullptr;

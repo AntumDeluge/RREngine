@@ -17,8 +17,8 @@
 #include "Object.hpp"
 #include "Player.hpp"
 #include "Tileset.hpp"
-#include "ViewportRenderer.hpp"
 #include "impl/SceneImpl.hpp"
+#include "impl/ViewportImpl.hpp"
 
 
 /**
@@ -154,7 +154,7 @@ public:
 	 * @param viewport
 	 *   Viewport renderer.
 	 */
-	void render(ViewportRenderer* viewport) override;
+	void render(ViewportImpl* viewport) override;
 
 	/**
 	 * Draws a tile layer on renderer.
@@ -168,7 +168,7 @@ public:
 	 * @param gids
 	 *   Layer definition.
 	 */
-	void renderTileLayer(ViewportRenderer* viewport, LayerDefinition ldef);
+	void renderTileLayer(ViewportImpl* viewport, LayerDefinition ldef);
 
 	/**
 	 * Sets layer to use for scrolling background 1.

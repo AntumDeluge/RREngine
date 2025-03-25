@@ -113,7 +113,7 @@ bool Entity::collides(Entity* other) {
 			|| (t_bottom >= o_rect.y && t_bottom <= o_bottom));
 }
 
-void Entity::render(ViewportRenderer* viewport) {
+void Entity::render(ViewportImpl* viewport) {
 	if (!hasSprite()) {
 		return;
 	}

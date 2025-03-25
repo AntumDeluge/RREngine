@@ -88,7 +88,7 @@ Sprite::Sprite(string id) : Image() {
 }
 
 
-void Sprite::render(ViewportRenderer* viewport, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
+void Sprite::render(ViewportImpl* viewport, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
 	if (!ready()) {
 		logger.warn("Sprite texture not ready");
 		return;

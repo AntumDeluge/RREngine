@@ -16,7 +16,7 @@
 #include "MomentumDir.hpp"
 #include "Object.hpp"
 #include "Sprite.hpp"
-#include "ViewportRenderer.hpp"
+#include "impl/ViewportImpl.hpp"
 
 
 /**
@@ -260,7 +260,7 @@ public:
 	 * @param viewport
 	 *   Viewport renderer.
 	 */
-	void render(ViewportRenderer* viewport) override;
+	void render(ViewportImpl* viewport) override;
 };
 
 

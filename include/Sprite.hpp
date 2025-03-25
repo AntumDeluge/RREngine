@@ -15,7 +15,7 @@
 
 #include "Image.hpp"
 #include "Logger.hpp"
-#include "ViewportRenderer.hpp"
+#include "impl/ViewportImpl.hpp"
 
 
 /**
@@ -152,7 +152,7 @@ public:
 	 * @param flags
 	 *   Flags to flip image horizontally & vertically.
 	 */
-	virtual void render(ViewportRenderer* viewport, uint32_t x, uint32_t y, SDL_RendererFlip flags);
+	virtual void render(ViewportImpl* viewport, uint32_t x, uint32_t y, SDL_RendererFlip flags);
 
 	/**
 	 * Draws this sprite on the viewport.
@@ -164,7 +164,7 @@ public:
 	 * @param y
 	 *   Pixel drawing position on vertical axis.
 	 */
-	virtual void render(ViewportRenderer* viewport, uint32_t x, uint32_t y) {
+	virtual void render(ViewportImpl* viewport, uint32_t x, uint32_t y) {
 		render(viewport, x, y, SDL_FLIP_NONE);
 	}
 };

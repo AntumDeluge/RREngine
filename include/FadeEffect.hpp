@@ -12,12 +12,12 @@
 #include <SDL2/SDL_pixels.h>
 
 #include "SingletonRepo.hpp"
-#include "ViewportRenderer.hpp"
+#include "impl/ViewportImpl.hpp"
 
 
 class FadeEffect {
 private:
-	ViewportRenderer* viewport;
+	ViewportImpl* viewport;
 	uint32_t f_time;
 	SDL_Color f_color;
 

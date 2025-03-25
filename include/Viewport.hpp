@@ -17,8 +17,8 @@
 #include "Movie.hpp"
 #include "Scene.hpp"
 #include "Sprite.hpp"
-#include "ViewportRenderer.hpp"
 #include "factory/MovieFactory.hpp"
+#include "impl/ViewportImpl.hpp"
 
 
 /**
@@ -27,7 +27,7 @@
  * TODO:
  * - move rendering functions to new renderer class or Scene
  */
-class Viewport: public ViewportRenderer {
+class Viewport: public ViewportImpl {
 private:
 	/** Logger instance for this class. */
 	static Logger logger;
@@ -186,32 +186,32 @@ public:
 	 */
 	void setMode(GameMode::Mode mode);
 
-	/** Overrides `ViewportRenderer::drawTexture`. */
+	/** Overrides `ViewportImpl::drawTexture`. */
 	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect, SDL_RendererFlip flags) override;
 
 	/**
-	 * Calls `ViewportRenderer::drawTexture`.
+	 * Calls `ViewportImpl::drawTexture`.
 	 *
 	 * NOTE: why must this be explicitly declared?
 	 */
 	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) {
-		ViewportRenderer::drawTexture(texture, s_rect, t_rect);
+		ViewportImpl::drawTexture(texture, s_rect, t_rect);
 	}
 
-	/** Overrides `ViewportRenderer::drawImage`. */
+	/** Overrides `ViewportImpl::drawImage`. */
 	void drawImage(Image* img, uint32_t sx, uint32_t sy, uint32_t s_width,
 			uint32_t t_height, uint32_t x, uint32_t y, SDL_RendererFlip flags) override;
 
-	/** Overrides `ViewportRenderer::drawImage`. */
+	/** Overrides `ViewportImpl::drawImage`. */
 	void drawImage(Image* img, uint32_t x, uint32_t y, SDL_RendererFlip flags) override;
 
 	/**
-	 * Calls `ViewportRenderer::drawImage`.
+	 * Calls `ViewportImpl::drawImage`.
 	 *
 	 * NOTE: why must this be explicitly declared?
 	 */
 	void drawImage(Image* img, uint32_t x, uint32_t y) {
-		ViewportRenderer::drawImage(img, x, y);
+		ViewportImpl::drawImage(img, x, y);
 	}
 
 	/**

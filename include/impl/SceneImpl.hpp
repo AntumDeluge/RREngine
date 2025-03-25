@@ -12,7 +12,7 @@
 #include <SDL2/SDL_rect.h>
 
 #include "HashObject.hpp"
-#include "ViewportRenderer.hpp"
+#include "impl/ViewportImpl.hpp"
 
 
 class SceneImpl: public HashObject {
@@ -22,7 +22,7 @@ public:
 
 	virtual void logic() = 0;
 
-	virtual void render(ViewportRenderer* viewport) = 0;
+	virtual void render(ViewportImpl* viewport) = 0;
 
 	/**
 	 * Checks for gravity rate at a given point.

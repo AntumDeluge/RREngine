@@ -58,7 +58,7 @@ Animation* AnimatedSprite::getDefaultMode() {
 }
 
 
-void AnimatedSprite::render(ViewportRenderer* viewport, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
+void AnimatedSprite::render(ViewportImpl* viewport, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
 	if (!ready()) {
 		logger.warn("Animated sprite texture not ready");
 		return;
