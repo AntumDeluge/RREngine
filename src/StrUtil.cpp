@@ -5,8 +5,6 @@
  */
 
 #include <cctype> // std::tolower, std::toupper
-#include <sstream>
-#include <type_traits>
 
 #include "Logger.hpp"
 #include "StrUtil.hpp"
@@ -15,20 +13,6 @@ using namespace std;
 
 
 static Logger logger = Logger::getLogger("StrUtil");
-
-template <typename T>
-string StrUtil::check(const T& v) {
-	static_assert(
-		is_same<T, string>::value
-		|| is_same<T, char>::value
-		|| is_same<T, char*>::value
-		|| is_same<T, const char*>::value,
-		"Argument must be of type std::string, char, or char*");
-
-	stringstream ss;
-	ss << v;
-	return ss.str();
-}
 
 string StrUtil::trim(string st) {
 	std::size_t f = st.find_first_not_of(" \t\n\r\f\v");

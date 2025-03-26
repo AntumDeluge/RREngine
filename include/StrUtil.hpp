@@ -8,7 +8,9 @@
 #define RRE_STR_UTIL
 
 #include <cstdint> // *int*_t
+#include <sstream>
 #include <string>
+#include <type_traits> // std::is_same
 
 
 /**
@@ -26,6 +28,8 @@ namespace StrUtil {
 	/**
 	 * Converts value to string.
 	 *
+	 * Define in header so required instances are created dynamically.
+	 *
 	 * FIXME: wide character strings not supported
 	 *
 	 * @param v
@@ -34,7 +38,18 @@ namespace StrUtil {
 	 *   `std::string` equivalent.
 	 */
 	template <typename T>
-	std::string check(const T& v);
+	std::string check(const T& v) {
+		static_assert(
+			std::is_same<T, std::string>::value
+			|| std::is_same<T, char>::value
+			|| std::is_same<T, char*>::value
+			|| std::is_same<T, const char*>::value,
+			"Argument must be of type std::string, char, or char*");
+
+		std::stringstream ss;
+		ss << v;
+		return ss.str();
+	}
 
 	/**
 	 * Trims leading & traling whitespace from a string.
