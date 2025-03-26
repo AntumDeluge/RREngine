@@ -61,7 +61,13 @@ unordered_map<wchar_t, int32_t> _parseCharacters(xml_node el) {
 			return empty_map;
 		}
 
-		const int start_index = StrUtil::toInt(attr.value());
+		int32_t start_index = 0;
+		ParseResult res = StrUtil::parseInt(start_index, attr.value());
+		if (res.first != 0) {
+			string msg = "Failed to parse index from \"" + string(attr.value()) + "\": " + res.second;
+			FontMapFactory::logger.error("XML Parsing Error: ", msg);
+			Dialog::error("XML Parsing Error", msg);
+		}
 		const string value = cel.text().get();
 		for (int idx = 0; idx < value.length(); idx++) {
 			int index_offset = start_index + idx;
@@ -98,8 +104,8 @@ bool _parseFont(xml_node el, const uint8_t data[], const uint32_t data_size) {
 
 	string id = "";
 	string rpath = "";
-	int w = 0;
-	int h = 0;
+	int32_t w = 0;
+	int32_t h = 0;
 
 	xml_attribute attr = el.attribute("id");
 	if (attr.empty()) {
@@ -119,14 +125,22 @@ bool _parseFont(xml_node el, const uint8_t data[], const uint32_t data_size) {
 	if (attr.empty()) {
 		err.push_back("Missing font attribute \"w\"");
 	} else {
-		w = StrUtil::toInt(attr.value());
+		ParseResult res = StrUtil::parseInt(w, attr.value());
+		if (res.first != 0) {
+			FontMapFactory::logger.warn("Failed to parse width from \"", attr.value(), "\": ",
+					res.second);
+		}
 	}
 
 	attr = el.attribute("h");
 	if (attr.empty()) {
 		err.push_back("Missing font attribute \"h\"");
 	} else {
-		h = StrUtil::toInt(attr.value());
+		ParseResult res = StrUtil::parseInt(h, attr.value());
+		if (res.first != 0) {
+			FontMapFactory::logger.warn("Failed to parse height from \"", attr.value(), "\": ",
+					res.second);
+		}
 	}
 
 	if (!err.empty()) {

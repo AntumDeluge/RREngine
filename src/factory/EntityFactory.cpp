@@ -47,11 +47,11 @@ Entity EntityFactory::build(xml_node el) {
 	uint32_t width = 0, height = 0;
 	xml_attribute attr_width = el.attribute("width");
 	if (!attr_width.empty()) {
-		width = StrUtil::toUInt(attr_width.value());
+		StrUtil::parseUInt(width, attr_width.value());
 	}
 	xml_attribute attr_height = el.attribute("height");
 	if (!attr_height.empty()) {
-		height = StrUtil::toUInt(attr_height.value());
+		StrUtil::parseUInt(height, attr_height.value());
 	}
 
 	if (width == 0 or height == 0) {
@@ -64,7 +64,7 @@ Entity EntityFactory::build(xml_node el) {
 	float momentum = 0;
 	xml_node el_momentum = el.child("momentum");
 	if (el_momentum.type() != node_null) {
-		momentum = StrUtil::toFloat(el_momentum.text().get());
+		StrUtil::parseFloat(momentum, el_momentum.text().get());
 	}
 	entity.set("base_momentum", momentum);
 

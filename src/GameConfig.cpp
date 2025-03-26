@@ -98,11 +98,11 @@ int GameConfig::load() {
 
 	xml_node el_scale = el_root.child("scale");
 	if (el_scale.type() != node_null) { // && StrUtil::toUint())
-		scale = StrUtil::toUInt(el_scale.text().get());
-		if (!scale) {
-			scale = 1;
-			onConfigError("XML Parsing Error", "\"scale\" value must be integer greater than 0");
-			return 1;
+		ParseResult res = StrUtil::parseUShort(scale, el_scale.text().get());
+		if (res.first != 0) {
+			onConfigError("XML Parsing Error", "\"scale\" value must be integer greater than 0: "
+					+ res.second);
+			return res.first;
 		}
 	}
 	if (scale > 4) {
@@ -112,12 +112,10 @@ int GameConfig::load() {
 
 	xml_node el_step_delay = el_root.child("step_delay");
 	if (el_step_delay.type() != node_null) {
-		step_delay = StrUtil::toUInt(el_step_delay.text().get());
-	}
-	if (!step_delay) {
-		GameConfig::logger.warn("Step delay must be a positive integer");
-		// reset to default value
-		step_delay = 300;
+		ParseResult res = StrUtil::parseUInt(step_delay, el_step_delay.text().get());
+		if (res.first != 0) {
+			GameConfig::logger.warn("Step delay must be a positive integer: ", res.second);
+		}
 	}
 
 	xml_node el_menu = el_root.child("menu");

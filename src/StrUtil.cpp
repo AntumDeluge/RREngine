@@ -40,72 +40,112 @@ string StrUtil::toUpper(string st) {
 	return u_value;
 }
 
-int32_t StrUtil::toInt(string st) {
-	string err;
+ParseResult StrUtil::parseShort(int16_t& s, string st) {
+	ParseResult res;
 	try {
-		return stoi(st);
+		s = static_cast<int16_t>(stoi(st));
+		res.first = 0;
 	} catch (const exception& e) {
-		err = e.what();
+		res.first = 1;
+		res.second = e.what();
 	}
-	logger.error("Cannot convert string value \"", st, "\" to int: ", err);
-	return 0;
+	return res;
 }
 
-uint32_t StrUtil::toUInt(string st) {
-	string err;
+ParseResult StrUtil::parseUShort(uint16_t& s, string st) {
+	ParseResult res;
 	try {
-		return static_cast<uint32_t>(stoul(st));
+		s = static_cast<uint16_t>(stoul(st));
+		res.first = 0;
 	} catch (const exception& e) {
-		err = e.what();
+		res.first = 1;
+		res.second = e.what();
 	}
-	logger.error("Cannot convert string value \"", st, "\" to unsigned int: ", err);
-	return 0;
+	return res;
 }
 
-int64_t StrUtil::toLong(string st) {
-	string err;
+ParseResult StrUtil::parseInt(int32_t& i, string st) {
+	ParseResult res;
 	try {
-		return stoll(st);
+		i = stoi(st);
+		res.first = 0;
 	} catch (const exception& e) {
-		err = e.what();
+		res.first = 1;
+		res.second = e.what();
 	}
-	logger.error("Cannot convert string value \"", st, "\" to long: ", err);
-	return 0;
+	return res;
 }
 
-uint64_t StrUtil::toULong(string st) {
-	string err;
+ParseResult StrUtil::parseUInt(uint32_t& i, string st) {
+	ParseResult res;
 	try {
-		return stoull(st);
+		i = static_cast<uint32_t>(stoul(st));
+		res.first = 0;
 	} catch (const exception& e) {
-		err = e.what();
+		res.first = 1;
+		res.second = e.what();
 	}
-	logger.error("Cannot convert string value \"", st, "\" to unsigned long: ", err);
-	return 0;
+	return res;
 }
 
-float StrUtil::toFloat(string st) {
-	string err;
+ParseResult StrUtil::parseLong(int64_t& l, string st) {
+	ParseResult res;
 	try {
-		return stof(st);
+		l = stoll(st);
+		res.first = 0;
 	} catch (const exception& e) {
-		err = e.what();
+		res.first = 1;
+		res.second = e.what();
 	}
-	logger.error("Cannot convert string value \"", st, "\" to float: ", err);
-	return 0;
+	return res;
 }
 
-double StrUtil::toDouble(string st) {
-	string err;
+ParseResult StrUtil::parseULong(uint64_t& l, string st) {
+	ParseResult res;
 	try {
-		return stod(st);
+		l = stoull(st);
+		res.first = 0;
 	} catch (const exception& e) {
-		err = e.what();
+		res.first = 1;
+		res.second = e.what();
 	}
-	logger.error("Cannot convert string value \"", st, "\" to double: ", err);
-	return 0;
+	return res;
 }
 
-bool StrUtil::toBool(string st) {
-	return StrUtil::toLower(StrUtil::trim(st)).compare("true") == 0;
+ParseResult StrUtil::parseFloat(float& f, string st) {
+	ParseResult res;
+	try {
+		f = stof(st);
+		res.first = 0;
+	} catch (const exception& e) {
+		res.first = 1;
+		res.second = e.what();
+	}
+	return res;
+}
+
+ParseResult StrUtil::parseDouble(double& d, string st) {
+	ParseResult res;
+	try {
+		d = stod(st);
+		res.first = 0;
+	} catch (const exception& e) {
+		res.first = 1;
+		res.second = e.what();
+	}
+	return res;
+}
+
+ParseResult StrUtil::parseBool(bool& b, string st) {
+	ParseResult res;
+	string temp = StrUtil::toLower(StrUtil::trim(st));
+	bool t = temp.compare("true") == 0;
+	if (t || temp.compare("false") == 0) {
+		b = t;
+		res.first = 0;
+	} else {
+		res.first = 1;
+		res.second = "Unrecognized string: \"" + st + "\"";
+	}
+	return res;
 }

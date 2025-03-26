@@ -33,11 +33,11 @@ shared_ptr<Sprite> SpriteFactory::build(xml_node el) {
 	if (el_size.type() != node_null) {
 		xml_attribute attr_width = el_size.attribute("width");
 		if (!attr_width.empty()) {
-			width = StrUtil::toUInt(attr_width.value());
+			StrUtil::parseUInt(width, attr_width.value());
 		}
 		xml_attribute attr_height = el_size.attribute("height");
 		if (!attr_height.empty()) {
-			height = StrUtil::toUInt(attr_height.value());
+			StrUtil::parseUInt(height, attr_height.value());
 		}
 	}
 
@@ -62,8 +62,9 @@ shared_ptr<Sprite> SpriteFactory::build(xml_node el) {
 		}
 
 		xml_attribute attr_default = el_animation.attribute("default");
-		if (mode_name.compare("") == 0 || (!attr_default.empty()
-				&& StrUtil::toBool(attr_default.value()))) {
+		bool is_default = false;
+		StrUtil::parseBool(is_default, attr_default.value());
+		if (mode_name.compare("") == 0 || (!attr_default.empty() && is_default)) {
 			default_mode = mode_name;
 		}
 
@@ -72,8 +73,10 @@ shared_ptr<Sprite> SpriteFactory::build(xml_node el) {
 			xml_attribute attr_index = el_frame.attribute("index");
 			xml_attribute attr_delay = el_frame.attribute("delay");
 			if (!attr_index.empty() && !attr_delay.empty()) {
-				current_frames.push_back(AnimationFrame(StrUtil::toUInt(attr_index.value()),
-						StrUtil::toUInt(attr_delay.value())));
+				uint32_t f_index = 0, f_delay = 0;
+				StrUtil::parseUInt(f_index, attr_index.value());
+				StrUtil::parseUInt(f_delay, attr_delay.value());
+				current_frames.push_back(AnimationFrame(f_index, f_delay));
 			}
 
 			el_frame = el_frame.next_sibling("frame");
@@ -103,7 +106,7 @@ shared_ptr<Sprite> SpriteFactory::build(xml_node el) {
 		uint32_t tile_index = 0;
 		xml_attribute attr_index = el_filename.attribute("index");
 		if (!attr_index.empty()) {
-			tile_index = StrUtil::toUInt(attr_index.value());
+			StrUtil::parseUInt(tile_index, attr_index.value());
 		}
 		sprite_ptr = make_shared<Sprite>(texture, width, height, tile_index);
 	}

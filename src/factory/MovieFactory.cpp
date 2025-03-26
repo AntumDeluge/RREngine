@@ -81,7 +81,8 @@ Movie* MovieFactory::getMovie(string id) {
 				Dialog::error("XML Parsing Error", msg);
 				return nullptr;
 			}
-			uint32_t duration = StrUtil::toUInt(ms_attr.value());
+			uint32_t duration = 0;
+			StrUtil::parseUInt(duration, ms_attr.value());
 			string frame_id = frame_el.text().get();
 			Image* img = new Image(TextureLoader::load(Path::join("movie", frame_id)));
 			if (!img->ready()) {
@@ -104,11 +105,13 @@ Movie* MovieFactory::getMovie(string id) {
 
 			xml_attribute delay_attr = text_el.attribute("delay");
 			// FIXME: should this be uint32_t?
-			uint16_t delay = !delay_attr.empty() ? StrUtil::toUInt(delay_attr.value()) : 0;
+			uint16_t delay = 0;
+			StrUtil::parseUShort(delay, delay_attr.value());
 
 			xml_attribute duration_attr = text_el.attribute("duration");
 			// FIXME: should this be uint32_t?
-			uint16_t duration = !duration_attr.empty() ? StrUtil::toUInt(duration_attr.value()) : 0;
+			uint16_t duration = 0;
+			StrUtil::parseUShort(duration, duration_attr.value());
 
 			texts.push_back(text);
 

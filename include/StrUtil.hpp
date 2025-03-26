@@ -11,19 +11,18 @@
 #include <sstream>
 #include <string>
 #include <type_traits> // std::is_same
+#include <utility> // std::pair
 
+
+/**
+ * Return type for string parsing functions.
+ */
+typedef std::pair<int32_t, std::string> ParseResult;
 
 /**
  * String related functions.
  */
 namespace StrUtil {
-
-	/**
-	 * Error for parsing string values.
-	 *
-	 * TODO: return `ParseError` from converstion/parsing functions
-	 */
-	//typedef std::pair<uint32_t, std::string> ParseError;
 
 	/**
 	 * Converts value to string.
@@ -82,76 +81,103 @@ namespace StrUtil {
 	std::string toUpper(std::string st);
 
 	/**
-	 * Converts string to integer.
+	 * Parses short value from a string.
 	 *
+	 * @param s
 	 * @param st
-	 *   String to convert.
+	 *   String to be parsed.
 	 * @return
-	 *   Integer value or 0 if conversion fails.
+	 *   Parse result with error message.
 	 */
-	int32_t toInt(std::string st);
+	ParseResult parseShort(int16_t& s, std::string st);
 
 	/**
-	 * Converts string to unsigned integer.
+	 * Parses unsigned short value from a string.
 	 *
-	 * FIXME: should take a reference parameter & return error code
-	 *
+	 * @param s
 	 * @param st
-	 *   String to convert.
+	 *   String to be parsed.
 	 * @return
-	 *   Unsigned integer value or 0 if conversion fails.
+	 *   Parse result with error message.
 	 */
-	uint32_t toUInt(std::string st);
+	ParseResult parseUShort(uint16_t& s, std::string st);
 
 	/**
-	 * Converts string to long.
+	 * Parses integer value from a string.
 	 *
+	 * @param i
 	 * @param st
-	 *   String to convert.
+	 *   String to be parsed.
 	 * @return
-	 *   Long value or 0 if conversion fails.
+	 *   Parse result with error message.
 	 */
-	int64_t toLong(std::string st);
+	ParseResult parseInt(int32_t& i, std::string st);
 
 	/**
-	 * Converts string to unsigned long.
+	 * Parses unsigned integer value from a string.
 	 *
+	 * @param i
 	 * @param st
-	 *   String to convert.
+	 *   String to be parsed.
 	 * @return
-	 *   Unsigned long value or 0 if conversion fails.
+	 *   Parse result with error message.
 	 */
-	uint64_t toULong(std::string st);
+	ParseResult parseUInt(uint32_t& i, std::string st);
 
 	/**
-	 * Converts string to float.
+	 * Parses long value from a string.
 	 *
+	 * @param l
 	 * @param st
-	 *   String to convert.
+	 *   String to be parsed.
 	 * @return
-	 *   Float value or 0 if conversion fails.
+	 *   Parse result with error message.
 	 */
-	float toFloat(std::string st);
+	ParseResult parseLong(int64_t& l, std::string st);
 
 	/**
-	 * Converts string to double.
+	 * Parses unsigned long value from a string.
 	 *
+	 * @param l
 	 * @param st
-	 *   String to convert.
+	 *   String to be parsed.
 	 * @return
-	 *   Double value or 0 if conversion fails.
+	 *   Parse result with error message.
 	 */
-	double toDouble(std::string st);
+	ParseResult parseULong(uint64_t& l, std::string st);
 
 	/**
-	 * Converts string to boolean.
+	 * Parses float value from a string.
 	 *
+	 * @param f
 	 * @param st
-	 *   String to convert.
+	 *   String to be parsed.
 	 * @return
-	 *   `true` if contents of string are "true" case insensitive.
+	 *   Parse result with error message.
 	 */
-	bool toBool(std::string st);
+	ParseResult parseFloat(float& f, std::string st);
+
+	/**
+	 * Parses double value from a string.
+	 *
+	 * @param d
+	 * @param st
+	 *   String to be parsed.
+	 * @return
+	 *   Parse result with error message.
+	 */
+	ParseResult parseDouble(double& d, std::string st);
+
+	/**
+	 * Parses boolean value from a string.
+	 *
+	 * @param b
+	 * @param st
+	 *   String to be parsed.
+	 * @return
+	 *   Parse result with error message.
+	 */
+	ParseResult parseBool(bool& b, std::string st);
 }
 
 #endif /* RRE_STR_UTIL */
