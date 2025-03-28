@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_GAME_LOGIC_H
-#define RRE_GAME_LOGIC_H
+#ifndef RRE_GAME_LOGIC
+#define RRE_GAME_LOGIC
 
 #include <cstdint> // *int*_t
 #include <memory> // std::unique_ptr, std::make_unique
@@ -118,4 +118,4 @@ public:
 	}
 };
 
-#endif /* RRE_GAME_LOGIC_H */
+#endif /* RRE_GAME_LOGIC */

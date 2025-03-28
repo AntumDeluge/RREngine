@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_LOGGER_H
-#define RRE_LOGGER_H
+#ifndef RRE_LOGGER
+#define RRE_LOGGER
 
 #include <iostream>
 #include <sstream>
@@ -262,4 +262,4 @@ public:
 	}
 };
 
-#endif /* RRE_LOGGER_H */
+#endif /* RRE_LOGGER */

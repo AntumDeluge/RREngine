@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_FONT_MAP_H
-#define RRE_FONT_MAP_H
+#ifndef RRE_FONT_MAP
+#define RRE_FONT_MAP
 
 #include <cstdint> // *int*_t
 #include <unordered_map>
@@ -82,4 +82,4 @@ public:
 	int32_t getCharIndex(wchar_t c);
 };
 
-#endif /* RRE_FONT_MAP_H */
+#endif /* RRE_FONT_MAP */

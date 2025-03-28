@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_SPRITE_H
-#define RRE_SPRITE_H
+#ifndef RRE_SPRITE
+#define RRE_SPRITE
 
 #include <cstdint> // uint*_t
 #include <string>
@@ -166,4 +166,4 @@ public:
 	}
 };
 
-#endif /* RRE_SPRITE_H */
+#endif /* RRE_SPRITE */

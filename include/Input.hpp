@@ -4,8 +4,8 @@
  * See: LICENSE.txt
  */
 
-#ifndef RRE_INPUT_H
-#define RRE_INPUT_H
+#ifndef RRE_INPUT
+#define RRE_INPUT
 
 #include <memory> // std::unique_ptr, std::make_unique
 #include <mutex>
@@ -108,4 +108,4 @@ public:
 	void onKeyUp(SDL_Keysym key);
 };
 
-#endif /* RRE_INPUT_H */
+#endif /* RRE_INPUT */
