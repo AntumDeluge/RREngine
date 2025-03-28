@@ -64,7 +64,7 @@ void Scene::render(ViewportImpl* viewport) {
 }
 
 void Scene::renderTileLayer(ViewportImpl* viewport, LayerDefinition ldef) {
-	uint32_t g_offset_x = 0, g_offset_y = 0;
+	int32_t g_offset_x = 0, g_offset_y = 0;
 	for (TileDefinition tdef: ldef) {
 		Tileset* tileset = nullptr;
 		// find tileset with matching GID
@@ -81,7 +81,8 @@ void Scene::renderTileLayer(ViewportImpl* viewport, LayerDefinition ldef) {
 			uint32_t index_x = tile_index % cols;
 			uint32_t index_y = tile_index / cols;
 
-			viewport->drawImage(tileset, index_x*tile_width, index_y*tile_height, tile_width, tile_height, g_offset_x, g_offset_y);
+			viewport->drawImage(tileset, index_x*tile_width, index_y*tile_height, tile_width, tile_height,
+					g_offset_x - offset_x, g_offset_y - offset_y);
 		}
 
 		g_offset_x += tile_width;

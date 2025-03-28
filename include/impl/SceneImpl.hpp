@@ -25,6 +25,38 @@ public:
 	virtual void render(ViewportImpl* viewport) = 0;
 
 	/**
+	 * Sets drawing offset on horizontal axis.
+	 *
+	 * @param offset
+	 *   Horizontal offset.
+	 */
+	virtual void setOffsetX(int32_t offset) = 0;
+
+	/**
+	 * Sets drawing offset on vertical axis.
+	 *
+	 * @param offset
+	 *   Vertical offset.
+	 */
+	virtual void setOffsetY(int32_t offset) = 0;
+
+	/**
+	 * Retrieves drawing offset on horizontal axis.
+	 *
+	 * @return
+	 *   Horizontal offset.
+	 */
+	virtual int32_t getOffsetX() = 0;
+
+	/**
+	 * Retrieves drawing offset on vertical axis.
+	 *
+	 * @return
+	 *   Vertical offset.
+	 */
+	virtual int32_t getOffsetY() = 0;
+
+	/**
 	 * Checks for gravity rate at a given point.
 	 *
 	 * @param x

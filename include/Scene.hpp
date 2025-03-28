@@ -46,6 +46,11 @@ private:
 	/** Individual tile pixel height. */
 	uint32_t tile_height;
 
+	/** Drawing offset on horizontal axis. */
+	int32_t offset_x = 0;
+	/** Drawing offset on vertical axis. */
+	int32_t offset_y = 0;
+
 	/** Collision mappings defined by collision layer. */
 	std::vector<std::vector<uint8_t>> collision_map;
 
@@ -169,6 +174,18 @@ public:
 	 *   Layer definition.
 	 */
 	void renderTileLayer(ViewportImpl* viewport, LayerDefinition ldef);
+
+	/** Overrides `SceneImpl::setOffsetX`. */
+	void setOffsetX(int32_t offset) override { offset_x = offset; }
+
+	/** Overrides `SceneImpl::setOffsetY`. */
+	void setOffsetY(int32_t offset) override { offset_y = offset; }
+
+	/** Overrides `SceneImpl::getOffsetX`. */
+	int32_t getOffsetX() override { return offset_x; }
+
+	/** Overrides `SceneImpl::getOffsetY`. */
+	int32_t getOffsetY() override { return offset_y; }
 
 	/**
 	 * Sets layer to use for scrolling background 1.
