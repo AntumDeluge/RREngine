@@ -15,7 +15,7 @@
  </layer>
  <layer id="3" name="terrain" width="32" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIKBAUxImJkO9okBsTgSHmyAicZ4FAwuAABduwCV
+   eJxjYBgFo2AUjIJRMBCAEYiZBggz08F/owA/AAB3hABB
   </data>
  </layer>
  <layer id="9" name="objects" width="32" height="15">
@@ -25,7 +25,7 @@
  </layer>
  <layer id="5" name="collision" width="32" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIKRCTiQMCcd7GNHsxMZ8NPBfl48ciD7OWiM8dk/EgEA3ysBOQ==
+   eJxjYBgFo2AUjIJRMBIBOxBzDBDmpIP/BjsAAEkTAQE=
   </data>
  </layer>
  <layer id="10" name="foreground" width="32" height="15">
