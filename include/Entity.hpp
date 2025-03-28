@@ -27,6 +27,7 @@ class Entity: public Object {
 private:
 	static Logger logger;
 
+protected:
 	/** Image drawn on viewport. */
 	Sprite* sprite;
 
