@@ -94,7 +94,11 @@ void Viewport::setRenderMode(GameMode::Mode mode) {
 		this->addText("here yet. :(");
 	} else if (mode == GameMode::INTRO) {
 		this->movie = GameConfig::getIntro();
-		this->movie->play();
+		if (this->movie) {
+			this->movie->play();
+		} else {
+			logger.warn("Intro movie not set");
+		}
 
 #if RRE_DEBUGGING
 		if (this->movie == nullptr) {
