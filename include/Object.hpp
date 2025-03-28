@@ -98,7 +98,7 @@ public:
 	 * @param scene
 	 *   Scene to which entity has been added.
 	 */
-	void onAdded(SceneImpl* scene) {
+	virtual void onAdded(SceneImpl* scene) {
 		this->scene = scene;
 	}
 
