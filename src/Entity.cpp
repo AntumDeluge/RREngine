@@ -172,14 +172,18 @@ void Entity::render(ViewportImpl* viewport) {
 	// align sprite to bottom of entity
 	int32_t offset_y = sprite->getTileHeight() - rect.h;
 
-	sprite->render(viewport, rect.x - offset_x, rect.y - offset_y, flags);
+	SDL_Rect draw_rect = rect;
+	draw_rect.x -= scene->getOffsetX();
+	draw_rect.y -= scene->getOffsetY();
+
+	sprite->render(viewport, draw_rect.x - offset_x, draw_rect.y - offset_y, flags);
 
 #if RRE_DEBUGGING
 	// debug collision box & sprite alignment
 	Renderer* renderer = GetRenderer();
 	renderer->save();
 	renderer->setDrawColor(0, 255, 0, 255);
-	renderer->drawRect(rect);
+	renderer->drawRect(draw_rect);
 	renderer->restore();
 #endif
 }
