@@ -175,6 +175,12 @@ public:
 	 */
 	void renderTileLayer(ViewportImpl* viewport, LayerDefinition ldef);
 
+	/** Overrides `SceneImpl::getWidth`. */
+	uint32_t getWidth() override { return width; }
+
+	/** Overrides `SceneImpl::getHeight`. */
+	uint32_t getHeight() override { return height; }
+
 	/** Overrides `SceneImpl::setOffsetX`. */
 	void setOffsetX(int32_t offset) override { offset_x = offset; }
 

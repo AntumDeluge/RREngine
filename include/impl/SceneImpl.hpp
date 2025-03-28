@@ -25,6 +25,22 @@ public:
 	virtual void render(ViewportImpl* viewport) = 0;
 
 	/**
+	 * Retreives scene width.
+	 *
+	 * @return
+	 *   Pixel width.
+	 */
+	virtual uint32_t getWidth() = 0;
+
+	/**
+	 * Retrieves scene height.
+	 *
+	 * @return
+	 *   Pixel height.
+	 */
+	virtual uint32_t getHeight() = 0;
+
+	/**
 	 * Sets drawing offset on horizontal axis.
 	 *
 	 * @param offset
