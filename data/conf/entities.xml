@@ -4,7 +4,7 @@
 	<!-- TODO: load from files in sub-directory -->
 
 	<entity id="player" sprite="player" width="20" height="26">
-		<momentum>1.0</momentum>
+		<momentum>2.0</momentum>
 	</entity>
 
 	<entity id="enemy" sprite="enemy" width="32" height="24">
