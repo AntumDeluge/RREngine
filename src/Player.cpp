@@ -28,9 +28,10 @@ void Player::onAdded(SceneImpl* scene) {
 }
 
 void Player::onMoved() {
+	uint32_t half_res_w = NATIVE_RES.first / 2;
 	int32_t p_center = rect.x + (rect.w / 2);
-	int32_t diff = p_center - (NATIVE_RES.first / 2);
-	if (diff > 0) {
+	int32_t diff = p_center - half_res_w;
+	if (diff > 0 && p_center < scene->getWidth() - half_res_w) {
 		scene->setOffsetX(diff);
 	}
 }
