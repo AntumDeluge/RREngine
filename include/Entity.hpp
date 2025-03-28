@@ -236,6 +236,18 @@ public:
 	 */
 	bool collides(Entity* other);
 
+	/** Action when entity hits left boundary of scene. */
+	void onClipLeft();
+
+	/** Action when entity hits right boundary of scene. */
+	void onClipRight();
+
+	/** Action when entity hits top boundary of scene. */
+	void onClipTop();
+
+	/** Action when entity hits bottom boundary of scene. */
+	void onClipBottom();
+
 	/**
 	 * Checks if the entity has a drawable sprite.
 	 *

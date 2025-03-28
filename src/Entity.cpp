@@ -71,6 +71,21 @@ void Entity::logic() {
 			this->rect.x -= momentum;
 		}
 	}
+
+	if (rect.x < 0) {
+		rect.x = 0;
+		onClipLeft();
+	} else if (rect.x + rect.w > scene->getWidth()) {
+		rect.x = scene->getWidth() - rect.w;
+		onClipRight();
+	}
+	if (rect.y < 0) {
+		rect.y = 0;
+		onClipTop();
+	} else if (rect.y + rect.h > scene->getHeight()) {
+		rect.y = scene->getHeight() - rect.h;
+		onClipBottom();
+	}
 }
 
 uint8_t Entity::addDirection(uint8_t dir) {
@@ -155,6 +170,34 @@ bool Entity::collides(Entity* other) {
 			|| (t_right >= o_rect.x && t_right <= o_right))
 		&& ((this->rect.y >= o_rect.y && this->rect.y <= o_bottom)
 			|| (t_bottom >= o_rect.y && t_bottom <= o_bottom));
+}
+
+void Entity::onClipLeft() {
+	// DEBUG:
+	logger.debug("Entity hit left boundary of scene");
+
+	// TODO:
+}
+
+void Entity::onClipRight() {
+	// DEBUG:
+	logger.debug("Entity hit right boundary of scene");
+
+	// TODO:
+}
+
+void Entity::onClipTop() {
+	// DEBUG:
+	logger.debug("Entity hit top boundary of scene");
+
+	// TODO:
+}
+
+void Entity::onClipBottom() {
+	// DEBUG:
+	logger.debug("Entity hit bottom boundary of scene");
+
+	// TODO:
 }
 
 void Entity::render(ViewportImpl* viewport) {
