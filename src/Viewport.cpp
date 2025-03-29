@@ -112,45 +112,6 @@ void Viewport::setRenderMode(GameMode::Mode mode) {
 	this->mode = mode;
 }
 
-void Viewport::drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect,
-		SDL_RendererFlip flags) {
-	renderer->drawTexture(texture, s_rect, t_rect, flags);
-}
-
-void Viewport::drawImage(Image* img, uint32_t sx, uint32_t sy, uint32_t s_width,
-		uint32_t s_height, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
-	SDL_Rect s_rect;
-	s_rect.x = sx;
-	s_rect.y = sy;
-	s_rect.w = s_width;
-	s_rect.h = s_height;
-
-	SDL_Rect t_rect;
-	t_rect.x = x;
-	t_rect.y = y;
-	t_rect.w = s_rect.w;
-	t_rect.h = s_rect.h;
-
-	this->drawTexture(img->getTexture(), s_rect, t_rect, flags);
-}
-
-void Viewport::drawImage(Image* img, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
-	SDL_Rect s_rect;
-	s_rect.x = 0;
-	s_rect.y = 0;
-	s_rect.w = img->getWidth();
-	s_rect.h = img->getHeight();
-
-	// target rectangle used for offset
-	SDL_Rect t_rect; //= (SDL_Rect) {x, y, s_rect.w, s_rect.h};
-	t_rect.x = x;
-	t_rect.y = y;
-	t_rect.w = s_rect.w;
-	t_rect.h = s_rect.h;
-
-	this->drawTexture(img->getTexture(), s_rect, t_rect, flags);
-}
-
 void Viewport::render() {
 	renderer->setDrawColor(0, 0, 0, 0);
 	renderer->clear();

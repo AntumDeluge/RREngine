@@ -132,34 +132,6 @@ public:
 	/** Overrides `ViewportImpl::setRenderMode`. */
 	void setRenderMode(GameMode::Mode mode) override;
 
-	/** Overrides `ViewportImpl::drawTexture`. */
-	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect, SDL_RendererFlip flags) override;
-
-	/**
-	 * Calls `ViewportImpl::drawTexture`.
-	 *
-	 * NOTE: why must this be explicitly declared?
-	 */
-	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) {
-		ViewportImpl::drawTexture(texture, s_rect, t_rect);
-	}
-
-	/** Overrides `ViewportImpl::drawImage`. */
-	void drawImage(Image* img, uint32_t sx, uint32_t sy, uint32_t s_width,
-			uint32_t t_height, uint32_t x, uint32_t y, SDL_RendererFlip flags) override;
-
-	/** Overrides `ViewportImpl::drawImage`. */
-	void drawImage(Image* img, uint32_t x, uint32_t y, SDL_RendererFlip flags) override;
-
-	/**
-	 * Calls `ViewportImpl::drawImage`.
-	 *
-	 * NOTE: why must this be explicitly declared?
-	 */
-	void drawImage(Image* img, uint32_t x, uint32_t y) {
-		ViewportImpl::drawImage(img, x, y);
-	}
-
 	/**
 	 * Renders the current scene, movie, menu, etc. on viewport.
 	 */
