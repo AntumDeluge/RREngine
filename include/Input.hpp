@@ -7,6 +7,7 @@
 #ifndef RRE_INPUT
 #define RRE_INPUT
 
+#include <cstdint> // *int*_t
 #include <memory> // std::unique_ptr, std::make_unique
 #include <mutex>
 #include <vector>
@@ -69,6 +70,18 @@ private:
 	 *   `true` if key is "left", "right", "up", or "down".
 	 */
 	bool keyIsDirection(SDL_Keycode key);
+
+	/**
+	 * Simulates releasing a keyboard key.
+	 *
+	 * NOTE: experimental, unused
+	 *
+	 * @param key
+	 *   Keycode of key to be released.
+	 * @param mod
+	 *   Optional modifier.
+	 */
+	void releaseKey(SDL_Keycode key, uint16_t mod=KMOD_NONE);
 
 public:
 	/** Default constructor. */

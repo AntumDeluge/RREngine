@@ -9,6 +9,10 @@
 #include <algorithm>
 #include <string>
 
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_timer.h>
+#include <SDL2/SDL_video.h>
+
 #include "GameLoop.hpp"
 #include "GlobalFunctions.hpp"
 #include "Input.hpp"
@@ -32,6 +36,19 @@ bool Input::keyIsDirection(SDL_Keycode key) {
 	return key == left || key == right || key == up || key == down;
 }
 
+void Input::releaseKey(SDL_Keycode key, uint16_t mod) {
+	SDL_KeyboardEvent event;
+	event.type = SDL_KEYUP;
+	event.timestamp = SDL_GetTicks64();
+	event.windowID = SDL_GetWindowID(GetGameWindow()->getElement());
+	event.state = SDL_RELEASED;
+	event.keysym.sym = key;
+	event.keysym.mod = mod;
+	event.keysym.scancode = SDL_GetScancodeFromKey(key);
+
+	SDL_PushEvent((SDL_Event*) &event);
+}
+
 void Input::onKeyDown(SDL_Keysym keysym) {
 	if (this->keyIsPressed(keysym.sym)) {
 		return;
@@ -42,6 +59,8 @@ void Input::onKeyDown(SDL_Keysym keysym) {
 			|| keyIsPressed(SDLK_RALT))) {
 		GetGameWindow()->toggleFullscreen();
 		GameLoop::setPaused(true, "KB_ALT_ENTER");
+		// FIXME: key release simulation works but subsequent presses are still processed until actually released
+		//releaseKey(keysym.sym, KMOD_ALT);
 		return;
 	}
 	// don't process game loop keyboard events while paused
