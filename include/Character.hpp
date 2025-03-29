@@ -11,6 +11,7 @@
 #include <string>
 
 #include "Callable.hpp"
+#include "EnergyBar.hpp"
 #include "Entity.hpp"
 #include "Logger.hpp"
 #include "Sprite.hpp"
@@ -29,11 +30,38 @@ private:
 
 	Callable* onDepletedInternal = nullptr;
 
+protected:
+	/** Visual representation of entity's current energy level. */
+	EnergyBar* energy_bar = nullptr;
+
 public:
 	Character(Sprite* sprite, uint32_t width, uint32_t height);
 	Character(Sprite* sprite);
 	Character(std::string sprite_id, uint32_t width, uint32_t height);
 	Character(std::string sprite_id);
+
+	/**
+	 * Copy constructor.
+	 *
+	 * @param other
+	 *   Character to be copied.
+	 */
+	Character(const Character& other): Entity(other) {
+		if (other.energy_bar) {
+			energy_bar = new EnergyBar(*other.energy_bar);
+		}
+	}
+
+	/** Default destructor. */
+	~Character() {
+		if (energy_bar) {
+			delete energy_bar;
+			energy_bar = nullptr;
+		}
+	}
+
+	/** Overrides `Entity::setBaseEnergy`. */
+	void setBaseEnergy(int32_t energy) override;
 
 	void recoverEnergy(uint32_t amount);
 
@@ -48,6 +76,9 @@ public:
 	void setOnDepleted(Callable* onDepleted) {
 		onDepletedInternal = onDepleted;
 	}
+
+	/** Overrides `Entity::render`. */
+	virtual void render(Renderer* ctx) override;
 };
 
 #endif /* RRE_CHARACTER */
