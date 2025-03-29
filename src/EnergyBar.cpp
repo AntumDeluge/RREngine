@@ -24,6 +24,7 @@ void EnergyBar::setInnerColor(uint8_t r, uint8_t g, uint8_t b) {
 }
 
 void EnergyBar::render(Renderer* ctx, int32_t energy) {
+	// FIXME: height should be based on `base_energy`
 	uint32_t height = 56;
 
 	ctx->save();
@@ -32,7 +33,7 @@ void EnergyBar::render(Renderer* ctx, int32_t energy) {
 	ctx->fillRect(x, y, 8, height);
 
 	int32_t offset_y = -2;
-	for (int32_t seg = 0; seg < base_energy; seg++) {
+	for (int32_t seg = 0; seg < energy; seg++) {
 		ctx->setDrawColor(color_outer);
 		ctx->fillRect(x + 1, y + height + offset_y, 6, 1);
 		ctx->setDrawColor(color_inner);
