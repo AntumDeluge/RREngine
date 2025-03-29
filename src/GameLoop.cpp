@@ -7,12 +7,7 @@
 
 #include "config.h"
 
-#include <cstdint> // uint*_t
-#if RRE_DEBUGGING
-#include <string>
-
-using namespace std;
-#endif
+#include <cstdint> // *int*_t
 
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_timer.h>
@@ -23,6 +18,8 @@ using namespace std;
 #include "SingletonRepo.hpp"
 #include "impl/ViewportImpl.hpp"
 
+using namespace std;
+
 
 namespace GameLoop {
 	// logger instance
@@ -32,7 +29,12 @@ namespace GameLoop {
 }
 
 // loop iterator flag
-bool quit = false;
+static bool quit = false;
+
+// pause loop flag
+static bool paused = false;
+// ID of source of pause
+static string pause_id = "";
 
 void GameLoop::start() {
 #if RRE_DEBUGGING
@@ -89,6 +91,9 @@ void GameLoop::start() {
 			}
 		}
 
+		// don't complete loop until unpaused
+		if (paused) continue;
+
 		const uint8_t* k_state = SDL_GetKeyboardState(NULL);
 
 		if (GameLoop::mode == GameMode::TITLE) {
@@ -135,4 +140,21 @@ GameMode::Mode GameLoop::getMode() {
 void GameLoop::setMode(GameMode::Mode mode) {
 	GameLoop::mode = mode;
 	GetViewport()->setRenderMode(GameLoop::mode);
+}
+
+void GameLoop::setPaused(bool pause, string id) {
+	paused = pause;
+	if (pause) {
+		pause_id = id;
+	} else {
+		// always reset when unpausing
+		pause_id = "";
+	}
+}
+
+bool GameLoop::isPaused(string id) {
+	if (id != "") {
+		return id == pause_id && paused;
+	}
+	return paused;
 }

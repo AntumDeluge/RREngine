@@ -8,6 +8,8 @@
 #ifndef RRE_GAME_LOOP
 #define RRE_GAME_LOOP
 
+#include <string>
+
 #include "enum/GameMode.hpp"
 
 
@@ -41,6 +43,28 @@ namespace GameLoop {
 	 *   New game mode.
 	 */
 	void setMode(GameMode::Mode mode);
+
+	/**
+	 * Toggles paused state of game loop.
+	 *
+	 * @param pause
+	 *   Set to `true` disable completion of loop, `false` to re-enable.
+	 * @param id
+	 *   Identifier of source of pause.
+	 */
+	void setPaused(bool pause, std::string id="");
+
+	/**
+	 * Checks paused state of game loop.
+	 *
+	 * If `id` defined, checks if paused by ID source.
+	 *
+	 * @param id
+	 *   Identifier of source of pause.
+	 * @return
+	 *   `true` if loop is considered to be paused.
+	 */
+	bool isPaused(std::string id="");
 };
 
 #endif /* RRE_GAME_LOOP */
