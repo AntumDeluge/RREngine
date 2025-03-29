@@ -194,7 +194,7 @@ void Viewport::drawTitle() {
 	int w, h;
 	SDL_QueryTexture(this->background, NULL, NULL, &w, &h);
 
-	this->drawTexture(this->background, (SDL_Rect) {0, 0, w, h},
+	renderer->drawTexture(this->background, (SDL_Rect) {0, 0, w, h},
 			(SDL_Rect) {0, 0, NATIVE_RES.first, NATIVE_RES.second});
 }
 
@@ -205,7 +205,7 @@ void Viewport::drawText() {
 		// TODO: need sprite class that defines text position
 		uint16_t center_x = (NATIVE_RES.first / 2) - (s->getWidth() / 2);
 		uint16_t center_y = (NATIVE_RES.second / 2) - (s_height / 2);
-		this->drawImage(s, center_x, center_y + y_offset);
+		renderer->drawImage(s, center_x, center_y + y_offset);
 
 		y_offset += s_height + 1;
 	}
@@ -231,6 +231,6 @@ void Viewport::drawFPS() {
 	cout << "FPS: " << this->current_fps << "                \r";
 #endif
 	if (this->fps_sprite != nullptr) {
-		this->drawImage(this->fps_sprite, 0, 0);
+		renderer->drawImage(this->fps_sprite, 0, 0);
 	}
 }
