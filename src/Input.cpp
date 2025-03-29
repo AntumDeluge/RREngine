@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <string>
 
+#include "GameLoop.hpp"
 #include "GlobalFunctions.hpp"
 #include "Input.hpp"
 #include "SingletonRepo.hpp"
@@ -37,9 +38,14 @@ void Input::onKeyDown(SDL_Keysym keysym) {
 	}
 	this->pressed_keys.push_back(keysym.sym);
 
-	if (keysym.sym == SDLK_RETURN && (keyIsPressed(SDLK_LALT) || keyIsPressed(SDLK_RALT))) {
+	if ((keysym.sym == SDLK_RETURN || keysym.sym == SDLK_KP_ENTER) && (keyIsPressed(SDLK_LALT)
+			|| keyIsPressed(SDLK_RALT))) {
 		GetGameWindow()->toggleFullscreen();
+		GameLoop::setPaused(true, "KB_ALT_ENTER");
+		return;
 	}
+	// don't process game loop keyboard events while paused
+	if (GameLoop::isPaused()) return;
 
 	if (keyIsDirection(keysym.sym)) {
 		uint8_t new_dir = GetPlayerDirection();
@@ -69,6 +75,14 @@ void Input::onKeyUp(SDL_Keysym keysym) {
 		return;
 	}
 	this->pressed_keys.erase(remove(this->pressed_keys.begin(), this->pressed_keys.end(), keysym.sym), this->pressed_keys.end());
+
+	if ((keysym.sym == SDLK_RETURN || keysym.sym == SDLK_KP_ENTER)
+			&& GameLoop::isPaused("KB_ALT_ENTER")) {
+		GameLoop::setPaused(false);
+		return;
+	}
+	// don't process game loop keyboard events while paused
+	if (GameLoop::isPaused()) return;
 
 	if (keyIsDirection(keysym.sym)) {
 		uint8_t new_dir = GetPlayerDirection();
