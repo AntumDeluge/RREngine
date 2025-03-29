@@ -65,6 +65,8 @@ public:
 	/**
 	 * Creates an entity with collision rectangle.
 	 *
+	 * TODO: remove & only use constructors passing sprite image parameter
+	 *
 	 * @param sprite_id
 	 *   String identifier to get sprite image from texture loader.
 	 * @param width
@@ -76,6 +78,8 @@ public:
 
 	/**
 	 * Creates an entity with collision rectangle using sprite's dimensions.
+	 *
+	 * TODO: remove & only use constructors passing sprite image parameter
 	 *
 	 * @param sprite_id
 	 *   String identifier to get sprite image from texture loader.
