@@ -112,6 +112,8 @@ public:
 	/**
 	 * Draws object sprite on viewport render.
 	 *
+	 * TODO: change parameter to `Renderer`
+	 *
 	 * @param viewport
 	 *   Viewport renderer.
 	 */
