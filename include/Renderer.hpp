@@ -128,6 +128,18 @@ public:
 	void setDrawColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
 	/**
+	 * Sets color with opaque alpha used for drawing operations.
+	 *
+	 * @param r
+	 *   Color's red value.
+	 * @param g
+	 *   Color's green value.
+	 * @param b
+	 *   Color's blue value.
+	 */
+	void setDrawColor(uint8_t r, uint8_t g, uint8_t b) { setDrawColor(r, g, b, 255); }
+
+	/**
 	 * Sets color used for drawing operations.
 	 *
 	 * @param color
