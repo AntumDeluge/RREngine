@@ -27,6 +27,8 @@ GameWindow::GameWindow() {
 	this->viewport = nullptr;
 	this->music = nullptr;
 	this->quit = false;
+	// initialize saved state
+	saveState();
 }
 
 void GameWindow::setTitle(const string title) {
@@ -138,9 +140,15 @@ void GameWindow::stopMusic() {
 }
 
 void GameWindow::toggleFullscreen() {
-	// FIXME: deforms window after restoring from fullscreen
-	SDL_SetWindowFullscreen(window, SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN ? 0
-			: SDL_WINDOW_FULLSCREEN);
+	if (!(SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN)) {
+		// remember window state before switching to fullscreen
+		saveState();
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+	} else {
+		SDL_SetWindowFullscreen(window, 0);
+		// restore window state after switching to windowed
+		restoreState();
+	}
 }
 
 void GameWindow::shutdown() {
@@ -150,4 +158,24 @@ void GameWindow::shutdown() {
 	IMG_Quit();
 	SDL_DestroyWindow(this->window);
 	SDL_Quit();
+}
+
+void GameWindow::saveState() {
+	SDL_GetWindowPosition(window, &window_state.x, &window_state.y);
+	SDL_GetWindowSize(window, &window_state.w, &window_state.h);
+}
+
+void GameWindow::restoreState() {
+	// workaround to restore correct window state
+	// try to force SDL to reinitialize window settings after display changes
+	SDL_DisplayMode display_mode;
+	SDL_GetCurrentDisplayMode(SDL_GetWindowDisplayIndex(window), &display_mode);
+	SDL_Window* temp = SDL_CreateWindow("temp", window_state.x, window_state.y,
+			window_state.w, window_state.h, SDL_WINDOW_SHOWN);
+	if (temp) {
+			SDL_SetWindowPosition(window, window_state.x, window_state.y);
+			SDL_SetWindowSize(window, window_state.w, window_state.h);
+			SDL_SetWindowDisplayMode(window, &display_mode);  // adjust window mode according to display
+			SDL_DestroyWindow(temp);
+	}
 }

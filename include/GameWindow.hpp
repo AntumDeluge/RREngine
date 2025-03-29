@@ -19,6 +19,13 @@
 
 
 /**
+ * Stores window state information.
+ */
+struct WindowState {
+	int x, y, w, h;
+};
+
+/**
  * Manages the window frame.
  */
 class GameWindow {
@@ -40,6 +47,9 @@ private:
 
 	/** The system window instance. */
 	SDL_Window* window;
+
+	/** Last known state of window. */
+	WindowState window_state;
 
 	/** Renderer where images are drawn. */
 	ViewportImpl* viewport;
@@ -144,8 +154,21 @@ public:
 	/** Stops music currently playing. */
 	void stopMusic();
 
-	/** Toggles between windowed & fullscreen mode. */
+	/**
+	 * Toggles between windowed & fullscreen mode.
+	 *
+	 * FIXME:
+	 * - viewport contents should be scaled
+	 * - text position is incorrect after toggle
+	 */
 	void toggleFullscreen();
+
+private:
+	/** Saves window position & dimensions. */
+	void saveState();
+
+	/** Restores window position & dimensions from saved state. */
+	void restoreState();
 };
 
 #endif /* RRE_GAME_WINDOW */
