@@ -92,6 +92,8 @@ public:
 	 *   Drawing points of target renderer.
 	 * @param flags
 	 *   Flags to flip image horizontally & vertically.
+	 * @deprecated
+	 *   Use `Renderer::drawTexture`.
 	 */
 	virtual void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect,
 			SDL_RendererFlip flags) = 0;
@@ -105,6 +107,8 @@ public:
 	 *   Drawing points of source image.
 	 * @param t_rect
 	 *   Drawing points of target renderer.
+	 * @deprecated
+	 *   Use `Renderer::drawTexture`.
 	 */
 	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) {
 		drawTexture(texture, s_rect, t_rect, SDL_FLIP_NONE);
@@ -119,6 +123,8 @@ public:
 	 *   Drawing points of both source image & target renderer.
 	 * @param flags
 	 *   Flags to flip image horizontally & vertically.
+	 * @deprecated
+	 *   Use `Renderer::drawTexture`.
 	 */
 	void drawTexture(SDL_Texture* texture, SDL_Rect rect, SDL_RendererFlip flags) {
 		drawTexture(texture, rect, rect, flags);
@@ -131,6 +137,8 @@ public:
 	 *   Texture reference.
 	 * @param rect
 	 *   Drawing points of both source image & target renderer.
+	 * @deprecated
+	 *   Use `Renderer::drawTexture`.
 	 */
 	void drawTexture(SDL_Texture* texture, SDL_Rect rect) {
 		drawTexture(texture, rect, rect, SDL_FLIP_NONE);
@@ -151,6 +159,8 @@ public:
 	 *   Pixel position to draw on vertical axis of viewport.
 	 * @param flags
 	 *   Flags to flip image horizontally & vertically.
+	 * @deprecated
+	 *   Use `Renderer::drawImage`.
 	 */
 	virtual void drawImage(Image* img, uint32_t sx, uint32_t sy, uint32_t s_width,
 			uint32_t t_height, uint32_t x, uint32_t y, SDL_RendererFlip flags) = 0;
@@ -168,6 +178,8 @@ public:
 	 *   Pixel position to draw on horizontal axis of viewport.
 	 * @param y
 	 *   Pixel position to draw on vertical axis of viewport.
+	 * @deprecated
+	 *   Use `Renderer::drawImage`.
 	 */
 	void drawImage(Image* img, uint32_t sx, uint32_t sy, uint32_t s_width,
 			uint32_t s_height, uint32_t x, uint32_t y) {
@@ -185,6 +197,8 @@ public:
 	 *   Pixel position to draw on vertical axis of viewport.
 	 * @param flags
 	 *   Flags to flip image horizontally & vertically.
+	 * @deprecated
+	 *   Use `Renderer::drawImage`.
 	 */
 	virtual void drawImage(Image* img, uint32_t x, uint32_t y, SDL_RendererFlip flags) = 0;
 
@@ -197,6 +211,8 @@ public:
 	 *   Pixel position to draw on horizontal axis of viewport.
 	 * @param y
 	 *   Pixel position to draw on vertical axis of viewport.
+	 * @deprecated
+	 *   Use `Renderer::drawImage`.
 	 */
 	void drawImage(Image* img, uint32_t x, uint32_t y) {
 		drawImage(img, x, y, SDL_FLIP_NONE);

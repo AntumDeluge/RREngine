@@ -16,6 +16,7 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_surface.h>
 
+#include "Image.hpp"
 #include "Logger.hpp"
 
 
@@ -118,6 +119,72 @@ public:
 	 *   Flags to flip image horizontally & vertically.
 	 */
 	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect, SDL_RendererFlip flags);
+
+	/**
+	 * Draws an image on the rendering target.
+	 *
+	 * @param img
+	 *   Image to be drawn.
+	 * @param sx
+	 * @param sy
+	 * @param s_width
+	 * @param s_height
+	 * @param x
+	 *   Pixel position to draw on horizontal axis.
+	 * @param y
+	 *   Pixel position to draw on vertical axis.
+	 * @param flags
+	 *   Flags to flip image horizontally & vertically.
+	 */
+	void drawImage(Image* img, uint32_t sx, uint32_t sy, uint32_t s_width, uint32_t s_height,
+			uint32_t x, uint32_t y, SDL_RendererFlip flags);
+
+	/**
+	 * Draws an image on the rendering target.
+	 *
+	 * @param img
+	 *   Image to be drawn.
+	 * @param sx
+	 * @param sy
+	 * @param s_width
+	 * @param s_height
+	 * @param x
+	 *   Pixel position to draw on horizontal axis of viewport.
+	 * @param y
+	 *   Pixel position to draw on vertical axis of viewport.
+	 */
+	void drawImage(Image* img, uint32_t sx, uint32_t sy, uint32_t s_width,
+		uint32_t s_height, uint32_t x, uint32_t y) {
+	drawImage(img, sx, sy, s_width, s_height, x, y, SDL_FLIP_NONE);
+}
+
+	/**
+	 * Draws an image on the rendering target.
+	 *
+	 * @param img
+	 *   Image to be drawn.
+	 * @param sx
+	 * @param sy
+	 * @param s_width
+	 * @param s_height
+	 * @param x
+	 *   Pixel position to draw on horizontal axis.
+	 * @param y
+	 *   Pixel position to draw on vertical axis.
+	 */
+	void drawImage(Image* img, uint32_t x, uint32_t y, SDL_RendererFlip flags);
+
+	/**
+	 * Draws an image on the rendering target.
+	 *
+	 * @param img
+	 *   Image to be drawn.
+	 * @param x
+	 *   Pixel position to draw on horizontal axis.
+	 * @param y
+	 *   Pixel position to draw on vertical axis.
+	 */
+	void drawImage(Image* img, uint32_t x, uint32_t y) { drawImage(img, x, y, SDL_FLIP_NONE); }
 
 	/**
 	 * Sets scaling factor of rendering target.
