@@ -3,3 +3,4 @@
 - Add Lua scripting support.
 - Parse C++ doc strings to Markdown for MkDocs integration.
 - support wide character strings
+- Port to SDL3.
