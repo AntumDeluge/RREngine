@@ -42,5 +42,5 @@ void GameVisuals::renderScene() {
 	if (!scene) {
 		return;
 	}
-	scene->render(GetViewport());
+	scene->render(GetRenderer());
 }

@@ -11,8 +11,8 @@
 
 #include "HashObject.hpp"
 #include "Logger.hpp"
+#include "Renderer.hpp"
 #include "impl/SceneImpl.hpp"
-#include "impl/ViewportImpl.hpp"
 
 
 /**
@@ -112,12 +112,10 @@ public:
 	/**
 	 * Draws object sprite on viewport render.
 	 *
-	 * TODO: change parameter to `Renderer`
-	 *
-	 * @param viewport
-	 *   Viewport renderer.
+	 * @param ctx
+	 *   Rendering context.
 	 */
-	virtual void render(ViewportImpl* viewport) = 0;
+	virtual void render(Renderer* ctx) = 0;
 };
 
 #endif /* RRE_OBJECT */

@@ -14,7 +14,7 @@ using namespace std;
 
 Logger Movie::logger = Logger::getLogger("Movie");
 
-void Movie::render(ViewportImpl* viewport) {
+void Movie::render(Renderer* ctx) {
 
 	uint16_t frames_count = this->frames.size();
 	if (!this->playing || frames_count == 0) {
@@ -39,7 +39,7 @@ void Movie::render(ViewportImpl* viewport) {
 		frame = this->frames[this->frame_index];
 	}
 
-	viewport->drawImage(frame.second, 0, 0);
+	ctx->drawImage(frame.second, 0, 0);
 
 	uint16_t y_offset = 0;
 	for (Sprite* s: this->text_sprites) {
@@ -47,7 +47,7 @@ void Movie::render(ViewportImpl* viewport) {
 		// TODO: need sprite class that defines text position
 		uint16_t center_x = (NATIVE_RES.first / 2) - (s->getWidth() / 2);
 		uint16_t center_y = (NATIVE_RES.second / 2) - (s_height / 2);
-		viewport->drawImage(s, center_x, center_y + y_offset);
+		ctx->drawImage(s, center_x, center_y + y_offset);
 
 		y_offset += s_height + 1;
 	}

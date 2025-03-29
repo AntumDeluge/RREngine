@@ -4,13 +4,12 @@
  * See: LICENSE.txt
  */
 
-#include "Logger.hpp"
 #include "Sprite.hpp"
 
 
 Logger Sprite::logger = Logger::getLogger("Sprite");
 
-void Sprite::render(ViewportImpl* viewport, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
+void Sprite::render(Renderer* ctx, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
 	if (!ready()) {
 		logger.warn("Sprite texture not ready");
 		return;
@@ -20,6 +19,6 @@ void Sprite::render(ViewportImpl* viewport, uint32_t x, uint32_t y, SDL_Renderer
 	uint32_t index_x = tile_index % cols;
 	uint32_t index_y = tile_index / cols;
 
-	viewport->drawImage(this,
-			index_x*tile_width, index_y*tile_height, tile_width, tile_height, x, y, flags);
+	ctx->drawImage(this, index_x*tile_width, index_y*tile_height, tile_width, tile_height, x, y,
+			flags);
 }

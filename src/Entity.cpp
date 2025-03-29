@@ -205,7 +205,7 @@ void Entity::onClipBottom() {
 	// TODO:
 }
 
-void Entity::render(ViewportImpl* viewport) {
+void Entity::render(Renderer* ctx) {
 	if (!hasSprite()) {
 		return;
 	}
@@ -224,7 +224,7 @@ void Entity::render(ViewportImpl* viewport) {
 	draw_rect.x -= scene->getOffsetX();
 	draw_rect.y -= scene->getOffsetY();
 
-	sprite->render(viewport, draw_rect.x - offset_x, draw_rect.y - offset_y, flags);
+	sprite->render(ctx, draw_rect.x - offset_x, draw_rect.y - offset_y, flags);
 
 	if (energy_bar) {
 		energy_bar->render(GetRenderer(), energy);
@@ -232,10 +232,9 @@ void Entity::render(ViewportImpl* viewport) {
 
 #if RRE_DEBUGGING
 	// debug collision box & sprite alignment
-	Renderer* renderer = GetRenderer();
-	renderer->save();
-	renderer->setDrawColor(0, 255, 0, 255);
-	renderer->drawRect(draw_rect);
-	renderer->restore();
+	ctx->save();
+	ctx->setDrawColor(0, 255, 0, 255);
+	ctx->drawRect(draw_rect);
+	ctx->restore();
 #endif
 }

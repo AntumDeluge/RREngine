@@ -15,10 +15,10 @@
 #include "EnergyBar.hpp"
 #include "Logger.hpp"
 #include "Object.hpp"
+#include "Renderer.hpp"
 #include "Sprite.hpp"
 #include "enum/FaceDir.hpp"
 #include "enum/MomentumDir.hpp"
-#include "impl/ViewportImpl.hpp"
 
 
 /**
@@ -292,15 +292,8 @@ public:
 	 */
 	bool hasSprite() { return sprite != nullptr && sprite->ready(); }
 
-	/**
-	 * Draws entity sprite on viewport render.
-	 *
-	 * Overrides `Object.render`.
-	 *
-	 * @param viewport
-	 *   Viewport renderer.
-	 */
-	void render(ViewportImpl* viewport) override;
+	/** Overrides `Object::render`. */
+	void render(Renderer* ctx) override;
 };
 
 

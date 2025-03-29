@@ -45,7 +45,7 @@ Animation* AnimatedSprite::getDefaultMode() {
 }
 
 
-void AnimatedSprite::render(ViewportImpl* viewport, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
+void AnimatedSprite::render(Renderer* ctx, uint32_t x, uint32_t y, SDL_RendererFlip flags) {
 	if (!ready()) {
 		logger.warn("Animated sprite texture not ready");
 		return;
@@ -56,6 +56,6 @@ void AnimatedSprite::render(ViewportImpl* viewport, uint32_t x, uint32_t y, SDL_
 	uint32_t index_x = tile_index % cols;
 	uint32_t index_y = tile_index / cols;
 
-	viewport->drawImage(this,
-			index_x*tile_width, index_y*tile_height, tile_width, tile_height, x, y, flags);
+	ctx->drawImage(this, index_x*tile_width, index_y*tile_height, tile_width, tile_height, x, y,
+			flags);
 }

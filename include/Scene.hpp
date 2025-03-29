@@ -16,9 +16,9 @@
 #include "Logger.hpp"
 #include "Object.hpp"
 #include "Player.hpp"
+#include "Renderer.hpp"
 #include "Tileset.hpp"
 #include "impl/SceneImpl.hpp"
-#include "impl/ViewportImpl.hpp"
 
 
 /**
@@ -156,10 +156,10 @@ public:
 	/**
 	 * Draws scene on renderer.
 	 *
-	 * @param viewport
-	 *   Viewport renderer.
+	 * @param ctx
+	 *   Rendering target context.
 	 */
-	void render(ViewportImpl* viewport) override;
+	void render(Renderer* ctx) override;
 
 	/**
 	 * Draws a tile layer on renderer.
@@ -168,12 +168,12 @@ public:
 	 * - build single image for rendering from tiles before drawing instead of drawing individual tiles (excluding animated ones)
 	 * - support flipped tiles
 	 *
-	 * @param viewport
-	 *   Viewport renderer.
+	 * @param ctx
+	 *   Rendering target context.
 	 * @param gids
 	 *   Layer definition.
 	 */
-	void renderTileLayer(ViewportImpl* viewport, LayerDefinition ldef);
+	void renderTileLayer(Renderer* ctx, LayerDefinition ldef);
 
 	/** Overrides `SceneImpl::getWidth`. */
 	uint32_t getWidth() override { return width; }

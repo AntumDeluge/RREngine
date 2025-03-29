@@ -42,28 +42,28 @@ void Scene::logic() {
 	}
 }
 
-void Scene::render(ViewportImpl* viewport) {
+void Scene::render(Renderer* ctx) {
 	// TODO: build layers as single image instead of drawing each tile individually
-	renderTileLayer(viewport, background);
-	renderTileLayer(viewport, terrain);
-	renderTileLayer(viewport, collision);
+	renderTileLayer(ctx, background);
+	renderTileLayer(ctx, terrain);
+	renderTileLayer(ctx, collision);
 
 	// TODO: render other layers behind objects
 
 	for (Object* obj: this->objects) {
-		obj->render(viewport);
+		obj->render(ctx);
 	}
 	// player instance not in object list
 	if (player != nullptr) {
-		player->render(viewport);
+		player->render(ctx);
 	}
 
-	renderTileLayer(viewport, foreground);
+	renderTileLayer(ctx, foreground);
 
 	// TODO: render other layers in front of objects
 }
 
-void Scene::renderTileLayer(ViewportImpl* viewport, LayerDefinition ldef) {
+void Scene::renderTileLayer(Renderer* ctx, LayerDefinition ldef) {
 	int32_t g_offset_x = 0, g_offset_y = 0;
 	for (TileDefinition tdef: ldef) {
 		Tileset* tileset = nullptr;
@@ -81,7 +81,7 @@ void Scene::renderTileLayer(ViewportImpl* viewport, LayerDefinition ldef) {
 			uint32_t index_x = tile_index % cols;
 			uint32_t index_y = tile_index / cols;
 
-			viewport->drawImage(tileset, index_x*tile_width, index_y*tile_height, tile_width, tile_height,
+			ctx->drawImage(tileset, index_x*tile_width, index_y*tile_height, tile_width, tile_height,
 					g_offset_x - offset_x, g_offset_y - offset_y);
 		}
 

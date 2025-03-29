@@ -19,8 +19,8 @@
 #include "FontMap.hpp"
 #include "Image.hpp"
 #include "Logger.hpp"
+#include "Renderer.hpp"
 #include "Sprite.hpp"
-#include "impl/ViewportImpl.hpp"
 
 
 /**
@@ -89,10 +89,10 @@ public:
 	/**
 	 * Draws current frame onto the renderer.
 	 *
-	 * @param viewport
-	 *   Viewport renderer.
+	 * @param ctx
+	 *   Rendering target context.
 	 */
-	void render(ViewportImpl* viewport);
+	void render(Renderer* ctx);
 
 	/**
 	 * Handles callback when movie finishes.

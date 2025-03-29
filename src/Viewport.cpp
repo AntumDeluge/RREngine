@@ -164,7 +164,7 @@ void Viewport::render() {
 			GameLoop::setMode(GameMode::TITLE);
 			return; // XXX: may be causing flicker between draws
 		} else {
-			this->movie->render(this);
+			this->movie->render(renderer);
 		}
 	}
 	this->drawText();
