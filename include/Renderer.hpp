@@ -121,7 +121,49 @@ public:
 	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect, SDL_RendererFlip flags);
 
 	/**
-	 * Draws an image on the rendering target.
+	 * Draws a texture on rendering target.
+	 *
+	 * @param texture
+	 *   Texture reference to draw.
+	 * @param s_rect
+	 *   Drawing points of source image.
+	 * @param t_rect
+	 *   Drawing points of target renderer.
+	 * @deprecated
+	 *   Use `Renderer::drawTexture`.
+	 */
+	void drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect) {
+		drawTexture(texture, s_rect, t_rect, SDL_FLIP_NONE);
+	}
+
+	/**
+	 * Draws a texture on rendering target.
+	 *
+	 * @param texture
+	 *   Texture reference.
+	 * @param rect
+	 *   Drawing points of both source image & target renderer.
+	 * @param flags
+	 *   Flags to flip image horizontally & vertically.
+	 */
+	void drawTexture(SDL_Texture* texture, SDL_Rect rect, SDL_RendererFlip flags) {
+		drawTexture(texture, rect, rect, flags);
+	}
+
+	/**
+	 * Draws a texture on rendering target.
+	 *
+	 * @param texture
+	 *   Texture reference.
+	 * @param rect
+	 *   Drawing points of both source image & target renderer.
+	 */
+	void drawTexture(SDL_Texture* texture, SDL_Rect rect) {
+		drawTexture(texture, rect, rect, SDL_FLIP_NONE);
+	}
+
+	/**
+	 * Draws an image on rendering target.
 	 *
 	 * @param img
 	 *   Image to be drawn.
@@ -140,7 +182,7 @@ public:
 			uint32_t x, uint32_t y, SDL_RendererFlip flags);
 
 	/**
-	 * Draws an image on the rendering target.
+	 * Draws an image on rendering target.
 	 *
 	 * @param img
 	 *   Image to be drawn.
@@ -159,7 +201,7 @@ public:
 }
 
 	/**
-	 * Draws an image on the rendering target.
+	 * Draws an image on rendering target.
 	 *
 	 * @param img
 	 *   Image to be drawn.
@@ -175,7 +217,7 @@ public:
 	void drawImage(Image* img, uint32_t x, uint32_t y, SDL_RendererFlip flags);
 
 	/**
-	 * Draws an image on the rendering target.
+	 * Draws an image on rendering target.
 	 *
 	 * @param img
 	 *   Image to be drawn.
