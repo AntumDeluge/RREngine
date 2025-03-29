@@ -84,6 +84,28 @@ public:
 	void drawRect(int32_t x, int32_t y, int32_t width, int32_t height);
 
 	/**
+	 * Fills rectangle on current rendering target with drawing color.
+	 *
+	 * @param rect
+	 *   Rectangle dimensions.
+	 */
+	void fillRect(SDL_Rect rect);
+
+	/**
+	 * Fills rectangle on current rendering target with drawing color.
+	 *
+	 * @param x
+	 *   Left position on horizontal axis.
+	 * @param y
+	 *   Top position on vertical axis.
+	 * @param width
+	 *   Rectangle width.
+	 * @param height
+	 *   Rectangle height.
+	 */
+	void fillRect(int32_t x, int32_t y, int32_t width, int32_t height);
+
+	/**
 	 * Draws a texture on rendering target.
 	 *
 	 * @param texture

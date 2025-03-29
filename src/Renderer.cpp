@@ -60,6 +60,14 @@ void Renderer::drawRect(int32_t x, int32_t y, int32_t width, int32_t height) {
 	drawRect({x, y, width, height});
 }
 
+void Renderer::fillRect(SDL_Rect rect) {
+	SDL_RenderFillRect(internal, &rect);
+}
+
+void Renderer::fillRect(int32_t x, int32_t y, int32_t width, int32_t height) {
+	fillRect({x, y, width, height});
+}
+
 void Renderer::drawTexture(SDL_Texture* texture, SDL_Rect s_rect, SDL_Rect t_rect,
 		SDL_RendererFlip flags) {
 	if (texture == nullptr) {
