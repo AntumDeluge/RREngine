@@ -106,4 +106,5 @@ public:
 	 */
 	virtual bool collidesWall(uint8_t dir, SDL_Rect rect) = 0;
 };
+
 #endif /* RRE_SCENE_IMPL */
