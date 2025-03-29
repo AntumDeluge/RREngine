@@ -11,8 +11,14 @@
 
 #include "Entity.hpp"
 #include "Logger.hpp"
+#include "Sprite.hpp"
 
 
+/**
+ * A playable character.
+ *
+ * TODO: derive from Character class
+ */
 class Player: public Entity {
 private:
 	static Logger logger;
@@ -24,12 +30,56 @@ private:
 
 public:
 	/**
+	 * Creates an entity with collision rectangle.
+	 *
+	 * @param sprite
+	 *   Entity's sprite to draw on viewport (`null` to draw nothing).
+	 * @param width
+	 *   Entity's pixel width.
+	 * @param height
+	 *   Entity's pixel height.
+	 */
+	Player(Sprite* sprite, uint32_t width, uint32_t height);
+
+	/**
+	 * Creates an entity with collision rectangle using sprite's dimensions.
+	 *
+	 * @param sprite
+	 *   Entity's sprite to draw on viewport (`null` to draw nothing).
+	 */
+	Player(Sprite* sprite);
+
+	/**
+	 * Creates an entity with collision rectangle.
+	 *
+	 * TODO: remove & only use constructors passing sprite image parameter
+	 *
+	 * @param sprite_id
+	 *   String identifier to get sprite image from texture loader.
+	 * @param width
+	 *   Entity's pixel width.
+	 * @param height
+	 *   Entity's pixel height.
+	 */
+	Player(std::string sprite_id, uint32_t width, uint32_t height);
+
+	/**
+	 * Creates an entity with collision rectangle using sprite's dimensions.
+	 *
+	 * TODO: remove & only use constructors passing sprite image parameter
+	 *
+	 * @param sprite_id
+	 *   String identifier to get sprite image from texture loader.
+	 */
+	Player(std::string sprite_id);
+
+	/**
 	 * Copy constructor.
 	 *
 	 * @param other
 	 *   Player to be copied.
 	 */
-	Player(const Player& other): Entity(other) {}
+	Player(const Player& other);
 
 	/** Overrides `Entity::logic`. */
 	void logic() override;

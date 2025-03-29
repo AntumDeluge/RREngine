@@ -12,6 +12,7 @@
 
 #include <SDL2/SDL_rect.h>
 
+#include "EnergyBar.hpp"
 #include "Logger.hpp"
 #include "Object.hpp"
 #include "Sprite.hpp"
@@ -40,6 +41,17 @@ protected:
 	uint8_t dir = MomentumDir::NONE;
 	/** Rate of momentum. */
 	float momentum = 0;
+
+	/**
+	 * Entity's current energy level.
+	 *
+	 * FIXME: change to float?
+	 *
+	 * TODO: move to Character or Player class
+	 */
+	int32_t energy;
+	/** Visual representation of entity's current energy level. */
+	EnergyBar* energy_bar = nullptr;
 
 public:
 	/**
@@ -95,6 +107,10 @@ public:
 	Entity(const Entity& other): Object(other) {
 		sprite = other.sprite;
 		rect = other.rect;
+		energy = other.energy;
+		if (other.energy_bar) {
+			energy_bar = new EnergyBar(*other.energy_bar);
+		}
 	}
 
 	/** Default constructor. */
@@ -103,6 +119,10 @@ public:
 	/** Default destructor. */
 	~Entity() {
 		// sprite instance is unique pointer so shouldn't need to destroy here
+		if (energy_bar) {
+			delete energy_bar;
+			energy_bar = nullptr;
+		}
 	}
 
 	/** Overrides `Object.logic`. */
@@ -213,6 +233,18 @@ public:
 	 *   Gravity force rate.
 	 */
 	float getGravity();
+
+	/**
+	 * Sets maximum energy value for this entity.
+	 *
+	 * TODO:
+	 * - override in Player or Character class
+	 * - set energy bar in Player or Character class (most entities won't have an energy bar to display)
+	 *
+	 * @param energy
+	 *   Maximum energy.
+	 */
+	void setBaseEnergy(int32_t energy);
 
 	/**
 	 * Checks if this entity collides on a horizontal or vertical line.

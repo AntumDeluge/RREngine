@@ -135,6 +135,11 @@ float Entity::getGravity() {
 	return 1.0;
 }
 
+void Entity::setBaseEnergy(int32_t energy) {
+	set("base_energy", energy);
+	energy_bar = new EnergyBar(energy, 24, 25);
+}
+
 bool Entity::collides(uint32_t x, uint32_t y, uint32_t len, bool horizontal) {
 	// this entity's right-most & bottom-most pixel collision
 	uint32_t right = this->rect.x + this->rect.w;
@@ -220,6 +225,10 @@ void Entity::render(ViewportImpl* viewport) {
 	draw_rect.y -= scene->getOffsetY();
 
 	sprite->render(viewport, draw_rect.x - offset_x, draw_rect.y - offset_y, flags);
+
+	if (energy_bar) {
+		energy_bar->render(GetRenderer(), energy);
+	}
 
 #if RRE_DEBUGGING
 	// debug collision box & sprite alignment
