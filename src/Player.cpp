@@ -10,32 +10,32 @@
 
 Logger Player::logger = Logger::getLogger("Player");
 
-Player::Player(Sprite* sprite, uint32_t width, uint32_t height): Entity(sprite, width, height) {
+Player::Player(Sprite* sprite, uint32_t width, uint32_t height): Character(sprite, width, height) {
 	setBaseEnergy(28);
 	energy_bar->setOuterColor(228, 229, 148);
 	energy_bar->setInnerColor(255, 254, 255);
 }
 
-Player::Player(Sprite* sprite): Entity(sprite) {
+Player::Player(Sprite* sprite): Character(sprite) {
 	setBaseEnergy(28);
 	energy_bar->setOuterColor(228, 229, 148);
 	energy_bar->setInnerColor(255, 254, 255);
 }
 
 Player::Player(std::string sprite_id, uint32_t width, uint32_t height)
-: Entity(sprite_id, width, height) {
+: Character(sprite_id, width, height) {
 	setBaseEnergy(28);
 	energy_bar->setOuterColor(228, 229, 148);
 	energy_bar->setInnerColor(255, 254, 255);
 }
 
-Player::Player(std::string sprite_id): Entity(sprite_id) {
+Player::Player(std::string sprite_id): Character(sprite_id) {
 	setBaseEnergy(28);
 	energy_bar->setOuterColor(228, 229, 148);
 	energy_bar->setInnerColor(255, 254, 255);
 }
 
-Player::Player(const Player& other): Entity(other) {
+Player::Player(const Player& other): Character(other) {
 	if (!energy_bar) {
 		setBaseEnergy(28);
 		energy_bar->setOuterColor(228, 229, 148);

@@ -9,7 +9,7 @@
 
 #include <cstdint> // *int*_t
 
-#include "Entity.hpp"
+#include "Character.hpp"
 #include "Logger.hpp"
 #include "Sprite.hpp"
 
@@ -19,7 +19,7 @@
  *
  * TODO: derive from Character class
  */
-class Player: public Entity {
+class Player: public Character {
 private:
 	static Logger logger;
 
