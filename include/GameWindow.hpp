@@ -143,6 +143,9 @@ public:
 
 	/** Stops music currently playing. */
 	void stopMusic();
+
+	/** Toggles between windowed & fullscreen mode. */
+	void toggleFullscreen();
 };
 
 #endif /* RRE_GAME_WINDOW */

@@ -137,6 +137,12 @@ void GameWindow::stopMusic() {
 	this->music = nullptr;
 }
 
+void GameWindow::toggleFullscreen() {
+	// FIXME: deforms window after restoring from fullscreen
+	SDL_SetWindowFullscreen(window, SDL_GetWindowFlags(window) & SDL_WINDOW_FULLSCREEN ? 0
+			: SDL_WINDOW_FULLSCREEN);
+}
+
 void GameWindow::shutdown() {
 	this->stopMusic();
 	Mix_CloseAudio();

@@ -11,6 +11,7 @@
 
 #include "GlobalFunctions.hpp"
 #include "Input.hpp"
+#include "SingletonRepo.hpp"
 #include "enum/MomentumDir.hpp"
 
 using namespace std;
@@ -35,6 +36,10 @@ void Input::onKeyDown(SDL_Keysym keysym) {
 		return;
 	}
 	this->pressed_keys.push_back(keysym.sym);
+
+	if (keysym.sym == SDLK_RETURN && (keyIsPressed(SDLK_LALT) || keyIsPressed(SDLK_RALT))) {
+		GetGameWindow()->toggleFullscreen();
+	}
 
 	if (keyIsDirection(keysym.sym)) {
 		uint8_t new_dir = GetPlayerDirection();
