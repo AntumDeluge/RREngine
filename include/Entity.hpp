@@ -89,7 +89,7 @@ public:
 	~Entity() {}
 
 	/** Overrides `Object.logic`. */
-	void logic() override;
+	virtual void logic() override;
 
 	/** Overrides `Object.equals`. */
 	bool equals(const Object& obj) const override {
