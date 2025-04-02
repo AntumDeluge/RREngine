@@ -36,11 +36,11 @@ void Character::setBaseEnergy(int32_t energy) {
 	energy_bar = new EnergyBar(energy, 24, 25);
 }
 
-void Character::recoverEnergy(uint32_t amount) {
-	energy = min(energy + amount, max_energy);
+void Character::recoverEnergy(float amount) {
+	energy = min(energy + amount, getUInt("base_energy"));
 }
 
-void Character::depleteEnergy(uint32_t amount) {
+void Character::depleteEnergy(float amount) {
 	energy = amount > energy ? 0 : energy - amount;
 	if (energy == 0) {
 		onDepleted();

@@ -24,10 +24,6 @@ class Character: public Entity {
 private:
 	static Logger logger;
 
-	/** Default energy level. */
-	uint32_t max_energy = 28;
-	uint32_t energy = 28;
-
 	Callable* onDepletedInternal = nullptr;
 
 protected:
@@ -66,9 +62,9 @@ public:
 	/** Overrides `Entity::setBaseEnergy`. */
 	void setBaseEnergy(int32_t energy) override;
 
-	void recoverEnergy(uint32_t amount);
+	void recoverEnergy(float amount);
 
-	void depleteEnergy(uint32_t amount);
+	void depleteEnergy(float amount);
 
 	void onDepleted() {
 		if (onDepletedInternal != nullptr) {

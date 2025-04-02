@@ -23,6 +23,9 @@ Entity::Entity(shared_ptr<Sprite> sprite, uint32_t width, uint32_t height) {
 	this->rect.y = 0;
 	this->rect.w = width;
 	this->rect.h = height;
+	// default energy
+	energy = 1.0;
+	set("base_energy", energy);
 }
 
 Entity::Entity(shared_ptr<Sprite> sprite) {
@@ -37,6 +40,9 @@ Entity::Entity(shared_ptr<Sprite> sprite) {
 		this->rect.w = 0;
 		this->rect.h = 0;
 	}
+	// default value for energy & base energy
+	energy = 1.0;
+	set("base_energy", energy);
 }
 
 

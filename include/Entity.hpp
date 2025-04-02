@@ -41,12 +41,8 @@ protected:
 	/** Rate of momentum. */
 	float momentum = 0;
 
-	/**
-	 * Entity's current energy level.
-	 *
-	 * FIXME: change to float?
-	 */
-	int32_t energy;
+	/** Entity's current energy level. */
+	float energy;
 
 public:
 	/**
