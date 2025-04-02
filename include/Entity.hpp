@@ -78,7 +78,8 @@ public:
 	Entity(const Entity& other): Object(other) {
 		sprite = other.sprite;
 		rect = other.rect;
-		energy = other.energy;
+		// base_energy attribute should have already been copied in super constructor
+		energy = getUInt("base_energy");
 	}
 
 	/** Default constructor. */
