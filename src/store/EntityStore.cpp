@@ -14,6 +14,7 @@
 #include "Path.hpp"
 #include "factory/EntityFactory.hpp"
 #include "store/EntityStore.hpp"
+#include "template/EntityTemplate.hpp"
 
 using namespace pugi;
 using namespace std;
@@ -22,7 +23,7 @@ using namespace std;
 static Logger _logger = Logger::getLogger("EntityStore");
 
 // base entities to make copies
-static unordered_map<string, Entity> _cache;
+static unordered_map<string, EntityTemplate> _cache;
 
 static void _onConfigError(string title, string msg) {
 	if (!title.empty()) {
@@ -65,13 +66,7 @@ bool EntityStore::load() {
 			_onConfigError("XML Parsing Error", "Entity without \"id\" attribute: " + conf);
 			return false;
 		}
-		string id = attr_id.value();
-		Entity e = EntityFactory::build(el);
-		if (NullEntity.equals(e)) {
-			_onConfigError("Failed to build Entity \"" + id + "\": " + conf);
-			return false;
-		}
-		_cache[id] = e;
+		_cache[attr_id.value()] = EntityFactory::build(el);
 
 		el = el.next_sibling("entity");
 	}
@@ -84,5 +79,21 @@ Entity EntityStore::get(string id) {
 		_logger.error("Entity \"", id, "\" not available");
 		return NullEntity;
 	}
-	return _cache[id];
+	return *_cache[id].build().get();
+}
+
+Character EntityStore::getCharacter(string id) {
+	if (_cache.find(id) == _cache.end()) {
+		_logger.error("Character \"", id, "\" not available");
+		return *dynamic_cast<const Character*>(&NullEntity);
+	}
+	return *_cache[id].buildCharacter().get();
+}
+
+Player EntityStore::getPlayer(string id) {
+	if (_cache.find(id) == _cache.end()) {
+		_logger.error("Player \"", id, "\" not available");
+		return *dynamic_cast<const Player*>(&NullEntity);
+	}
+	return *_cache[id].buildPlayer().get();
 }

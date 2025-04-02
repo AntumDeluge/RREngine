@@ -11,7 +11,7 @@
 
 #include <pugixml.hpp>
 
-#include "Entity.hpp"
+#include "template/EntityTemplate.hpp"
 
 
 namespace EntityFactory {
@@ -22,9 +22,9 @@ namespace EntityFactory {
 	 * @param el
 	 *   Parsed entity element.
 	 * @return
-	 *   Unique entity instance.
+	 *   Entity template.
 	 */
-	Entity build(pugi::xml_node el);
+	EntityTemplate build(pugi::xml_node el);
 }
 
 #endif /* RRE_ENTITY_FACTORY */

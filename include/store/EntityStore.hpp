@@ -9,7 +9,9 @@
 
 #include <string>
 
+#include "Character.hpp"
 #include "Entity.hpp"
+#include "Player.hpp"
 
 
 /**
@@ -28,13 +30,42 @@ namespace EntityStore {
 	/**
 	 * Retrieves an entity from cache.
 	 *
+	 * FIXME:
+	 * - return `shared_ptr`
+	 *
 	 * @param id
 	 *   Entity identifier.
 	 * @return
 	 *   Copy of an entity instance. If not found, `NullEntity` is returned.
-	 *   FIXME: player entities should be unique instead of a copy
 	 */
 	Entity get(std::string id);
+
+	/**
+	 * Retrieves a character from cache.
+	 *
+	 * FIXME:
+	 * - return `shared_ptr`
+	 *
+	 * @param id
+	 *   Character identifier.
+	 * @return
+	 *   Copy of an character instance. If not found, `NullEntity` is returned.
+	 */
+	Character getCharacter(std::string id);
+
+	/**
+	 * Retrieves a player from cache.
+	 *
+	 * FIXME:
+	 * - return `shared_ptr`
+	 * - should `Player` instances by `unique_ptr`?
+	 *
+	 * @param id
+	 *   Player identifier.
+	 * @return
+	 *   Copy of an player instance. If not found, `NullEntity` is returned.
+	 */
+	Player getPlayer(std::string id);
 }
 
 #endif /* RRE_ENTITY_STORE */

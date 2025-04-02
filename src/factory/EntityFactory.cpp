@@ -35,8 +35,8 @@ static void _onConfigError(string msg) {
 	_onConfigError("", msg);
 }
 
-Entity EntityFactory::build(xml_node el) {
-	Entity entity;
+EntityTemplate EntityFactory::build(xml_node el) {
+	EntityTemplate entity = EntityTemplate();
 
 	shared_ptr<Sprite> sprite = nullptr;
 	xml_attribute attr_sprite = el.attribute("sprite");
@@ -45,6 +45,7 @@ Entity EntityFactory::build(xml_node el) {
 	} else {
 		sprite = SpriteStore::get(attr_sprite.value());
 	}
+	entity.setSprite(sprite);
 
 	uint32_t width = 0, height = 0;
 	xml_attribute attr_width = el.attribute("width");
@@ -55,13 +56,8 @@ Entity EntityFactory::build(xml_node el) {
 	if (!attr_height.empty()) {
 		StrUtil::parseUInt(height, attr_height.value());
 	}
-
-	if (width == 0 or height == 0) {
-		_logger.warn("Entity dimensions not configured correctly; falling back to sprite dimensions");
-		entity = Entity(sprite);
-	} else {
-		entity = Entity(sprite, width, height);
-	}
+	entity.set("width", width);
+	entity.set("height", height);
 
 	float momentum = 0;
 	xml_node el_momentum = el.child("momentum");

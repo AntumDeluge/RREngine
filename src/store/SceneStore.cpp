@@ -165,16 +165,14 @@ Scene* SceneStore::get(string id) {
 	}
 
 	// DEBUG: test drawing entity in scene
+	uint32_t center_x = NATIVE_RES.first / 2; // - (player->getRect().w / 2);
+	uint32_t center_y = NATIVE_RES.second / 2; // + (player->getRect().h / 2);
 	// NOTE: deleted by scene
 	// FIXME:
 	// - scene shouldn't inherently add player
-	Entity* ent = new Entity(EntityStore::get("player"));
-	Player* player = new Player((Player&) *ent);
-	delete ent;
-	uint32_t center_x = (NATIVE_RES.first / 2) - (player->getRect().w / 2);
-	uint32_t center_y = (NATIVE_RES.second / 2) + (player->getRect().h / 2);
-	player->setX(center_x);
-	player->setY(center_y-64);
+	Player* player = new Player(EntityStore::getPlayer("player"));
+	player->setX(center_x - (player->getRect().w / 2));
+	player->setY(center_y + (player->getRect().h / 2) - 64);
 	scene->addPlayer(player);
 
 	// DEBUG:
