@@ -113,12 +113,7 @@ public:
 
 	/** Default destructor. */
 	~Scene() {
-		delete this->s_background;
-		this->s_background = nullptr;
-		delete this->s_background2;
-		this->s_background2 = nullptr;
-		delete this->s_foreground;
-		this->s_foreground = nullptr;
+		// NOTE: don't delete tmx::Layer which is done automatically by tmxlite
 
 		// NOTE: should objects by shared_ptr & destroyed automatically?
 		for (Object* obj: this->objects) {
