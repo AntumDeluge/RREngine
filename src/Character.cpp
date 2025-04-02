@@ -4,8 +4,6 @@
  * See: LICENSE.txt
  */
 
-#include <algorithm>
-
 #include "Character.hpp"
 
 using namespace std;
@@ -34,17 +32,6 @@ void Character::setBaseEnergy(int32_t energy) {
 		energy_bar = nullptr;
 	}
 	energy_bar = new EnergyBar(energy, 24, 25);
-}
-
-void Character::recoverEnergy(float amount) {
-	energy = min(energy + amount, getUInt("base_energy"));
-}
-
-void Character::depleteEnergy(float amount) {
-	energy = amount > energy ? 0 : energy - amount;
-	if (energy == 0) {
-		onDepleted();
-	}
 }
 
 void Character::render(Renderer* ctx) {

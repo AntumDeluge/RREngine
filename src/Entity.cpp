@@ -6,6 +6,8 @@
 
 #include "config.h"
 
+#include <algorithm> // min, max
+
 #include <SDL2/SDL_render.h>
 
 #include "Entity.hpp"
@@ -23,6 +25,7 @@ Entity::Entity(shared_ptr<Sprite> sprite, uint32_t width, uint32_t height) {
 	this->rect.y = 0;
 	this->rect.w = width;
 	this->rect.h = height;
+	onDepletedInternal = nullptr;
 	// default energy
 	energy = 1.0;
 	set("base_energy", energy);
@@ -40,6 +43,7 @@ Entity::Entity(shared_ptr<Sprite> sprite) {
 		this->rect.w = 0;
 		this->rect.h = 0;
 	}
+	onDepletedInternal = nullptr;
 	// default value for energy & base energy
 	energy = 1.0;
 	set("base_energy", energy);
@@ -134,6 +138,18 @@ float Entity::getGravity() {
 
 void Entity::setBaseEnergy(int32_t energy) {
 	set("base_energy", energy);
+}
+
+void Entity::recoverEnergy(float amount) {
+	// "base_energy" should unsigned int, but retrieve float for correct comparison
+	energy = min(energy + amount, getFloat("base_energy"));
+}
+
+void Entity::depleteEnergy(float amount) {
+	energy = amount > energy ? 0 : energy - amount;
+	if (energy == 0) {
+		onDepleted();
+	}
 }
 
 bool Entity::collides(uint32_t x, uint32_t y, uint32_t len, bool horizontal) {

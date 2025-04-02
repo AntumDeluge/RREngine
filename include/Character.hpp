@@ -10,7 +10,6 @@
 #include <cstdint> // *int*_t
 #include <memory> // std::shared_ptr, std::make_shared
 
-#include "Callable.hpp"
 #include "EnergyBar.hpp"
 #include "Entity.hpp"
 #include "Logger.hpp"
@@ -23,8 +22,6 @@
 class Character: public Entity {
 private:
 	static Logger logger;
-
-	Callable* onDepletedInternal = nullptr;
 
 protected:
 	/** Visual representation of entity's current energy level. */
@@ -61,20 +58,6 @@ public:
 
 	/** Overrides `Entity::setBaseEnergy`. */
 	void setBaseEnergy(int32_t energy) override;
-
-	void recoverEnergy(float amount);
-
-	void depleteEnergy(float amount);
-
-	void onDepleted() {
-		if (onDepletedInternal != nullptr) {
-			onDepletedInternal->call();
-		}
-	}
-
-	void setOnDepleted(Callable* onDepleted) {
-		onDepletedInternal = onDepleted;
-	}
 
 	/** Overrides `Entity::render`. */
 	virtual void render(Renderer* ctx) override;

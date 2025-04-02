@@ -12,6 +12,7 @@
 
 #include <SDL2/SDL_rect.h>
 
+#include "Callable.hpp"
 #include "Logger.hpp"
 #include "Object.hpp"
 #include "Renderer.hpp"
@@ -43,6 +44,9 @@ protected:
 
 	/** Entity's current energy level. */
 	float energy;
+
+	/** Called when energy is completely depleted. */
+	Callable* onDepletedInternal;
 
 public:
 	/**
@@ -203,6 +207,39 @@ public:
 	 *   Maximum energy.
 	 */
 	virtual void setBaseEnergy(int32_t energy);
+
+	/**
+	 * Increases entity's energy.
+	 *
+	 * @param amount
+	 *   Amount to be added to current energy.
+	 */
+	virtual void recoverEnergy(float amount);
+
+	/**
+	 * Decreases entity's energy.
+	 *
+	 * @param amount
+	 *   Amount to be subtracted from current energy.
+	 */
+	virtual void depleteEnergy(float amount);
+
+	/** Executed when energy is completely depleted. */
+	void onDepleted() {
+		if (onDepletedInternal != nullptr) {
+			onDepletedInternal->call();
+		}
+	}
+
+	/**
+	 * Sets instructions to be called when energy is completely depleted.
+	 *
+	 * @param on_depleted
+	 *   Instructions to be called.
+	 */
+	void setOnDepleted(Callable* on_depleted) {
+		onDepletedInternal = on_depleted;
+	}
 
 	/**
 	 * Checks if this entity collides on a horizontal or vertical line.
