@@ -30,6 +30,10 @@ void EntityTemplate::updateAttributes(shared_ptr<Entity> entity) {
 		entity->setWidth(width);
 		entity->setHeight(height);
 	}
+
+	// properties not needed by entity
+	entity->unset("width");
+	entity->unset("height");
 }
 
 shared_ptr<Entity> EntityTemplate::build() {
