@@ -54,6 +54,16 @@ public:
 		return data[key];
 	}
 
+	/** Iterable begin method. */
+	auto begin() {
+		return data.begin();
+	}
+
+	/** Iterable end method. */
+	auto end() {
+		return data.end();
+	}
+
 	/**
 	 * Sets a property.
 	 *
