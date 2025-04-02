@@ -18,16 +18,18 @@ EntityTemplate::EntityTemplate() {
 }
 
 void EntityTemplate::updateAttributes(shared_ptr<Entity> entity) {
-	uint32_t width = getUInt("width"), height = getUInt("height");
+	// copy all attributes
+	for (auto attr: *this) {
+		entity->set(attr.first, attr.second);
+	}
+
+	uint32_t width = entity->getUInt("width"), height = entity->getUInt("height");
 	if (width == 0 || height == 0) {
 		logger.warn("Entity dimensions not configured correctly; falling back to sprite dimensions");
 	} else {
 		entity->setWidth(width);
 		entity->setHeight(height);
 	}
-	entity->set("base_momentum", getFloat("base_momentum"));
-
-	// TODO: any other attributes
 }
 
 shared_ptr<Entity> EntityTemplate::build() {
