@@ -39,11 +39,6 @@ Entity::Entity(Sprite* sprite) {
 	}
 }
 
-Entity::Entity(std::string sprite_id, uint32_t width, uint32_t height):
-		Entity(SpriteStore::get(sprite_id), width, height) {}
-
-Entity::Entity(string sprite_id): Entity(SpriteStore::get(sprite_id)) {}
-
 
 void Entity::logic() {
 	if (scene && !scene->collidesGround(rect)) {

@@ -37,8 +37,6 @@ protected:
 public:
 	Character(Sprite* sprite, uint32_t width, uint32_t height);
 	Character(Sprite* sprite);
-	Character(std::string sprite_id, uint32_t width, uint32_t height);
-	Character(std::string sprite_id);
 
 	/**
 	 * Copy constructor.

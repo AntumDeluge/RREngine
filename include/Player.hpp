@@ -49,29 +49,6 @@ public:
 	 */
 	Player(Sprite* sprite);
 
-	/**
-	 * Creates an entity with collision rectangle.
-	 *
-	 * TODO: remove & only use constructors passing sprite image parameter
-	 *
-	 * @param sprite_id
-	 *   String identifier to get sprite image from texture loader.
-	 * @param width
-	 *   Entity's pixel width.
-	 * @param height
-	 *   Entity's pixel height.
-	 */
-	Player(std::string sprite_id, uint32_t width, uint32_t height);
-
-	/**
-	 * Creates an entity with collision rectangle using sprite's dimensions.
-	 *
-	 * TODO: remove & only use constructors passing sprite image parameter
-	 *
-	 * @param sprite_id
-	 *   String identifier to get sprite image from texture loader.
-	 */
-	Player(std::string sprite_id);
 
 	/**
 	 * Copy constructor.

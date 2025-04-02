@@ -21,14 +21,6 @@ Character::Character(Sprite* sprite)
 : Entity(sprite) {
 }
 
-Character::Character(string sprite_id, uint32_t width, uint32_t height)
-: Entity(sprite_id, width, height) {
-}
-
-Character::Character(string sprite_id)
-: Entity(sprite_id) {
-}
-
 void Character::setBaseEnergy(int32_t energy) {
 	Entity::setBaseEnergy(energy);
 	if (energy_bar) {
