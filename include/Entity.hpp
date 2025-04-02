@@ -9,7 +9,6 @@
 
 #include <cstdint> // *int*_t
 #include <memory> // std::shared_ptr, std::make_shared
-#include <string>
 
 #include <SDL2/SDL_rect.h>
 
