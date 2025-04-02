@@ -8,6 +8,7 @@
 #define RRE_CHARACTER
 
 #include <cstdint> // *int*_t
+#include <memory> // std::shared_ptr, std::make_shared
 #include <string>
 
 #include "Callable.hpp"
@@ -35,8 +36,8 @@ protected:
 	EnergyBar* energy_bar = nullptr;
 
 public:
-	Character(Sprite* sprite, uint32_t width, uint32_t height);
-	Character(Sprite* sprite);
+	Character(std::shared_ptr<Sprite> sprite, uint32_t width, uint32_t height);
+	Character(std::shared_ptr<Sprite> sprite);
 
 	/**
 	 * Copy constructor.

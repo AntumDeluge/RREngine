@@ -8,6 +8,7 @@
 #define RRE_ENTITY
 
 #include <cstdint> // *int*_t
+#include <memory> // std::shared_ptr, std::make_shared
 #include <string>
 
 #include <SDL2/SDL_rect.h>
@@ -29,7 +30,7 @@ private:
 
 protected:
 	/** Image drawn on viewport. */
-	Sprite* sprite;
+	std::shared_ptr<Sprite> sprite;
 
 	/** Entity's collision rectangle. */
 	SDL_Rect rect;
@@ -59,7 +60,7 @@ public:
 	 * @param height
 	 *   Entity's pixel height.
 	 */
-	Entity(Sprite* sprite, uint32_t width, uint32_t height);
+	Entity(std::shared_ptr<Sprite> sprite, uint32_t width, uint32_t height);
 
 	/**
 	 * Creates an entity with collision rectangle using sprite's dimensions.
@@ -67,7 +68,7 @@ public:
 	 * @param sprite
 	 *   Entity's sprite to draw on viewport (`null` to draw nothing).
 	 */
-	Entity(Sprite* sprite);
+	Entity(std::shared_ptr<Sprite> sprite);
 
 	/**
 	 * Copy constructor.
@@ -85,9 +86,7 @@ public:
 	Entity(): Entity(nullptr) {}
 
 	/** Default destructor. */
-	~Entity() {
-		// sprite instance is unique pointer so shouldn't need to destroy here
-	}
+	~Entity() {}
 
 	/** Overrides `Object.logic`. */
 	void logic() override;

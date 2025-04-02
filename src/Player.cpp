@@ -7,16 +7,19 @@
 #include "Player.hpp"
 #include "reso.hpp"
 
+using namespace std;
+
 
 Logger Player::logger = Logger::getLogger("Player");
 
-Player::Player(Sprite* sprite, uint32_t width, uint32_t height): Character(sprite, width, height) {
+Player::Player(shared_ptr<Sprite> sprite, uint32_t width, uint32_t height)
+: Character(sprite, width, height) {
 	setBaseEnergy(28);
 	energy_bar->setOuterColor(228, 229, 148);
 	energy_bar->setInnerColor(255, 254, 255);
 }
 
-Player::Player(Sprite* sprite): Character(sprite) {
+Player::Player(shared_ptr<Sprite> sprite): Character(sprite) {
 	setBaseEnergy(28);
 	energy_bar->setOuterColor(228, 229, 148);
 	energy_bar->setInnerColor(255, 254, 255);

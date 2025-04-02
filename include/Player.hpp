@@ -8,6 +8,7 @@
 #define RRE_PLAYER
 
 #include <cstdint> // *int*_t
+#include <memory> // std::shared_ptr, std::make_shared
 
 #include "Character.hpp"
 #include "Logger.hpp"
@@ -39,7 +40,7 @@ public:
 	 * @param height
 	 *   Entity's pixel height.
 	 */
-	Player(Sprite* sprite, uint32_t width, uint32_t height);
+	Player(std::shared_ptr<Sprite> sprite, uint32_t width, uint32_t height);
 
 	/**
 	 * Creates an entity with collision rectangle using sprite's dimensions.
@@ -47,7 +48,7 @@ public:
 	 * @param sprite
 	 *   Entity's sprite to draw on viewport (`null` to draw nothing).
 	 */
-	Player(Sprite* sprite);
+	Player(std::shared_ptr<Sprite> sprite);
 
 
 	/**

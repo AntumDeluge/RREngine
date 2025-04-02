@@ -13,11 +13,11 @@ using namespace std;
 
 Logger Character::logger = Logger::getLogger("Character");
 
-Character::Character(Sprite *sprite, uint32_t width, uint32_t height)
+Character::Character(shared_ptr<Sprite> sprite, uint32_t width, uint32_t height)
 : Entity(sprite, width, height) {
 }
 
-Character::Character(Sprite* sprite)
+Character::Character(shared_ptr<Sprite> sprite)
 : Entity(sprite) {
 }
 

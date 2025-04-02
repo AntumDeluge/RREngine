@@ -4,6 +4,8 @@
  * See: LICENSE.txt
  */
 
+#include <memory> // std::shared_ptr
+
 #include "Dialog.hpp"
 #include "Filesystem.hpp"
 #include "Logger.hpp"
@@ -36,7 +38,7 @@ static void _onConfigError(string msg) {
 Entity EntityFactory::build(xml_node el) {
 	Entity entity;
 
-	Sprite* sprite = nullptr;
+	shared_ptr<Sprite> sprite = nullptr;
 	xml_attribute attr_sprite = el.attribute("sprite");
 	if (attr_sprite.empty()) {
 		_logger.warn("Entity sprite not configured");

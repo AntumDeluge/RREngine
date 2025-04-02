@@ -16,7 +16,7 @@ using namespace std;
 
 Logger Entity::logger = Logger::getLogger("Entity");
 
-Entity::Entity(Sprite* sprite, uint32_t width, uint32_t height) {
+Entity::Entity(shared_ptr<Sprite> sprite, uint32_t width, uint32_t height) {
 	this->sprite = sprite;
 	// NOTE: are values of `SDL_Rect` implicitly set to 0 by default?
 	this->rect.x = 0;
@@ -25,7 +25,7 @@ Entity::Entity(Sprite* sprite, uint32_t width, uint32_t height) {
 	this->rect.h = height;
 }
 
-Entity::Entity(Sprite* sprite) {
+Entity::Entity(shared_ptr<Sprite> sprite) {
 	this->sprite = sprite;
 	this->rect.x = 0;
 	this->rect.y = 0;

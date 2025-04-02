@@ -7,6 +7,7 @@
 #ifndef RRE_SPRITE_STORE
 #define RRE_SPRITE_STORE
 
+#include <memory> // std::shared_ptr, std::make_shared
 #include <string>
 
 #include "Sprite.hpp"
@@ -36,7 +37,7 @@ namespace SpriteStore {
 	 *   Reference to a sprite instance. If not found, an uninitialized sprite is returned. Can be
 	 *   checked with `Sprite.ready()`.
 	 */
-	Sprite* get(std::string id);
+	std::shared_ptr<Sprite> get(std::string id);
 }
 
 #endif /* RRE_SPRITE_STORE */

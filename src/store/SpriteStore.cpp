@@ -81,11 +81,11 @@ bool SpriteStore::load() {
 	return true;
 }
 
-Sprite* SpriteStore::get(string id) {
-	Sprite* sprite;
+shared_ptr<Sprite> SpriteStore::get(string id) {
+	shared_ptr<Sprite> sprite;
 	// check cache first
 	if (_cache.find(id) != _cache.end()) {
-		sprite = _cache[id].get();
+		sprite = _cache[id];
 		if (!sprite->ready()) {
 			_logger.warn("Returning uninitialized sprite: ", id);
 		}
