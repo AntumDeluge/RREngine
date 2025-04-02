@@ -48,6 +48,10 @@ public:
 	 */
 	Player(std::shared_ptr<Sprite> sprite);
 
+	/**
+	 * Default constructor.
+	 */
+	Player();
 
 	/**
 	 * Copy constructor.

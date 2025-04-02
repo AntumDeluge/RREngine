@@ -15,10 +15,16 @@ Logger Character::logger = Logger::getLogger("Character");
 
 Character::Character(shared_ptr<Sprite> sprite, uint32_t width, uint32_t height)
 : Entity(sprite, width, height) {
+	energy_bar = nullptr;
 }
 
 Character::Character(shared_ptr<Sprite> sprite)
 : Entity(sprite) {
+	energy_bar = nullptr;
+}
+
+Character::Character() {
+	energy_bar = nullptr;
 }
 
 void Character::setBaseEnergy(int32_t energy) {

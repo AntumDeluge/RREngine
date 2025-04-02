@@ -25,6 +25,12 @@ Player::Player(shared_ptr<Sprite> sprite): Character(sprite) {
 	energy_bar->setInnerColor(255, 254, 255);
 }
 
+Player::Player() {
+	setBaseEnergy(28);
+	energy_bar->setOuterColor(228, 229, 148);
+	energy_bar->setInnerColor(255, 254, 255);
+}
+
 Player::Player(const Player& other): Character(other) {
 	if (!energy_bar) {
 		setBaseEnergy(28);

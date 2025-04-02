@@ -33,11 +33,14 @@ private:
 
 protected:
 	/** Visual representation of entity's current energy level. */
-	EnergyBar* energy_bar = nullptr;
+	EnergyBar* energy_bar;
 
 public:
 	Character(std::shared_ptr<Sprite> sprite, uint32_t width, uint32_t height);
 	Character(std::shared_ptr<Sprite> sprite);
+
+	/** Default constructor. */
+	Character();
 
 	/**
 	 * Copy constructor.
@@ -48,6 +51,8 @@ public:
 	Character(const Character& other): Entity(other) {
 		if (other.energy_bar) {
 			energy_bar = new EnergyBar(*other.energy_bar);
+		} else {
+			energy_bar = nullptr;
 		}
 	}
 
