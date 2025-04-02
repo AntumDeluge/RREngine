@@ -17,8 +17,6 @@
 
 /**
  * A playable character.
- *
- * TODO: derive from Character class
  */
 class Player: public Character {
 private:
