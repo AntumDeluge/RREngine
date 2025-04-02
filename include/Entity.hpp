@@ -131,7 +131,7 @@ public:
 	 * @param width
 	 *   Entity's new pixel width.
 	 */
-	void setheight(uint32_t height) { this->rect.h = height; }
+	void setHeight(uint32_t height) { this->rect.h = height; }
 
 	/**
 	 * Retrieves entity's collision dimensions.
