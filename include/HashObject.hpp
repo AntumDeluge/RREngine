@@ -87,7 +87,7 @@ public:
 	 * @return
 	 *   `true` if `key` index is found in properties table.
 	 */
-	bool has(std::string key) {
+	bool has(std::string key) const {
 		return data.find(key) != data.end();
 	}
 
@@ -99,9 +99,11 @@ public:
 	 * @return
 	 *   String value or empty string if property not set.
 	 */
-	std::string get(std::string key) {
-		if (has(key)) {
-			return data[key];
+	std::string get(std::string key) const {
+		// use an iterator so data not modified using [] operator
+		auto iter = data.find(key);
+		if (iter != data.end()) {
+			return iter->second;
 		}
 		return "";
 	}
@@ -114,7 +116,7 @@ public:
 	 * @return
 	 *   Integer value or 0 if property not set.
 	 */
-	int32_t getInt(std::string key);
+	int32_t getInt(std::string key) const;
 
 	/**
 	 * Retreivies a property unsigned integer value.
@@ -124,7 +126,7 @@ public:
 	 * @return
 	 *   Unsigned integer value or 0 if property not set.
 	 */
-	uint32_t getUInt(std::string key);
+	uint32_t getUInt(std::string key) const;
 
 	/**
 	 * Retreivies a property long value.
@@ -134,7 +136,7 @@ public:
 	 * @return
 	 *   Long value or 0 if property not set.
 	 */
-	int64_t getLong(std::string key);
+	int64_t getLong(std::string key) const;
 
 	/**
 	 * Retreivies a property unsigned long value.
@@ -144,7 +146,7 @@ public:
 	 * @return
 	 *   Unsigned long value or 0 if property not set.
 	 */
-	uint64_t getULong(std::string key);
+	uint64_t getULong(std::string key) const;
 
 	/**
 	 * Retreivies a property float value.
@@ -154,7 +156,7 @@ public:
 	 * @return
 	 *   Float value or 0 if property not set.
 	 */
-	float getFloat(std::string key);
+	float getFloat(std::string key) const;
 
 	/**
 	 * Retreivies a property double value.
@@ -164,7 +166,7 @@ public:
 	 * @return
 	 *   Double value or 0 if property not set.
 	 */
-	double getDouble(std::string key);
+	double getDouble(std::string key) const;
 };
 
 #endif /* RRE_HASH_OBJECT */
