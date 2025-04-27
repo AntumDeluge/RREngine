@@ -76,14 +76,6 @@ endif()
 add_executable(game ${CPP_SOURCE})
 target_link_libraries(game PRIVATE ${LIBS})
 
-if(NOT DEBUG)
-	# strip executable of debugging symbols
-	add_custom_command(
-		TARGET game POST_BUILD
-		COMMAND ${CMAKE_OBJCOPY} --strip-debug "$<TARGET_FILE:game>"
-	)
-endif()
-
 # convert or copy built-in resources
 file(MAKE_DIRECTORY "${PROJECT_BINARY_DIR}/builtin/tileset")
 if(BIN2HEADER)

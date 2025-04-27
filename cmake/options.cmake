@@ -1,7 +1,10 @@
 
-# debugging symbols
-option(DEBUG "Include debugging symbols" OFF)
-if(DEBUG)
+
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Build type" FORCE)
+endif()
+
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	set(RRE_DEBUGGING true)
 else()
 	set(RRE_DEBUGGING false)
