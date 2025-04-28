@@ -20,7 +20,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 # project & version info
 
-project(RREngine)
+project(RREngine VERSION 0.1.0)
 set(RRE_VER_MAJ 0)
 set(RRE_VER_MIN 1)
 set(RRE_VER_REL 0)
