@@ -136,8 +136,7 @@ if(EXAMPLE)
 
 	file(GLOB_RECURSE MUSIC_SOURCE_FILES RELATIVE "${DATA_DIR_SOURCE}/music" "${DATA_DIR_SOURCE}/music/*.flac")
 
-	find_program(FFMPEG_EXE ffmpeg)
-	if(NOT FFMPEG_EXE)
+	if(NOT FFMPEG)
 		message("-- WARNING: ffmpeg not found; cannot build example music")
 	else()
 		message("-- ffmpeg found")
@@ -151,7 +150,7 @@ if(EXAMPLE)
 			file(MAKE_DIRECTORY "${MUSIC_OGG_DIR}")
 
 			execute_process(
-				COMMAND "${FFMPEG_EXE}"
+				COMMAND "${FFMPEG}"
 					-y
 					-hide_banner
 					-loglevel warning
