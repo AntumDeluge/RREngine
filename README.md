@@ -21,6 +21,7 @@ Example data:
 - tileset:
     - megabot (CC0): [Mega Bot Assets Pack by Luis Zuno (ansimuz)](https://opengameart.org/node/99323)
 - backgrounds:
+    - megabot_scaled (CC0): [Mega Bot Assets Pack by Luis Zuno (ansimuz)](https://opengameart.org/node/99323)
     - [underwater_mountains](https://opengameart.org/node/28985) by
       [PumpkinGlitters](https://pumpkingitters.deviantart.com/) (CC BY 3.0)
     - [voodoo_cactus_underwater by lzubiaur](https://opengameart.org/node/30946) (CC BY 3.0)
