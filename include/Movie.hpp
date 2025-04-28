@@ -78,6 +78,14 @@ public:
 		this->frames.clear();
 	}
 
+	/**
+	 * Retrieves total duration of movie.
+	 *
+	 * @return
+	 *   Movie duration in milliseconds.
+	 */
+	uint32_t getDuration();
+
 	/** Marks movie for playback. */
 	void play() {
 		this->frame_start = SDL_GetTicks64();

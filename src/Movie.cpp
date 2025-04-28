@@ -16,6 +16,14 @@ using namespace std;
 
 Logger Movie::logger = Logger::getLogger("Movie");
 
+uint32_t Movie::getDuration() {
+	uint32_t ms = 0;
+	for (MovieFrame f: frames) {
+		ms += f.first;
+	}
+	return ms;
+}
+
 void Movie::render(Renderer* ctx) {
 
 	uint16_t frames_count = this->frames.size();
