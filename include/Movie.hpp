@@ -7,9 +7,7 @@
 #ifndef RRE_MOVIE
 #define RRE_MOVIE
 
-#include "config.h"
-
-#include <cstdint> // uint*_t
+#include <cstdint> // *int*_t
 #include <string>
 #include <utility> // std::pair
 #include <vector>
@@ -99,13 +97,7 @@ public:
 	 *
 	 * FIXME: not necessary?
 	 */
-	void onComplete() {
-#if RRE_DEBUGGING
-		this->logger.debug("Movie has ended");
-#endif
-
-		// TODO: execute callback to notify thread that movie has finished
-	}
+	void onComplete();
 
 	/**
 	 * Checks if movie has ended playback.

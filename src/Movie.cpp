@@ -4,6 +4,8 @@
  * See: LICENSE.txt
  */
 
+#include "config.h"
+
 #include "Movie.hpp"
 #include "SingletonRepo.hpp"
 #include "reso.hpp"
@@ -51,6 +53,15 @@ void Movie::render(Renderer* ctx) {
 
 		y_offset += s_height + 1;
 	}
+}
+
+void Movie::onComplete() {
+#if RRE_DEBUGGING
+	logger.debug("movie duration: ", to_string(getDuration()), " (actual ",
+			to_string(SDL_GetTicks64() - frame_start), ")");
+#endif
+
+	// TODO: execute callback to notify thread that movie has finished
 }
 
 void Movie::addText(FontMap* font_map, uint32_t expires, string text) {
