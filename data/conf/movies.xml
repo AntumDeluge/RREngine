@@ -3,7 +3,7 @@
 <movies>
 
 	<movie id="intro" fade_in="100" fade_out="100">
-		<frame ms="5000">underwater_mountains</frame>
+		<frame ms="5000">NULL</frame>
 		<text delay="0" duration="10000">Rock & Roll Engine</text>
 		<text delay="0" duration="10000">(alpha)</text>
 	</movie>
