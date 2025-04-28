@@ -63,7 +63,7 @@ public:
 	virtual void setCurrentFPS(uint32_t fps) = 0;
 
 	/**
-	 * Sets scaling factor of game window.
+	 * Sets scaling factor of viewport renderer.
 	 *
 	 * @param scale
 	 *   New scaling factor.
