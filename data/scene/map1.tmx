@@ -3,19 +3,19 @@
  <properties>
   <property name="parallax1" value="filename_here"/>
  </properties>
- <tileset firstgid="1" name="grassland" tilewidth="16" tileheight="16" tilecount="48" columns="6">
-  <image source="../tileset/grassland.png" width="96" height="128"/>
+ <tileset firstgid="1" name="megabot" tilewidth="16" tileheight="16" tilecount="42" columns="6">
+  <image source="../tileset/megabot.png" width="96" height="112"/>
  </tileset>
  <imagelayer id="7" name="s_background2"/>
  <imagelayer id="6" name="s_background"/>
  <layer id="1" name="background" width="32" height="15">
   <data encoding="base64" compression="zlib">
-   eJzjY2Bg4BvFo3gUj+JRPIpHMV0xALG+GkE=
+   eJxjYBgFo2AUjIJRMApGAb0BAAeAAAE=
   </data>
  </layer>
  <layer id="3" name="terrain" width="32" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMBCAEYiZBggz08F/owA/AAB3hABB
+   eJxjYBgFo2AUjIJRMAroD2SAWHaAsNwgsB8AtTUHQQ==
   </data>
  </layer>
  <layer id="9" name="objects" width="32" height="15">
@@ -25,7 +25,7 @@
  </layer>
  <layer id="5" name="collision" width="32" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMBIBOxBzDBDmpIP/BjsAAEkTAQE=
+   eJxjYBgFo2AUjIJRMBKBGBCLDxCWoIP/BjsAAKTxAuE=
   </data>
  </layer>
  <layer id="10" name="foreground" width="32" height="15">
