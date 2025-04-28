@@ -2,7 +2,7 @@
 
 <movies>
 
-	<movie id="intro" fade_in="100" fade_out="100">
+	<movie id="intro" fade_in="200" fade_out="200">
 		<frame ms="5000">NULL</frame>
 		<text delay="0" duration="10000">Rock & Roll Engine</text>
 		<text delay="0" duration="10000">(alpha)</text>
