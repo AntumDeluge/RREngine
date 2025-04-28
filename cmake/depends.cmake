@@ -65,7 +65,7 @@ include_directories(
 
 # linker libraries
 
-# make sure libs not cached
+# clean libs cache
 unset(LIBS)
 
 if(NOT STATIC)

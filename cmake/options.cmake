@@ -10,9 +10,8 @@ else()
 	set(RRE_DEBUGGING false)
 endif()
 
-option(STATIC "Try to link executable statically" OFF)
-
-option(EXAMPLE "Include example game data files" OFF)
+option(EXAMPLE "Include example game data." OFF)
+option(STATIC "Link executable statically." OFF)
 
 # bin2header executable
 find_program(BIN2HEADER bin2header)
