@@ -95,13 +95,16 @@ Movie* MovieFactory::getMovie(string id) {
 			uint32_t duration = 0;
 			StrUtil::parseUInt(duration, ms_attr.value());
 			string frame_id = frame_el.text().get();
-			Image* img = new Image(TextureLoader::load(Path::join("movie", frame_id)));
-			if (!img->ready()) {
-				string msg = "Failed to load movie frame image \"" + frame_id
-						+ "\": " + movies_conf;
-				MovieFactory::logger.error(msg);
-				Dialog::error(msg);
-				return nullptr;
+			Image* img = nullptr;
+			if (frame_id != "NULL") {
+				img = new Image(TextureLoader::load(Path::join("movie", frame_id)));
+				if (!img->ready()) {
+					string msg = "Failed to load movie frame image \"" + frame_id
+							+ "\": " + movies_conf;
+					MovieFactory::logger.error(msg);
+					Dialog::error(msg);
+					return nullptr;
+				}
 			}
 			frames.push_back({duration, img});
 

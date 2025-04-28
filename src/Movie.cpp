@@ -60,7 +60,10 @@ void Movie::render(Renderer* ctx) {
 		frame = this->frames[this->frame_index];
 	}
 
-	ctx->drawImage(frame.second, 0, 0);
+	// frame image may be `null`
+	if (frame.second) {
+		ctx->drawImage(frame.second, 0, 0);
+	}
 
 	uint16_t y_offset = 0;
 	for (Sprite* s: this->text_sprites) {
