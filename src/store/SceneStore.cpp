@@ -32,10 +32,9 @@ using namespace std;
 #include "store/EntityStore.hpp"
 
 
-namespace SceneStore {
-	// FIXME: can't initialize logger here
-	//~ Logger logger = Logger::getLogger("SceneStore");
+static Logger logger = Logger::getLogger("SceneStore");
 
+namespace SceneStore {
 	bool loaded = false;
 
 	unordered_map<string, string> scene_paths;
@@ -44,8 +43,6 @@ namespace SceneStore {
 };
 
 bool SceneStore::load() {
-	Logger logger = Logger::getLogger("SceneStore");
-
 	if (SceneStore::loaded) {
 		logger.warn("Scene paths already loaded");
 		return true;
@@ -79,8 +76,6 @@ Scene* SceneStore::get(string id) {
 	if (SceneStore::scenes.find(id) != SceneStore::scenes.end()) {
 		return SceneStore::scenes[id];
 	}
-
-	Logger logger = Logger::getLogger("SceneStore");
 
 	// get map file path
 	string map_path;
