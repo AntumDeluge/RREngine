@@ -163,10 +163,12 @@ public:
 	 *
 	 * @param key
 	 *   Property key.
+	 * @param def
+	 *   Default value to return if property not set.
 	 * @return
 	 *   Float value or 0 if property not set.
 	 */
-	float getFloat(std::string key) const;
+	float getFloat(std::string key, float def=0.0f) const;
 
 	/**
 	 * Retreivies a property double value.

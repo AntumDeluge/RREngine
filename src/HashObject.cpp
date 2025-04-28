@@ -54,9 +54,9 @@ uint64_t HashObject::getULong(string key) const {
 	return l_value;
 }
 
-float HashObject::getFloat(string key) const {
+float HashObject::getFloat(string key, float def) const {
 	string s_value = get(key);
-	float f_value = 0;
+	float f_value = def;
 	ParseResult res = StrUtil::parseFloat(f_value, s_value);
 	if (res.first != 0) {
 		logger.error("Cannot parse float from key \"", key, "\" value \"", s_value, ": ", res.second);
