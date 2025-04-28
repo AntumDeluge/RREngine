@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="32" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="1">
- <properties>
-  <property name="parallax1" value="filename_here"/>
- </properties>
  <tileset firstgid="1" name="megabot" tilewidth="16" tileheight="16" tilecount="42" columns="6">
   <image source="../tileset/megabot.png" width="96" height="112"/>
  </tileset>
  <imagelayer id="7" name="s_background2" repeatx="1">
   <image source="../background/megabot_scaled.png" width="137" height="240"/>
+  <properties>
+   <property name="scroll_rate" type="float" value="0.2"/>
+  </properties>
  </imagelayer>
  <imagelayer id="6" name="s_background"/>
  <layer id="1" name="background" width="32" height="15">
