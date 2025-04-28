@@ -89,6 +89,11 @@ void Entity::logic() {
 	}
 }
 
+void Entity::onAdded(SceneImpl* scene) {
+	Object::onAdded(scene);
+	gravity = getFloat("gravity", 1.0f);
+}
+
 uint8_t Entity::addDirection(uint8_t dir) {
 	if (dir == MomentumDir::LEFT || dir == MomentumDir::RIGHT) {
 		if (dir == MomentumDir::LEFT) {

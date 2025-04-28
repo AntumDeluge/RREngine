@@ -45,6 +45,9 @@ protected:
 	/** Entity's current energy level. */
 	float energy;
 
+	/** Gravity influence on entity. */
+	float gravity;
+
 	/** Called when energy is completely depleted. */
 	Callable* onDepletedInternal;
 
@@ -100,6 +103,9 @@ public:
 		return sprite == other->sprite && rect.x == other->rect.x && rect.y == other->rect.y
 				&& rect.w == other->rect.w && rect.h == other->rect.h;
 	}
+
+	/** Overrides `Object::onAdded`. */
+	void onAdded(SceneImpl* scene) override;
 
 	/**
 	 * Update entity's position.

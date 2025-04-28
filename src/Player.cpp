@@ -51,7 +51,7 @@ void Player::logic() {
 }
 
 void Player::onAdded(SceneImpl* scene) {
-	Object::onAdded(scene);
+	Entity::onAdded(scene);
 
 	x_prev = rect.x;
 	y_prev = rect.y;
