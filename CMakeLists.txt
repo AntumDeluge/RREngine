@@ -25,8 +25,8 @@ set(RRE_VER_MAJ 0)
 set(RRE_VER_MIN 1)
 set(RRE_VER_REL 0)
 
-include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake")
-include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/depends.cmake")
+include("${PROJECT_SOURCE_DIR}/cmake/options.cmake")
+include("${PROJECT_SOURCE_DIR}/cmake/depends.cmake")
 
 # configure header file to pass some of the CMake settings to source compiler
 configure_file("config.h.in" "config.h")
