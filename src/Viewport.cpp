@@ -9,6 +9,8 @@
 #include <iostream>
 #include <string>
 
+#include <SDL2/SDL_timer.h>
+
 #include "GameConfig.hpp"
 #include "GameLoop.hpp"
 #include "SingletonRepo.hpp"
@@ -28,6 +30,7 @@ mutex Viewport::mtx;
 
 Viewport::Viewport() {
 	renderer = new Renderer();
+	render_time = 0;
 
 	// TODO: initial viewport font should be configured in game.xml
 	this->font_map = nullptr; // cannot be set here because font maps have not yet loaded
@@ -113,6 +116,7 @@ void Viewport::setRenderMode(GameMode::Mode mode) {
 }
 
 void Viewport::render() {
+	render_time = SDL_GetTicks64();
 	renderer->setDrawColor(0, 0, 0, 0);
 	renderer->clear();
 	// TODO: create Scene class that handles drawing tiles

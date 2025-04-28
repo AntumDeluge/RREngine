@@ -40,6 +40,8 @@ private:
 
 	/** Drawing renderer. */
 	Renderer* renderer;
+	/** Timestamp of current draw. */
+	uint64_t render_time;
 
 	/** Font map for drawing text. */
 	FontMap* font_map;
