@@ -39,4 +39,13 @@
 		</animation>
 	</sprite>
 
+	<sprite id="flying_enemy">
+		<filename>flying_enemy</filename>
+		<size width="22" height="24" />
+		<animation mode="idle" default="true">
+			<frame index="0" delay="250" />
+			<frame index="1" delay="250" />
+		</animation>
+	</sprite>
+
 </sprites>
