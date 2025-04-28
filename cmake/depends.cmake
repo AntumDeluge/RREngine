@@ -66,10 +66,10 @@ include_directories(
 # linker libraries
 
 # clean libs cache
-unset(LIBS)
+unset(LINK_LIBRARIES)
 
 if(NOT STATIC)
-	set(LIBS
+	set(LINK_LIBRARIES
 		${SDL2_LIBRARIES}
 		${SDL2MIXER_LIBRARIES}
 		${SDL2IMAGE_LIBRARIES}
@@ -77,7 +77,7 @@ if(NOT STATIC)
 		${TMXLITE_LIBRARIES}
 	)
 else()
-	set(LIBS
+	set(LINK_LIBRARIES
 		${SDL2_STATIC_LIBRARIES}
 		${SDL2MIXER_STATIC_LIBRARIES}
 		${SDL2IMAGE_STATIC_LIBRARIES}

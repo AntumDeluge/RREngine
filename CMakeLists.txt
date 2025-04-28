@@ -82,7 +82,7 @@ endif()
 
 #add_executable(game ${CPP_SOURCE} ${LUA_C_SOURCE})
 add_executable(game ${CPP_SOURCE})
-target_link_libraries(game PRIVATE ${LIBS})
+target_link_libraries(game PRIVATE ${LINK_LIBRARIES})
 
 # convert or copy built-in resources
 file(MAKE_DIRECTORY "${PROJECT_BINARY_DIR}/builtin/tileset")
