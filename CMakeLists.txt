@@ -74,14 +74,14 @@ endif()
 # the output executable
 
 # detect all .cpp source files dynamically
-file(GLOB_RECURSE CPP_SOURCE "${PROJECT_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE APP_SRC "${PROJECT_SOURCE_DIR}/src/*.cpp")
 if(WIN32)
 	# Windows resources
-	list(APPEND CPP_SOURCE "${PROJECT_SOURCE_DIR}/win_resources.rc")
+	list(APPEND APP_SRC "${PROJECT_SOURCE_DIR}/win_resources.rc")
 endif()
 
-#add_executable(game ${CPP_SOURCE} ${LUA_C_SOURCE})
-add_executable(game ${CPP_SOURCE})
+#add_executable(game ${APP_SRC} ${LUA_C_SOURCE})
+add_executable(game ${APP_SRC})
 target_link_libraries(game PRIVATE ${LINK_LIBRARIES})
 
 # convert or copy built-in resources
