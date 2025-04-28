@@ -34,14 +34,20 @@ configure_file("config.h.in" "config.h")
 
 # compiler options
 
-# prioritize Clang over GNU
-find_program(CLANG_COMPILER NAMES clang++)
-if(CLANG_COMPILER)
-	set(CMAKE_C_COMPILER clang)
-	set(CMAKE_CXX_COMPILER clang++)
-else()
-	set(CMAKE_C_COMPILER gcc)
-	set(CMAKE_CXX_COMPILER g++)
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+	# prioritize Clang over GNU
+	find_program(CLANG_COMPILER NAMES clang++)
+	if(CLANG_COMPILER)
+		set(CMAKE_C_COMPILER_ID "Clang")
+		set(CMAKE_C_COMPILER clang)
+		set(CMAKE_CXX_COMPILER_ID "Clang")
+		set(CMAKE_CXX_COMPILER clang++)
+	else()
+		set(CMAKE_C_COMPILER_ID "GNU")
+		set(CMAKE_C_COMPILER gcc)
+		set(CMAKE_CXX_COMPILER_ID "GNU")
+		set(CMAKE_CXX_COMPILER g++)
+	endif()
 endif()
 
 
