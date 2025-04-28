@@ -12,7 +12,6 @@
 #include "GameWindow.hpp"
 #include "Input.hpp"
 #include "Renderer.hpp"
-#include "Viewport.hpp"
 
 
 /**
@@ -53,7 +52,7 @@ static inline Input* GetInput() { return Input::get(); }
  * @return
  *   Renderer instance.
  */
-static inline Renderer* GetRenderer() { return Viewport::get()->getRenderer(); }
+extern Renderer* GetRenderer();
 
 /**
  * Retrieves viewport renderer singleton.
@@ -61,6 +60,6 @@ static inline Renderer* GetRenderer() { return Viewport::get()->getRenderer(); }
  * @return
  *   `Viewport` singleton instance.
  */
-static inline ViewportImpl* GetViewport() { return Viewport::get(); }
+extern ViewportImpl* GetViewport();
 
 #endif /* RRE_SINGLETON_REPO */
