@@ -51,12 +51,12 @@ Entity::Entity(shared_ptr<Sprite> sprite) {
 
 
 void Entity::logic() {
-	if (scene && !scene->collidesGround(rect)) {
+	if (gravity > 0 && scene && !scene->collidesGround(rect)) {
 		if (sprite->getModeId() != "fall") {
 			sprite->setMode("fall");
 		}
 		// apply gravity
-		rect.y += getGravity() * 4;
+		rect.y += getGravity() * (4 * gravity);
 	} else if (sprite->getModeId() == "fall") {
 		if (dir & MomentumDir::LEFT || dir & MomentumDir::RIGHT) {
 			sprite->setMode("run");
