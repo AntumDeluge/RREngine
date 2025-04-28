@@ -66,6 +66,13 @@ EntityTemplate EntityFactory::build(xml_node el) {
 	}
 	entity.set("base_momentum", momentum);
 
+	xml_node el_gravity = el.child("gravity");
+	if (el_gravity.type() != node_null) {
+		float gravity = 1.0f;
+		StrUtil::parseFloat(gravity, el_gravity.text().get());
+		entity.set("gravity", gravity);
+	}
+
 	// TODO: other entity attributes.
 
 	return entity;
