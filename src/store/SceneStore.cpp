@@ -192,6 +192,12 @@ Scene* SceneStore::get(string id) {
 		enemy->setY(center_y-64);
 		scene->addObject(enemy);
 	}
+	Entity* f_enemy = new Entity(EntityStore::get("flying_enemy"));
+	if(!f_enemy->equals(NullEntity)) {
+		f_enemy->setX(center_x+30);
+		f_enemy->setY(center_y-64);
+		scene->addObject(f_enemy);
+	}
 
 	// cache for subsequent retrieval
 	SceneStore::scenes[id] = scene;

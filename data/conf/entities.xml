@@ -11,4 +11,9 @@
 		<momentum>1.0</momentum>
 	</entity>
 
+	<entity id="flying_enemy" sprite="flying_enemy" width="22" height="24">
+		<momentum>1.0</momentum>
+		<gravity>0.0</gravity>
+	</entity>
+
 </entities>
