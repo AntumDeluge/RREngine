@@ -10,11 +10,11 @@
 #include <vector>
 
 #include <SDL2/SDL_rect.h>
-#include <tmxlite/ImageLayer.hpp>
 
 #include "LayerDefinition.hpp"
 #include "Logger.hpp"
 #include "Object.hpp"
+#include "ParallaxImage.hpp"
 #include "Player.hpp"
 #include "Renderer.hpp"
 #include "Tileset.hpp"
@@ -58,9 +58,9 @@ private:
 	std::vector<Tileset*> tilesets;
 
 	/** Parallax scrolling background layer 1. */
-	tmx::ImageLayer* s_background;
+	ParallaxImage* s_background;
 	/** Parallax scrolling background layer 2. */
-	tmx::ImageLayer* s_background2;
+	ParallaxImage* s_background2;
 
 	/** Bottom tiled layer. */
 	LayerDefinition background;
@@ -74,7 +74,7 @@ private:
 	LayerDefinition foreground;
 
 	/** Parallax scrolling foreground layer. */
-	tmx::ImageLayer* s_foreground;
+	ParallaxImage* s_foreground;
 
 	/** Objects currently occupying this scene. */
 	std::vector<Object*> objects;
@@ -194,7 +194,7 @@ public:
 	 * @param layer
 	 *   Image layer definition.
 	 */
-	void setLayerSBackground(tmx::ImageLayer* layer) { this->s_background = layer; }
+	void setLayerSBackground(ParallaxImage* layer) { this->s_background = layer; }
 
 	/**
 	 * Sets layer to use for scrolling background 2.
@@ -202,7 +202,7 @@ public:
 	 * @param layer
 	 *   Image layer definition.
 	 */
-	void setLayerSBackground2(tmx::ImageLayer* layer) { this->s_background2 = layer; }
+	void setLayerSBackground2(ParallaxImage* layer) { this->s_background2 = layer; }
 
 	/**
 	 * Sets layer to use for background.
@@ -250,7 +250,7 @@ public:
 	 * @param layer
 	 *   Image layer definition.
 	 */
-	void setLayerSForeground(tmx::ImageLayer* layer) { this->s_foreground = layer; }
+	void setLayerSForeground(ParallaxImage* layer) { this->s_foreground = layer; }
 
 	/**
 	 * Adds a point of collision to map.

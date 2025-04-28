@@ -43,6 +43,13 @@ void Scene::logic() {
 }
 
 void Scene::render(Renderer* ctx) {
+	if (s_background2) {
+		s_background2->render(ctx, offset_x, offset_y);
+	}
+	if (s_background) {
+		s_background->render(ctx, offset_x, offset_y);
+	}
+
 	// TODO: build layers as single image instead of drawing each tile individually
 	renderTileLayer(ctx, background);
 	renderTileLayer(ctx, terrain);
@@ -60,7 +67,9 @@ void Scene::render(Renderer* ctx) {
 
 	renderTileLayer(ctx, foreground);
 
-	// TODO: render other layers in front of objects
+	if (s_foreground) {
+		s_foreground->render(ctx, offset_x, offset_y);
+	}
 }
 
 void Scene::renderTileLayer(Renderer* ctx, LayerDefinition ldef) {

@@ -11,6 +11,7 @@
 
 #include <tmxlite/ImageLayer.hpp>
 #include <tmxlite/Map.hpp>
+#include <tmxlite/Property.hpp>
 #include <tmxlite/TileLayer.hpp>
 #include <tmxlite/Types.hpp>
 
@@ -130,15 +131,29 @@ Scene* SceneStore::get(string id) {
 
 		if (layer.getType() == tmx::Layer::Type::Image) {
 			tmx::ImageLayer i_layer = dynamic_cast<const tmx::ImageLayer&>(*layerPtr);
+			string texture_path = i_layer.getImagePath();
+			if (texture_path.empty()) {
+				logger.warn("Image layer \"", layerName, "\" without image");
+				continue;
+			}
+
+			ParallaxImage* p_image = new ParallaxImage(TextureLoader::absLoad(texture_path));
+			for (tmx::Property prop: i_layer.getProperties()) {
+				if (prop.getName() == "scroll_rate" && prop.getType() == tmx::Property::Type::Float) {
+					p_image->setScrollRate(prop.getFloatValue());
+					break;
+				}
+			}
 
 			if (layerName == "s_background") {
-				scene->setLayerSBackground(&i_layer);
+				scene->setLayerSBackground(p_image);
 			} else if (layerName == "s_background2") {
-				scene->setLayerSBackground2(&i_layer);
+				scene->setLayerSBackground2(p_image);
 			} else if (layerName == "s_foreground") {
-				scene->setLayerSForeground(&i_layer);
+				scene->setLayerSForeground(p_image);
 			} else {
 				logger.warn("Unknown image layer \"", layerName, "\": ", map_path);
+				delete p_image;
 			}
 		} else if (layer.getType() == tmx::Layer::Type::Tile) {
 			tmx::TileLayer t_layer = dynamic_cast<const tmx::TileLayer&>(*layerPtr);
