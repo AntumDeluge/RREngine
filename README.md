@@ -19,6 +19,7 @@ Example data:
     - character (CC0): based on [Mega Bot Assets Pack by Luis Zuno (ansimuz)](https://opengameart.org/node/99323)
     - enemy (CC0): [Classic Hero and Baddies Pack by GrafxKid](https://opengameart.org/node/36173)
     - flying_enemy (CC0): [Mega Bot Assets Pack by Luis Zuno (ansimuz)](https://opengameart.org/node/99323)
+    - explosion (CC0): [Mega Bot Assets Pack by Luis Zuno (ansimuz)](https://opengameart.org/node/99323)
 - tileset:
     - megabot (CC0): [Mega Bot Assets Pack by Luis Zuno (ansimuz)](https://opengameart.org/node/99323)
 - backgrounds:
