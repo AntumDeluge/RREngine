@@ -21,7 +21,7 @@ Example data:
 - tileset:
     - megabot (CC0): [Mega Bot Assets Pack by Luis Zuno (ansimuz)](https://opengameart.org/node/99323)
 - backgrounds:
-    - megabot_scaled (CC0): [Mega Bot Assets Pack by Luis Zuno (ansimuz)](https://opengameart.org/node/99323)
+    - megabot_scaled* (CC0): [Mega Bot Assets Pack by Luis Zuno (ansimuz)](https://opengameart.org/node/99323)
     - [voodoo_cactus_underwater by lzubiaur](https://opengameart.org/node/30946) (CC BY 3.0)
 - music:
     - summer_sunday (CC0): [Summer Sunday by celestialghost8](https://opengameart.org/node/71806)

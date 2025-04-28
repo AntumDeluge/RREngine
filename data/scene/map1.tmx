@@ -9,7 +9,12 @@
    <property name="scroll_rate" type="float" value="0.2"/>
   </properties>
  </imagelayer>
- <imagelayer id="6" name="s_background"/>
+ <imagelayer id="6" name="s_background" repeatx="1">
+  <image source="../background/megabot_scaled_front.png" width="137" height="240"/>
+  <properties>
+   <property name="scroll_rate" type="float" value="0.5"/>
+  </properties>
+ </imagelayer>
  <layer id="1" name="background" width="32" height="15">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGAb0BAAeAAAE=
