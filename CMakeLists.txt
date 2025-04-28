@@ -34,7 +34,9 @@ configure_file("config.h.in" "config.h")
 
 # compiler options
 
+set(GNUC false)
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+	set(GNUC true)
 	# prioritize Clang over GNU
 	find_program(CLANG_COMPILER NAMES clang++)
 	if(CLANG_COMPILER)
@@ -63,7 +65,7 @@ endif()
 if(STATIC)
 	if(MSVC)
 		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /STATIC")
-	else()
+	elseif(GNUC)
 		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
 	endif()
 endif()
