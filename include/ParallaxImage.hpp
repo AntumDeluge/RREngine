@@ -7,6 +7,7 @@
 #ifndef RRE_PARALLAX_IMAGE
 #define RRE_PARALLAX_IMAGE
 
+#include <algorithm> // std::min, std::max
 #include <cstdint> // *int*_t
 
 #include <SDL2/SDL_render.h>
@@ -32,6 +33,8 @@ private:
 
 	/** Scrolling direction. */
 	ORIENT orientation;
+	/** Scrolling rate. */
+	float scroll_rate;
 
 public:
 	/**
@@ -42,6 +45,7 @@ public:
 	 */
 	ParallaxImage(SDL_Texture* texture): Image(texture) {
 		orientation = HORIZONTAL;
+		scroll_rate = 1.0f;
 	}
 
 	/**
@@ -52,6 +56,16 @@ public:
 	 */
 	void setOrientation(ORIENT orient) {
 		orientation = orient;
+	}
+
+	/**
+	 * Sets scrolling rate of image layer.
+	 *
+	 * @param rate
+	 *   Value between 0.0 & 1.0.
+	 */
+	void setScrollRate(float rate) {
+		scroll_rate = std::max(rate, 0.0f);
 	}
 
 	/**
