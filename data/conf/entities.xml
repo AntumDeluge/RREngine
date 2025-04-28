@@ -3,7 +3,7 @@
 <entities>
 	<!-- TODO: load from files in sub-directory -->
 
-	<entity id="player" sprite="player" width="20" height="26">
+	<entity id="player" sprite="player" width="18" height="23">
 		<momentum>3.0</momentum>
 	</entity>
 
