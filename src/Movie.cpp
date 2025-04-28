@@ -6,6 +6,8 @@
 
 #include "config.h"
 
+#include <SDL2/SDL_timer.h>
+
 #include "Movie.hpp"
 #include "SingletonRepo.hpp"
 #include "reso.hpp"
@@ -25,6 +27,9 @@ uint32_t Movie::getDuration() {
 }
 
 void Movie::render(Renderer* ctx) {
+	if (frame_start == 0) {
+		frame_start = SDL_GetTicks64();
+	}
 
 	uint16_t frames_count = this->frames.size();
 	if (!this->playing || frames_count == 0) {

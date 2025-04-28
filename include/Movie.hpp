@@ -12,8 +12,6 @@
 #include <utility> // std::pair
 #include <vector>
 
-#include <SDL2/SDL_timer.h>
-
 #include "FontMap.hpp"
 #include "Image.hpp"
 #include "Logger.hpp"
@@ -88,8 +86,8 @@ public:
 
 	/** Marks movie for playback. */
 	void play() {
-		this->frame_start = SDL_GetTicks64();
-		this->playing = true;
+		frame_start = 0;
+		playing = true;
 	}
 
 	/**
