@@ -27,28 +27,41 @@ if(NOT PUGIXML_VERSION)
 	message(FATAL_ERROR "Please install pugixml")
 endif()
 
+
+# --- Bundled Dependencies --- #
+
+set(BUNDLED_SRC "")
+
 # tmxlite
-pkg_search_module(TMXLITE tmxlite ${MODULE_PARAMS})
-if(NOT TMXLITE_VERSION)
-	message(FATAL_ERROR "Required library tmxlite not found")
-endif()
-if(STATIC AND NOT MSVC)
-	# tmxlite static libs may not be configured correctly for pkg-config
-	find_library(TMXLITE_A libtmxlite.a NO_CACHE)
-	if(NOT TMXLITE_A)
-		message("-- WARNING: tmxlite static library may not be configured correctly for pkg-config; attempting to locate manually")
-		find_library(TMXLITE_A libtmxlite-s.a NO_CACHE REQUIRED)
-		message("-- Found tmxlite static library: ${TMXLITE_A}")
-		set(TMXLITE_STATIC_LIBRARIES ${TMXLITE_A})
+if(SYSTEM_TMXLITE)
+	pkg_search_module(TMXLITE tmxlite ${MODULE_PARAMS})
+	if(NOT TMXLITE_VERSION)
+		message(FATAL_ERROR "Required library tmxlite not found (please install tmxlite or use -DSYSTEM_TMXLITE=OFF)")
 	endif()
+	if(STATIC AND NOT MSVC)
+		# tmxlite static libs may not be configured correctly for pkg-config
+		find_library(TMXLITE_A libtmxlite.a NO_CACHE)
+		if(NOT TMXLITE_A)
+			message("-- WARNING: tmxlite static library may not be configured correctly for pkg-config; attempting to locate manually")
+			find_library(TMXLITE_A libtmxlite-s.a NO_CACHE REQUIRED)
+			message("-- Found tmxlite static library: ${TMXLITE_A}")
+			set(TMXLITE_STATIC_LIBRARIES ${TMXLITE_A})
+		endif()
+	endif()
+else()
+	set(TMXLITE_BUNDLE "${PROJECT_SOURCE_DIR}/lib/tmxlite")
+	file(GLOB TMXLITE_SRC "${TMXLITE_BUNDLE}/src/*.c" "${TMXLITE_BUNDLE}/src/*.cpp")
+	list(APPEND BUNDLED_SRC ${TMXLITE_SRC})
+	include_directories("${TMXLITE_BUNDLE}/include")
 endif()
 
 
-# bundled Lua library source
+# Lua
 #file(GLOB_RECURSE LUA_C_SOURCE "${PROJECT_SOURCE_DIR}/lib/lua/src/*.c")
 # exclude Lua interpreter/compiler executables source
 #list(REMOVE_ITEM LUA_C_SOURCE "${PROJECT_SOURCE_DIR}/lib/lua/src/lua.c")
 #list(REMOVE_ITEM LUA_C_SOURCE "${PROJECT_SOURCE_DIR}/lib/lua/src/luac.c")
+#list(APPEND BUNDLED_SRC ${LUA_C_SOURCE})
 
 
 # compiler include paths
@@ -80,8 +93,10 @@ if(NOT STATIC)
 		${SDL2IMAGE_LIBRARIES}
 		${SDL2TTF_LIBRARIES}
 		${PUGIXML_LIBRARIES}
-		${TMXLITE_LIBRARIES}
 	)
+	if(SYSTEM_TMXLITE)
+		list(APPEND LINK_LIBRARIES ${TMXLITE_LIBRARIES})
+	endif()
 else()
 	set(LINK_LIBRARIES
 		${SDL2_STATIC_LIBRARIES}
@@ -89,6 +104,8 @@ else()
 		${SDL2IMAGE_STATIC_LIBRARIES}
 		${SDL2TTF_STATIC_LIBRARIES}
 		${PUGIXML_STATIC_LIBRARIES}
-		${TMXLITE_STATIC_LIBRARIES}
 	)
+	if(SYSTEM_TMXLITE)
+		list(APPEND LINK_LIBRARIES ${TMXLITE_STATIC_LIBRARIES})
+	endif()
 endif()

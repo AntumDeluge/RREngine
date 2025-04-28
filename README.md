@@ -37,6 +37,7 @@ Example data:
 
 - [cxxopts](https://github.com/jarro2783/cxxopts) v3.2.0 ([MIT](lib/cxxopts/LICENSE.txt))
 - [lua](https://lua.org/) v5.4.7 ([MIT](lib/lua/LICENSE.txt)) _(disabled)_
+- [tmxlite](https://github.com/fallahn/tmxlite) v1.4.4 (zlib)
 
 ### External Libraries
 
@@ -44,7 +45,6 @@ Example data:
 - [SDL2_mixer](https://wiki.libsdl.org/SDL2_mixer) (zlib) ([source](https://github.com/libsdl-org/SDL_mixer/releases))
 - [SDL2_image](https://wiki.libsdl.org/SDL2_image) (zlib) ([source](https://github.com/libsdl-org/SDL_image/releases))
 - [pugixml](https://pugixml.org/) (MIT) ([source](https://github.com/zeux/pugixml))
-- [tmxlite](https://github.com/fallahn/tmxlite) (zlib)
 
 ### Required Build Tools
 

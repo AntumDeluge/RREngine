@@ -23,3 +23,6 @@ endif()
 
 # ffmpeg executable
 find_program(FFMPEG ffmpeg)
+
+# dependencies options
+option(SYSTEM_TMXLITE "Use system tmxlite." OFF)
