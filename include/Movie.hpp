@@ -54,6 +54,13 @@ private:
 	uint32_t frame_start = 0;
 	/** Denotes frames can be drawn. */
 	bool playing = false;
+	/** Timestamp of first played frame. */
+	uint64_t init_time = 0;
+
+	/** Fade in animation duration in milliseconds. */
+	uint32_t fade_in = 0;
+	/** Fade out animation duration in milliseconds. */
+	uint32_t fade_out = 0;
 
 public:
 	/** Default constructor. */
@@ -162,6 +169,24 @@ public:
 		}
 		this->text_sprites.clear();
 	}
+
+	/**
+	 * Sets fade in animation duration.
+	 *
+	 * TODO: support fade color
+	 *
+	 * @param ms
+	 *   Duration in milliseconds.
+	 */
+	void setFadeIn(uint32_t ms) { fade_in = ms; }
+
+	/**
+	 * Sets fade out animation duration.
+	 *
+	 * @param ms
+	 *   Duration in milliseconds.
+	 */
+	void setFadeOut(uint32_t ms) { fade_out = ms; }
 };
 
 #endif /* RRE_MOVIE */

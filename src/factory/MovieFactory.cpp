@@ -69,8 +69,19 @@ Movie* MovieFactory::getMovie(string id) {
 	MovieFrameList frames;
 	//vector<pair<uint16_t, Sprite*>> text_sprites;
 	vector<string> texts;
+	uint32_t fade_in = 0;
+	uint32_t fade_out = 0;
 
 	if (movie_el.type() != node_null) {
+		xml_attribute attr_fade_in = movie_el.attribute("fade_in");
+		xml_attribute attr_fade_out = movie_el.attribute("fade_out");
+		if (!attr_fade_in.empty()) {
+			fade_in = attr_fade_in.as_uint();
+		}
+		if (!attr_fade_out.empty()) {
+			fade_out = attr_fade_out.as_uint();
+		}
+
 		xml_node frame_el = movie_el.child("frame");
 		while (frame_el.type() != node_null) {
 			xml_attribute ms_attr = frame_el.attribute("ms");
@@ -130,6 +141,12 @@ Movie* MovieFactory::getMovie(string id) {
 	Movie* movie = new Movie(frames);
 	for (string t: texts) {
 		movie->addText(t);
+	}
+	if (fade_in > 0) {
+		movie->setFadeIn(fade_in);
+	}
+	if (fade_out > 0) {
+		movie->setFadeOut(fade_out);
 	}
 
 	return movie;

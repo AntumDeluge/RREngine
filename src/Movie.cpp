@@ -29,6 +29,12 @@ uint32_t Movie::getDuration() {
 void Movie::render(Renderer* ctx) {
 	if (frame_start == 0) {
 		frame_start = SDL_GetTicks64();
+		if (fade_in > 0) {
+			GetViewport()->setFadeIn(frame_start, fade_in);
+		}
+		if (fade_out > 0) {
+			GetViewport()->setFadeOut(frame_start + getDuration() - fade_out, fade_out);
+		}
 	}
 
 	uint16_t frames_count = this->frames.size();
