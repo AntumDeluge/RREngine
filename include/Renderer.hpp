@@ -237,6 +237,46 @@ public:
 	void setScale(uint16_t scale);
 
 	/**
+	 * Retrieves scaling factor of rendering target.
+	 *
+	 * @return
+	 *   Scaling factor.
+	 */
+	uint16_t getScale();
+
+	/**
+	 * Retrieves viewport renderer pixel width.
+	 *
+	 * @return
+	 *   Actual pixel width.
+	 */
+	uint32_t getWidth();
+
+	/**
+	 * Retrieves viewport renderer pixel height.
+	 *
+	 * @return
+	 *   Actual pixel height.
+	 */
+	uint32_t getHeight();
+
+	/**
+	 * Retrieves viewport renderer internal pixel width.
+	 *
+	 * @return
+	 *   Internal unscaled width.
+	 */
+	uint32_t getInternalWidth();
+
+	/**
+	 * Retrieves viewport renderer internal pixel height.
+	 *
+	 * @return
+	 *   Internal unscaled height.
+	 */
+	uint32_t getInternalHeight();
+
+	/**
 	 * Sets blend mode used for drawing operations.
 	 *
 	 * @param blend_mode

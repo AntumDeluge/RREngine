@@ -5,6 +5,7 @@
  */
 
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_video.h>
 
 #include "Renderer.hpp"
 #include "SingletonRepo.hpp"
@@ -113,6 +114,32 @@ void Renderer::drawImage(Image* img, uint32_t x, uint32_t y, SDL_RendererFlip fl
 
 void Renderer::setScale(uint16_t scale) {
 	SDL_RenderSetScale(internal, scale, scale);
+}
+
+uint16_t Renderer::getScale() {
+	float scaleX;
+	SDL_RenderGetScale(internal, &scaleX, NULL);
+	return (uint16_t) scaleX;
+}
+
+uint32_t Renderer::getWidth() {
+	int32_t w;
+	SDL_GetWindowSize(SDL_RenderGetWindow(internal), &w, NULL);
+	return (uint32_t) w;
+}
+
+uint32_t Renderer::getHeight() {
+	int32_t h;
+	SDL_GetWindowSize(SDL_RenderGetWindow(internal), NULL, &h);
+	return (uint32_t) h;
+}
+
+uint32_t Renderer::getInternalWidth() {
+	return getWidth() / getScale();
+}
+
+uint32_t Renderer::getInternalHeight() {
+	return getHeight() / getScale();
 }
 
 void Renderer::setBlendMode(SDL_BlendMode blend_mode) {
