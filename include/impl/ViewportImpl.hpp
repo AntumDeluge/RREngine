@@ -79,6 +79,40 @@ public:
 	virtual void setRenderMode(GameMode::Mode mode) = 0;
 
 	/**
+	 * Sets fade in animation.
+	 *
+	 * @param start_time
+	 *   Timestamp when animation should begin.
+	 * @param ms
+	 *   Duration of animation in milliseconds.
+	 */
+	virtual void setFadeIn(uint64_t start_time, uint32_t ms) = 0;
+
+	/**
+	 * Sets fade out animation.
+	 *
+	 * @param start_time
+	 *   Timestamp when animation should begin.
+	 * @param ms
+	 *   Duration of animation in milliseconds.
+	 */
+	virtual void setFadeOut(uint64_t start_time, uint32_t ms) = 0;
+
+	/**
+	 * Sets fade in/out color.
+	 *
+	 * FIXME: not yet supported
+	 *
+	 * @param r
+	 *   Red value.
+	 * @param g
+	 *   Green value.
+	 * @param b
+	 *   Blue value.
+	 */
+	virtual void setFadeColor(uint8_t r, uint8_t g, uint8_t b) = 0;
+
+	/**
 	 * Renders the current scene, movie, menu, etc. on viewport.
 	 */
 	virtual void render() = 0;

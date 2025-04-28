@@ -40,6 +40,8 @@ Viewport::Viewport() {
 	this->background = nullptr;
 	this->fps_sprite = nullptr;
 	this->movie = nullptr;
+
+	resetFade();
 }
 
 void Viewport::shutdown() {
@@ -80,6 +82,7 @@ bool Viewport::setBackground(string rdpath) {
 }
 
 void Viewport::setRenderMode(GameMode::Mode mode) {
+	resetFade();
 	GetGameWindow()->stopMusic();
 	this->clearText();
 	this->unsetBackground();
@@ -115,6 +118,16 @@ void Viewport::setRenderMode(GameMode::Mode mode) {
 	this->mode = mode;
 }
 
+void Viewport::setFadeIn(uint64_t start_time, uint32_t ms) {
+	fade_in_start = start_time;
+	fade_in_end = fade_in_start + ms;
+}
+
+void Viewport::setFadeOut(uint64_t start_time, uint32_t ms) {
+	fade_out_start = start_time;
+	fade_out_end = fade_out_start + ms;
+}
+
 void Viewport::render() {
 	render_time = SDL_GetTicks64();
 	renderer->setDrawColor(0, 0, 0, 0);
@@ -133,6 +146,7 @@ void Viewport::render() {
 		}
 	}
 	this->drawText();
+	handleFade();
 	renderer->present();
 }
 
@@ -198,4 +212,40 @@ void Viewport::drawFPS() {
 	if (this->fps_sprite != nullptr) {
 		renderer->drawImage(this->fps_sprite, 0, 0);
 	}
+}
+
+void Viewport::handleFade() {
+	if (fade_in_end == 0 && fade_out_end == 0) {
+		return;
+	}
+
+	if (fade_in_start > 0) {
+		if (render_time > fade_in_end) {
+			// don't call `resetFade` here in case fade out is cached
+			fade_in_start = 0;
+			fade_in_end = 0;
+			return;
+		}
+
+		uint8_t alpha = 0;
+		if (fade_in_end > render_time) {
+			float dur = fade_in_end - fade_in_start;
+			float p = 1.0 - ((render_time - fade_in_start) / dur);
+			alpha = 255 * p;
+		}
+		fade_color.a = alpha;
+		renderer->setDrawColor(fade_color);
+		renderer->fillRect(0, 0, renderer->getInternalWidth(), renderer->getInternalHeight());
+	} else if (fade_out_start > 0 && render_time >= fade_out_start) {
+		// NOTE: resetting fade out is done externally or by `Viewport::setRenderMode`
+		uint8_t alpha = 255;
+		if (fade_out_end > render_time) {
+			float dur = fade_out_end - fade_out_start;
+			float p = (render_time - fade_out_start) / dur;
+			alpha = 255 * p;
+		}
+		fade_color.a = alpha;
+		renderer->setDrawColor(fade_color);
+		renderer->fillRect(0, 0, renderer->getInternalWidth(), renderer->getInternalHeight());
+		}
 }

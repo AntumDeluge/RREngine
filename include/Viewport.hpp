@@ -11,6 +11,8 @@
 #include <mutex>
 #include <vector>
 
+#include <SDL2/SDL_pixels.h>
+
 #include "Logger.hpp"
 #include "Movie.hpp"
 #include "Sprite.hpp"
@@ -69,6 +71,17 @@ private:
 	 * TODO: replace with text sprite class with x/y offsets
 	 */
 	std::vector<Sprite*> text_sprites;
+
+	/** Timestamp for fade in animation to begin. */
+	uint64_t fade_in_start;
+	/** Timestamp for fade in animation to reach full transparency. */
+	uint64_t fade_in_end;
+	/** Timestamp for fade out animation to begin. */
+	uint64_t fade_out_start;
+	/** Timestamp for fade out animation to reach full opacity. */
+	uint64_t fade_out_end;
+	/** Color drawn for fade in/out animation opacity. */
+	SDL_Color fade_color;
 
 public:
 	/** Default constructor. */
@@ -134,6 +147,26 @@ public:
 	/** Overrides `ViewportImpl::setRenderMode`. */
 	void setRenderMode(GameMode::Mode mode) override;
 
+	/** Overrides `ViewportImpl::setFadeIn`. */
+	void setFadeIn(uint64_t start_time, uint32_t ms) override;
+
+	/** Overrides `ViewportImpl::setFadeOut`. */
+	void setFadeOut(uint64_t start_time, uint32_t ms) override;
+
+	/** Overrides `ViewportImpl::setFadeColor`. */
+	void setFadeColor(uint8_t r, uint8_t g, uint8_t b) override {
+		fade_color = (SDL_Color) {r, g, b, 255};
+	}
+
+	/** Resets fade animations parameters to default. */
+	void resetFade() {
+		fade_in_start = 0;
+		fade_in_end = 0;
+		fade_out_start = 0;
+		fade_out_end = 0;
+		setFadeColor(0, 0, 0);
+	}
+
 	/**
 	 * Renders the current scene, movie, menu, etc. on viewport.
 	 */
@@ -174,6 +207,9 @@ private:
 
 	/** Renders FPS text sprite on viewport. */
 	void drawFPS();
+
+	/** Draws fade in/out animations on viewport renderer. */
+	void handleFade();
 };
 
 #endif /* RRE_VIEWPORT */
