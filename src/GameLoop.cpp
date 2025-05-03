@@ -88,6 +88,12 @@ void GameLoop::start() {
 				GetInput()->onKeyDown(event.key.keysym.sym);
 			} else if (event.type == SDL_KEYUP) {
 				GetInput()->onKeyUp(event.key.keysym.sym);
+			} else if (event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP) {
+				GetInput()->translateGamepadButtonEvent(event.jbutton.button, event.jbutton.state);
+			} else if (event.type == SDL_JOYHATMOTION) {
+				GetInput()->translateGamepadHatEvent(event.jhat);
+			} else if (event.type == SDL_JOYAXISMOTION) {
+				GetInput()->translateGamepadAxisEvent(event.jaxis);
 			}
 		}
 

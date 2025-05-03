@@ -14,6 +14,7 @@
 #include <utility> // std::pair
 #include <vector>
 
+#include <SDL2/SDL_events.h>
 #include <SDL2/SDL_gamecontroller.h>
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_keycode.h>
@@ -160,6 +161,32 @@ public:
 
 	/** Refreshes list of detected gamepads/joysticks. */
 	void updateGamepads();
+
+	/**
+	 * Translates gamepad/joystick event to matching input event.
+	 *
+	 * @param evt
+	 *   Gamepad hat direction event.
+	 */
+	void translateGamepadHatEvent(SDL_JoyHatEvent evt);
+
+	/**
+	 * Translates gamepad/joystick event to matching input event.
+	 *
+	 * @param evt
+	 *   Gamepad axis event.
+	 */
+	void translateGamepadAxisEvent(SDL_JoyAxisEvent evt);
+
+	/**
+	 * Translates gamepad/joystick event to matching input event.
+	 *
+	 * @param button
+	 *   Triggered button index.
+	 * @param state
+	 *   Button state.
+	 */
+	void translateGamepadButtonEvent(uint8_t button, uint8_t state);
 
 	/**
 	 * Interprets keyboard key down events.

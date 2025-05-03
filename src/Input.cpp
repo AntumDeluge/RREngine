@@ -7,9 +7,9 @@
 #include "config.h"
 
 #include <algorithm>
+// #include <cstdlib> // std::abs
 #include <cstring>  // std::memcmp
 
-#include <SDL2/SDL_events.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
 
@@ -110,6 +110,51 @@ void Input::updateGamepads() {
 		SDL_GameControllerClose(dev);
 	}
 #endif
+}
+
+void Input::translateGamepadHatEvent(SDL_JoyHatEvent evt) {
+	// TODO: allow to be customized
+	if (evt.value == 0) {
+		onKeyUp(SDLK_UP);
+		onKeyUp(SDLK_DOWN);
+		onKeyUp(SDLK_LEFT);
+		onKeyUp(SDLK_RIGHT);
+	}
+	if (evt.value & 8) {
+		onKeyDown(SDLK_LEFT);
+	}
+	if (evt.value & 2) {
+		onKeyDown(SDLK_RIGHT);
+	}
+	if (evt.value & 1) {
+		onKeyDown(SDLK_UP);
+	}
+	if (evt.value & 4) {
+		onKeyDown(SDLK_DOWN);
+	}
+}
+
+void Input::translateGamepadAxisEvent(SDL_JoyAxisEvent evt) {
+	// FIXME: need to veto if sensitivity threshold not met
+
+	// DEBUG:
+	// logger.debug("axis ", to_string(evt.axis), " value: ", to_string(evt.value));
+
+	// TODO:
+}
+
+void Input::translateGamepadButtonEvent(uint8_t button, uint8_t state) {
+	// DEBUG:
+	string msg = "";
+	if (state == SDL_PRESSED) {
+		msg = "pressed ";
+	} else if (state == SDL_RELEASED) {
+		msg = "released ";
+	}
+	msg += "button " + to_string(button);
+	logger.debug(msg);
+
+	// TODO:
 }
 
 bool Input::keyIsPressed(SDL_Keycode key) {
