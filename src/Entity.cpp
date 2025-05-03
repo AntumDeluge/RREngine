@@ -239,7 +239,7 @@ void Entity::render(Renderer* ctx) {
 
 	SDL_Rect draw_rect = rect;
 	draw_rect.x -= scene->getOffsetX();
-	draw_rect.y -= scene->getOffsetY();
+	draw_rect.y -= scene->getOffsetY() + offset_y;
 
 	sprite->render(ctx, draw_rect.x - offset_x, draw_rect.y - offset_y, flags);
 

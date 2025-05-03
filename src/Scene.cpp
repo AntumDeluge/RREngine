@@ -147,7 +147,7 @@ bool Scene::collidesGround(SDL_Rect rect) {
 	// FIXME: collision recognized late
 
 	// position of bottom of entity
-	int32_t pos_y = small_rect.y + small_rect.h + 1;
+	int32_t pos_y = small_rect.y + small_rect.h;
 	// check entire width of entity
 	for (int32_t pos_x = small_rect.x; pos_x < small_rect.x + small_rect.w; pos_x++) {
 		if (collision_map[pos_x][pos_y]) {
