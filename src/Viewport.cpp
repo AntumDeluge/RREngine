@@ -96,8 +96,8 @@ void Viewport::setRenderMode(GameMode::Mode mode) {
 	} else if (mode == GameMode::SCENE) {
 		// DEBUG: placeholder example
 		GetGameVisuals()->setScene("map1");
-		this->addText("Sorry, nothing to do");
-		this->addText("here yet. :(");
+		// this->addText("Sorry, nothing to do");
+		// this->addText("here yet. :(");
 	} else if (mode == GameMode::INTRO) {
 		this->movie = GameConfig::getIntro();
 		if (this->movie) {
