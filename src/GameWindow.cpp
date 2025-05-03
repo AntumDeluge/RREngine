@@ -93,6 +93,13 @@ int GameWindow::init(const string title, const int width, const int height) {
 		return 1;
 	}
 
+	// initialize joystick/gamepad input support
+	if (SDL_Init(SDL_INIT_JOYSTICK) != 0) {
+		string msg = SDL_GetError();
+		this->logger.error(msg);
+		Dialog::error(msg);
+	}
+
 	this->viewport = GetViewport();
 
 	return 0;
