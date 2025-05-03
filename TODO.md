@@ -6,3 +6,11 @@
 - Port to SDL3.
   - Note: SDL_mixer not yet ported to SDL3
 - Use SDL_ttf to support TrueType fonts.
+- Support co-op play.
+- Entities:
+  - Customizable behavior.
+- Desktop support:
+  - Hardware gamepad input.
+- Mobile support:
+  - Touch input.
+  - Hardware gamepad input.
