@@ -7,6 +7,8 @@
 #ifndef RRE_IMAGE
 #define RRE_IMAGE
 
+#include <cstdint> // *int*_t
+
 #include <SDL2/SDL_render.h>
 
 #include "Logger.hpp"
@@ -24,9 +26,9 @@ protected:
 	SDL_Texture* texture;
 
 	/** Full image width (in pixels). */
-	int width;
+	int32_t width;
 	/** Full image height (in pixels). */
-	int height;
+	int32_t height;
 
 	/**
 	 * Sets texture used by this image.
@@ -76,7 +78,7 @@ public:
 	 * @return
 	 *   Image width in pixels.
 	 */
-	int getWidth() { return this->width; }
+	int32_t getWidth() { return this->width; }
 
 	/**
 	 * Retrieves image height.
@@ -84,7 +86,7 @@ public:
 	 * @return
 	 *   Image height in pixels.
 	 */
-	int getHeight() { return this->height; }
+	int32_t getHeight() { return this->height; }
 
 	/**
 	 * Checks if image is ready for rendering.
