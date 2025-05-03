@@ -67,8 +67,8 @@ void Scene::render(Renderer* ctx) {
 
 	renderTileLayer(ctx, foreground);
 
-	if (s_foreground) {
-		s_foreground->render(ctx, offset_x, offset_y);
+	if (weather) {
+		weather->render(ctx, offset_x, offset_y);
 	}
 }
 

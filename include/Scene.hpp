@@ -74,7 +74,7 @@ private:
 	LayerDefinition foreground;
 
 	/** Parallax scrolling foreground layer. */
-	ParallaxImage* s_foreground;
+	ParallaxImage* weather;
 
 	/** Objects currently occupying this scene. */
 	std::vector<Object*> objects;
@@ -104,7 +104,7 @@ public:
 
 		this->s_background = nullptr;
 		this->s_background2 = nullptr;
-		this->s_foreground = nullptr;
+		this->weather = nullptr;
 
 		this->player = nullptr;
 
@@ -247,10 +247,10 @@ public:
 	/**
 	 * Sets layer to use for scrolling foreground.
 	 *
-	 * @param layer
-	 *   Image layer definition.
+	 * @param img
+	 *   Parallax scrolling image.
 	 */
-	void setLayerSForeground(ParallaxImage* layer) { this->s_foreground = layer; }
+	void setLayerWeather(ParallaxImage* img) { weather = img; }
 
 	/**
 	 * Adds a point of collision to map.

@@ -144,8 +144,8 @@ Scene* SceneStore::get(string id) {
 				scene->setLayerSBackground(p_image);
 			} else if (layerName == "s_background2") {
 				scene->setLayerSBackground2(p_image);
-			} else if (layerName == "s_foreground") {
-				scene->setLayerSForeground(p_image);
+			} else if (layerName == "weather") {
+				scene->setLayerWeather(p_image);
 			} else {
 				logger.warn("Unknown image layer \"", layerName, "\": ", map_path);
 				delete p_image;
