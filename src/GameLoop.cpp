@@ -85,9 +85,9 @@ void GameLoop::start() {
 			if (event.type == SDL_QUIT) {
 				GameLoop::end();
 			} else if (event.type == SDL_KEYDOWN) {
-				GetInput()->onKeyDown(event.key.keysym);
+				GetInput()->onKeyDown(event.key.keysym.sym);
 			} else if (event.type == SDL_KEYUP) {
-				GetInput()->onKeyUp(event.key.keysym);
+				GetInput()->onKeyUp(event.key.keysym.sym);
 			}
 		}
 

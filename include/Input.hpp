@@ -16,7 +16,6 @@
 
 #include <SDL2/SDL_gamecontroller.h>
 #include <SDL2/SDL_joystick.h>
-#include <SDL2/SDL_keyboard.h>
 #include <SDL2/SDL_keycode.h>
 
 #include "Logger.hpp"
@@ -165,18 +164,18 @@ public:
 	/**
 	 * Interprets keyboard key down events.
 	 *
-	 * @param key
+	 * @param keycode
 	 *   Depressed key.
 	 */
-	void onKeyDown(SDL_Keysym key);
+	void onKeyDown(SDL_Keycode keycode);
 
 	/**
 	 * Interprets keyboard key up events.
 	 *
-	 * @param key
+	 * @param keycode
 	 *   Released key.
 	 */
-	void onKeyUp(SDL_Keysym key);
+	void onKeyUp(SDL_Keycode keycode);
 };
 
 #endif /* RRE_INPUT */

@@ -133,26 +133,26 @@ void Input::releaseKey(SDL_Keycode key, uint16_t mod) {
 	SDL_PushEvent((SDL_Event*) &event);
 }
 
-void Input::onKeyDown(SDL_Keysym keysym) {
-	if (this->keyIsPressed(keysym.sym)) {
+void Input::onKeyDown(SDL_Keycode keycode) {
+	if (this->keyIsPressed(keycode)) {
 		return;
 	}
-	this->pressed_keys.push_back(keysym.sym);
+	this->pressed_keys.push_back(keycode);
 
-	if ((keysym.sym == SDLK_RETURN || keysym.sym == SDLK_KP_ENTER) && (keyIsPressed(SDLK_LALT)
+	if ((keycode == SDLK_RETURN || keycode == SDLK_KP_ENTER) && (keyIsPressed(SDLK_LALT)
 			|| keyIsPressed(SDLK_RALT))) {
 		GetGameWindow()->toggleFullscreen();
 		GameLoop::setPaused(true, "KB_ALT_ENTER");
 		// FIXME: key release simulation works but subsequent presses are still processed until actually released
-		//releaseKey(keysym.sym, KMOD_ALT);
+		//releaseKey(keycode, KMOD_ALT);
 		return;
 	}
 	// don't process game loop keyboard events while paused
 	if (GameLoop::isPaused()) return;
 
-	if (keyIsDirection(keysym.sym)) {
+	if (keyIsDirection(keycode)) {
 		uint8_t new_dir = GetPlayerDirection();
-		switch(keysym.sym) {
+		switch(keycode) {
 			case SDLK_LEFT:
 				new_dir = AddPlayerDirection(MomentumDir::LEFT);
 				break;
@@ -173,13 +173,13 @@ void Input::onKeyDown(SDL_Keysym keysym) {
 	}
 }
 
-void Input::onKeyUp(SDL_Keysym keysym) {
-	if (!this->keyIsPressed(keysym.sym)) {
+void Input::onKeyUp(SDL_Keycode keycode) {
+	if (!this->keyIsPressed(keycode)) {
 		return;
 	}
-	this->pressed_keys.erase(remove(this->pressed_keys.begin(), this->pressed_keys.end(), keysym.sym), this->pressed_keys.end());
+	this->pressed_keys.erase(remove(this->pressed_keys.begin(), this->pressed_keys.end(), keycode), this->pressed_keys.end());
 
-	if ((keysym.sym == SDLK_RETURN || keysym.sym == SDLK_KP_ENTER)
+	if ((keycode == SDLK_RETURN || keycode == SDLK_KP_ENTER)
 			&& GameLoop::isPaused("KB_ALT_ENTER")) {
 		GameLoop::setPaused(false);
 		return;
@@ -187,9 +187,9 @@ void Input::onKeyUp(SDL_Keysym keysym) {
 	// don't process game loop keyboard events while paused
 	if (GameLoop::isPaused()) return;
 
-	if (keyIsDirection(keysym.sym)) {
+	if (keyIsDirection(keycode)) {
 		uint8_t new_dir = GetPlayerDirection();
-		switch(keysym.sym) {
+		switch(keycode) {
 			case SDLK_LEFT:
 				new_dir = RemovePlayerDirection(MomentumDir::LEFT);
 				break;
