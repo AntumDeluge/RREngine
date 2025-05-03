@@ -32,6 +32,14 @@ Input::Input() {
 	gamepad = nullptr;
 	// TODO: move to `init` function
 	updateGamepads();
+
+#if RRE_DEBUGGING
+	if (!setGamepad(3)) {
+		logger.error("failed to set gamepad: ", SDL_GetError());
+	} else {
+		logger.debug("gamepad set: ", getGamepadName(gamepad));
+	}
+#endif
 }
 
 bool Input::setGamepad(SDL_JoystickGUID guid) {
