@@ -95,7 +95,7 @@ public:
 	 *   `true` if texture has been loaded.
 	 */
 	bool ready() {
-		return this->texture != nullptr;
+		return this->texture != nullptr && width > 0 && height > 0;
 	}
 };
 
