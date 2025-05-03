@@ -7,7 +7,7 @@
 #include "config.h"
 
 #include <algorithm>
-#include <string>
+#include <cstring>  // std::memcmp
 
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_timer.h>
@@ -27,6 +27,90 @@ Logger Input::logger = Logger::getLogger("Input");
 // initialize singleton instance
 unique_ptr<Input> Input::instance = nullptr;
 mutex Input::mtx;
+
+Input::Input() {
+	gamepad = nullptr;
+	// TODO: move to `init` function
+	updateGamepads();
+}
+
+bool Input::setGamepad(SDL_JoystickGUID guid) {
+	if (gamepad != nullptr) {
+		SDL_GameControllerClose(gamepad);
+		gamepad = nullptr;
+	}
+	gamepad = getGamepad(guid);
+	if (gamepad == nullptr) {
+		SDL_SetError("device not found");
+		return false;
+	}
+	SDL_JoystickGUID dev_guid = SDL_JoystickGetGUID(SDL_GameControllerGetJoystick(gamepad));
+	if (memcmp(&dev_guid, &guid, sizeof(SDL_JoystickGUID)) != 0) {
+		SDL_SetError("device GUID mismatch");
+		return false;
+	}
+	return true;
+}
+
+bool Input::setGamepad(int32_t idx) {
+	for (auto dev_info: gamepad_guids) {
+		if (idx == dev_info.first) {
+			return setGamepad(dev_info.second);
+		}
+	}
+	return false;
+}
+
+SDL_GameController* Input::getGamepad(SDL_JoystickGUID guid) {
+	for (int idx = 0; idx < SDL_NumJoysticks(); idx++) {
+		SDL_JoystickGUID dev_guid = SDL_JoystickGetDeviceGUID(idx);
+		if (memcmp(&dev_guid, &guid, sizeof(SDL_JoystickGUID)) == 0) {
+			return SDL_GameControllerOpen(idx);
+		}
+	}
+	return nullptr;
+}
+
+string Input::getGamepadName(SDL_GameController* dev) {
+	return SDL_JoystickName(SDL_GameControllerGetJoystick(dev));
+}
+
+void Input::updateGamepads() {
+	if (gamepad && !SDL_GameControllerGetAttached(gamepad)) {
+		SDL_GameControllerClose(gamepad);
+		gamepad = nullptr;
+	}
+	gamepad_guids.clear();
+	for (int32_t dev_idx = 0; dev_idx < SDL_NumJoysticks(); dev_idx++) {
+		SDL_JoystickGUID dev_guid = SDL_JoystickGetDeviceGUID(dev_idx);
+		SDL_GameController* dev = getGamepad(dev_guid);
+		if (!dev) {
+			continue;
+		}
+		gamepad_guids.push_back({dev_idx, dev_guid});
+		SDL_GameControllerClose(dev);
+	}
+
+#if RRE_DEBUGGING
+	logger.debug("attached gamepads: ", to_string(gamepad_guids.size()));
+	for (auto dev_info: gamepad_guids) {
+		int32_t dev_idx = dev_info.first;
+		SDL_JoystickGUID dev_guid = dev_info.second;
+		SDL_GameController* dev = getGamepad(dev_guid);
+		if (!dev) {
+			continue;
+		}
+		SDL_Joystick* js = SDL_GameControllerGetJoystick(dev);
+		char sguid[33];
+		SDL_JoystickGetGUIDString(dev_guid, sguid, 33);
+		logger.debug("- GUID:  ", sguid);
+		logger.debug("  index: ", to_string(dev_idx));
+		logger.debug("  name:  ", SDL_JoystickName(js));
+		SDL_JoystickClose(js);
+		SDL_GameControllerClose(dev);
+	}
+#endif
+}
 
 bool Input::keyIsPressed(SDL_Keycode key) {
 	return find(this->pressed_keys.begin(), this->pressed_keys.end(), key) != this->pressed_keys.end();

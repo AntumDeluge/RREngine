@@ -10,8 +10,12 @@
 #include <cstdint> // *int*_t
 #include <memory> // std::unique_ptr, std::make_unique
 #include <mutex>
+#include <string>
+#include <utility> // std::pair
 #include <vector>
 
+#include <SDL2/SDL_gamecontroller.h>
+#include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_keyboard.h>
 #include <SDL2/SDL_keycode.h>
 
@@ -23,10 +27,18 @@
  *
  * TODO:
  * - _maybe_ convert to namespace
+ * - listen for game controller connect/disconnect
+ * - map game controller input
  */
 class Input {
 private:
 	static Logger logger;
+
+	/** Active gamepad/joystick. */
+	SDL_GameController* gamepad;
+
+	/** Detected gamepads/joysticks listed by <index, GUID>. */
+	std::vector<std::pair<int32_t, SDL_JoystickGUID>> gamepad_guids;
 
 	/** List of keyboard keys currently depressed. */
 	std::vector<SDL_Keycode> pressed_keys;
@@ -85,10 +97,15 @@ private:
 
 public:
 	/** Default constructor. */
-	Input() {}
+	Input();
 
-	/** Defaul destructor. */
-	~Input() {}
+	/** Default destructor. */
+	~Input() {
+		if (gamepad != nullptr) {
+			SDL_GameControllerClose(gamepad);
+			gamepad = nullptr;
+		}
+	}
 
 	/**
 	 * Initializes & retrieves singleton instance.
@@ -103,6 +120,47 @@ public:
 		}
 		return instance.get();
 	}
+
+	/**
+	 * Sets the active gamepad/joystick.
+	 *
+	 * @param guid
+	 *   Device's global ID.
+	 */
+	bool setGamepad(SDL_JoystickGUID guid);
+
+	/**
+	 * Sets the active gamepad/joystick.
+	 *
+	 * @param idx
+	 *   Device's system index.
+	 */
+	bool setGamepad(int32_t idx);
+
+	/**
+	 * Retrieves an attached gamepad/joystick.
+	 *
+	 * NOTE: Receiving function must call `SDL_GameControllerClose` on returned device.
+	 *
+	 * @param guid
+	 *   Device's global ID.
+	 * @return
+	 *   Game controller instance or `null`.
+	 */
+	SDL_GameController* getGamepad(SDL_JoystickGUID guid);
+
+	/**
+	 * Retrieves gamepad/joystick device name.
+	 *
+	 * @param dev
+	 *   Device instance.
+	 * @return
+	 *   Device name.
+	 */
+	std::string getGamepadName(SDL_GameController* dev);
+
+	/** Refreshes list of detected gamepads/joysticks. */
+	void updateGamepads();
 
 	/**
 	 * Interprets keyboard key down events.
