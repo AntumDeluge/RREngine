@@ -55,6 +55,7 @@ Example data:
 - GNU compatible C++ compiler such as [gcc](https://www.gnu.org/software/gcc/) or
   [clang](https://clang.llvm.org/) with C++20 support (untested with other compilers).
 - [CMake](https://cmake.org/)
+- [pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/) or [pkgconf](http://pkgconf.org/)
 
 ### Running CMake Commands
 
