@@ -7,6 +7,7 @@
   - Note: SDL_mixer not yet ported to SDL3
 - Use SDL_ttf to support TrueType fonts.
 - Support co-op play.
+- Remove dependence on pkg-config/pkgconf to allow broader development environment support.
 - Entities:
   - Customizable behavior.
 - Desktop support:
