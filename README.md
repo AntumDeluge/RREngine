@@ -8,6 +8,9 @@ _(this software is a work-in-progress & not yet fully functional)_
 
 An engine to create [Mega Man/Rockman](https://en.wikipedia.org/wiki/Mega_Man) style platform games.
 
+_This project is not affiliated an any way with Capcom. Nor is it related to the fan game known as
+[Mega Man: Rock N Roll](https://megamanfanon.fandom.com/wiki/Mega_Man:_Rock_N_Roll)._
+
 ---
 ## Licensing
 
