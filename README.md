@@ -159,4 +159,7 @@ open http://localhost:8000/ in a web browser.
 ---
 ## Links
 
+- Source code:
+    - [Codeberg](https://codeberg.org/AntumDeluge/RREngine)
+    - [GitHub](https://github.com/AntumDeluge/RREngine)
 - [TODO](TODO.md)
