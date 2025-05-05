@@ -8,6 +8,7 @@
 - Use SDL_ttf to support TrueType fonts.
 - Support co-op play.
 - Remove dependence on pkg-config/pkgconf to allow broader development environment support.
+- Support custom window icon.
 - Entities:
   - Customizable behavior.
 - Desktop support:
