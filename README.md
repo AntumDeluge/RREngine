@@ -120,9 +120,13 @@ $ cmake --build ../
 
 __CMake Options:__
 
-- `-DDEBUG=on`: Enable debugging symbols.
-- `-DSTATIC=off`: Disable linking executable statically by default.
-- `-DEXAMPLE=on`: Copy example game data files to build directory.
+The following are notable build options that can be configured using CMake's `-D` flag. Example:
+`-DSTATIC=ON`.
+
+- `STATIC`: Link dependency libraries statically. Default: `OFF`.
+- `EXAMPLE`: Copy example game data files to build directory. Default: `OFF`.
+- `CMAKE_BUILD_TYPE`: Set to `Release` for optimized build without debugging symbols. Default:
+  `Debug`.
 
 ---
 ## Building Documentation
