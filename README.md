@@ -119,15 +119,29 @@ $ cmake --build ../
 ...
 ```
 
-__CMake Options:__
+__Build Options:__
 
 The following are notable build options that can be configured using CMake's `-D` flag. Example:
-`-DSTATIC=ON`.
+`cmake -B build -DSTATIC=ON`.
 
-- `STATIC`: Link dependency libraries statically. Default: `OFF`.
-- `EXAMPLE`: Copy example game data files to build directory. Default: `OFF`.
+CMake standard options:
+
 - `CMAKE_BUILD_TYPE`: Set to `Release` for optimized build without debugging symbols. Default:
   `Debug`.
+- `CMAKE_CXX_STANDARD`: Standard to use for C++ code compilation. Minimum supported is 20. Default:
+  `20`.
+- `CMAKE_C_STANDARD`: Standard to use for C code compilation. Default: compiler default.
+
+Project specific options:
+
+- `EXAMPLE`: Copy example game data files to build directory. Default: `OFF`.
+- `STATIC`: Link dependency libraries statically. Default: `OFF`.
+- `SYSTEM_TMXLITE`: Use system's tmxlite library instead of building bundled version. Default:
+  `OFF`.
+- `BIN2HEADER`: Path to [`Binary to Header`](https://antumdeluge.github.io/bin2header/) executable.
+  Used for converting built-in resources. Default: auto detected.
+- `FFMPEG`: Path to [`FFmpeg`](https://ffmpeg.org/) executable. Used for converting example music
+  data. Default: auto detected.
 
 ---
 ## Building Documentation
