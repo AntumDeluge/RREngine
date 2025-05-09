@@ -5,17 +5,25 @@ See [downloads section](download.md) for how to get source code.
 
 ## Required Libraries
 
-- [SDL2](https://libsdl.org/)
-- [SDL2_mixer](https://wiki.libsdl.org/SDL2_mixer)
-- [SDL2_image](https://wiki.libsdl.org/SDL2_image)
-- [pugixml](https://github.com/zeux/pugixml)
-- [tmxlite](https://github.com/fallahn/tmxlite)
+### Bundled Libraries
+
+- [cxxopts](https://github.com/jarro2783/cxxopts) v3.2.0 ([MIT](lib/cxxopts/LICENSE.txt))
+- [lua](https://lua.org/) v5.4.7 ([MIT](lib/lua/LICENSE.txt)) _(disabled)_
+- [tmxlite](https://github.com/fallahn/tmxlite) v1.4.4 (zlib)
+
+### External Libraries
+
+- [SDL2](https://libsdl.org/) (zlib) ([source](https://github.com/libsdl-org/SDL/releases))
+- [SDL2_mixer](https://wiki.libsdl.org/SDL2_mixer) (zlib) ([source](https://github.com/libsdl-org/SDL_mixer/releases))
+- [SDL2_image](https://wiki.libsdl.org/SDL2_image) (zlib) ([source](https://github.com/libsdl-org/SDL_image/releases))
+- [pugixml](https://pugixml.org/) (MIT) ([source](https://github.com/zeux/pugixml))
 
 ## Required Build Tools
 
 - GNU compatible C++ compiler such as [gcc](https://www.gnu.org/software/gcc/) or
-  [clang](https://clang.llvm.org/).
+  [clang](https://clang.llvm.org/) with C++20 support (untested with other compilers).
 - [CMake](https://cmake.org/)
+- [pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/) or [pkgconf](http://pkgconf.org/)
 
 ## Running CMake Commands
 
