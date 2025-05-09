@@ -151,6 +151,9 @@ The following layer names are supported:
   `scroll_rate` float value.
 - __s_background2:__ Second background image layer. Parallax scrolling also supported.
 
+To play music in a scene add a custom string property named "music" to map. The value should be the
+basename of a music file located in `data/music`.
+
 ## Audio
 
 ### Sound Effects

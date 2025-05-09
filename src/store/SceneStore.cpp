@@ -174,6 +174,14 @@ Scene* SceneStore::get(string id) {
 		}
 	}
 
+	// music
+	for (tmx::Property prop: map.getProperties()) {
+		if (prop.getName() == "music" && prop.getType() == tmx::Property::Type::String) {
+			scene->setMusic(prop.getStringValue());
+			break;
+		}
+	}
+
 	// DEBUG: test drawing entity in scene
 	uint32_t center_x = NATIVE_RES.first / 2; // - (player->getRect().w / 2);
 	uint32_t center_y = NATIVE_RES.second / 2; // + (player->getRect().h / 2);
