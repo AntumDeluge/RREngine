@@ -7,6 +7,7 @@
 #ifndef RRE_SCENE
 #define RRE_SCENE
 
+#include <string>
 #include <vector>
 
 #include <SDL2/SDL_rect.h>
@@ -84,6 +85,8 @@ private:
 
 	/** ID of next object to be added to scene. */
 	uint32_t next_object_id;
+
+	std::string music;
 
 public:
 	/**
@@ -259,6 +262,17 @@ public:
 	 * @param y
 	 */
 	void setCollisionPoint(uint32_t x, uint32_t y) { collision_map[x][y] = 1; }
+
+	/**
+	 * Sets music to be played in this scene.
+	 *
+	 * @param music_file
+	 *   Music file basename.
+	 */
+	void setMusic(std::string music_file) { music = music_file; }
+
+	/** Overrides `SceneImpl::getMusic`. */
+	std::string getMusic() override { return music; }
 
 	/**
 	 * Adds an object to the scene.

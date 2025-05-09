@@ -27,6 +27,11 @@ bool GameVisuals::setScene(string id) {
 	bool result = scene != nullptr;
 	if (!result) {
 		logger.error("Failed to set scene: ", id);
+	} else {
+		string music_file = scene->getMusic();
+		if (music_file.compare("") != 0) {
+			GetGameWindow()->playMusic(music_file);
+		}
 	}
 	return result;
 }

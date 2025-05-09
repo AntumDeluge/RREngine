@@ -8,6 +8,7 @@
 #define RRE_SCENE_IMPL
 
 #include <cstdint> // *int*_t
+#include <string>
 
 #include <SDL2/SDL_rect.h>
 
@@ -105,6 +106,14 @@ public:
 	 *   `true` if side of rectangle collides with vertical line in collision map.
 	 */
 	virtual bool collidesWall(uint8_t dir, SDL_Rect rect) = 0;
+
+	/**
+	 * Retrieves scene music.
+	 *
+	 * @return
+	 *   Music to play in this scene.
+	 */
+	virtual std::string getMusic() = 0;
 };
 
 #endif /* RRE_SCENE_IMPL */
