@@ -26,8 +26,8 @@ Example data:
 - tileset:
     - megabot (CC0): [Mega Bot Assets Pack by Luis Zuno (ansimuz)](https://opengameart.org/node/99323)
 - backgrounds:
+    - [cityscape by Sardonic](https://opengameart.org/node/63496) (CC0)
     - megabot_scaled* (CC0): [Mega Bot Assets Pack by Luis Zuno (ansimuz)](https://opengameart.org/node/99323)
-    - [voodoo_cactus_underwater by lzubiaur](https://opengameart.org/node/30946) (CC BY 3.0)
 - music:
     - [actiontheme-v3 by Ted Kerr](https://opengameart.org/node/150692) (CC BY 4.0)
     - summer_sunday (CC0): [Summer Sunday by celestialghost8](https://opengameart.org/node/71806)

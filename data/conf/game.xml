@@ -7,5 +7,5 @@
 	<step_delay>50</step_delay>
 	<intro movie="intro" />
 	<!-- TODO: configure menu parameters in separate XML -->
-	<menu id="title" background="voodoo_cactus_underwater" music="summer_sunday" />
+	<menu id="title" background="cityscape" music="summer_sunday" />
 </game>
