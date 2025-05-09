@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Game Configuration - Rock & Roll Engine</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Game Configuration";
+        var mkdocs_page_input_path = "game.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Rock & Roll Engine
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../download/">Download</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../build/">Build</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Game Configuration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#configuration-files">Configuration Files</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#gamexml">game.xml</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#spritesxml">sprites.xml</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#entitiesxml">entities.xml</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scenesxml">scenes.xml</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#moviesxml">movies.xml</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scenes">Scenes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#audio">Audio</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#sound-effects">Sound Effects</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#music">Music</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#graphics">Graphics</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#sprite-images">Sprite Images</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tilesets">Tilesets</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://codeberg.org/AntumDeluge/RREngine">Source Code</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://codeberg.org/AntumDeluge/RREngine/issues">Issue Tracker</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Rock & Roll Engine</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Game Configuration</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="game-configuration">Game Configuration</h1>
+<p><em>This project is in early development stages &amp; not yet fully functional. Documentation may be
+incomplete.</em></p>
+<h2 id="configuration-files">Configuration Files</h2>
+<p>Games are configured using <a href="https://wikipedia.org/wiki/XML">XML files</a> located in the <code>data/conf</code>
+subdirectory where engine executable is located.</p>
+<h3 id="gamexml">game.xml</h3>
+<p>This is the main configuration file. It must have a root <code>game</code> node. The following nested nodes
+are supported:</p>
+<ul>
+<li><strong>title:</strong> Text displayed in window title bar.</li>
+<li><strong>icon:</strong> Icon displayed in window title bar <em>(not yet supported)</em>.</li>
+<li><strong>scale:</strong> Window scaling factor. Max 4.</li>
+<li><strong>step_delay:</strong> Game stepping delay in milliseconds.</li>
+<li><strong>intro:</strong> Configures the introduction movie. Attributes:<ul>
+<li><strong>movie:</strong> Movie played in introduction. Configured in <a href="#moviesxml">movies.xml</a>.</li>
+</ul>
+</li>
+<li><strong>menu:</strong> Configured main menu. Attributes:<ul>
+<li><strong>id:</strong> Menu identifier.</li>
+<li><strong>background:</strong> Menu background image. Images located in <code>data/background</code> directory.</li>
+<li><strong>music:</strong> Menu music. See <a href="#music">music</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="spritesxml">sprites.xml</h3>
+<p>Configures entity sprites. Must contain a <code>sprites</code> root node. Each sprite is configured in a
+<code>sprite</code> node. Each sprite must have an <code>id</code> attribute. The following nested nodes are supported:</p>
+<ul>
+<li><strong>filename:</strong> Base filename of sprite image. Attributes:<ul>
+<li><strong>index:</strong> Used for static sprites.</li>
+</ul>
+</li>
+<li><strong>size:</strong> Sprite frame dimensions. Supports <code>width</code> &amp; <code>height</code> attributes.</li>
+<li><strong>animation:</strong> Animation definition. Supports <code>mode</code> attribute to identify each animation mode.
+  Nested <code>frame</code> nodes are used to define a frame of animation using <code>index</code> &amp; <code>delay</code> attributes.</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-xml">&lt;sprites&gt;
+
+    &lt;sprite id=&quot;player&quot;&gt;
+        &lt;filename&gt;character&lt;/filename&gt;
+        &lt;size width=&quot;32&quot; height=&quot;32&quot; /&gt;
+        &lt;animation mode=&quot;idle&quot; default=&quot;true&quot;&gt;
+            &lt;frame index=&quot;6&quot; delay=&quot;4000&quot; /&gt;
+            &lt;frame index=&quot;7&quot; delay=&quot;250&quot; /&gt;
+        &lt;/animation&gt;
+        &lt;animation mode=&quot;run&quot;&gt;
+            &lt;frame index=&quot;10&quot; delay=&quot;100&quot; /&gt;
+            &lt;frame index=&quot;9&quot; delay=&quot;100&quot; /&gt;
+            &lt;frame index=&quot;10&quot; delay=&quot;100&quot; /&gt;
+            &lt;frame index=&quot;11&quot; delay=&quot;100&quot; /&gt;
+        &lt;/animation&gt;
+        &lt;animation mode=&quot;fall&quot;&gt;
+            &lt;frame index=&quot;0&quot; delay=&quot;10000&quot; /&gt;
+        &lt;/animation&gt;
+    &lt;/sprite&gt;
+
+    &lt;sprite id=&quot;enemy&quot;&gt;
+        &lt;filename&gt;enemy&lt;/filename&gt;
+        &lt;size width=&quot;16&quot; height=&quot;16&quot; /&gt;
+        &lt;animation mode=&quot;idle&quot; default=&quot;true&quot;&gt;
+            &lt;frame index=&quot;0&quot; delay=&quot;4000&quot; /&gt;
+            &lt;frame index=&quot;1&quot; delay=&quot;250&quot; /&gt;
+        &lt;/animation&gt;
+        &lt;animation mode=&quot;run&quot;&gt;
+            &lt;frame index=&quot;6&quot; delay=&quot;100&quot; /&gt;
+            &lt;frame index=&quot;7&quot; delay=&quot;100&quot; /&gt;
+            &lt;frame index=&quot;8&quot; delay=&quot;100&quot; /&gt;
+            &lt;frame index=&quot;7&quot; delay=&quot;100&quot; /&gt;
+        &lt;/animation&gt;
+        &lt;animation mode=&quot;fall&quot;&gt;
+            &lt;frame index=&quot;3&quot; delay=&quot;10000&quot; /&gt;
+        &lt;/animation&gt;
+    &lt;/sprite&gt;
+
+    &lt;sprite id=&quot;flying_enemy&quot;&gt;
+        &lt;filename&gt;flying_enemy&lt;/filename&gt;
+        &lt;size width=&quot;22&quot; height=&quot;24&quot; /&gt;
+        &lt;animation mode=&quot;idle&quot; default=&quot;true&quot;&gt;
+            &lt;frame index=&quot;0&quot; delay=&quot;250&quot; /&gt;
+            &lt;frame index=&quot;1&quot; delay=&quot;250&quot; /&gt;
+        &lt;/animation&gt;
+    &lt;/sprite&gt;
+
+&lt;/sprites&gt;
+</code></pre>
+<h3 id="entitiesxml">entities.xml</h3>
+<p>Configures all the entities available in the game. Must contain a root <code>entities</code> node.</p>
+<p>Example:</p>
+<pre><code class="language-xml">&lt;entities&gt;
+
+    &lt;entity id=&quot;player&quot; sprite=&quot;player&quot; width=&quot;18&quot; height=&quot;23&quot;&gt;
+        &lt;momentum&gt;3.0&lt;/momentum&gt;
+    &lt;/entity&gt;
+
+    &lt;entity id=&quot;enemy&quot; sprite=&quot;enemy&quot; width=&quot;16&quot; height=&quot;12&quot;&gt;
+        &lt;momentum&gt;1.0&lt;/momentum&gt;
+    &lt;/entity&gt;
+
+    &lt;entity id=&quot;flying_enemy&quot; sprite=&quot;flying_enemy&quot; width=&quot;22&quot; height=&quot;24&quot;&gt;
+        &lt;momentum&gt;1.0&lt;/momentum&gt;
+        &lt;gravity&gt;0.0&lt;/gravity&gt;
+    &lt;/entity&gt;
+
+&lt;/entities&gt;
+</code></pre>
+<h3 id="scenesxml">scenes.xml</h3>
+<p><em>Currently not supported.</em></p>
+<h3 id="moviesxml">movies.xml</h3>
+<p>Example:</p>
+<pre><code class="language-xml">&lt;movies&gt;
+
+    &lt;movie id=&quot;intro&quot; fade_in=&quot;200&quot; fade_out=&quot;200&quot;&gt;
+        &lt;frame ms=&quot;5000&quot;&gt;NULL&lt;/frame&gt;
+        &lt;text delay=&quot;0&quot; duration=&quot;10000&quot;&gt;Rock &amp; Roll Engine&lt;/text&gt;
+        &lt;text delay=&quot;0&quot; duration=&quot;10000&quot;&gt;(alpha)&lt;/text&gt;
+    &lt;/movie&gt;
+
+&lt;/movies&gt;
+</code></pre>
+<h2 id="scenes">Scenes</h2>
+<p>Scene maps are built in the <a href="https://mapeditor.org/">Tiled Map Editor</a> format &amp; stored in the
+<code>data/scene</code> directory. They are configured in <a href="#scenesxml">scenes.xml</a>.</p>
+<p>The following layer names are supported:</p>
+<ul>
+<li><strong>weather:</strong> <em>not implemented</em></li>
+<li><strong>foreground:</strong> Front most tile layer drawn above entities.</li>
+<li><strong>collision:</strong> Tiles on this layer define scene points of collision.</li>
+<li><strong>objects:</strong> <em>not implemented</em></li>
+<li><strong>terrain:</strong> First tile layer drawn under entities.</li>
+<li><strong>background:</strong> Second tile layer drawn under entities.</li>
+<li><strong>s_background:</strong> First background image layer. Parallax scrolling supported using custom property
+  <code>scroll_rate</code> float value.</li>
+<li><strong>s_background2:</strong> Second background image layer. Parallax scrolling also supported.</li>
+</ul>
+<h2 id="audio">Audio</h2>
+<h3 id="sound-effects">Sound Effects</h3>
+<p><em>Currently not supported.</em></p>
+<h3 id="music">Music</h3>
+<p>Music files are located in the <code>data/music</code> directory. The engine supports playing
+<a href="https://xiph.org/vorbis/">Ogg Vorbis</a> audio. Files must have either the <code>.oga</code> or <code>.ogg</code> filename
+extension.</p>
+<h2 id="graphics">Graphics</h2>
+<p><em>Currently only <a href="https://wikipedia.org/wiki/PNG">PNG</a> images supported.</em></p>
+<h3 id="sprite-images">Sprite Images</h3>
+<p>Sprites are stored in the <code>data/sprite</code> directory. They are configured in
+<a href="#spritesxml">sprites.xml</a>.</p>
+<h3 id="tilesets">Tilesets</h3>
+<p>Scene tileset images are located in <code>data/tileset</code> by default. Storing in other locations may work
+but not officially supported. These tilesets are used for creating <a href="#scenes">scene maps</a>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../build/" class="btn btn-neutral float-left" title="Build"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../build/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
